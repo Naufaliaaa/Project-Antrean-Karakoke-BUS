@@ -4,35 +4,43 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="img/Logo.png">
-<link rel="apple-touch-icon" href="img/Logo.png">
-<title>Karaoke Bus</title>
+<link rel="icon" type="image/jpeg" href="img/hioo.jpeg">
+<link rel="apple-touch-icon" href="img/hioo.jpeg">
+<title>Karaoke Bus - Pilih Unit</title>
 <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
-<div class="container">
-<!-- HEADER -->
-<div class="header">
-<div class="icon">🎤</div>
-<h1>Karaoke Bus</h1>
-<p class="subtitle">Sistem Antrean Karaoke Bus Pariwisata</p>
+<!-- NAVBAR WITH LOGO -->
+<nav class="top-navbar">
+<img src="img/hioo.jpeg" alt="HiQo Logo" class="navbar-logo">
+</nav>
+
+<!-- HERO HEADER WITH BACKGROUND (NO OVERLAY) -->
+<header class="hero-header">
+<div class="hero-content">
+<h1 class="hero-title">Pusat Kontrol Hiburan Karaoke Bus<br>Bikin Perjalanan Makin Meriah!</h1>
+<p class="hero-subtitle">Pilih unit dibawah untuk memulai Karaoke,<br>atur playlist atau mereset sistem.</p>
 </div>
-<!-- BUS SELECTION -->
-<div class="bus-selection">
-<h2>Pilih Bus</h2>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+<div class="container">
+<!-- SECTION HEADER -->
+<div class="section-header">
+<h2 class="section-title">Pilih Unit Yang Sedang Digunakan</h2>
+<div class="custom-room-input">
+<input type="text" id="custom-room-id" placeholder="MASUKKAN ROOM ID" style="text-transform: uppercase;">
+<button onclick="enterCustomRoom()" class="btn-masuk">Masuk</button>
+</div>
+</div>
+
+<!-- BUS GRID -->
 <div class="bus-grid" id="bus-grid">
 <!-- Bus cards akan di-generate oleh JavaScript -->
 </div>
 </div>
-<!-- CUSTOM ROOM -->
-<div class="custom-room">
-<p class="custom-label">Atau masukkan Room ID:</p>
-<div class="custom-input">
-<input type="text" id="custom-room-id" placeholder="Contoh: BUS-008" style="text-transform: uppercase;">
-<button onclick="enterCustomRoom()">Masuk</button>
-</div>
-</div>
-</div>
+</main>
 
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
