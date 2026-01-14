@@ -4,27 +4,112 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="img/Logo.png">
-<link rel="apple-touch-icon" href="img/Logo.png">
+<link rel="icon" type="image/jpeg" href="img/hioo.jpeg">
+<link rel="apple-touch-icon" href="img/hioo.jpeg">
 <title>Masuk ke Bus - Karaoke Bus</title>
 <link rel="stylesheet" href="css/pin-login.css">
 </head>
 <body>
-<div class="card">
-<h1>🔑 Masuk ke Bus</h1>
-<p>Masukkan PIN 6 digit</p>
-<input type="text" id="pin" maxlength="6" placeholder="______" autofocus>
-<button id="submit-btn">Masuk</button>
-<div class="error" id="error">PIN salah</div>
-<a href="index.html" class="back-button">
-<span>←</span>
-<span>Kembali ke Pilih Bus</span>
-</a>
+<!-- NAVBAR -->
+<nav class="top-navbar">
+<img src="img/hioo.jpeg" alt="HiQo Logo" class="navbar-logo">
+</nav>
+
+<!-- HERO BACKGROUND SECTION -->
+<section class="hero-background">
+<div class="hero-overlay"></div>
+<div class="hero-text">
+<h1 class="hero-title">Pusat Kontrol Hiburan Karaoke Bus<br>Bikin Perjalanan Makin Meriah!</h1>
+<p class="hero-subtitle">Pilih unit dibawah untuk memulai Karaoke,<br>atur playlist atau mereset sistem.</p>
+</div>
+</section>
+
+<!-- VERIFICATION MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+<div class="modal-container">
+<div class="modal-content">
+<!-- Modal Header -->
+<div class="modal-header">
+<h2 class="modal-title">Verifikasi Akses Unit</h2>
+<div class="modal-underline"></div>
+</div>
+
+<!-- Bus Info -->
+<div class="bus-info-section">
+<img src="img/unit.png" alt="Bus Unit" class="bus-image">
+<div class="bus-details">
+<h3 class="bus-name" id="bus-name">Hiace 1</h3>
+<p class="bus-id" id="bus-id">HIC-001</p>
+</div>
+</div>
+
+<!-- PIN Input Section -->
+<div class="pin-section">
+<label class="pin-label">Masukan 6-Digit PIN Admin!</label>
+<div class="pin-inputs" id="pin-inputs">
+<input type="text" maxlength="1" class="pin-box" data-index="0" inputmode="numeric" pattern="[0-9]*">
+<input type="text" maxlength="1" class="pin-box" data-index="1" inputmode="numeric" pattern="[0-9]*">
+<input type="text" maxlength="1" class="pin-box" data-index="2" inputmode="numeric" pattern="[0-9]*">
+<input type="text" maxlength="1" class="pin-box" data-index="3" inputmode="numeric" pattern="[0-9]*">
+<input type="text" maxlength="1" class="pin-box" data-index="4" inputmode="numeric" pattern="[0-9]*">
+<input type="text" maxlength="1" class="pin-box" data-index="5" inputmode="numeric" pattern="[0-9]*">
+</div>
+<div class="error-message" id="error-message" style="display: none;">
+❌ PIN yang Anda masukkan salah!
+</div>
+</div>
+
+<!-- Action Buttons -->
+<div class="modal-actions">
+<button class="btn-submit" id="submit-btn">Masuk</button>
+<button class="btn-cancel" id="cancel-btn">Batal</button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Background Content (Blurred) -->
+<div class="background-content">
+<div class="section-header">
+<h2 class="section-title">Pilih Unit Yang Sedang Digunakan</h2>
+<div class="custom-room-input">
+<input type="text" placeholder="Masukkan Room ID" disabled>
+<button class="btn-masuk" disabled>Masuk</button>
+</div>
+</div>
+
+<div class="bus-grid-preview">
+<!-- Preview bus cards (blurred background) -->
+<div class="bus-card-preview">
+<img src="img/unit.png" alt="Bus">
+<button class="bus-button">Hiace 1</button>
+<p class="bus-id-text">BUS-001</p>
+</div>
+<div class="bus-card-preview">
+<img src="img/unit.png" alt="Bus">
+<button class="bus-button">Hiace 2</button>
+<p class="bus-id-text">BUS-002</p>
+</div>
+<div class="bus-card-preview">
+<img src="img/unit.png" alt="Bus">
+<button class="bus-button">Hiace 3</button>
+<p class="bus-id-text">BUS-003</p>
+</div>
+<div class="bus-card-preview">
+<img src="img/unit.png" alt="Bus">
+<button class="bus-button">Hiace 4</button>
+<p class="bus-id-text">BUS-004</p>
+</div>
+<div class="bus-card-preview">
+<img src="img/unit.png" alt="Bus">
+<button class="bus-button">Hiace 5</button>
+<p class="bus-id-text">BUS-005</p>
+</div>
+</div>
 </div>
 
 <!-- Custom Modal -->
 <script src="js/custom-modal.js"></script>
-
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script src="js/firebase.js"></script>
