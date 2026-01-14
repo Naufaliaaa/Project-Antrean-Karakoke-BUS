@@ -4,48 +4,112 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="img/Logo.png">
-<link rel="apple-touch-icon" href="img/Logo.png">
+<link rel="icon" type="image/jpeg" href="img/hioo.jpeg">
+<link rel="apple-touch-icon" href="img/hioo.jpeg">
 <title>Menu - Karaoke Bus</title>
 <link rel="stylesheet" href="css/bus-menu.css">
 </head>
 <body>
-<div class="container">
-<!-- BACK BUTTON -->
-<a href="#" id="back-button" class="back-button">
-<span>←</span>
+<!-- NAVBAR -->
+<nav class="top-navbar">
+<img src="img/hioo.jpeg" alt="HiQo Logo" class="navbar-logo">
+</nav>
+
+<!-- HERO HEADER -->
+<header class="hero-header">
+<div class="hero-content">
+<div class="back-button" id="back-button">
+<span class="back-icon">←</span>
 <span>Pilih Bus Lain</span>
-</a>
-<!-- HEADER -->
-<div class="header">
-<div class="icon" id="bus-icon">🚌</div>
-<h1 id="bus-name">Bus Loading...</h1>
-<p class="subtitle" id="room-id">Room: ...</p>
 </div>
-<!-- MENU BUTTONS -->
-<div class="menu-buttons">
-<a href="#" id="display-btn" class="menu-button display">
-<span class="icon-button">📺</span>
-<span>Layar Karaoke</span>
-</a>
-<a href="#" id="form-btn" class="menu-button form">
-<span class="icon-button">👥</span>
-<span>Request Lagu</span>
-</a>
-<a href="#" id="video-btn" class="menu-button video">
-<span class="icon-button">🎥</span>
-<span>Video Panel</span>
-</a>
-<a href="#" id="admin-btn" class="menu-button admin">
-<span class="icon-button">⚙️</span>
-<span>Panel Admin</span>
-</a>
+<h1 class="hero-title">Menu Kontrol Bus</h1>
+<p class="hero-subtitle">Pilih fitur yang ingin Anda gunakan</p>
+</div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="main-content">
+<div class="container">
+<!-- BUS INFO CARD -->
+<div class="bus-info-card">
+<div class="bus-icon-container">
+<img src="img/unit.png" alt="Bus Unit" class="bus-unit-image" id="bus-icon">
+</div>
+<div class="bus-details">
+<h2 class="bus-name" id="bus-name">Bus Loading...</h2>
+<p class="room-id" id="room-id">Room: ...</p>
 </div>
 </div>
+
+<!-- MENU TITLE -->
+<div class="menu-title">
+<h3>Pilih Fitur Yang Tersedia</h3>
+<p class="menu-subtitle">Klik salah satu menu di bawah untuk melanjutkan</p>
+</div>
+
+<!-- MENU GRID -->
+<div class="menu-grid">
+<!-- Layar Karaoke -->
+<a href="#" id="display-btn" class="menu-card display-card">
+<div class="menu-card-content">
+<div class="menu-icon-box">
+<img src="img/layar.png" alt="Layar Karaoke" class="menu-icon-img">
+</div>
+<div class="menu-text">
+<h4 class="menu-name">Layar Karaoke</h4>
+<p class="menu-description">Tampilkan layar karaoke utama</p>
+</div>
+</div>
+<div class="menu-arrow">→</div>
+</a>
+
+<!-- Request Lagu -->
+<a href="#" id="form-btn" class="menu-card form-card">
+<div class="menu-card-content">
+<div class="menu-icon-box">
+<img src="img/req.png" alt="Request Lagu" class="menu-icon-img">
+</div>
+<div class="menu-text">
+<h4 class="menu-name">Request Lagu</h4>
+<p class="menu-description">Tambahkan lagu ke antrean</p>
+</div>
+</div>
+<div class="menu-arrow">→</div>
+</a>
+
+<!-- Video Panel -->
+<a href="#" id="video-btn" class="menu-card video-card">
+<div class="menu-card-content">
+<div class="menu-icon-box">
+<img src="img/video.png" alt="Video Panel" class="menu-icon-img">
+</div>
+<div class="menu-text">
+<h4 class="menu-name">Video Panel</h4>
+<p class="menu-description">Kontrol kamera streaming</p>
+</div>
+</div>
+<div class="menu-arrow">→</div>
+</a>
+
+<!-- Panel Admin -->
+<a href="#" id="admin-btn" class="menu-card admin-card">
+<div class="menu-card-content">
+<div class="menu-icon-box">
+<img src="img/admin.png" alt="Panel Admin" class="menu-icon-img">
+</div>
+<div class="menu-text">
+<h4 class="menu-name">Panel Admin</h4>
+<p class="menu-description">Kelola sistem karaoke</p>
+</div>
+</div>
+<div class="menu-arrow">→</div>
+</a>
+</div>
+</div>
+</main>
 
 <!-- Custom Modal -->
 <script src="js/custom-modal.js"></script>
-
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>

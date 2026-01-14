@@ -187,7 +187,7 @@ async function verifyPin() {
       localStorage.setItem('karaoke_room_id', roomId);
       
       // Success feedback
-      submitBtn.textContent = '✅ Berhasil!';
+      submitBtn.textContent = ' Berhasil!';
       submitBtn.classList.remove('loading');
       submitBtn.style.background = 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)';
       
@@ -198,7 +198,7 @@ async function verifyPin() {
       
     } else {
       // ❌ PIN SALAH
-      console.warn('❌ PIN incorrect');
+      console.warn('PIN incorrect');
       
       submitBtn.disabled = false;
       submitBtn.classList.remove('loading');

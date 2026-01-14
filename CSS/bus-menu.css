@@ -1,4 +1,9 @@
-/* File bus-menu.css */
+/* ========================================
+   BUS-MENU.CSS - FINAL VERSION
+   ✅ Background: Polos dari gambar
+   ✅ Bus icon: Gambar unit.png
+   ✅ Menu icons: Custom images
+======================================== */
 
 * {
   margin: 0;
@@ -7,29 +12,135 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background: #f5f5f7;
+  color: #1d1d1f;
   min-height: 100vh;
+}
+
+/* ========================================
+   TOP NAVBAR
+======================================== */
+.top-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.navbar-logo {
+  height: 40px;
+  width: auto;
+}
+
+/* ========================================
+   HERO HEADER - BACKGROUND POLOS
+======================================== */
+.hero-header {
+  margin-top: 70px;
+  background-image: url('../img/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 40px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* NO GRADIENT OVERLAY - PURE BACKGROUND IMAGE */
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  color: #667eea;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(102, 126, 234, 0.2);
+  margin-bottom: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-button:hover {
+  background: white;
+  border-color: #667eea;
+  transform: translateX(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.back-icon {
+  font-size: 18px;
+}
+
+.hero-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 400;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================
+   MAIN CONTENT
+======================================== */
+.main-content {
+  padding: 50px 20px;
+  background: #f5f5f7;
+  min-height: calc(100vh - 220px);
 }
 
 .container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   BUS INFO CARD - WITH UNIT IMAGE
+======================================== */
+.bus-info-card {
   background: white;
-  border-radius: 30px;
-  box-shadow: 0 25px 80px rgba(0,0,0,0.3);
-  padding: 50px;
-  max-width: 500px;
-  width: 100%;
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 25px;
   animation: fadeIn 0.5s ease;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -37,150 +148,401 @@ body {
   }
 }
 
-/* BACK BUTTON */
-.back-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 20px;
-  background: #f1f5f9;
-  color: #64748b;
-  text-decoration: none;
-  border-radius: 12px;
-  font-weight: 600;
-  margin-bottom: 30px;
-  transition: all 0.3s;
-  font-size: 14px;
-}
-
-.back-button:hover {
-  background: #e2e8f0;
-  color: #334155;
-  transform: translateX(-3px);
-}
-
-/* HEADER */
-.header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.icon {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 20px;
-  border-radius: 25px;
+.bus-icon-container {
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 50px;
-  animation: pulse 2s infinite;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  padding: 15px;
 }
 
-@keyframes pulse {
+.bus-unit-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
   0%, 100% {
-    transform: scale(1);
+    transform: translateY(0px);
   }
   50% {
-    transform: scale(1.05);
+    transform: translateY(-5px);
   }
 }
 
-h1 {
-  font-size: 32px;
-  color: #333;
-  margin-bottom: 10px;
+.bus-details {
+  flex: 1;
 }
 
-.subtitle {
-  color: #666;
-  font-size: 14px;
-  background: #f1f5f9;
+.bus-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.room-id {
+  font-size: 15px;
+  color: #86868b;
+  font-weight: 500;
+  background: #f5f5f7;
   display: inline-block;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 8px;
 }
 
-/* MENU BUTTONS */
-.menu-buttons {
+/* ========================================
+   MENU TITLE
+======================================== */
+.menu-title {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.menu-title h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
+}
+
+.menu-subtitle {
+  font-size: 15px;
+  color: #86868b;
+}
+
+/* ========================================
+   MENU GRID - VERTICAL LAYOUT
+======================================== */
+.menu-grid {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 18px;
+  max-width: 600px;
+  margin: 0 auto;
+  animation: fadeIn 0.6s ease 0.2s backwards;
 }
 
-.menu-button {
+/* ========================================
+   MENU CARD - WITH IMAGE ICONS
+======================================== */
+.menu-card {
+  background: white;
+  border-radius: 18px;
+  padding: 25px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  min-height: 100px;
+}
+
+.menu-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.menu-card:hover::before {
+  opacity: 1;
+}
+
+.menu-card:hover {
+  transform: translateX(8px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.menu-card:active {
+  transform: translateX(4px);
+}
+
+/* Display Card - Purple */
+.menu-card.display-card::before {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+}
+
+.menu-card.display-card:hover {
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+.menu-card.display-card .menu-icon-box {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  border: none;
-  padding: 20px;
-  border-radius: 15px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
+}
+
+/* Form Card - Cyan */
+.menu-card.form-card::before {
+  background: linear-gradient(135deg, rgba(79, 172, 254, 0.05) 0%, rgba(0, 242, 254, 0.05) 100%);
+}
+
+.menu-card.form-card:hover {
+  border-color: rgba(79, 172, 254, 0.3);
+}
+
+.menu-card.form-card .menu-icon-box {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* Video Card - Dark Purple */
+.menu-card.video-card::before {
+  background: linear-gradient(135deg, rgba(118, 75, 162, 0.05) 0%, rgba(102, 126, 234, 0.05) 100%);
+}
+
+.menu-card.video-card:hover {
+  border-color: rgba(118, 75, 162, 0.3);
+}
+
+.menu-card.video-card .menu-icon-box {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* Admin Card - Green */
+.menu-card.admin-card::before {
+  background: linear-gradient(135deg, rgba(67, 233, 123, 0.05) 0%, rgba(56, 249, 215, 0.05) 100%);
+}
+
+.menu-card.admin-card:hover {
+  border-color: rgba(67, 233, 123, 0.3);
+}
+
+.menu-card.admin-card .menu-icon-box {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+/* ========================================
+   MENU CARD CONTENT
+======================================== */
+.menu-card-content {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.menu-icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 15px;
-  text-decoration: none;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  padding: 12px;
 }
 
-.menu-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+.menu-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  /* Make images white */
 }
 
-.menu-button:active {
-  transform: translateY(-1px);
+.menu-card:hover .menu-icon-box {
+  transform: scale(1.08);
 }
 
-.menu-button.display {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+/* Menu text container */
+.menu-text {
+  flex: 1;
 }
 
-.menu-button.form {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+.menu-name {
+  font-size: 19px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 4px;
+  letter-spacing: -0.3px;
 }
 
-.menu-button.form:hover {
-  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.6);
+.menu-description {
+  font-size: 14px;
+  color: #86868b;
+  line-height: 1.4;
 }
 
-.menu-button.admin {
-  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-  box-shadow: 0 4px 15px rgba(67, 233, 123, 0.4);
+.menu-arrow {
+  font-size: 28px;
+  color: #d2d2d7;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
-.menu-button.admin:hover {
-  box-shadow: 0 8px 25px rgba(67, 233, 123, 0.6);
+.menu-card:hover .menu-arrow {
+  color: #667eea;
+  transform: translateX(5px);
 }
 
-.icon-button {
-  font-size: 24px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 600px) {
-  .container {
-    padding: 30px 25px;
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+@media (max-width: 768px) {
+  .top-navbar {
+    height: 60px;
   }
 
-  h1 {
-    font-size: 28px;
+  .navbar-logo {
+    height: 35px;
   }
 
-  .icon {
-    width: 80px;
-    height: 80px;
-    font-size: 40px;
+  .hero-header {
+    margin-top: 60px;
+    padding: 30px 20px;
   }
 
-  .menu-button {
-    padding: 18px;
-    font-size: 16px;
+  .hero-title {
+    font-size: 26px;
   }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+
+  .back-button {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+
+  .main-content {
+    padding: 40px 15px;
+  }
+
+  .bus-info-card {
+    padding: 25px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .bus-icon-container {
+    width: 100px;
+    height: 100px;
+  }
+
+  .bus-name {
+    font-size: 24px;
+  }
+
+  .room-id {
+    font-size: 14px;
+  }
+
+  .menu-title h3 {
+    font-size: 20px;
+  }
+
+  .menu-grid {
+    gap: 15px;
+  }
+
+  .menu-card {
+    padding: 20px 25px;
+  }
+
+  .menu-icon-box {
+    width: 55px;
+    height: 55px;
+  }
+
+  .menu-name {
+    font-size: 18px;
+  }
+
+  .menu-description {
+    font-size: 13px;
+  }
+
+  .menu-arrow {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-header {
+    padding: 25px 15px;
+  }
+
+  .hero-title {
+    font-size: 22px;
+  }
+
+  .bus-info-card {
+    padding: 20px;
+  }
+
+  .bus-icon-container {
+    width: 90px;
+    height: 90px;
+  }
+
+  .menu-card {
+    padding: 18px 20px;
+  }
+
+  .menu-icon-box {
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+  }
+}
+
+/* ========================================
+   LOADING STATE
+======================================== */
+.menu-card.loading {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.menu-card.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(102, 126, 234, 0.3);
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  transform: translateY(-50%);
+}
+
+@keyframes spin {
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+/* ========================================
+   SMOOTH SCROLL
+======================================== */
+html {
+  scroll-behavior: smooth;
 }

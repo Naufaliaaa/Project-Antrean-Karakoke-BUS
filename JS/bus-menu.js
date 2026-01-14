@@ -1,6 +1,6 @@
 /*************************************************
- * BUS-MENU.JS - UPDATED WITH CAMERA LOGIN
- * ✅ Camera Panel → Redirect to camera-login.html
+ * BUS-MENU.JS - ENHANCED VERSION
+ * With loading states and better UX
  *************************************************/
 
 // ========= SECURITY CHECK =========
@@ -45,14 +45,23 @@ const buses = [
 function setBusInfo() {
   const bus = buses.find(b => b.id === roomId);
   
+  const busNameEl = document.getElementById('bus-name');
+  const roomIdEl = document.getElementById('room-id');
+  const busIconEl = document.getElementById('bus-icon');
+  
   if (bus) {
-    document.getElementById('bus-name').textContent = bus.name;
-    document.getElementById('bus-icon').style.background = `linear-gradient(135deg, ${bus.color} 0%, ${adjustColor(bus.color, -20)} 100%)`;
+    if (busNameEl) busNameEl.textContent = bus.name;
+    if (roomIdEl) roomIdEl.textContent = `Room ID: ${bus.id}`;
+    
+    if (busIconEl) {
+      busIconEl.style.background = `linear-gradient(135deg, ${bus.color} 0%, ${adjustColor(bus.color, -20)} 100%)`;
+    }
   } else {
-    document.getElementById('bus-name').textContent = roomId;
+    if (busNameEl) busNameEl.textContent = roomId;
+    if (roomIdEl) roomIdEl.textContent = `Room ID: ${roomId}`;
   }
   
-  document.getElementById('room-id').textContent = `Room ID: ${roomId}`;
+  console.log('✅ Bus info set:', bus || roomId);
 }
 
 // ========= ADJUST COLOR =========
@@ -81,53 +90,102 @@ async function confirmExit(e) {
   );
   
   if (result) {
+    // Clear session
     sessionStorage.removeItem(`room_token_${roomId}`);
     sessionStorage.removeItem(`room_pin_verified_${roomId}`);
     console.log('🚪 User logged out, token removed');
+    
+    // Redirect
     window.location.href = 'index.html';
   }
 }
 
-// ========= NAVIGATION =========
+// ========= NAVIGATION WITH LOADING STATE =========
+function navigateWithLoading(button, url) {
+  // Add loading class
+  button.classList.add('loading');
+  
+  // Navigate after short delay for visual feedback
+  setTimeout(() => {
+    window.location.href = url;
+  }, 300);
+}
+
+// ========= NAVIGATION FUNCTIONS =========
 function goToDisplay(e) {
   e.preventDefault();
-  window.location.href = `display-login.html?room=${roomId}`;
+  navigateWithLoading(e.currentTarget, `display-login.html?room=${roomId}`);
 }
 
 function goToForm(e) {
   e.preventDefault();
-  window.location.href = `form.html?room=${roomId}`;
+  navigateWithLoading(e.currentTarget, `form.html?room=${roomId}`);
 }
 
-function goToEmote(e) {
-  e.preventDefault();
-  window.location.href = `emote.html?room=${roomId}`;
-}
-
-// ✅ UPDATED: Camera Panel → Redirect to camera-login.html
 function goToVideo(e) {
   e.preventDefault();
-  window.location.href = `camera-login.html?room=${roomId}`;
+  navigateWithLoading(e.currentTarget, `camera-login.html?room=${roomId}`);
 }
 
 function goToAdmin(e) {
   e.preventDefault();
-  window.location.href = `admin-login.html?room=${roomId}`;
+  navigateWithLoading(e.currentTarget, `admin-login.html?room=${roomId}`);
 }
 
 // ========= EVENT LISTENERS =========
-document.getElementById('back-button').addEventListener('click', confirmExit);
-document.getElementById('display-btn').addEventListener('click', goToDisplay);
-document.getElementById('form-btn').addEventListener('click', goToForm);
-document.getElementById('video-btn').addEventListener('click', goToVideo);
-document.getElementById('admin-btn').addEventListener('click', goToAdmin);
+document.addEventListener('DOMContentLoaded', function() {
+  // Set bus info
+  setBusInfo();
+  
+  // Back button
+  const backButton = document.getElementById('back-button');
+  if (backButton) {
+    backButton.addEventListener('click', confirmExit);
+  }
+  
+  // Menu buttons
+  const displayBtn = document.getElementById('display-btn');
+  if (displayBtn) {
+    displayBtn.addEventListener('click', goToDisplay);
+  }
+  
+  const formBtn = document.getElementById('form-btn');
+  if (formBtn) {
+    formBtn.addEventListener('click', goToForm);
+  }
+  
+  const videoBtn = document.getElementById('video-btn');
+  if (videoBtn) {
+    videoBtn.addEventListener('click', goToVideo);
+  }
+  
+  const adminBtn = document.getElementById('admin-btn');
+  if (adminBtn) {
+    adminBtn.addEventListener('click', goToAdmin);
+  }
+  
+  console.log('✅ Bus-menu.js loaded (Enhanced Version)');
+  console.log('🚌 Current room:', roomId);
+});
 
-const emoteBtn = document.getElementById('emote-btn');
-if (emoteBtn) {
-  emoteBtn.addEventListener('click', goToEmote);
-}
-
-// ========= INIT =========
-setBusInfo();
-
-console.log('✅ Bus-menu.js loaded (WITH CAMERA LOGIN)');
+// ========= KEYBOARD SHORTCUTS (BONUS) =========
+document.addEventListener('keydown', function(e) {
+  // ESC key - back to index
+  if (e.key === 'Escape') {
+    const backButton = document.getElementById('back-button');
+    if (backButton) {
+      backButton.click();
+    }
+  }
+  
+  // Number keys 1-4 for quick navigation
+  if (e.key >= '1' && e.key <= '4') {
+    const buttons = ['display-btn', 'form-btn', 'video-btn', 'admin-btn'];
+    const buttonId = buttons[parseInt(e.key) - 1];
+    const button = document.getElementById(buttonId);
+    
+    if (button) {
+      button.click();
+    }
+  }
+});
