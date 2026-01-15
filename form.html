@@ -4,72 +4,136 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="img/Logo.png">
-<link rel="apple-touch-icon" href="img/Logo.png">
-<title>Request Lagu Karaoke Bus</title>
+<link rel="icon" type="image/jpeg" href="img/hioo.jpeg">
+<link rel="apple-touch-icon" href="img/hioo.jpeg">
+<title>Request Lagu - HiQo Karaoke</title>
 <link rel="stylesheet" href="css/form.css">
 </head>
 <body>
+
+<!-- ========================================
+     CONTAINER
+======================================== -->
 <div class="container">
-<div class="header">
-<div class="icon">🎤</div>
-<h1>Request Lagu</h1>
-<p class="subtitle">Masukkan nama dan link YouTube lagu kamu</p>
+  
+  <!-- ========================================
+       LOGO SECTION
+  ======================================== -->
+  <div class="logo-section">
+    <img src="img/hioo.jpeg" alt="HiQo Logo" class="logo-image">
+    <p class="logo-tagline">Silahkan Request lagu yang anda ingin kan</p>
+  </div>
+
+  <!-- ========================================
+       TITLE SECTION
+  ======================================== -->
+  <div class="title-section">
+    <h1 class="main-title">Request Lagu</h1>
+    <p class="main-subtitle">Masukan Nama dan Link Youtube Lagu Kamu!</p>
+  </div>
+
+  <!-- ========================================
+       ALERT (Hidden by default)
+  ======================================== -->
+  <div id="alert" class="alert"></div>
+
+  <!-- ========================================
+       FORM SECTION
+  ======================================== -->
+  <div class="form-section">
+    
+    <!-- Nama Kamu -->
+    <div class="form-group">
+      <label for="name" class="form-label">Nama Kamu</label>
+      <input 
+        type="text" 
+        id="name" 
+        class="form-input"
+        placeholder="Masukan nama......."
+        autocomplete="name"
+      >
+    </div>
+
+    <!-- Link YouTube -->
+    <div class="form-group">
+      <label for="youtube-link" class="form-label">Link YouTube</label>
+      <input 
+        type="url" 
+        id="youtube-link" 
+        class="form-input"
+        placeholder="https://youtube.com....."
+        autocomplete="url"
+      >
+    </div>
+
+    <!-- Submit Button -->
+    <button class="submit-button" onclick="submitSong()">
+      <span class="button-icon">➕</span>
+      <span class="button-text">Tambah Antrean</span>
+    </button>
+
+  </div>
+
+  <!-- ========================================
+       LIVE REACTION (EMOTES)
+  ======================================== -->
+  <div class="live-reaction-section">
+    <h2 class="reaction-title">LIVE REACTION</h2>
+    
+    <div class="emote-grid">
+      <!-- Row 1 -->
+      <button class="emote-btn" onclick="sendEmote('👏', 'Tepuk Tangan')" title="Tepuk Tangan">
+        👏
+      </button>
+      <button class="emote-btn" onclick="sendEmote('❤️', 'Love')" title="Love">
+        ❤️
+      </button>
+      <button class="emote-btn" onclick="sendEmote('👍', 'Jempol')" title="Jempol">
+        👍
+      </button>
+      <button class="emote-btn" onclick="sendEmote('🔥', 'Mantap')" title="Mantap">
+        🔥
+      </button>
+
+      <!-- Row 2 -->
+      <button class="emote-btn" onclick="sendEmote('🥰', 'Senyum Love')" title="Senyum Love">
+        🥰
+      </button>
+      <button class="emote-btn" onclick="sendEmote('😎', 'Keren')" title="Keren">
+        😎
+      </button>
+      <button class="emote-btn" onclick="sendEmote('😂', 'Ketawa')" title="Ketawa">
+        😂
+      </button>
+      <button class="emote-btn" onclick="sendEmote('🥳', 'Party')" title="Party">
+        🥳
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================
+       QUEUE STATUS
+  ======================================== -->
+  <div class="queue-info">
+    <div class="queue-total">
+      Total Antrean : <strong><span id="queue-count">0</span></strong>
+    </div>
+    
+    <div class="queue-status" id="queue-status">
+      ⏳ Menunggu antrean...
+    </div>
+  </div>
+
 </div>
 
-<div id="alert" class="alert"></div>
-
-<!-- ===== NAMA (WAJIB) ===== -->
-<div class="form-group">
-<label for="name">Nama Kamu</label>
-<input type="text" id="name" placeholder="Masukkan nama...">
-</div>
-
-<!-- ===== LINK YOUTUBE ===== -->
-<div class="form-group">
-<label for="youtube-link">Link YouTube</label>
-<input type="url" id="youtube-link" placeholder="https://youtube.com/watch?v=...">
-<p class="help-text">Contoh: https://www.youtube.com/watch?v=dQw4w9WgXcQ</p>
-</div>
-
-<button class="submit-button" onclick="submitSong()">
-<span>➕</span>
-<span>Tambah ke Antrean</span>
-</button>
-
-<!-- ===== DIVIDER ===== -->
-<div class="divider">
-<span>atau</span>
-</div>
-
-<!-- ===== EMOTE SECTION (CLEAN DESIGN) ===== -->
-<div class="emote-section">
-<h3>🎭 Kirim Emote ke Layar</h3>
-<p class="emote-description">Ekspresikan perasaan kamu yang akan muncul di layar karaoke!</p>
-<div class="emote-grid">
-<button class="emote-btn" onclick="sendEmote('👏', 'Tepuk Tangan')" title="Tepuk Tangan">👏</button>
-<button class="emote-btn" onclick="sendEmote('😍', 'Kagum')" title="Kagum">😍</button>
-<button class="emote-btn" onclick="sendEmote('👍', 'Jempol')" title="Jempol">👍</button>
-<button class="emote-btn" onclick="sendEmote('😂', 'Ketawa')" title="Ketawa">😂</button>
-<button class="emote-btn" onclick="sendEmote('❤️', 'Love')" title="Love">❤️</button>
-<button class="emote-btn" onclick="sendEmote('🔥', 'Mantap')" title="Mantap">🔥</button>
-</div>
-</div>
-
-<!-- ===== QUEUE STATUS ===== -->
-<div class="queue-status">
-Total antrean: <strong><span id="queue-count">0</span></strong>
-</div>
-
-<div class="queue-status" id="queue-status">
-⏳ Menunggu antrean...
-</div>
-</div>
-
+<!-- ========================================
+     SCRIPTS
+======================================== -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script src="js/firebase.js"></script>
 <script src="js/room.js"></script>
 <script src="js/form.js"></script>
+
 </body>
 </html>

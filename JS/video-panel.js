@@ -197,6 +197,12 @@ window.startCamera = async function() {
       flipBtn.disabled = false;
       console.log('✅ Flip button enabled');
     }
+    // Enable mute button
+    const muteBtn = document.getElementById('mute-btn');
+    if (muteBtn) {
+    muteBtn.disabled = false;
+    console.log('✅ Mute button enabled');
+}
     
     // Update status UI
     updateStatusUI('online');
@@ -476,6 +482,20 @@ window.stopCamera = async function() {
     const flipBtn = document.getElementById('flip-camera-btn');
     if (flipBtn) flipBtn.disabled = true;
     
+    // Disable and reset mute button
+    const muteBtn = document.getElementById('mute-btn');
+    if (muteBtn) {
+    muteBtn.disabled = true;
+    window.isAudioMuted = false;
+  
+    const muteIcon = document.getElementById('mute-icon');
+    const muteText = document.getElementById('mute-text');
+  
+    if (muteIcon) muteIcon.textContent = '🎤';
+    if (muteText) muteText.textContent = 'Matikan Mic Video';
+  
+    console.log('✅ Mute button disabled and reset');
+    }
     updateStatusUI('offline');
     
     const streamText = document.getElementById('streaming-status');
@@ -498,8 +518,8 @@ window.stopCamera = async function() {
   }
 };
 
-// ========= FLIP CAMERA =========
-window.flipCamera = async function() {
+  // ========= FLIP CAMERA =========
+  window.flipCamera = async function() {
   console.log('🔄 Flip camera called');
   
   try {
@@ -1244,6 +1264,170 @@ setTimeout(() => {
   console.log('🔄 Auto-checking dependencies...');
   checkDependencies();
 }, 500);
+
+/*************************************************
+ * TAMBAHAN UNTUK video-panel.js
+ * Fungsi Mute/Unmute Audio
+ * 
+ * INSTRUKSI:
+ * Tambahkan code ini DI AKHIR file video-panel.js
+ * (Sebelum console.log terakhir)
+ *************************************************/
+
+// ========= MUTE STATE =========
+window.isAudioMuted = false;
+
+// ========= TOGGLE MUTE FUNCTION =========
+window.toggleMute = function() {
+  console.log('🎤 Toggle mute called');
+  console.log('Current mute state:', window.isAudioMuted);
+  
+  if (!window.localStream) {
+    console.error('❌ No local stream available');
+    
+    if (typeof customError === 'function') {
+      customError('Kamera belum aktif!\n\nAktifkan kamera terlebih dahulu.', '⚠️ Peringatan');
+    } else {
+      alert('⚠️ Kamera belum aktif!');
+    }
+    return;
+  }
+  
+  try {
+    // Get audio tracks
+    const audioTracks = window.localStream.getAudioTracks();
+    
+    if (audioTracks.length === 0) {
+      console.error('❌ No audio tracks found');
+      
+      if (typeof customError === 'function') {
+        customError('Tidak ada audio track!\n\nKamera mungkin tidak memiliki mikrofon.', '⚠️ Audio Error');
+      } else {
+        alert('⚠️ Tidak ada audio track!');
+      }
+      return;
+    }
+    
+    console.log('🎤 Audio tracks found:', audioTracks.length);
+    
+    // Toggle mute state
+    window.isAudioMuted = !window.isAudioMuted;
+    
+    // Apply mute to all audio tracks
+    audioTracks.forEach(track => {
+      track.enabled = !window.isAudioMuted;
+      console.log(`🎤 Audio track ${track.id}: enabled = ${track.enabled}`);
+    });
+    
+    // Update UI
+    updateMuteUI();
+    
+    // Log result
+    if (window.isAudioMuted) {
+      console.log('🔇 Audio MUTED (Mic OFF)');
+      
+      if (typeof customSuccess === 'function') {
+        customSuccess('Mikrofon dimatikan!\n\n🔇 Audio tidak akan terdengar di display.', '🎤 Mic OFF');
+      }
+    } else {
+      console.log('🔊 Audio UNMUTED (Mic ON)');
+      
+      if (typeof customSuccess === 'function') {
+        customSuccess('Mikrofon dihidupkan!\n\n🔊 Audio akan terdengar di display.', '🎤 Mic ON');
+      }
+    }
+    
+  } catch (error) {
+    console.error('❌ Toggle mute error:', error);
+    
+    if (typeof customError === 'function') {
+      customError('Gagal mengubah status audio:\n\n' + error.message, '❌ Error');
+    } else {
+      alert('❌ Error: ' + error.message);
+    }
+  }
+};
+
+// ========= UPDATE MUTE UI =========
+function updateMuteUI() {
+  const muteBtn = document.getElementById('mute-btn');
+  const muteIcon = document.getElementById('mute-icon');
+  const muteText = document.getElementById('mute-text');
+  
+  if (!muteBtn || !muteIcon || !muteText) {
+    console.error('❌ Mute UI elements not found');
+    return;
+  }
+  
+  if (window.isAudioMuted) {
+    // MUTED STATE (Mic OFF)
+    muteBtn.classList.add('muted');
+    muteIcon.textContent = '🔇';
+    muteText.textContent = 'Hidupkan Mic Video';
+    muteBtn.title = 'Hidupkan Mic/Video';
+    console.log('✅ UI updated: MUTED');
+  } else {
+    // UNMUTED STATE (Mic ON)
+    muteBtn.classList.remove('muted');
+    muteIcon.textContent = '🎤';
+    muteText.textContent = 'Matikan Mic Video';
+    muteBtn.title = 'Matikan Mic/Video';
+    console.log('✅ UI updated: UNMUTED');
+  }
+}
+
+// ========= ENABLE/DISABLE MUTE BUTTON =========
+function enableMuteButton() {
+  const muteBtn = document.getElementById('mute-btn');
+  if (muteBtn) {
+    muteBtn.disabled = false;
+    console.log('✅ Mute button enabled');
+  }
+}
+
+function disableMuteButton() {
+  const muteBtn = document.getElementById('mute-btn');
+  if (muteBtn) {
+    muteBtn.disabled = true;
+    // Reset to default state
+    window.isAudioMuted = false;
+    updateMuteUI();
+    console.log('✅ Mute button disabled');
+  }
+}
+
+// ========= INTEGRATE WITH EXISTING FUNCTIONS =========
+
+// Modify existing startCamera function to enable mute button
+// Find this code in your existing startCamera function:
+/*
+  const flipBtn = document.getElementById('flip-camera-btn');
+  if (flipBtn) {
+    flipBtn.disabled = false;
+    console.log('✅ Flip button enabled');
+  }
+*/
+
+// ADD THIS RIGHT AFTER the flip button code:
+/*
+  // Enable mute button
+  enableMuteButton();
+*/
+
+// Modify existing stopCamera function to disable mute button
+// Find this code in your existing stopCamera function:
+/*
+  const flipBtn = document.getElementById('flip-camera-btn');
+  if (flipBtn) flipBtn.disabled = true;
+*/
+
+// ADD THIS RIGHT AFTER the flip button code:
+/*
+  // Disable mute button
+  disableMuteButton();
+*/
+
+console.log('✅ Mute/Unmute functions added to video-panel.js');
 
 // ========= FINAL LOG =========
 console.log('');
