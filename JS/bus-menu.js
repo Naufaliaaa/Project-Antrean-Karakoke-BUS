@@ -47,15 +47,10 @@ function setBusInfo() {
   
   const busNameEl = document.getElementById('bus-name');
   const roomIdEl = document.getElementById('room-id');
-  const busIconEl = document.getElementById('bus-icon');
   
   if (bus) {
     if (busNameEl) busNameEl.textContent = bus.name;
     if (roomIdEl) roomIdEl.textContent = `Room ID: ${bus.id}`;
-    
-    if (busIconEl) {
-      busIconEl.style.background = `linear-gradient(135deg, ${bus.color} 0%, ${adjustColor(bus.color, -20)} 100%)`;
-    }
   } else {
     if (busNameEl) busNameEl.textContent = roomId;
     if (roomIdEl) roomIdEl.textContent = `Room ID: ${roomId}`;

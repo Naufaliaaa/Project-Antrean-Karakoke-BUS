@@ -66,6 +66,10 @@ let emotePositions = [15, 30, 45, 60, 75];
 let nextEmotePosition = 0;
 let nextDirection = 'rtl';
 
+// Audio Control State
+let youtubeVolume = 100;
+let audioControlRef = null;
+
 // ========= 1. OVERLAY =========
 document.body.insertAdjacentHTML('afterbegin', `
   <div id="start-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:linear-gradient(135deg, #1a1a1a, #000); z-index:10000; display:flex; flex-direction:column; align-items:center; justify-content:center; color:white; font-family: sans-serif;">
@@ -80,6 +84,18 @@ window.startSystem = function() {
   const overlay = document.getElementById('start-overlay');
   if (overlay) overlay.remove();
   console.log("🚀 System Started");
+  
+  // Set display status to online
+  const displayStatusRef = roomRef.child('displayStatus');
+  displayStatusRef.set('active').then(() => {
+    console.log('✅ Display status set to: active');
+  }).catch(err => {
+    console.error('❌ Failed to set display status:', err);
+  });
+  
+  // Setup audio control listener
+  setupAudioControl();
+  
   checkAndPlayFirst();
   initWebRTCReceiver();
   initEmoteListener();
@@ -502,6 +518,61 @@ window.addEventListener('beforeunload', () => {
     videoSessionRef.child('answer').remove();
     videoSessionRef.child('displayCandidates').remove();
   }
+  
+  // Set display status to offline
+  const displayStatusRef = roomRef.child('displayStatus');
+  displayStatusRef.set('inactive').then(() => {
+    console.log('✅ Display status set to: inactive');
+  }).catch(err => {
+    console.error('❌ Failed to set display status:', err);
+  });
 });
+
+// ========= 10. AUDIO CONTROL =========
+function setupAudioControl() {
+  console.log('🔊 Setting up audio control...');
+  
+  audioControlRef = roomRef.child('audioControl');
+  
+  // Get initial YouTube volume
+  audioControlRef.child('youtubeVolume').once('value', (snapshot) => {
+    const savedVolume = snapshot.val();
+    if (savedVolume !== null && savedVolume !== undefined) {
+      youtubeVolume = savedVolume;
+      console.log('📥 Initial YouTube volume loaded:', youtubeVolume);
+      
+      // Apply to current player if exists
+      if (player && typeof player.setVolume === 'function') {
+        player.setVolume(youtubeVolume);
+        console.log('🔊 YouTube volume applied to player:', youtubeVolume);
+      }
+    }
+  });
+  
+  // Listen for real-time volume changes from admin
+  audioControlRef.child('youtubeVolume').on('value', (snapshot) => {
+    const newVolume = snapshot.val();
+    if (newVolume !== null && newVolume !== undefined && newVolume !== youtubeVolume) {
+      youtubeVolume = newVolume;
+      console.log('🔄 YouTube volume updated by admin:', youtubeVolume);
+      
+      // Apply to current player
+      if (player && typeof player.setVolume === 'function') {
+        player.setVolume(youtubeVolume);
+        console.log('🔊 YouTube volume applied:', youtubeVolume);
+      }
+    }
+  });
+  
+  console.log('✅ Audio control setup complete');
+}
+
+// ========= 11. APPLY YOUTUBE VOLUME =========
+function applyYoutubeVolume() {
+  if (player && typeof player.setVolume === 'function') {
+    player.setVolume(youtubeVolume);
+    console.log('🔊 YouTube volume applied:', youtubeVolume);
+  }
+}
 
 console.log('✅ Display.js with FIXED WebRTC and emote animation loaded');

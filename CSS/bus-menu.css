@@ -152,9 +152,9 @@ body {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  /* CIRCULAR SHAPE WITH GRADIENT */
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  /* Full color gradient on circle */
+  /* CIRCULAR SHAPE WITH SOLID COLOR */
+  background: #667eea;
+  /* Solid color background */
   display: flex;
   align-items: center;
   justify-content: center;

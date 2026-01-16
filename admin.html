@@ -4,64 +4,227 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="img/Logo.png">
-<link rel="apple-touch-icon" href="img/Logo.png">
-<title>Panel Admin Karaoke Bus</title>
-<link rel="stylesheet" href="css/admin.css">
+<link rel="icon" type="image/jpeg" href="img/hioo.jpeg">
+<link rel="apple-touch-icon" href="img/hioo.jpeg">
+<title>Admin Panel - HiQo Karaoke</title>
+<link rel="stylesheet" href="css/admin-redesign.css">
 </head>
 <body>
-<div class="container">
-<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-<a href="#" id="back-btn" class="back-button">
-<span>🏠</span><span>Kembali ke Menu Bus</span>
-</a>
-<button id="logout-btn" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3); font-size: 14px;">
-<span>🚪</span><span>Logout</span>
-</button>
+
+<!-- ========================================
+     HEADER
+======================================== -->
+<header class="admin-header">
+  <div class="header-content">
+    <div class="logo-section">
+      <img src="img/hioo.jpeg" alt="HiQo Logo" class="logo">
+      <div class="logo-text">
+        <h1>Admin Panel</h1>
+        <p>JALAN JALAN NYAMAN, CUAN AMAN</p>
+      </div>
+    </div>
+    
+    <button id="logout-btn" class="logout-btn">
+      <span class="logout-icon">🚪</span>
+      <span>Keluar</span>
+    </button>
+  </div>
+</header>
+
+<!-- ========================================
+     MAIN CONTAINER
+======================================== -->
+<div class="admin-container">
+  
+  <!-- LEFT COLUMN -->
+  <div class="left-column">
+    
+    <!-- SYSTEM CONTROL -->
+    <div class="control-card">
+      <h2 class="card-title">SYSTEM CONTROL</h2>
+      
+      <div class="system-controls">
+        <!-- Display Status -->
+        <div class="control-item">
+          <div class="control-icon tv-icon"><img src="img/layar.png" alt="Layar"></div>
+          <div class="control-info">
+            <h3>Layar Karaoke</h3>
+            <div class="status-indicator">
+              <span class="status-dot" id="display-status-dot"></span>
+              <span class="status-text" id="display-status-text">Checking...</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Video Panel Status -->
+        <div class="control-item">
+          <div class="control-icon camera-icon"><img src="img/video.png" alt="Kamera"></div>
+          <div class="control-info">
+            <h3>Video Kamera</h3>
+            <div class="status-indicator">
+              <span class="status-dot" id="camera-status-dot"></span>
+              <span class="status-text" id="camera-status-text">Checking...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- LIVE REACTION -->
+    <div class="control-card">
+      <h2 class="card-title">LIVE REACTION</h2>
+      
+      <div class="emote-grid">
+        <!-- Row 1 -->
+        <button class="emote-btn" onclick="sendAdminEmote('👏', 'Tepuk Tangan')" title="Tepuk Tangan">👏</button>
+        <button class="emote-btn" onclick="sendAdminEmote('❤️', 'Love')" title="Love">❤️</button>
+        <button class="emote-btn" onclick="sendAdminEmote('😍', 'Kagum')" title="Kagum">😍</button>
+        <button class="emote-btn" onclick="sendAdminEmote('😂', 'Ketawa')" title="Ketawa">😂</button>
+        
+        <!-- Row 2 -->
+        <button class="emote-btn" onclick="sendAdminEmote('👍', 'Jempol')" title="Jempol">👍</button>
+        <button class="emote-btn" onclick="sendAdminEmote('🤩', 'Wink')" title="Wink">🤩</button>
+        <button class="emote-btn" onclick="sendAdminEmote('🔥', 'Mantap')" title="Mantap">🔥</button>
+        <button class="emote-btn" onclick="sendAdminEmote('😎', 'Keren')" title="Keren">😎</button>
+      </div>
+      
+      <p class="emote-hint">Serukan Karaoke Dengan EMOTE</p>
+    </div>
+    
+  </div>
+  
+  <!-- MIDDLE COLUMN -->
+  <div class="middle-column">
+    
+    <!-- NOW PLAYING -->
+    <div class="now-playing-card">
+      <div class="now-playing-header">
+        <h2>NOW PLAYING</h2>
+        <button class="reset-btn" onclick="resetAllQueue()">
+          <span>🔄</span>
+          <span>Reset semua</span>
+        </button>
+      </div>
+      
+      <div class="now-playing-content" id="now-playing-section">
+        <div class="now-playing-placeholder">
+          <div class="placeholder-icon">🎵</div>
+          <p>Belum ada lagu yang diputar</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- QUEUE LIST -->
+    <div class="queue-card">
+      <div class="queue-header">
+      <div class="queue-title">
+          <span class="mic-icon"><img src="img/req.png" alt="Request"></span>
+          <h2>Antrean Lagu (<span id="queue-count">0</span>)</h2>
+        </div>
+        <div class="queue-total">
+          <span id="total-count">0</span>/20
+        </div>
+      </div>
+      
+      <!-- Add Manual -->
+      <div class="add-manual-section">
+        <h3>Request Manual</h3>
+        <div class="add-manual-form">
+          <input type="text" id="admin-name" placeholder="Nama" class="form-input">
+          <input type="url" id="admin-link" placeholder="Link Youtube" class="form-input">
+          <button class="add-btn" onclick="addManual()">
+            <span>➕</span>
+            <span>Tambah</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Queue List -->
+      <div id="queue-list" class="queue-list">
+        <div class="empty-queue">
+          <div class="empty-icon">📭</div>
+          <p>Belum ada antrean</p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- RIGHT COLUMN -->
+  <div class="right-column">
+    
+    <!-- AUDIO CONTROL -->
+    <div class="control-card audio-control-card">
+      <h2 class="card-title">AUDIO CONTROL</h2>
+      
+      <!-- YouTube Volume -->
+      <div class="audio-control-item">
+        <div class="audio-header">
+          <div class="audio-icon music-icon">🎵</div>
+          <h3>Musik</h3>
+        </div>
+        <div class="volume-slider-container">
+          <input type="range" min="0" max="100" value="100" class="volume-slider" id="youtube-volume">
+          <div class="volume-indicator">
+            <span class="volume-icon">🔊</span>
+            <span class="volume-value" id="youtube-volume-value">100</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Microphone Volume -->
+      <div class="audio-control-item">
+        <div class="audio-header">
+          <div class="audio-icon mic-icon-audio">🎤</div>
+          <h3>MIC</h3>
+        </div>
+        <div class="volume-slider-container">
+          <input type="range" min="0" max="100" value="100" class="volume-slider" id="mic-volume">
+          <div class="volume-indicator">
+            <span class="volume-icon">🔊</span>
+            <span class="volume-value" id="mic-volume-value">100</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- SCAN FOR REQUEST -->
+    <div class="control-card qr-card">
+      <h2 class="card-title">SCAN FOR REQUEST</h2>
+      
+      <div class="qr-code-container">
+        <img id="qr-image" alt="QR Code" class="qr-code">
+      </div>
+      
+      <p class="qr-url" id="form-url">Loading...</p>
+    </div>
+    
+  </div>
+  
 </div>
-<div class="header-card">
-<div class="header-content">
-<div class="header-title">
-<h1>⚙️ Panel Admin</h1>
-<p>Kontrol antrean karaoke bus</p>
-</div>
-<div class="queue-counter">
-<p>Total Antrean</p>
-<div class="count"><span id="total-count">0</span>/20</div>
-</div>
-</div>
-<div class="qr-section">
-<div class="qr-code"><img id="qr-image" alt="QR Code"></div>
-<div class="qr-info">
-<h3>📱 QR untuk Penumpang</h3>
-<p>Scan untuk request lagu</p>
-<div class="qr-link" id="form-url"></div>
-</div>
-</div>
-</div>
-<div id="now-playing-section"></div>
-<div class="queue-card">
-<h2>👥 Daftar Antrean (<span id="queue-count">0</span>)</h2>
-<div class="add-manual">
-<h3>Tambah Manual</h3>
-<div class="add-form">
-<input type="text" id="admin-name" placeholder="Nama">
-<input type="url" id="admin-link" placeholder="Link YouTube">
-<button class="add-button" onclick="addManual()">➕ Tambah</button>
-</div>
-</div>
-<div id="queue-list" class="queue-list"></div>
-</div>
-</div>
+
+<!-- ========================================
+     SCRIPTS
+======================================== -->
 
 <!-- Custom Modal -->
 <script src="js/custom-modal.js"></script>
 
+<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<!-- Firebase Config -->
 <script src="js/firebase.js"></script>
+
+<!-- Room Manager -->
 <script src="js/room.js"></script>
+
+<!-- Security Check -->
 <script src="js/admin-page.js"></script>
-<script src="js/admin.js"></script>
+
+<!-- Main Logic -->
+<script src="js/admin-redesign.js"></script>
+
 </body>
 </html>

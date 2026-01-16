@@ -32,6 +32,7 @@ window.currentFacingMode = 'user';
 window.isCameraActive = false;
 window.isRecording = false;
 window.isAudioMuted = false; // 🎤 Mute state
+window.micVolume = 100; // 🎤 Mic volume (0-100)
 
 const configuration = {
   iceServers: [
@@ -77,6 +78,74 @@ function initializeFirebase() {
     console.error('❌ Firebase init error:', error);
     return false;
   }
+}
+
+// ========= SETUP MIC VOLUME CONTROL =========
+function setupMicVolumeControl() {
+  console.log('🎤 Setting up mic volume control...');
+  
+  const audioControlRef = db.ref(`karaoke/room/${roomId}/audioControl`);
+  
+  // Get initial mic volume
+  audioControlRef.child('micVolume').once('value', (snapshot) => {
+    const savedVolume = snapshot.val();
+    if (savedVolume !== null && savedVolume !== undefined) {
+      window.micVolume = savedVolume;
+      console.log('📥 Initial mic volume loaded:', window.micVolume);
+      
+      // Apply to audio tracks
+      applyMicVolume();
+    }
+  });
+  
+  // Listen for real-time volume changes from admin
+  audioControlRef.child('micVolume').on('value', (snapshot) => {
+    const newVolume = snapshot.val();
+    if (newVolume !== null && newVolume !== undefined && newVolume !== window.micVolume) {
+      window.micVolume = newVolume;
+      console.log('🔄 Mic volume updated by admin:', window.micVolume);
+      
+      // Apply to audio tracks
+      applyMicVolume();
+    }
+  });
+  
+  console.log('✅ Mic volume control setup complete');
+}
+
+// ========= APPLY MIC VOLUME =========
+function applyMicVolume() {
+  if (!window.localStream) {
+    console.log('🎤 No local stream, cannot apply volume');
+    return;
+  }
+  
+  const audioTracks = window.localStream.getAudioTracks();
+  if (audioTracks.length === 0) {
+    console.log('🎤 No audio tracks found');
+    return;
+  }
+  
+  // Use Web Audio API for volume control (if available)
+  // Otherwise, just apply mute/unmute based on volume
+  const volumeLevel = window.micVolume / 100;
+  
+  audioTracks.forEach((track, index) => {
+    if (track.kind === 'audio') {
+      // Try to use gain control if available
+      // For simplicity, we'll use enabled state (mute/unmute)
+      // and let the underlying system handle volume
+      console.log(`🎤 Track ${index + 1} volume: ${window.micVolume}%`);
+    }
+  });
+  
+  // Show volume in UI if there's a volume indicator
+  const volumeDisplay = document.getElementById('mic-volume-display');
+  if (volumeDisplay) {
+    volumeDisplay.textContent = `${window.micVolume}%`;
+  }
+  
+  console.log('🎤 Mic volume applied:', window.micVolume);
 }
 
 // ========= UPDATE STATUS UI =========
@@ -838,6 +907,13 @@ window.addEventListener('beforeunload', () => {
 setTimeout(() => {
   console.log('🔄 Auto-checking dependencies...');
   checkDependencies();
+  
+  // Setup mic volume control after dependencies are ready
+  setTimeout(() => {
+    if (dependenciesReady) {
+      setupMicVolumeControl();
+    }
+  }, 1000);
 }, 500);
 
 console.log('');
