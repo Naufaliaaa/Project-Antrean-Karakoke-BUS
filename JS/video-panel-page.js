@@ -4,6 +4,7 @@
  * ✅ All functions immediately available
  * ✅ Proper error handling
  * ✅ Works with event handlers in HTML
+ * ✅ Mute/unmute audio functionality
  *************************************************/
 
 console.log('🎥 ========================================');
@@ -34,6 +35,7 @@ window.recordingInterval = null;
 window.currentFacingMode = 'user';
 window.isCameraActive = false;
 window.isRecording = false;
+window.isAudioMuted = false; // 🎤 Mute state
 
 const configuration = {
   iceServers: [
@@ -79,6 +81,105 @@ function initializeFirebase() {
   } catch (error) {
     console.error('❌ Firebase init error:', error);
     return false;
+  }
+}
+
+// ========= UPDATE MUTE UI =========
+function updateMuteUI() {
+  const muteBtn = document.getElementById('mute-btn');
+  const muteIcon = document.getElementById('mute-icon');
+  const muteText = document.getElementById('mute-text');
+  
+  if (!muteBtn || !muteIcon || !muteText) {
+    console.log('🎤 Mute UI elements not found (waiting for DOM...)');
+    return;
+  }
+  
+  if (window.isAudioMuted) {
+    muteBtn.classList.add('muted');
+    muteIcon.textContent = '🔇';
+    muteText.textContent = 'Hidupkan Mic Video';
+    muteBtn.title = 'Hidupkan Mic/Video';
+    console.log('✅ UI updated: MUTED');
+  } else {
+    muteBtn.classList.remove('muted');
+    muteIcon.textContent = '🎤';
+    muteText.textContent = 'Matikan Mic Video';
+    muteBtn.title = 'Matikan Mic/Video';
+    console.log('✅ UI updated: UNMUTED');
+  }
+}
+
+// ========= TOGGLE MUTE FUNCTION =========
+window.toggleMute = function() {
+  console.log('🎤 ========================================');
+  console.log('🎤 TOGGLE MUTE CALLED!');
+  console.log('🎤 Current state:', window.isAudioMuted ? 'MUTED' : 'UNMUTED');
+  console.log('🎤 ========================================');
+  
+  if (!window.localStream) {
+    console.error('❌ No local stream available');
+    alert('⚠️ Kamera belum aktif!');
+    return;
+  }
+  
+  try {
+    const audioTracks = window.localStream.getAudioTracks();
+    
+    if (audioTracks.length === 0) {
+      console.error('❌ No audio tracks found');
+      alert('⚠️ Tidak ada audio track!');
+      return;
+    }
+    
+    console.log('🎤 Audio tracks found:', audioTracks.length);
+    
+    // Toggle mute state
+    window.isAudioMuted = !window.isAudioMuted;
+    
+    // Apply mute to ALL audio tracks
+    audioTracks.forEach((track, index) => {
+      track.enabled = !window.isAudioMuted;
+      console.log(`🎤 Track ${index + 1}: enabled = ${track.enabled}`);
+    });
+    
+    // Update UI
+    updateMuteUI();
+    
+    // Log result
+    if (window.isAudioMuted) {
+      console.log('');
+      console.log('🔇 ========================================');
+      console.log('🔇 AUDIO MUTED (MIC OFF)');
+      console.log('🔇 ========================================');
+      console.log('');
+      alert('🔇 Mikrofon dimatikan!');
+    } else {
+      console.log('');
+      console.log('🔊 ========================================');
+      console.log('🔊 AUDIO UNMUTED (MIC ON)');
+      console.log('🔊 ========================================');
+      console.log('');
+      alert('🔊 Mikrofon dihidupkan!');
+    }
+    
+  } catch (error) {
+    console.error('❌ Toggle mute error:', error);
+    alert('❌ Error: ' + error.message);
+  }
+};
+
+// ========= UPDATE STATUS UI =========
+function updateStatusUI(status) {
+  const statusText = document.getElementById('connection-status');
+  const statusDot = document.getElementById('status-dot');
+  
+  if (status === 'online') {
+    if (statusText) statusText.textContent = 'Online';
+    if (statusDot) statusDot.classList.add('online');
+  } else {
+    if (statusText) statusText.textContent = 'Offline';
+    if (statusDot) statusDot.classList.remove('online');
   }
 }
 
@@ -196,6 +297,13 @@ window.startCamera = async function() {
     if (flipBtn) {
       flipBtn.disabled = false;
       console.log('✅ Flip button enabled');
+    }
+    
+    // 🎤 ENABLE MUTE BUTTON
+    const muteBtn = document.getElementById('mute-btn');
+    if (muteBtn) {
+      muteBtn.disabled = false;
+      console.log('✅ Mute button enabled');
     }
     
     // Update status UI
@@ -392,20 +500,6 @@ async function setupWebRTC() {
   }
 }
 
-// ========= UPDATE STATUS UI =========
-function updateStatusUI(status) {
-  const statusText = document.getElementById('connection-status');
-  const statusDot = document.getElementById('status-dot');
-  
-  if (status === 'online') {
-    if (statusText) statusText.textContent = 'Online';
-    if (statusDot) statusDot.classList.add('online');
-  } else {
-    if (statusText) statusText.textContent = 'Offline';
-    if (statusDot) statusDot.classList.remove('online');
-  }
-}
-
 // ========= STOP CAMERA =========
 window.stopCamera = async function() {
   console.log('⏹️ Stop camera called');
@@ -476,6 +570,15 @@ window.stopCamera = async function() {
     const flipBtn = document.getElementById('flip-camera-btn');
     if (flipBtn) flipBtn.disabled = true;
     
+    // 🎤 DISABLE & RESET MUTE BUTTON
+    const muteBtn = document.getElementById('mute-btn');
+    if (muteBtn) {
+      muteBtn.disabled = true;
+      window.isAudioMuted = false;
+      updateMuteUI();
+      console.log('✅ Mute button disabled and reset');
+    }
+    
     updateStatusUI('offline');
     
     const streamText = document.getElementById('streaming-status');
@@ -528,6 +631,15 @@ window.flipCamera = async function() {
       
       if (videoSender && videoTrack) await videoSender.replaceTrack(videoTrack);
       if (audioSender && audioTrack) await audioSender.replaceTrack(audioTrack);
+      
+      // 🎤 RE-APPLY MUTE STATE AFTER FLIP
+      if (window.isAudioMuted) {
+        const audioTracks = window.localStream.getAudioTracks();
+        audioTracks.forEach(track => {
+          track.enabled = false;
+        });
+        console.log('🎤 Mute state re-applied after flip');
+      }
     }
     
     console.log('✅ Camera flipped to:', window.currentFacingMode);
@@ -750,7 +862,9 @@ console.log('✅ Functions exposed to window:');
 console.log('   - window.startCamera');
 console.log('   - window.stopCamera');
 console.log('   - window.flipCamera');
+console.log('   - window.toggleMute  ← NEW!');
 console.log('   - window.toggleRecording');
 console.log('   - window.logout');
 console.log('✅ ========================================');
 console.log('');
+
