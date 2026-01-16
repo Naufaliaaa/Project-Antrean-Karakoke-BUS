@@ -7,7 +7,7 @@
 <link rel="icon" type="image/jpeg" href="img/hioo.jpeg">
 <link rel="apple-touch-icon" href="img/hioo.jpeg">
 <title>Admin Panel - HiQo Karaoke</title>
-<link rel="stylesheet" href="css/admin-redesign.css">
+<link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
 
@@ -20,14 +20,14 @@
       <img src="img/hioo.jpeg" alt="HiQo Logo" class="logo">
       <div class="logo-text">
         <h1>Admin Panel</h1>
-        <p>JALAN JALAN NYAMAN, CUAN AMAN</p>
+        <p>Sistem Control Dan Monitoring Karaoke</p>
       </div>
     </div>
     
-    <button id="logout-btn" class="logout-btn">
-      <span class="logout-icon">🚪</span>
-      <span>Keluar</span>
-    </button>
+<button id="logout-btn" class="logout-btn">
+<img src="img/log-out.png" alt="Logout" style="width: 20px; height: 20px;">
+<span>Keluar</span>
+</button>
   </div>
 </header>
 
@@ -41,7 +41,7 @@
     
     <!-- SYSTEM CONTROL -->
     <div class="control-card">
-      <h2 class="card-title">SYSTEM CONTROL</h2>
+      <h2 class="card-title">SYSTEM MONITORING</h2>
       
       <div class="system-controls">
         <!-- Display Status -->
@@ -88,7 +88,16 @@
         <button class="emote-btn" onclick="sendAdminEmote('😎', 'Keren')" title="Keren">😎</button>
       </div>
       
-      <p class="emote-hint">Serukan Karaoke Dengan EMOTE</p>
+        <p class="emote-hint">Serukan Karaoke Dengan EMOTE</p>
+    </div>
+    
+    <!-- TOTAL REQUEST LAGU -->
+    <div class="control-card total-request-card">
+      <h2 class="card-title">TOTAL REQUEST LAGU</h2>
+      <div class="total-request-display">
+        <div class="total-request-number" id="total-request-count">0</div>
+        <div class="total-request-label">Lagu Diproses</div>
+      </div>
     </div>
     
   </div>
@@ -101,14 +110,14 @@
       <div class="now-playing-header">
         <h2>NOW PLAYING</h2>
         <button class="reset-btn" onclick="resetAllQueue()">
-          <span>🔄</span>
+          <img src="img/reset.png" alt="Reset" style="width: 18px; height: 18px;">
           <span>Reset semua</span>
         </button>
       </div>
       
       <div class="now-playing-content" id="now-playing-section">
         <div class="now-playing-placeholder">
-          <div class="placeholder-icon">🎵</div>
+          <img src="img/microphone.png" alt="Microphone" style="width: 60px; height: 60px; object-fit: contain; margin-bottom: 10px; opacity: 0.7;">
           <p>Belum ada lagu yang diputar</p>
         </div>
       </div>
@@ -160,13 +169,12 @@
       <!-- YouTube Volume -->
       <div class="audio-control-item">
         <div class="audio-header">
-          <div class="audio-icon music-icon">🎵</div>
+          <div class="audio-icon music-icon"><img src="img/loud-speaker.png" alt="Musik" style="width: 28px; height: 28px; object-fit: contain;"></div>
           <h3>Musik</h3>
         </div>
         <div class="volume-slider-container">
           <input type="range" min="0" max="100" value="100" class="volume-slider" id="youtube-volume">
           <div class="volume-indicator">
-            <span class="volume-icon">🔊</span>
             <span class="volume-value" id="youtube-volume-value">100</span>
           </div>
         </div>
@@ -175,13 +183,12 @@
       <!-- Microphone Volume -->
       <div class="audio-control-item">
         <div class="audio-header">
-          <div class="audio-icon mic-icon-audio">🎤</div>
-          <h3>MIC</h3>
+          <div class="audio-icon mic-icon-audio"><img src="img/voice-search.png" alt="Microphone" style="width: 28px; height: 28px; object-fit: contain;"></div>
+          <h3>Microphone Camera</h3>
         </div>
         <div class="volume-slider-container">
           <input type="range" min="0" max="100" value="100" class="volume-slider" id="mic-volume">
           <div class="volume-indicator">
-            <span class="volume-icon">🔊</span>
             <span class="volume-value" id="mic-volume-value">100</span>
           </div>
         </div>
@@ -224,7 +231,7 @@
 <script src="js/admin-page.js"></script>
 
 <!-- Main Logic -->
-<script src="js/admin-redesign.js"></script>
+<script src="js/admin.js"></script>
 
 </body>
 </html>

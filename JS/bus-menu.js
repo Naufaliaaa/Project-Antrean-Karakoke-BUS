@@ -33,12 +33,12 @@ const roomId = urlParams.get('room');
 // ========= DAFTAR BUS =========
 const buses = [
   { id: 'BUS-001', name: 'Bus 1', color: '#667eea' },
-  { id: 'BUS-002', name: 'Bus 2', color: '#f093fb' },
-  { id: 'BUS-003', name: 'Bus 3', color: '#4facfe' },
-  { id: 'BUS-004', name: 'Bus 4', color: '#43e97b' },
-  { id: 'BUS-005', name: 'Bus 5', color: '#fa709a' },
-  { id: 'BUS-006', name: 'Bus 6', color: '#feca57' },
-  { id: 'BUS-007', name: 'Bus 7', color: '#ff6b6b' },
+  { id: 'BUS-002', name: 'Bus 2', color: '#667eea' },
+  { id: 'BUS-003', name: 'Bus 3', color: '#667eea' },
+  { id: 'BUS-004', name: 'Bus 4', color: '#667eea' },
+  { id: 'BUS-005', name: 'Bus 5', color: '#667eea' },
+  { id: 'BUS-006', name: 'Bus 6', color: '#667eea' },
+  { id: 'BUS-007', name: 'Bus 7', color: '#667eea' },
 ];
 
 // ========= SET BUS INFO =========

@@ -14,7 +14,7 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  background: linear-gradient(135deg, #e5e7eb 0%, #f3f4f6 100%);
+  background: white;
   min-height: 100vh;
   overflow-x: hidden;
 }
@@ -269,6 +269,42 @@ body {
 }
 
 /* ========================================
+   TOTAL REQUEST CARD
+======================================== */
+.total-request-card {
+  background: linear-gradient(135deg, #7c5ceb 0%, #5b3fd9 100%);
+  box-shadow: 0 8px 30px rgba(124, 92, 235, 0.4);
+}
+
+.total-request-card .card-title {
+  color: white;
+  margin-bottom: 15px;
+}
+
+.total-request-display {
+  text-align: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+}
+
+.total-request-number {
+  font-size: 56px;
+  font-weight: 800;
+  color: white;
+  line-height: 1;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.total-request-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 8px;
+}
+
+/* ========================================
    LIVE REACTION (EMOTE GRID)
 ======================================== */
 .emote-grid {
@@ -356,6 +392,7 @@ body {
 }
 
 .now-playing-content {
+  flex: 1;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
   border-radius: 15px;
@@ -371,12 +408,6 @@ body {
   color: white;
 }
 
-.placeholder-icon {
-  font-size: 60px;
-  margin-bottom: 10px;
-  opacity: 0.7;
-}
-
 .now-playing-placeholder p {
   font-size: 16px;
   opacity: 0.9;
@@ -387,9 +418,10 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
+  width: 100%;
 }
 
-.album-cover {
+.karaoke-cover {
   width: 120px;
   height: 120px;
   border-radius: 12px;
@@ -440,6 +472,18 @@ body {
 .skip-btn:hover {
   background: rgba(255, 255, 255, 0.3);
   transform: translateY(-2px);
+}
+
+/* Placeholder */
+.now-playing-placeholder {
+  text-align: center;
+  color: white;
+}
+
+.placeholder-icon {
+  font-size: 60px;
+  margin-bottom: 10px;
+  opacity: 0.7;
 }
 
 /* ========================================
@@ -699,10 +743,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
   border-radius: 12px;
   background: linear-gradient(135deg, #7c5ceb 0%, #5b3fd9 100%);
   box-shadow: 0 4px 12px rgba(124, 92, 235, 0.3);
+  overflow: hidden;
+}
+
+.audio-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 
 .audio-header h3 {

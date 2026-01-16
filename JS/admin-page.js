@@ -53,10 +53,10 @@ async function goBackToBusMenu() {
 // ========= LOGOUT =========
 async function logout() {
   const result = await customConfirm(
-    'Anda akan keluar dari panel admin. Anda perlu login kembali untuk mengakses panel ini.', 
+    'Anda akan keluar dari panel admin. Anda perlu login kembali untuk mengakses panel ini.',
     {
       title: 'Konfirmasi Logout',
-      icon: '🚪',
+      icon: 'img/log-out.png',
       confirmText: 'Ya, Logout',
       cancelText: 'Batal',
       confirmClass: 'custom-modal-btn-danger'
@@ -66,6 +66,7 @@ async function logout() {
   if (result) {
     sessionStorage.removeItem("adminAuth");
     sessionStorage.removeItem("loginTime");
+    sessionStorage.removeItem("adminRequestCount");
     
     await customSuccess("Logout berhasil! Anda akan diarahkan ke halaman login.", "Sampai Jumpa!");
     

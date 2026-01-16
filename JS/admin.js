@@ -16,6 +16,41 @@ let roomId = null;
 let dragSourceKey = null;
 let displayStatusListener = null;
 let cameraStatusListener = null;
+let totalRequestCount = 0;
+
+// ========= SESSION COUNTER =========
+let sessionStartTime = null;
+
+function initSessionCounter() {
+  const savedCount = sessionStorage.getItem('adminRequestCount');
+  if (savedCount) {
+    totalRequestCount = parseInt(savedCount, 10);
+  } else {
+    totalRequestCount = 0;
+    sessionStorage.setItem('adminRequestCount', '0');
+  }
+  sessionStartTime = Date.now();
+  updateTotalRequestDisplay();
+}
+
+function incrementRequestCount() {
+  totalRequestCount++;
+  sessionStorage.setItem('adminRequestCount', totalRequestCount.toString());
+  updateTotalRequestDisplay();
+}
+
+function resetRequestCount() {
+  totalRequestCount = 0;
+  sessionStorage.setItem('adminRequestCount', '0');
+  updateTotalRequestDisplay();
+}
+
+function updateTotalRequestDisplay() {
+  const countEl = document.getElementById('total-request-count');
+  if (countEl) {
+    countEl.textContent = totalRequestCount;
+  }
+}
 
 // ========= WAIT FOR DOM =========
 if (document.readyState === 'loading') {
@@ -65,6 +100,9 @@ async function initAdmin() {
   }
 
   console.log('✅ Firebase refs ready');
+  
+  // Initialize session counter
+  initSessionCounter();
   
   // Initialize features
   setupQueueListener();
@@ -235,6 +273,21 @@ function setupQueueListener() {
   }, (error) => {
     console.error('❌ Listener error:', error);
   });
+  
+  // Listen for new user requests (not admin manual)
+  queueRef.on('child_added', (snapshot) => {
+    const data = snapshot.val();
+    // Only increment for user requests (not admin manual)
+    // Only count requests created during this session
+    if (data && data.deviceId && data.deviceId !== 'ADMIN-MANUAL') {
+      if (data.createdAt && sessionStartTime && data.createdAt > sessionStartTime) {
+        console.log('🎵 User request detected:', data.name);
+        incrementRequestCount();
+      }
+    }
+  }, (error) => {
+    console.error('❌ Child added listener error:', error);
+  });
 }
 
 // ========= RENDER QUEUE =========
@@ -291,13 +344,14 @@ function renderQueue(snapshot) {
   const first = items[0];
   nowSection.innerHTML = `
     <div class="now-playing-active">
+      <img src="img/karaoke.jpg.avif" alt="Karaoke" class="karaoke-cover">
       <div class="now-playing-info">
         <div class="song-number">1. ${first.name}</div>
         <div class="song-title">Sedang Bernyanyi</div>
         <div class="song-artist">Device: ${(first.deviceId || 'Unknown').substring(0, 15)}</div>
         <button class="skip-btn" onclick="skipCurrent()">
-          <span>⏭️</span>
-          <span>Skip Antre</span>
+          <img src="img/next.png" alt="Next" style="width: 18px; height: 18px;">
+          <span>Skip Karaoke ini</span>
         </button>
       </div>
     </div>
@@ -456,6 +510,7 @@ window.addManual = async function() {
         await customError(`Gagal menambahkan lagu: ${error.message}`, 'Gagal Menambahkan');
       } else {
         console.log('✅ Added successfully');
+        incrementRequestCount();
         await customSuccess(`Lagu "${name}" berhasil ditambahkan ke antrean!`, 'Berhasil!');
         nameInput.value = '';
         linkInput.value = '';
@@ -643,6 +698,7 @@ function setupLogout() {
       if (result) {
         sessionStorage.removeItem('adminAuth');
         sessionStorage.removeItem('loginTime');
+        sessionStorage.removeItem('adminRequestCount');
         
         await customSuccess('Logout berhasil! Anda akan diarahkan ke halaman login.', 'Sampai Jumpa!');
         

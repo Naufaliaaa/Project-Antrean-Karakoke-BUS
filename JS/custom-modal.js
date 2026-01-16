@@ -36,6 +36,15 @@ const modalStyles = `
   font-size: 64px;
   text-align: center;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-modal-icon img {
+  max-width: 80px;
+  max-height: 80px;
+  object-fit: contain;
 }
 
 .custom-modal-title {
@@ -174,14 +183,19 @@ window.customAlert = function(message, options = {}) {
       buttonText = 'OK',
       buttonClass = 'custom-modal-btn-primary'
     } = options;
-    
+
+    // Check if icon is an image path
+    const iconContent = icon.match(/\.(jpeg|jpg|png|gif|svg|webp)$/i)
+      ? `<img src="${icon}" alt="${title}" style="max-width: 80px; max-height: 80px; object-fit: contain;">`
+      : icon;
+
     // Create overlay
     const overlay = document.createElement('div');
     overlay.className = 'custom-modal-overlay';
-    
+
     overlay.innerHTML = `
       <div class="custom-modal">
-        <div class="custom-modal-icon">${icon}</div>
+        <div class="custom-modal-icon">${iconContent}</div>
         <div class="custom-modal-title">${title}</div>
         <div class="custom-modal-message">${message}</div>
         <div class="custom-modal-buttons">
@@ -234,14 +248,19 @@ window.customConfirm = function(message, options = {}) {
       confirmClass = 'custom-modal-btn-primary',
       cancelClass = 'custom-modal-btn-secondary'
     } = options;
-    
+
+    // Check if icon is an image path
+    const iconContent = icon.match(/\.(jpeg|jpg|png|gif|svg|webp)$/i)
+      ? `<img src="${icon}" alt="${title}" style="max-width: 80px; max-height: 80px; object-fit: contain;">`
+      : icon;
+
     // Create overlay
     const overlay = document.createElement('div');
     overlay.className = 'custom-modal-overlay';
-    
+
     overlay.innerHTML = `
       <div class="custom-modal">
-        <div class="custom-modal-icon">${icon}</div>
+        <div class="custom-modal-icon">${iconContent}</div>
         <div class="custom-modal-title">${title}</div>
         <div class="custom-modal-message">${message}</div>
         <div class="custom-modal-buttons">
