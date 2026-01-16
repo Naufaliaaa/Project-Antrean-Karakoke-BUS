@@ -3,24 +3,87 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Favicon -->
 <link rel="icon" type="image/png" href="img/Logo.png">
 <link rel="apple-touch-icon" href="img/Logo.png">
-<title>Login Display - Karaoke Bus</title>
-<link rel="stylesheet" href="css/display-login.css">
+<title>Login Layar Karaoke - Karaoke Bus</title>
+<link rel="stylesheet" href="css/admin-login.css">
 </head>
 <body>
-<div class="card">
-<h1>📺 Layar Karaoke</h1>
-<p>Masukkan password untuk melanjutkan</p>
-<input type="password" id="password" placeholder="Password display" autofocus>
-<button id="login-btn">Masuk</button>
-<div class="error" id="error">❌ Password salah</div>
-<a href="#" id="back-link" class="back-link">← Kembali ke Beranda</a>
+<nav class="top-navbar">
+<img src="img/hioo.jpeg" alt="HiQo Logo" class="navbar-logo">
+</nav>
+
+<section class="hero-background">
+<div class="hero-overlay"></div>
+<div class="hero-text">
+<h1 class="hero-title">Pusat Kontrol Hiburan Karaoke Bus<br>Bikin Perjalanan Makin Meriah!</h1>
+<p class="hero-subtitle">Masuk ke Layar Karaoke untuk menampilkan<br>video dan lirik di layar utama.</p>
+</div>
+</section>
+
+<div class="modal-overlay" id="modal-overlay">
+<div class="modal-container">
+<div class="modal-content">
+<div class="modal-header">
+<h2 class="modal-title">Verifikasi Akses Layar Karaoke</h2>
+<div class="modal-underline"></div>
 </div>
 
-<!-- Custom Modal -->
+<!-- Section Info -->
+<div class="section-info">
+<img src="img/layar.png" alt="Layar Karaoke" class="section-image">
+<div class="section-details">
+<h3 class="section-name">Layar Karaoke</h3>
+<p class="section-id">Tampilan Utama Karaoke Bus</p>
+</div>
+</div>
+
+<!-- Password Input Section -->
+<div class="password-section">
+<label class="password-label">Masukkan Password Layar!</label>
+<input type="password" id="password" class="password-input" placeholder="Password layar" autofocus>
+<div class="error-message" id="error-message" style="display: none;">
+❌ Password yang Anda masukkan salah!
+</div>
+</div>
+
+<!-- Action Buttons -->
+<div class="modal-actions">
+<button class="btn-submit" id="login-btn">Masuk</button>
+<a href="#" id="back-link" class="btn-cancel">Batal</a>
+</div>
+</div>
+</div>
+</div>
+
+<div class="background-content">
+<div class="section-header">
+<h2 class="section-title">Akses Pusat Kontrol</h2>
+</div>
+
+<div class="access-grid-preview">
+<div class="access-card-preview">
+<img src="img/admin.png" alt="Admin">
+<button class="access-button">Admin Panel</button>
+<p class="access-text">Pengaturan & Kontrol</p>
+</div>
+<div class="access-card-preview">
+<img src="img/layar.png" alt="Layar">
+<button class="access-button">Layar Karaoke</button>
+<p class="access-text">Tampilan Utama</p>
+</div>
+<div class="access-card-preview">
+<img src="img/video.png" alt="Video">
+<button class="access-button">Video Panel</button>
+<p class="access-text">Panel Video</p>
+</div>
+</div>
+
 <script src="js/custom-modal.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="js/firebase.js"></script>
+<script src="js/room.js"></script>
 <script src="js/display-login.js"></script>
 </body>
 </html>

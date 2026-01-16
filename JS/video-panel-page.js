@@ -5,6 +5,7 @@
  * ✅ Proper error handling
  * ✅ Works with event handlers in HTML
  * ✅ Mute/unmute audio functionality
+ * ✅ Updated for video-panel-login.html
  *************************************************/
 
 console.log('🎥 ========================================');
@@ -23,6 +24,18 @@ if (!roomId) {
 }
 
 console.log('✅ Room ID:', roomId);
+
+// ========= CHECK AUTHENTICATION =========
+const isVideoPanelAuth = sessionStorage.getItem("videoPanelAuth") === "authenticated";
+const videoPanelToken = sessionStorage.getItem("videoPanel_token");
+
+if (!isVideoPanelAuth || !videoPanelToken) {
+  console.warn('⚠️ Unauthorized video panel access! Redirecting to login...');
+  window.location.replace(`video-panel-login.html?room=${roomId}`);
+  throw new Error("Unauthorized");
+}
+
+console.log('✅ Video Panel authentication verified');
 
 // ========= GLOBAL STATE (EXPOSED TO WINDOW) =========
 window.videoSessionRef = null;
@@ -819,13 +832,13 @@ window.logout = async function() {
     }
     
     setTimeout(() => {
-      window.location.replace(`camera-login.html?room=${roomId}`);
+      window.location.replace(`video-panel-login.html?room=${roomId}`);
     }, 1000);
     
   } catch (error) {
     console.error('Logout error:', error);
     sessionStorage.clear();
-    window.location.replace(`camera-login.html?room=${roomId}`);
+    window.location.replace(`video-panel-login.html?room=${roomId}`);
   }
 };
 

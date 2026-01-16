@@ -1,91 +1,154 @@
-/*************************************************
- * ADMIN-LOGIN.JS - Admin Authentication
- *************************************************/
+//admin-login.js
+console.log('🔐 ADMIN-LOGIN.JS LOADING...');
 
-// ========= PASSWORD ADMIN =========
-const ADMIN_PASSWORD = "karaokebushioo0001";
-
-// ========= ELEMENTS =========
 const passwordInput = document.getElementById('password');
 const loginBtn = document.getElementById('login-btn');
-const errorEl = document.getElementById('error');
 const backLink = document.getElementById('back-link');
+const errorDiv = document.getElementById('error-message');
 
-// ========= CHECK ALREADY LOGGED IN =========
-if (sessionStorage.getItem("adminAuth") === "authenticated") {
+// Password admin
+const ADMIN_PASSWORD = "karaokebushioo0001";
+
+function getRoomId() {
   const urlParams = new URLSearchParams(window.location.search);
-  const room = urlParams.get('room');
-  if (room) {
-    window.location.href = `admin.html?room=${room}`;
+  let roomId = urlParams.get('room');
+  
+  if (!roomId) {
+    roomId = localStorage.getItem('karaoke_room_id');
+  }
+  
+  if (!roomId) {
+    roomId = sessionStorage.getItem('karaoke_room_id');
+  }
+  
+  return roomId;
+}
+
+// Cek apakah sudah login
+if (sessionStorage.getItem("adminAuth") === "authenticated") {
+  const roomId = getRoomId();
+  if (roomId) {
+    window.location.replace(`admin.html?room=${roomId}`);
   } else {
-    window.location.href = "admin.html";
+    window.location.replace("admin.html");
   }
 }
 
-// ========= EVENT LISTENERS =========
-passwordInput.addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') {
-    login();
-  }
-});
-
-loginBtn.addEventListener('click', login);
-backLink.addEventListener('click', goBackToBusMenu);
-
-// ========= LOGIN FUNCTION =========
-function login() {
-  const input = passwordInput.value;
+// Initialize
+async function initialize() {
+  console.log('🔐 Initializing Admin Login...');
   
-  if (input === ADMIN_PASSWORD) {
-    // Set auth
-    sessionStorage.setItem("adminAuth", "authenticated");
-    sessionStorage.setItem("loginTime", Date.now());
-    
-    // Get room
-    const urlParams = new URLSearchParams(window.location.search);
-    const room = urlParams.get('room');
-    
-    // Redirect
-    if (room) {
-      localStorage.setItem('karaoke_room_id', room);
-      window.location.href = `admin.html?room=${room}`;
-    } else {
-      window.location.href = "admin.html";
-    }
-  } else {
-    // Show error
-    errorEl.style.display = "block";
-    passwordInput.value = "";
+  const roomId = getRoomId();
+  if (roomId) {
+    localStorage.setItem('karaoke_room_id', roomId);
+    sessionStorage.setItem('karaoke_room_id', roomId);
+    console.log('✅ Room ID set:', roomId);
+  }
+}
+
+// Focus pada input password
+setTimeout(() => {
+  if (passwordInput) {
     passwordInput.focus();
+  }
+}, 300);
+
+// Handle submit
+async function handleSubmit() {
+  const password = passwordInput.value;
+  
+  if (!password) {
+    await customWarning('Masukkan password terlebih dahulu!', 'Password Kosong');
+    return;
+  }
+  
+  loginBtn.disabled = true;
+  loginBtn.classList.add('loading');
+  loginBtn.textContent = 'Memeriksa...';
+  
+  try {
+    console.log('🔐 Verifying password...');
     
-    setTimeout(() => {
-      errorEl.style.display = "none";
-    }, 3000);
+    // Simulasi delay untuk UX
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    if (password === ADMIN_PASSWORD) {
+      console.log('✅ Password verified successfully!');
+      
+      // Set session
+      sessionStorage.setItem('adminAuth', 'authenticated');
+      sessionStorage.setItem('loginTime', Date.now().toString());
+      sessionStorage.setItem('adminRequestCount', '0');
+      
+      await customSuccess('Password benar! Mengalihkan ke Admin Panel...', '✅ Berhasil');
+      
+      setTimeout(() => {
+        const roomId = getRoomId();
+        if (roomId) {
+          window.location.replace(`admin.html?room=${roomId}`);
+        } else {
+          window.location.replace('admin.html');
+        }
+      }, 1000);
+      
+    } else {
+      console.warn('❌ Password verification failed!');
+      errorDiv.style.display = 'block';
+      passwordInput.classList.add('error');
+      setTimeout(() => passwordInput.classList.remove('error'), 500);
+      passwordInput.value = '';
+      passwordInput.focus();
+      loginBtn.disabled = false;
+      loginBtn.classList.remove('loading');
+      loginBtn.textContent = 'Masuk';
+    }
+    
+  } catch (error) {
+    console.error('❌ Error:', error);
+    loginBtn.disabled = false;
+    loginBtn.classList.remove('loading');
+    loginBtn.textContent = 'Masuk';
+    await customError('Gagal memverifikasi password: ' + error.message, '❌ Error');
   }
 }
 
-// ========= GO BACK =========
-async function goBackToBusMenu(e) {
-  e.preventDefault();
-  
+// Handle back link
+async function goBack() {
   const result = await customConfirm(
-    'Anda akan kembali ke menu bus tanpa login sebagai admin.', 
+    'Kembali ke menu bus?',
     {
-      title: 'Kembali ke Menu?',
-      icon: '🏠',
-      confirmText: 'Ya, Kembali',
-      cancelText: 'Batal'
+      title: 'Kembali',
+      confirmText: 'Ya',
+      cancelText: 'Tidak'
     }
   );
   
   if (result) {
-    const roomId = localStorage.getItem('karaoke_room_id');
+    const roomId = getRoomId();
     if (roomId) {
-      window.location.href = `bus-menu.html?room=${roomId}`;
+      window.location.replace(`bus-menu.html?room=${roomId}`);
     } else {
-      window.location.href = 'index.html';
+      window.location.replace('index.html');
     }
   }
 }
 
-console.log('✅ Admin-login.js loaded');
+// Event listeners
+loginBtn.addEventListener('click', handleSubmit);
+passwordInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    handleSubmit();
+  }
+});
+passwordInput.addEventListener('input', () => {
+  errorDiv.style.display = 'none';
+  passwordInput.classList.remove('error');
+});
+backLink.addEventListener('click', (e) => {
+  e.preventDefault();
+  goBack();
+});
+
+document.addEventListener('DOMContentLoaded', initialize);
+console.log('✅ ADMIN-LOGIN.JS LOADED');
+

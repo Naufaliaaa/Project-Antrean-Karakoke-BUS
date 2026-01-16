@@ -10,13 +10,80 @@
 <link rel="stylesheet" href="css/camera-login.css">
 </head>
 <body>
-<div class="card">
-<h1>🎥 Camera Panel</h1>
-<p>Masukkan password untuk melanjutkan</p>
-<input type="password" id="password" placeholder="Password camera panel" autofocus>
-<button id="login-btn">Masuk</button>
-<div class="error" id="error">❌ Password salah</div>
-<a href="#" id="back-link" class="back-link">← Kembali ke Menu Bus</a>
+<!-- NAVBAR -->
+<nav class="top-navbar">
+<img src="img/hioo.jpeg" alt="HiQo Logo" class="navbar-logo">
+</nav>
+
+<!-- HERO BACKGROUND SECTION -->
+<section class="hero-background">
+<div class="hero-overlay"></div>
+<div class="hero-text">
+<h1 class="hero-title">Pusat Kontrol Hiburan Karaoke Bus<br>Bikin Perjalanan Makin Meriah!</h1>
+<p class="hero-subtitle">Masuk ke Camera Panel untuk mengakses<br>kontrol kamera bus.</p>
+</div>
+</section>
+
+<!-- VERIFICATION MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+<div class="modal-container">
+<div class="modal-content">
+<!-- Modal Header -->
+<div class="modal-header">
+<h2 class="modal-title">Verifikasi Akses Camera Panel</h2>
+<div class="modal-underline"></div>
+</div>
+
+<!-- Section Info -->
+<div class="section-info">
+<img src="img/video.png" alt="Camera Panel" class="section-image">
+<div class="section-details">
+<h3 class="section-name">Camera Panel</h3>
+<p class="section-id">Panel Kontrol Kamera Bus</p>
+</div>
+</div>
+
+<!-- Password Input Section -->
+<div class="password-section">
+<label class="password-label">Masukkan Password Camera!</label>
+<input type="password" id="password" class="password-input" placeholder="Password camera" autofocus>
+<div class="error-message" id="error-message" style="display: none;">
+❌ Password yang Anda masukkan salah!
+</div>
+</div>
+
+<!-- Action Buttons -->
+<div class="modal-actions">
+<button class="btn-submit" id="login-btn">Masuk</button>
+<a href="#" id="back-link" class="btn-cancel">Batal</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Background Content (Blurred) -->
+<div class="background-content">
+<div class="section-header">
+<h2 class="section-title">Akses Pusat Kontrol</h2>
+</div>
+
+<div class="access-grid-preview">
+<div class="access-card-preview">
+<img src="img/admin.png" alt="Admin">
+<button class="access-button">Admin Panel</button>
+<p class="access-text">Pengaturan & Kontrol</p>
+</div>
+<div class="access-card-preview">
+<img src="img/layar.png" alt="Layar">
+<button class="access-button">Layar Karaoke</button>
+<p class="access-text">Tampilan Utama</p>
+</div>
+<div class="access-card-preview">
+<img src="img/video.png" alt="Video">
+<button class="access-button">Camera Panel</button>
+<p class="access-text">Panel Kamera</p>
+</div>
+</div>
 </div>
 
 <!-- Custom Modal -->

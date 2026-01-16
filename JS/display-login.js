@@ -1,97 +1,154 @@
-/*************************************************
- * DISPLAY-LOGIN.JS - Display Authentication
- *************************************************/
+//display-login.js
+console.log('📺 DISPLAY-LOGIN.JS LOADING...');
 
-// ========= PASSWORD DISPLAY =========
-const DISPLAY_PASSWORD = "displaybus9999";
-
-// ========= ELEMENTS =========
 const passwordInput = document.getElementById('password');
 const loginBtn = document.getElementById('login-btn');
-const errorEl = document.getElementById('error');
 const backLink = document.getElementById('back-link');
+const errorDiv = document.getElementById('error-message');
 
-// ========= HAPUS TOKEN LAMA =========
-sessionStorage.removeItem('displayAuth');
-sessionStorage.removeItem('displayLoginTime');
-sessionStorage.removeItem('display_token');
+// Password display
+const DISPLAY_PASSWORD = "displaybus9999";
 
-// ========= EVENT LISTENERS =========
-passwordInput.addEventListener('keypress', function(e) {
-  if (e.key === 'Enter') {
-    login();
-  }
-});
-
-loginBtn.addEventListener('click', login);
-backLink.addEventListener('click', goBackHome);
-
-// ========= LOGIN FUNCTION =========
-function login() {
-  const input = passwordInput.value;
+function getRoomId() {
+  const urlParams = new URLSearchParams(window.location.search);
+  let roomId = urlParams.get('room');
   
-  if (input === DISPLAY_PASSWORD) {
-    // Disable button
-    loginBtn.disabled = true;
-    loginBtn.textContent = 'Memverifikasi...';
-    
-    // Generate token
-    const token = generateDisplayToken();
-    
-    // Set auth
-    sessionStorage.setItem("displayAuth", "authenticated");
-    sessionStorage.setItem("displayLoginTime", Date.now());
-    sessionStorage.setItem("display_token", token);
-    
-    console.log('✅ Display authenticated with token');
-    
-    // Redirect
-    window.location.href = "display.html";
-  } else {
-    // Show error
-    errorEl.style.display = "block";
-    passwordInput.value = "";
+  if (!roomId) {
+    roomId = localStorage.getItem('karaoke_room_id');
+  }
+  
+  if (!roomId) {
+    roomId = sessionStorage.getItem('karaoke_room_id');
+  }
+  
+  return roomId;
+}
+
+// Cek apakah sudah login
+const isAuthenticated = sessionStorage.getItem("displayAuth") === "authenticated";
+const displayToken = sessionStorage.getItem("display_token");
+
+if (isAuthenticated && displayToken) {
+  window.location.replace("display.html");
+}
+
+// Initialize
+function initialize() {
+  console.log('📺 Initializing Display Login...');
+  
+  const roomId = getRoomId();
+  if (roomId) {
+    localStorage.setItem('karaoke_room_id', roomId);
+    sessionStorage.setItem('karaoke_room_id', roomId);
+    console.log('✅ Room ID set:', roomId);
+  }
+}
+
+// Focus pada input password
+setTimeout(() => {
+  if (passwordInput) {
     passwordInput.focus();
+  }
+}, 300);
+
+// Handle submit
+async function handleSubmit() {
+  const password = passwordInput.value;
+  
+  if (!password) {
+    await customWarning('Masukkan password terlebih dahulu!', 'Password Kosong');
+    return;
+  }
+  
+  loginBtn.disabled = true;
+  loginBtn.classList.add('loading');
+  loginBtn.textContent = 'Memeriksa...';
+  
+  try {
+    console.log('📺 Verifying password...');
     
-    setTimeout(() => {
-      errorEl.style.display = "none";
-    }, 3000);
+    // Simulasi delay untuk UX
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    if (password === DISPLAY_PASSWORD) {
+      console.log('✅ Password verified successfully!');
+      
+      // Generate token
+      const timestamp = Date.now();
+      const random = Math.random().toString(36).substring(2, 15);
+      const token = `DISPLAY_TOKEN_${Math.abs((timestamp + random).split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0)).toString(36)}_${timestamp}`;
+      
+      // Set session
+      sessionStorage.setItem('displayAuth', 'authenticated');
+      sessionStorage.setItem('displayLoginTime', Date.now().toString());
+      sessionStorage.setItem('display_token', token);
+      
+      console.log('✅ Display authenticated with token:', token);
+      
+      await customSuccess('Password benar! Mengalihkan ke Layar Karaoke...', '✅ Berhasil');
+      
+      setTimeout(() => {
+        window.location.replace("display.html");
+      }, 1000);
+      
+    } else {
+      console.warn('❌ Password verification failed!');
+      errorDiv.style.display = 'block';
+      passwordInput.classList.add('error');
+      setTimeout(() => passwordInput.classList.remove('error'), 500);
+      passwordInput.value = '';
+      passwordInput.focus();
+      loginBtn.disabled = false;
+      loginBtn.classList.remove('loading');
+      loginBtn.textContent = 'Masuk';
+    }
+    
+  } catch (error) {
+    console.error('❌ Error:', error);
+    loginBtn.disabled = false;
+    loginBtn.classList.remove('loading');
+    loginBtn.textContent = 'Masuk';
+    await customError('Gagal memverifikasi password: ' + error.message, '❌ Error');
   }
 }
 
-// ========= GENERATE TOKEN =========
-function generateDisplayToken() {
-  const timestamp = Date.now();
-  const random = Math.random().toString(36).substring(2, 15);
-  const data = `display-${timestamp}-${random}`;
-  
-  let hash = 0;
-  for (let i = 0; i < data.length; i++) {
-    const char = data.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash;
-  }
-  
-  return `DISPLAY_TOKEN_${Math.abs(hash).toString(36)}_${timestamp}`;
-}
-
-// ========= GO BACK HOME =========
-async function goBackHome(e) {
-  e.preventDefault();
-  
+// Handle back link
+async function goBack() {
   const result = await customConfirm(
-    'Anda akan kembali ke beranda tanpa mengaktifkan display.', 
+    'Kembali ke menu bus?',
     {
-      title: 'Kembali ke Beranda?',
-      icon: '🏠',
-      confirmText: 'Ya, Kembali',
-      cancelText: 'Batal'
+      title: 'Kembali',
+      confirmText: 'Ya',
+      cancelText: 'Tidak'
     }
   );
   
   if (result) {
-    window.location.href = 'index.html';
+    const roomId = getRoomId();
+    if (roomId) {
+      window.location.replace(`bus-menu.html?room=${roomId}`);
+    } else {
+      window.location.replace("index.html");
+    }
   }
 }
 
-console.log('✅ Display-login.js loaded');
+// Event listeners
+loginBtn.addEventListener('click', handleSubmit);
+passwordInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    handleSubmit();
+  }
+});
+passwordInput.addEventListener('input', () => {
+  errorDiv.style.display = 'none';
+  passwordInput.classList.remove('error');
+});
+backLink.addEventListener('click', (e) => {
+  e.preventDefault();
+  goBack();
+});
+
+document.addEventListener('DOMContentLoaded', initialize);
+console.log('✅ DISPLAY-LOGIN.JS LOADED');
+

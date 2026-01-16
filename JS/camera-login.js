@@ -19,7 +19,7 @@ if (!roomId) {
 // ========= ELEMENTS =========
 const passwordInput = document.getElementById('password');
 const loginBtn = document.getElementById('login-btn');
-const errorEl = document.getElementById('error');
+const errorEl = document.getElementById('error-message');
 const backLink = document.getElementById('back-link');
 
 // ========= HAPUS TOKEN LAMA (Force re-login) =========
@@ -96,7 +96,7 @@ async function login() {
     } else {
       // Password salah
       console.warn('❌ Wrong password attempt');
-      showError('Password salah! Silakan coba lagi.');
+      showError('Password yang Anda masukkan salah!');
       
       // Reset input
       passwordInput.value = '';
@@ -121,13 +121,13 @@ async function login() {
 
 // ========= SHOW ERROR =========
 function showError(message) {
-  errorEl.textContent = `❌ ${message}`;
+  errorEl.textContent = message;
   errorEl.style.display = 'block';
   
   // Animate
   errorEl.style.animation = 'none';
   setTimeout(() => {
-    errorEl.style.animation = 'shake 0.5s';
+    errorEl.style.animation = 'shake 0.4s';
   }, 10);
   
   // Auto hide after 4 seconds
