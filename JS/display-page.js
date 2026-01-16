@@ -35,7 +35,7 @@ async function logout() {
     'Layar karaoke akan berhenti dan Anda perlu login kembali untuk mengaktifkannya.', 
     {
       title: 'Keluar dari Display?',
-      icon: '🚪',
+      icon: 'img/exit.png',
       confirmText: 'Ya, Logout',
       cancelText: 'Batal',
       confirmClass: 'custom-modal-btn-danger'

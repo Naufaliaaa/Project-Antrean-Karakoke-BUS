@@ -306,7 +306,7 @@ window.customConfirm = function(message, options = {}) {
 };
 
 // ========= SUCCESS ALERT (Green) =========
-window.customSuccess = function(message, title = '✅ Berhasil!') {
+window.customSuccess = function(message, title = ' Berhasil!') {
   return customAlert(message, {
     title: title,
     icon: '✅',

@@ -10,11 +10,22 @@
 <link rel="stylesheet" href="css/display.css">
 </head>
 <body>
-<!-- Tombol Logout -->
-<button id="logout-btn" class="display-logout-btn">
-<img src="img/log-out.png" alt="Logout" style="width: 20px; height: 20px;">
-<span>Logout</span>
-</button>
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-left">
+    <img src="img/hioo.jpeg" alt="Hioo Logo" class="navbar-logo">
+  </div>
+  <div class="navbar-center">
+    <div class="navbar-title">Ingat Holiday Ingat Hioo</div>
+    <div class="navbar-subtitle">Jalan Jalan NYAMAN Cuan AMAN</div>
+  </div>
+  <div class="navbar-right">
+    <button id="logout-btn" class="display-logout-btn">
+      <img src="img/log-out.png" alt="Logout" class="logout-icon">
+      <span>Logout</span>
+    </button>
+  </div>
+</nav>
 
 <!-- YouTube Player Container -->
 <div id="player-container">
@@ -36,11 +47,11 @@
 <div class="now-playing">
 <div class="now-playing-label">Sedang Bernyanyi</div>
 <div class="now-playing-name" id="now">Menunggu lagu...</div>
-<div class="now-playing-time" id="timer">⏳ 10:00</div>
+<div class="now-playing-time" id="timer"><img src="img/waktu.png" alt="Waktu" class="timer-icon"> 10:00</div>
 </div>
 
 <div class="queue-container">
-<div class="queue-header">🎵 Antrean Selanjutnya</div>
+<div class="queue-header"><img src="img/antre.png" alt="Antre" class="queue-icon"> Antrean Selanjutnya</div>
 <div id="queue-list" class="empty">Belum ada antrean</div>
 </div>
 

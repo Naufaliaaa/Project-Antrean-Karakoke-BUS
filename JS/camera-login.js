@@ -85,7 +85,7 @@ async function login() {
       // Success message
       await customSuccess(
         'Password benar! Anda akan diarahkan ke Camera Panel.',
-        '✅ Login Berhasil'
+        ' Login Berhasil'
       );
       
       // Redirect to video panel

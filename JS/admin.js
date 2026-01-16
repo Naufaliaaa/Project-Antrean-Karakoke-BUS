@@ -688,7 +688,7 @@ function setupLogout() {
         'Anda akan keluar dari panel admin. Anda perlu login kembali untuk mengakses panel ini.', 
         {
           title: 'Konfirmasi Logout',
-          icon: '🚪',
+          icon: 'img/log-out.png',
           confirmText: 'Ya, Logout',
           cancelText: 'Batal',
           confirmClass: 'custom-modal-btn-danger'

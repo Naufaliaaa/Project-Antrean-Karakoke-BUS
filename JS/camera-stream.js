@@ -274,7 +274,7 @@ function saveRecording() {
   console.log('💾 Recording saved');
   
   // Show success message
-  alert('✅ Video berhasil disimpan ke galeri!');
+  alert('Video berhasil disimpan ke galeri!');
 }
 
 // ========= FLIP CAMERA =========

@@ -73,7 +73,7 @@ let audioControlRef = null;
 // ========= 1. OVERLAY =========
 document.body.insertAdjacentHTML('afterbegin', `
   <div id="start-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:linear-gradient(135deg, #1a1a1a, #000); z-index:10000; display:flex; flex-direction:column; align-items:center; justify-content:center; color:white; font-family: sans-serif;">
-    <div style="font-size: 80px; margin-bottom: 20px;">🎤</div>
+    <img src="img/microphone.png" alt="Mic" style="width: 100px; margin-bottom: 20px;">
     <h1 style="margin-bottom:10px; font-size: 32px;">Sistem Karaoke Bus</h1>
     <p style="margin-bottom:30px; color: #aaa;">Klik tombol di bawah untuk mengaktifkan player</p>
     <button onclick="startSystem()" style="padding:20px 50px; font-size:24px; cursor:pointer; background:linear-gradient(135deg, #667eea, #764ba2); border:none; border-radius:50px; color:white; font-weight:bold; box-shadow: 0 10px 20px rgba(0,0,0,0.3); transition: 0.3s;">MULAI KARAOKE</button>
@@ -347,7 +347,7 @@ function playSong(key, data) {
   console.log("🎵 Playing:", data.name);
   currentKey = key;
   remainingTime = MAX_DURATION;
-  document.getElementById("now").innerText = "🎤 " + data.name;
+  document.getElementById("now").innerHTML = '<img src="img/microphone.png" alt="Mic" style="width:24px; vertical-align:middle; margin-right:8px;">' + data.name;
 
   if (player) {
     clearAllTimers();
@@ -460,7 +460,7 @@ function updateTimerUI() {
   const min = Math.floor(remainingTime / 60);
   const sec = remainingTime % 60;
   const el = document.getElementById("timer");
-  if (el) el.innerText = `⏳ ${String(min).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
+  if (el) el.innerHTML = `<img src="img/waktu.png" alt="Waktu" style="width:24px; vertical-align:middle; margin-right:5px;"> ${String(min).padStart(2, "0")}:${String(sec).padStart(2, "0")}`;
 }
 
 function clearAllTimers() {
@@ -481,7 +481,7 @@ function resetPlayer() {
   clearAllTimers();
   if (player) { try { player.destroy(); } catch(e) {} player = null; }
   document.getElementById("now").innerText = "Menunggu lagu...";
-  document.getElementById("timer").innerText = "⏳ 10:00";
+  document.getElementById("timer").innerHTML = `<img src="img/waktu.png" alt="Waktu" style="width:24px; vertical-align:middle; margin-right:5px;"> 10:00`;
 }
 
 // ========= 8. RENDER QUEUE =========

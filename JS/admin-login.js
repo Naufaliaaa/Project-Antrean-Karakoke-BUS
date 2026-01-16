@@ -80,7 +80,7 @@ async function handleSubmit() {
       sessionStorage.setItem('loginTime', Date.now().toString());
       sessionStorage.setItem('adminRequestCount', '0');
       
-      await customSuccess('Password benar! Mengalihkan ke Admin Panel...', '✅ Berhasil');
+      await customSuccess('Password benar! Mengalihkan ke Admin Panel...', 'Berhasil');
       
       setTimeout(() => {
         const roomId = getRoomId();

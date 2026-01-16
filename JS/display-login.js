@@ -85,7 +85,7 @@ async function handleSubmit() {
       
       console.log('✅ Display authenticated with token:', token);
       
-      await customSuccess('Password benar! Mengalihkan ke Layar Karaoke...', '✅ Berhasil');
+      await customSuccess('Password benar! Mengalihkan ke Layar Karaoke...', ' Berhasil');
       
       setTimeout(() => {
         window.location.replace("display.html");

@@ -77,7 +77,7 @@ async function confirmExit(e) {
     'Apakah Anda yakin ingin keluar dari room bus ini?', 
     {
       title: 'Konfirmasi Keluar',
-      icon: '🚪',
+      icon: 'img/exit.png',
       confirmText: 'Ya, Keluar',
       cancelText: 'Batal',
       confirmClass: 'custom-modal-btn-danger'
