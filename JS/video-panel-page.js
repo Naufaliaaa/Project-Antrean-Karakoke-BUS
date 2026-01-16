@@ -5,7 +5,7 @@
  * ✅ Proper error handling
  * ✅ Works with event handlers in HTML
  * ✅ Mute/unmute audio functionality
- * ✅ Updated for video-panel-login.html
+ * ✅ Uses camera-login.html for authentication
  *************************************************/
 
 console.log('🎥 ========================================');
@@ -31,7 +31,7 @@ const videoPanelToken = sessionStorage.getItem("videoPanel_token");
 
 if (!isVideoPanelAuth || !videoPanelToken) {
   console.warn('⚠️ Unauthorized video panel access! Redirecting to login...');
-  window.location.replace(`video-panel-login.html?room=${roomId}`);
+  window.location.replace(`camera-login.html?room=${roomId}`);
   throw new Error("Unauthorized");
 }
 
@@ -794,7 +794,8 @@ window.logout = async function() {
     confirmed = await customConfirm(
       'Logout dari Camera Panel?\n\nAnda perlu login kembali untuk mengakses panel ini.',
       {
-        title: '🚪 Logout?',
+        title: 'Logout?',
+        icon: 'img/log-out.png',
         confirmText: 'Ya, Logout',
         cancelText: 'Batal',
         confirmClass: 'custom-modal-btn-danger'
@@ -804,7 +805,11 @@ window.logout = async function() {
     confirmed = confirm('Logout dari Camera Panel?');
   }
   
-  if (!confirmed) return;
+  // User clicked Batal - do nothing, stay on page
+  if (!confirmed) {
+    console.log('🚪 User cancelled logout, staying on page');
+    return;
+  }
   
   try {
     if (window.isCameraActive) {
@@ -825,20 +830,26 @@ window.logout = async function() {
       }
     }
     
-    sessionStorage.clear();
+    // Clear ONLY video panel auth tokens (keep bus room token)
+    sessionStorage.removeItem('videoPanelAuth');
+    sessionStorage.removeItem('videoPanel_token');
+    sessionStorage.removeItem('videoPanel_login_time');
     
     if (typeof customSuccess === 'function') {
       await customSuccess('Logout berhasil!', '👋 Sampai Jumpa!');
     }
     
     setTimeout(() => {
-      window.location.replace(`video-panel-login.html?room=${roomId}`);
+      window.location.replace(`bus-menu.html?room=${roomId}`);
     }, 1000);
     
   } catch (error) {
     console.error('Logout error:', error);
-    sessionStorage.clear();
-    window.location.replace(`video-panel-login.html?room=${roomId}`);
+    // Clear ONLY video panel auth tokens
+    sessionStorage.removeItem('videoPanelAuth');
+    sessionStorage.removeItem('videoPanel_token');
+    sessionStorage.removeItem('videoPanel_login_time');
+    window.location.replace(`bus-menu.html?room=${roomId}`);
   }
 };
 

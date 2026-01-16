@@ -23,17 +23,17 @@ const errorEl = document.getElementById('error-message');
 const backLink = document.getElementById('back-link');
 
 // ========= HAPUS TOKEN LAMA (Force re-login) =========
-sessionStorage.removeItem(`camera_auth_${roomId}`);
-sessionStorage.removeItem(`camera_token_${roomId}`);
-sessionStorage.removeItem(`camera_login_time_${roomId}`);
+sessionStorage.removeItem('videoPanelAuth');
+sessionStorage.removeItem('videoPanel_token');
+sessionStorage.removeItem('videoPanel_login_time');
 
 console.log('🎥 Camera login page loaded for room:', roomId);
 
 // ========= CHECK IF ALREADY LOGGED IN =========
 // (Disabled untuk force login setiap kali)
 /*
-const existingToken = sessionStorage.getItem(`camera_token_${roomId}`);
-const loginTime = sessionStorage.getItem(`camera_login_time_${roomId}`);
+const existingToken = sessionStorage.getItem('videoPanel_token');
+const loginTime = sessionStorage.getItem('videoPanel_login_time');
 
 if (existingToken && loginTime) {
   const fourHours = 4 * 60 * 60 * 1000;
@@ -77,10 +77,10 @@ async function login() {
       // Generate secure token
       const token = generateCameraToken(roomId, input);
       
-      // Set authentication data
-      sessionStorage.setItem(`camera_auth_${roomId}`, 'authenticated');
-      sessionStorage.setItem(`camera_token_${roomId}`, token);
-      sessionStorage.setItem(`camera_login_time_${roomId}`, Date.now());
+      // Set authentication data (MATCH with video-panel-page.js)
+      sessionStorage.setItem('videoPanelAuth', 'authenticated');
+      sessionStorage.setItem('videoPanel_token', token);
+      sessionStorage.setItem('videoPanel_login_time', Date.now());
       
       // Success message
       await customSuccess(
@@ -176,13 +176,13 @@ async function goBackToBusMenu(e) {
 // ========= PREVENT BACK BUTTON AFTER LOGIN =========
 window.addEventListener('popstate', function(e) {
   // User mencoba back setelah login
-  const isAuthenticated = sessionStorage.getItem(`camera_auth_${roomId}`);
+  const isAuthenticated = sessionStorage.getItem('videoPanelAuth');
   
   if (isAuthenticated) {
     console.log('⚠️ Back button pressed after auth, clearing session');
-    sessionStorage.removeItem(`camera_auth_${roomId}`);
-    sessionStorage.removeItem(`camera_token_${roomId}`);
-    sessionStorage.removeItem(`camera_login_time_${roomId}`);
+    sessionStorage.removeItem('videoPanelAuth');
+    sessionStorage.removeItem('videoPanel_token');
+    sessionStorage.removeItem('videoPanel_login_time');
   }
 });
 
