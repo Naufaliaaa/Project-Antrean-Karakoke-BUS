@@ -902,10 +902,3 @@ SOFTWARE.
 - **Open Source Community** - Untuk inspirasi dan support
 
 ---
-
-## 📊 Project Statistics
-
-![GitHub repo size](https://img.shields.io/github/repo-size/naufaliaaa/hioo-karaoke-bus)
-![GitHub contributors](https://img.shields.io/github/contributors/naufaliaaa/hioo-karaoke-bus)
-![GitHub stars](https://img.shields.io/github/stars/naufaliaaa/hioo-karaoke-bus?style=social)
-![GitHub forks](https://img.shields.io/github/forks/naufaliaaa/hioo-karaoke-bus?style=social)
