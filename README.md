@@ -874,16 +874,16 @@ SOFTWARE.
 
 ### **Developer Team**
 
-- **Project Lead** - Naufal Zul Faza (https://www.instagram.com/_naufaliaaa/)
-- **Frontend Developer** - Naufal Zul Faza (https://www.facebook.com/profile.php?id=100011473811622&locale=id_ID)
-- **System Architect** - Hemalia Putri (https://www.instagram.com/hmptr_09/)
+- **Project Lead** - [Naufal Zul Faza](https://www.instagram.com/_naufaliaaa/)
+- **Frontend Developer** - [Zul](https://www.facebook.com/profile.php?id=100011473811622&locale=id_ID)
+- **System Architect** - [Hemalia Putri](https://www.instagram.com/hmptr_09/)
 
 ### **Hioo Official**
 
 - 🌐 **Website:** [https://hioo.co.id](https://hioo.co.id)
 - 📧 **Linkedin:** [hioo](https://www.linkedin.com/company/hioojalanjalanyo/people/?viewAsMember=true)
 - 📱 **WhatsApp:** +62 8221-1902-246
-- 📍 **Address:** Jl. Tirta Raya VIDA Bekasi, Bekasi, Jawa Barat 17151, ID
+- 📍 **Address:** [Jl. Tirta Raya VIDA Bekasi, Bekasi, Jawa Barat 17151, ID](https://maps.app.goo.gl/i4qvWVSzy2p1eGQa9)
 
 ### **Support & Documentation**
 

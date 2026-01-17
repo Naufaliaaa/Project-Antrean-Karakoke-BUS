@@ -1,432 +1,959 @@
-📋 NOTES LENGKAP - REQUIREMENTS UNTUK MENJALANKAN WEB KARAOKE BUS
+# 🚌 PANDUAN LENGKAP SETUP BUS - HiQo Karaoke System
 
-🚌 1. PERANGKAT YANG DIBUTUHKAN
-A. Display Karaoke (Layar Utama)
+<div align="center">
 
-Device: Laptop, PC, atau Smart TV
-Specs:
+**Checklist Komprehensif untuk Implementasi Sistem Karaoke Bus**
 
-RAM minimal: 4GB (recommended 8GB)
-Browser: Chrome/Firefox/Edge terbaru
-Resolusi layar: 1920x1080 (Full HD) atau lebih tinggi
+**Ingat Wisata Ingat HiQo - Jalan Jalan NYAMAN, Cuan AMAN**
 
-
-Fungsi: Menampilkan video YouTube + PiP camera + antrean lagu
-
-B. Camera Panel (Untuk Streaming Kamera)
-
-Device: Laptop/PC dengan webcam ATAU smartphone
-Specs:
-
-Webcam HD (720p minimum, 1080p recommended)
-RAM minimal: 4GB
-Browser: Chrome/Safari/Firefox terbaru
-
-
-Fungsi: Streaming video penyanyi ke layar display (PiP)
-
-C. Admin Panel (Kontrol Antrean)
-
-Device: Laptop, PC, Tablet, atau Smartphone
-Browser: Chrome/Firefox/Safari terbaru
-Fungsi: Mengelola antrean lagu, skip, hapus, tambah manual
-
-D. Penumpang (Request Lagu)
-
-Device: Smartphone Android/iOS
-Browser: Chrome/Safari/Firefox
-Fungsi: Request lagu via QR Code atau link
-
-
-🌐 2. KONEKSI INTERNET
-Requirements:
-
-✅ Koneksi Internet WAJIB (untuk streaming YouTube + Firebase)
-✅ Kecepatan minimum: 10 Mbps (download)
-✅ Recommended: 20 Mbps atau lebih tinggi
-✅ Stabil: Hindari paket data yang throttling
-
-Opsi Koneksi:
-
-WiFi Router di Bus
-
-Gunakan modem 4G/5G dengan unlimited data
-Pasang WiFi router untuk semua device
-Recommended: Modem Huawei/ZTE dengan unlimited Telkomsel/XL
-
-
-Hotspot Smartphone
-
-Pakai smartphone sebagai hotspot
-Pastikan paket data unlimited
-Kurang stabil untuk banyak user
-
-
-Mobile Router
-
-Device khusus seperti Mifi
-Bisa sambil charging
-Lebih stabil dari hotspot HP
-
-
-
-
-🔐 3. FIREBASE & HOSTING
-Firebase (Database):
-
-✅ Sudah setup di: https://karaoke-bus-default-rtdb.asia-southeast1.firebasedatabase.app
-✅ Free plan Firebase (sudah cukup untuk 100+ user)
-⚠️ Monitor usage di Firebase Console
-📊 Quota Harian:
-
-Simultaneous connections: 100
-GB downloaded: 10 GB/day
-Realtime Database storage: 1 GB
-
-
-
-Web Hosting:
-Ada beberapa opsi:
-OPSI 1: GitHub Pages (GRATIS) ⭐ RECOMMENDED
-
-✅ 100% Gratis
-✅ HTTPS otomatis
-✅ Custom domain support
-✅ Unlimited bandwidth
-❌ Tidak support PHP/backend
-
-Cara Deploy:
-bash1. Buat repository di GitHub
-2. Upload semua file HTML, CSS, JS, img
-3. Settings → Pages → Deploy from main branch
-4. Akses via: https://username.github.io/karaoke-bus
-```
-
-#### **OPSI 2: Netlify (GRATIS)** ⭐ **RECOMMENDED**
-- ✅ **100% Gratis**
-- ✅ **HTTPS otomatis**
-- ✅ **Custom domain**
-- ✅ **Drag & drop deploy**
-- ✅ **Auto SSL certificate**
-
-**Cara Deploy:**
-```
-1. Buka netlify.com
-2. Drag & drop folder project
-3. Selesai! Auto dapat link https://xxx.netlify.app
-```
-
-#### **OPSI 3: Vercel (GRATIS)**
-- ✅ **100% Gratis**
-- ✅ **HTTPS otomatis**
-- ✅ **Fast CDN**
-- ✅ **GitHub integration**
-
-#### **OPSI 4: Hosting Berbayar**
-- **Niagahoster:** Rp 20.000/bulan
-- **Hostinger:** Rp 25.000/bulan
-- **Domainesia:** Rp 30.000/bulan
+</div>
 
 ---
 
-## 🔑 **4. PASSWORD & CREDENTIALS**
+## 📋 DAFTAR ISI
 
-### **Password yang Perlu Diingat:**
-
-| Akses | Password | File Config |
-|-------|----------|-------------|
-| **PIN Bus** | `101010` | `firebase.js` (di database) |
-| **Admin Panel** | `karaokebushioo0001` | `admin-login.js` |
-| **Display Panel** | `displaybus9999` | `display-login.js` |
-| **Camera Panel** | `panelcamerabushioo021` | `camera-login.js` |
-
-### **Cara Ganti Password:**
-
-#### **Ganti PIN Bus:**
-1. Buka Firebase Console
-2. Masuk ke: `karaoke/room/BUS-001/Setting/pin`
-3. Ubah nilai dari `101010` ke PIN baru (6 digit)
-
-#### **Ganti Password Admin:**
-1. Buka file: `js/admin-login.js`
-2. Cari baris: `const ADMIN_PASSWORD = "karaokebushioo0001";`
-3. Ubah password di dalam tanda kutip
-
-#### **Ganti Password Display:**
-1. Buka file: `js/display-login.js`
-2. Cari: `const DISPLAY_PASSWORD = "displaybus9999";`
-3. Ubah password
-
-#### **Ganti Password Camera:**
-1. Buka file: `js/camera-login.js`
-2. Cari: `const CAMERA_PASSWORD = "panelcamerabushioo021";`
-3. Ubah password
+1. [Hardware Requirements](#1-hardware-requirements)
+2. [Network & Internet](#2-network--internet)
+3. [Audio Visual Equipment](#3-audio-visual-equipment)
+4. [Device Setup](#4-device-setup)
+5. [Software Installation](#5-software-installation)
+6. [Wiring & Installation](#6-wiring--installation)
+7. [Testing & Calibration](#7-testing--calibration)
+8. [Maintenance & Backup](#8-maintenance--backup)
+9. [Emergency Procedures](#9-emergency-procedures)
+10. [Cost Estimation](#10-estimasi-biaya)
 
 ---
 
-## 🚀 **5. CARA SETUP DI BUS (STEP-BY-STEP)**
+## 1. 🖥️ HARDWARE REQUIREMENTS
 
-### **PERSIAPAN (1 Hari Sebelumnya):**
+### **A. DISPLAY SYSTEM (Layar Utama)**
 
-1. ✅ **Deploy Website**
-   - Upload ke GitHub Pages/Netlify/Vercel
-   - Dapatkan URL: `https://yourdomain.com`
-   - Test akses dari HP
+#### **✅ TV/Monitor (Layar Karaoke Utama)**
+- **Ukuran:** 32" - 55" (Rekomendasi: 43")
+- **Resolusi:** Minimum Full HD (1920x1080)
+- **Tipe:** Smart TV atau TV + Mini PC
+- **Fitur Wajib:**
+  - HDMI input
+  - Audio output (3.5mm atau optical)
+  - Mounting VESA compatible
+- **Merk Rekomendasi:**
+  - Samsung, LG, Sony, TCL
+- **Harga:** Rp 3.000.000 - Rp 8.000.000
 
-2. ✅ **Test Semua Fitur**
-   - Login semua panel (Admin, Display, Camera)
-   - Request lagu dummy
-   - Test PiP camera
-   - Test recording
+**Alternatif Budget:**
+- Proyektor + Layar (untuk bus besar)
+- Proyektor: Rp 2.000.000 - Rp 5.000.000
 
-3. ✅ **Setup Modem/Router**
-   - Beli paket unlimited (Telkomsel/XL/Indosat)
-   - Setup WiFi dengan password
-   - Test kecepatan internet (min 10 Mbps)
+---
 
-4. ✅ **Print QR Code**
-   - Buka Admin Panel
-   - Screenshot QR Code
-   - Print ukuran A4
-   - Laminating (opsional)
+#### **✅ Mini PC / Stick PC (Display Controller)**
 
-### **SETUP DI BUS (30 Menit):**
+**Opsi 1: Mini PC (Recommended)**
+- **Processor:** Intel Celeron N4020 atau lebih tinggi
+- **RAM:** Minimum 4GB
+- **Storage:** 64GB SSD/eMMC
+- **OS:** Windows 10/11 atau Linux
+- **Port:** HDMI, USB, Ethernet, WiFi
+- **Contoh Device:**
+  - Intel NUC (Rp 2.500.000)
+  - Beelink Mini PC (Rp 1.500.000)
+  - Asus PN Series (Rp 3.000.000)
 
-#### **Step 1: Setup Internet (5 menit)**
+**Opsi 2: Stick PC**
+- Intel Compute Stick (Rp 1.500.000)
+- ASUS Chromebit (Rp 1.200.000)
+
+**Opsi 3: Android TV Box (Budget)**
+- Mi Box S (Rp 800.000)
+- Xiaomi TV Stick (Rp 600.000)
+- ⚠️ **Note:** Fitur terbatas, tidak support semua features
+
+---
+
+### **B. ADMIN CONTROL STATION**
+
+#### **✅ Laptop/Tablet Admin**
+- **Processor:** Core i3 / Ryzen 3 (minimal)
+- **RAM:** 4GB minimum
+- **OS:** Windows 10/11, macOS, atau Chrome OS
+- **Screen:** 13" - 15.6"
+- **Battery:** Minimum 4 jam
+- **Connectivity:** WiFi, Bluetooth
+- **Harga:** Rp 4.000.000 - Rp 8.000.000
+
+**Alternatif Budget:**
+- Tablet Android 10" + Keyboard
+- iPad + Keyboard
+- Chromebook (Rp 3.000.000)
+
+---
+
+### **C. CAMERA SYSTEM (Video Panel)**
+
+#### **✅ Webcam / Action Camera**
+
+**Opsi 1: Webcam Eksternal (Recommended)**
+- **Resolusi:** Minimum 720p (Rekomendasi: 1080p)
+- **Frame Rate:** 30fps minimum
+- **Fitur:** Auto-focus, low-light capability
+- **Connection:** USB atau WiFi
+- **Contoh:**
+  - Logitech C920 (Rp 1.200.000)
+  - Logitech C270 (Rp 400.000 - budget)
+  - Microsoft LifeCam (Rp 600.000)
+
+**Opsi 2: Action Camera**
+- GoPro Hero 8+ (Rp 3.000.000)
+- DJI Osmo Action (Rp 4.000.000)
+- Insta360 GO 2 (Rp 3.500.000)
+
+**Opsi 3: Smartphone Bekas**
+- Android 8.0+ dengan camera decent
+- Bisa pakai HP lama sebagai dedicated camera
+- Install DroidCam atau IP Webcam app
+- **Harga:** Rp 500.000 - Rp 1.500.000
+
+---
+
+#### **✅ Camera Controller Device**
+
+**Dedicated Device untuk Camera Panel:**
+- **Option 1:** Laptop/PC terpisah
+- **Option 2:** Tablet Android dengan USB camera
+- **Option 3:** Smartphone dengan tripod stand
+
+**Specs Minimum:**
+- Processor: Snapdragon 660 / MediaTek G80
+- RAM: 3GB
+- Storage: 32GB
+- Camera: 8MP (jika pakai built-in)
+- Battery: 4000mAh
+
+---
+
+### **D. AUDIO EQUIPMENT**
+
+#### **✅ Microphone System**
+
+**Wireless Microphone (Wajib)**
+- **Tipe:** UHF Wireless Microphone
+- **Jumlah:** 2 unit (untuk duet)
+- **Range:** 50-100 meter
+- **Fitur:** 
+  - Rechargeable battery
+  - Multiple frequency channels
+  - Anti-interference
+- **Contoh:**
+  - Shure SM58 Wireless (Rp 3.000.000/set)
+  - Sennheiser EW Series (Rp 5.000.000/set)
+  - Behringer ULM Series (Rp 1.500.000/set - budget)
+  - **Budget:** TOA/Ashley Wireless (Rp 800.000)
+
+---
+
+#### **✅ Audio Mixer**
+
+**Digital Audio Mixer**
+- **Channels:** Minimum 4-8 channel
+- **Fitur Wajib:**
+  - Echo/Reverb effect
+  - EQ controls
+  - Volume per channel
+  - USB/Bluetooth input
+- **Contoh:**
+  - Yamaha MG Series (Rp 2.500.000)
+  - Behringer Xenyx (Rp 1.200.000)
+  - Soundcraft Notepad (Rp 2.000.000)
+
+**Alternatif Compact:**
+- Portable Audio Mixer (Rp 500.000 - Rp 1.000.000)
+
+---
+
+#### **✅ Amplifier**
+
+**Power Amplifier**
+- **Power:** 100W - 300W RMS
+- **Channels:** 2 channel (stereo)
+- **Protection:** Overload, thermal protection
+- **Contoh:**
+  - Ashley KA Series (Rp 1.500.000)
+  - TOA PA Amplifier (Rp 2.000.000)
+  - Crown XLS Series (Rp 3.500.000)
+
+---
+
+#### **✅ Speaker System**
+
+**Main Speakers (2 unit)**
+- **Type:** 2-way speaker system
+- **Power:** 50W - 100W per speaker
+- **Impedance:** 8 ohm
+- **Mounting:** Wall/ceiling mount brackets
+- **Contoh:**
+  - JBL Control Series (Rp 1.500.000/pair)
+  - Yamaha NS Series (Rp 2.000.000/pair)
+  - TOA Column Speaker (Rp 1.200.000/pair)
+
+**Optional: Subwoofer**
+- 8" atau 10" active subwoofer
+- Untuk bass yang lebih powerful
+- Harga: Rp 1.500.000 - Rp 3.000.000
+
+---
+
+### **E. NETWORKING EQUIPMENT**
+
+#### **✅ Router WiFi (Wajib)**
+
+**Specifications:**
+- **Standard:** WiFi 5 (802.11ac) minimum
+- **Frequency:** Dual-band (2.4GHz + 5GHz)
+- **Coverage:** 50-100 meter
+- **Speed:** AC1200 atau lebih tinggi
+- **Ports:** 4x LAN ports minimum
+- **Fitur:**
+  - Guest network support
+  - QoS (Quality of Service)
+  - DHCP server
+  - Password protection
+
+**Contoh Produk:**
+- **Tenda AC10** (Rp 350.000) - Budget
+- **TP-Link Archer C6** (Rp 450.000)
+- **Xiaomi Mi Router 4A Gigabit** (Rp 400.000)
+- **ASUS RT-AC1200** (Rp 600.000)
+- **Mikrotik hAP ac2** (Rp 800.000) - Enterprise
+
+---
+
+#### **✅ Modem 4G/5G**
+
+**Mobile Broadband Modem:**
+- **Tipe:** 4G LTE Cat6 atau lebih tinggi
+- **Speed:** Download 150Mbps+ / Upload 50Mbps+
+- **Ports:** WAN port untuk router
+- **Battery Backup:** Optional
+- **SIM Card Slot:** Minimum 1 slot
+
+**Contoh:**
+- **Huawei E5577** (Rp 700.000) - Portable
+- **TP-Link MR6400** (Rp 1.200.000) - With WiFi
+- **Huawei B315** (Rp 1.500.000) - Home router
+- **Teltonika RUT240** (Rp 2.500.000) - Industrial
+
+**Alternatif:**
+- Smartphone dengan USB tethering
+- Portable WiFi dari operator (MiFi)
+
+---
+
+#### **✅ Ethernet Cables**
+
+- **Cat5e atau Cat6**
+- **Panjang:** 
+  - 3m x 2 (device to router)
+  - 5m x 1 (router to modem)
+  - 10m x 1 (backup/extension)
+- **Harga:** Rp 50.000 - Rp 200.000 total
+
+---
+
+#### **✅ Network Switch (Optional)**
+
+**Untuk koneksi lebih banyak:**
+- **Ports:** 5-8 port Gigabit
+- **Tipe:** Unmanaged switch
+- **Contoh:**
+  - TP-Link TL-SG108 (Rp 300.000)
+  - Tenda TEG1008D (Rp 250.000)
+
+---
+
+### **F. POWER SUPPLY & PROTECTION**
+
+#### **✅ UPS (Uninterruptible Power Supply)**
+
+**Untuk Backup Power:**
+- **Capacity:** 600VA - 1000VA
+- **Battery Backup:** 15-30 menit
+- **Outlets:** Minimum 4 outlets
+- **Fitur:**
+  - Surge protection
+  - Voltage regulation
+  - Auto shutdown
+- **Contoh:**
+  - APC BX700U-MS (Rp 1.200.000)
+  - Cyberpower VALUE600EI (Rp 900.000)
+  - Prolink PRO700SFC (Rp 800.000)
+
+---
+
+#### **✅ Power Strip / Extension**
+
+- **Outlets:** 6-8 outlets
+- **Cable Length:** 3-5 meter
+- **Surge Protection:** Wajib
+- **Switch:** Individual switch per outlet
+- **Harga:** Rp 100.000 - Rp 300.000
+
+---
+
+#### **✅ DC-DC Converter (Untuk Bus)**
+
+**Mengubah 12V/24V Bus ke 220V AC:**
+- **Type:** Pure Sine Wave Inverter
+- **Power:** 300W - 1000W
+- **Input:** 12V/24V DC (dari bus battery)
+- **Output:** 220V AC 50Hz
+- **Protection:** Overload, short circuit, over temperature
+- **Contoh:**
+  - Suoer Power Inverter (Rp 500.000 - 300W)
+  - Energizer EN500 (Rp 800.000 - 500W)
+  - Microtek UPS SW1000 (Rp 1.500.000 - 1000W)
+
+**⚠️ PENTING:** Hitung total wattage semua device!
+
+---
+
+### **G. ACCESSORIES & MOUNTING**
+
+#### **✅ Mounting Hardware**
+
+**TV Wall Mount:**
+- VESA compatible bracket
+- Tilt/swivel mount
+- Harga: Rp 150.000 - Rp 500.000
+
+**Camera Mount:**
+- Tripod mini (Rp 100.000)
+- Magnetic mount (Rp 50.000)
+- Suction cup mount (Rp 150.000)
+
+**Cable Management:**
+- Cable clips (Rp 30.000)
+- Cable sleeves (Rp 50.000)
+- Velcro straps (Rp 20.000)
+
+---
+
+#### **✅ Cooling & Ventilation**
+
+**USB Fans (untuk Mini PC):**
+- 2-3 unit USB cooling fans
+- Harga: Rp 50.000 - Rp 100.000/unit
+
+**Ventilation:**
+- Pastikan area equipment punya sirkulasi udara
+- Jangan tutup rapat device yang panas
+
+---
+
+#### **✅ Storage & Organization**
+
+**Equipment Box/Rack:**
+- Kotak plastik/metal untuk router, modem
+- 19" rack mount (optional, untuk professional setup)
+- Harga: Rp 200.000 - Rp 1.000.000
+
+**Cable Organizer:**
+- Cable management box
+- Label maker untuk kabel
+- Harga: Rp 100.000
+
+---
+
+## 2. 🌐 NETWORK & INTERNET
+
+### **A. INTERNET CONNECTION**
+
+#### **✅ Provider Selection**
+
+**Primary Provider (Wajib):**
+- **Telkomsel** (coverage terbaik)
+- **Indosat Ooredoo** (alternatif)
+- **XL Axiata** (backup)
+
+**Paket Data Rekomendasi:**
+
+| Provider | Paket | Kuota | Harga/Bulan | Kecepatan |
+|----------|-------|-------|-------------|-----------|
+| Telkomsel | Orbit Max | 100GB | Rp 250.000 | 4G/5G |
+| Indosat | Freedom Internet | 75GB | Rp 200.000 | 4G |
+| XL | HotRod | 80GB | Rp 220.000 | 4G+ |
+
+**⚠️ CATATAN PENTING:**
+- **Video streaming** = boros kuota!
+- **YouTube 720p** = ~2GB/jam
+- **YouTube 1080p** = ~3-5GB/jam
+- **Estimasi:** Bus jalan 8 jam/hari dengan karaoke aktif = 20-40GB/hari
+
+**Rekomendasi Kuota:**
+- **Light usage** (2-3 jam/hari): 50GB/bulan
+- **Medium usage** (4-6 jam/hari): 100GB/bulan
+- **Heavy usage** (8+ jam/hari): 200GB+/bulan
+
+---
+
+#### **✅ Backup Internet (Recommended)**
+
+**Dual SIM Setup:**
+- Primary: Telkomsel
+- Backup: Indosat/XL
+- Auto failover jika primary down
+
+**Hardware:**
+- Modem dual-SIM (Teltonika RUT240)
+- Atau 2 modem terpisah + router failover
+
+---
+
+#### **✅ Signal Booster (Jika Perlu)**
+
+**External Antenna:**
+- 4G LTE Outdoor Antenna
+- Gain: 20-30 dBi
+- Cable: RG58 atau better
+- Harga: Rp 300.000 - Rp 800.000
+
+**Installation:**
+- Mount di atap bus
+- Connect ke modem via pigtail cable
+
+---
+
+### **B. NETWORK SETUP**
+
+#### **✅ WiFi Configuration**
+
+**Router Settings:**
+
 ```
-1. Nyalakan modem/mifi
-2. Pastikan semua device konek WiFi
-3. Test internet: buka google.com
-4. Cek kecepatan: fast.com (min 10 Mbps)
-```
+SSID Primary: "HiQo-Karaoke-BUS001"
+Password: [Strong password]
+Security: WPA2-PSK / WPA3
 
-#### **Step 2: Setup Display Karaoke (10 menit)**
-```
-1. Hubungkan laptop ke TV/Monitor via HDMI
-2. Buka browser (Chrome recommended)
-3. Akses: https://yourdomain.com
-4. Pilih bus (contoh: BUS-001)
-5. Masukkan PIN: 101010
-6. Klik "Layar Karaoke"
-7. Login dengan password: displaybus9999
-8. Klik "MULAI KARAOKE"
-9. Full screen (F11)
-10. ✅ Display ready!
-```
+SSID Guest: "HiQo-Penumpang"
+Password: [Simple password untuk penumpang]
+Security: WPA2-PSK
 
-#### **Step 3: Setup Camera Panel (5 menit)**
-```
-1. Buka laptop/PC dengan webcam
-2. Akses: https://yourdomain.com
-3. Pilih bus yang sama (BUS-001)
-4. Masukkan PIN yang sama
-5. Klik "Video Panel"
-6. Login: panelcamerabushioo021
-7. Klik "Aktifkan Kamera"
-8. Izinkan akses kamera
-9. ✅ Kamera streaming ke display!
-```
+Channel 2.4GHz: Auto (atau 1, 6, 11)
+Channel 5GHz: Auto (atau 36, 40, 44, 48)
 
-#### **Step 4: Setup Admin Panel (5 menit)**
-```
-1. Buka laptop/tablet/HP
-2. Akses: https://yourdomain.com
-3. Pilih bus yang sama
-4. Masukkan PIN yang sama
-5. Klik "Panel Admin"
-6. Login: karaokebushioo0001
-7. ✅ Admin panel ready!
-```
-
-#### **Step 5: Pasang QR Code (5 menit)**
-```
-1. Print QR Code dari Admin Panel
-2. Tempel di dinding bus (dekat penumpang)
-3. Atau taruh di tempat yang mudah dilihat
-4. Test scan QR pakai HP
-5. ✅ Penumpang bisa request lagu!
+DHCP Range: 192.168.1.100 - 192.168.1.200
+IP Display: 192.168.1.10 (static)
+IP Admin: 192.168.1.11 (static)
+IP Camera: 192.168.1.12 (static)
 ```
 
 ---
 
-## 📱 **6. CARA PAKAI UNTUK PENUMPANG**
+#### **✅ IP Address Scheme**
 
-### **Cara Request Lagu:**
+| Device | IP Address | Note |
+|--------|------------|------|
+| Router | 192.168.1.1 | Gateway |
+| Modem | 192.168.1.2 | WAN |
+| Display PC | 192.168.1.10 | Static |
+| Admin Laptop | 192.168.1.11 | Static |
+| Camera Device | 192.168.1.12 | Static |
+| Form Users | 192.168.1.100-200 | DHCP Pool |
+
+---
+
+#### **✅ QoS (Quality of Service) Settings**
+
+**Priority Bandwidth:**
+
+1. **High Priority (60% bandwidth):**
+   - Display PC (YouTube streaming)
+   - Camera streaming (WebRTC)
+
+2. **Medium Priority (30% bandwidth):**
+   - Admin Panel
+   - Firebase sync
+
+3. **Low Priority (10% bandwidth):**
+   - Form requests dari penumpang
+   - General browsing
+
+**Router Settings:**
 ```
-1. Scan QR Code di bus ATAU
-   Akses link dari papan pengumuman
-
-2. Masukkan PIN bus (101010)
-
-3. Isi form:
-   - Nama kamu
-   - Link YouTube lagu karaoke
-
-4. Klik "Tambah ke Antrean"
-
-5. ✅ Lagu masuk antrean!
-   Tunggu giliran untuk nyanyi
-```
-
-### **Cara Kirim Emote:**
-```
-1. Buka form request lagu (sama seperti di atas)
-
-2. Scroll ke bawah
-
-3. Klik emoji yang kamu mau:
-   👏 Tepuk Tangan
-   😍 Kagum
-   👍 Jempol
-   😂 Ketawa
-   ❤️ Love
-   🔥 Mantap
-
-4. ✅ Emote muncul di layar karaoke!
+Enable QoS: Yes
+Total Bandwidth: Set to 80% of actual speed
+Priority by IP: 
+  - 192.168.1.10 (Display) = High
+  - 192.168.1.12 (Camera) = High
+  - 192.168.1.11 (Admin) = Medium
 ```
 
 ---
 
-## ⚙️ **7. CARA PAKAI UNTUK ADMIN**
+#### **✅ Bandwidth Management**
 
-### **Kontrol Antrean:**
-- ✅ **Skip lagu:** Klik tombol "⏭️ Skip"
-- ✅ **Hapus lagu:** Klik tombol "🗑️ Hapus"
-- ✅ **Tambah manual:** Isi form + klik "➕ Tambah"
-- ✅ **Ubah urutan:** Drag & drop lagu (☰ icon)
-- ✅ **Reset semua:** Klik "🗑️ Reset Semua"
+**Tips Hemat Kuota:**
 
-### **Monitor:**
-- 📊 Total antrean: terlihat di header
-- 🎤 Lagu sedang diputar: card besar di atas
-- 👥 Daftar tunggu: list di bawah
+1. **Pre-download YouTube videos** (jika mungkin)
+2. **Limit video quality** di admin panel
+3. **Compress video stream** untuk camera
+4. **Cache frequently played songs**
+5. **Use CDN** untuk assets (CSS, JS, images)
+
+**Monitoring Tools:**
+- GlassWire (Windows) - free
+- NetGuard (Android) - free
+- Router admin panel statistics
 
 ---
 
-## 🎥 **8. CARA PAKAI CAMERA PANEL**
+### **C. FIREWALL & SECURITY**
 
-### **Recording Video:**
-```
-1. Aktifkan kamera
-2. Klik "⏺️ Mulai Rekam"
-3. Timer mulai berjalan
-4. Klik "⏹️ Stop Rekam" saat selesai
-5. Video otomatis save
-```
+#### **✅ Router Firewall**
 
-### **Cara Save di iPhone:**
 ```
-1. Tab baru terbuka dengan video
-2. TEKAN DAN TAHAN video (2-3 detik)
-3. Pilih "Save Video"
-4. ✅ Video tersimpan ke Photos
+Enable Firewall: Yes
+Block Incoming: Yes
+Allow Outgoing: Yes
+
+Port Forwarding: None (tidak perlu)
+DMZ: Disabled
+UPnP: Disabled (security risk)
+
+MAC Filtering: Optional (whitelist devices)
 ```
 
-### **Cara Save di Android:**
+---
+
+#### **✅ WiFi Security**
+
+**Guest Network:**
+- Isolate dari main network
+- Limit bandwidth (2-5 Mbps per user)
+- Auto-disconnect setelah 4 jam
+
+**Main Network:**
+- Hide SSID (optional)
+- Strong password (min 12 karakter)
+- Change password setiap bulan
+
+---
+
+## 3. 🔊 AUDIO VISUAL EQUIPMENT
+
+### **A. AUDIO WIRING DIAGRAM**
+
 ```
-1. Video download otomatis ke Downloads
-2. Buka Files → Downloads
-3. Tap video → Share → Gallery
-4. Tap "Save"
-5. ✅ Video masuk Galeri!
+┌─────────────────┐
+│  Display PC     │
+│  (HDMI Audio)   │
+└────────┬────────┘
+         │ HDMI
+         ↓
+┌─────────────────┐      ┌──────────────┐
+│   TV/Monitor    │      │  Microphone  │
+│                 │      │  Receiver    │
+└────────┬────────┘      └──────┬───────┘
+         │ 3.5mm/Optical       │ XLR/1/4"
+         ↓                     ↓
+┌─────────────────────────────────┐
+│        Audio Mixer              │
+│  Ch1: YouTube Audio             │
+│  Ch2: Microphone 1              │
+│  Ch3: Microphone 2              │
+│  Ch4: Backup Input              │
+└─────────────────┬───────────────┘
+                  │ XLR/RCA
+                  ↓
+         ┌────────────────┐
+         │   Amplifier    │
+         └────────┬───────┘
+                  │
+         ┌────────┴────────┐
+         ↓                 ↓
+    ┌─────────┐       ┌─────────┐
+    │Speaker L│       │Speaker R│
+    └─────────┘       └─────────┘
+```
 
-🔧 9. TROUBLESHOOTING UMUM
-❌ Video YouTube Tidak Bisa Diputar:
-Penyebab: Link bermasalah / embed disabled
-Solusi:
+---
 
-Validasi sudah otomatis di form
-Admin: Skip lagu yang error
-Minta penumpang request lagu lain
+### **B. AUDIO CABLES NEEDED**
 
-❌ Kamera Tidak Muncul di Display:
-Penyebab: WebRTC connection gagal
-Solusi:
+#### **✅ Cable List:**
 
-Refresh Camera Panel (F5)
-Refresh Display (F5)
-Klik "Aktifkan Kamera" lagi
-Cek koneksi internet
+| Cable Type | Length | Quantity | Purpose | Price |
+|------------|--------|----------|---------|-------|
+| HDMI 2.0 | 3m | 1 | PC to TV | Rp 100k |
+| 3.5mm to RCA | 2m | 1 | TV to Mixer | Rp 50k |
+| XLR Male-Female | 5m | 2 | Mic to Mixer | Rp 150k |
+| RCA to RCA | 2m | 1 | Mixer to Amp | Rp 50k |
+| Speaker Cable | 10m | 1 | Amp to Speakers | Rp 100k |
 
-❌ Internet Lemot:
-Solusi:
+**Total Cable Cost:** ~Rp 600.000
 
-Cek kecepatan: fast.com
-Restart modem
-Kurangi device yang konek WiFi
-Pakai paket unlimited yang lebih cepat
+---
 
-❌ Lupa Password:
-Solusi:
+### **C. VIDEO WIRING DIAGRAM**
 
-Lihat di notes ini atau
-Buka file JS di folder js/
-Cari const xxx_PASSWORD = "..."
+```
+┌──────────────┐
+│   Camera     │
+│   Device     │
+└──────┬───────┘
+       │ USB / WiFi
+       ↓
+┌──────────────┐      Internet
+│  Camera PC   │◄─────────────►  Firebase
+└──────┬───────┘
+       │
+       │ WebRTC Streaming
+       │
+       ↓
+┌──────────────┐
+│  Display PC  │
+│  (PiP Video) │
+└──────┬───────┘
+       │ HDMI
+       ↓
+┌──────────────┐
+│ TV/Monitor   │
+│ (Main Screen)│
+└──────────────┘
+```
 
+---
 
-💾 10. BACKUP & MAINTENANCE
-Backup Rutin:
+### **D. AUDIO MIXER SETTINGS**
 
-✅ Export Firebase data setiap minggu
-✅ Backup source code di GitHub
-✅ Screenshot QR Code untuk print ulang
-✅ Catat password di tempat aman
+#### **✅ Recommended Settings:**
 
-Monitoring:
+**Channel 1 (YouTube Audio):**
+```
+Gain: 0dB (unity)
+EQ:
+  - Low: +2dB
+  - Mid: 0dB
+  - High: +1dB
+Effect: None
+Volume: 70%
+Pan: Center
+```
 
-📊 Firebase Console: Cek usage harian
-🔥 Quota: Pastikan tidak exceed free tier
-🌐 Hosting: Monitor uptime
+**Channel 2 & 3 (Microphones):**
+```
+Gain: Set by sound check (biasanya +10 to +20dB)
+EQ:
+  - Low: -2dB (reduce rumble)
+  - Mid: +3dB (vocal clarity)
+  - High: +2dB (presence)
+Effect: Echo/Reverb (medium)
+Volume: 80-90%
+Pan: Mic1=Left, Mic2=Right (untuk stereo)
+```
 
-Update:
+**Master Output:**
+```
+Volume: 75-80%
+EQ: Flat (0dB all)
+Compressor: Light (3:1 ratio, jika ada)
+Limiter: -3dB (prevent clipping)
+```
 
-🔄 Browser: Update ke versi terbaru
-🔐 Password: Ganti setiap 3 bulan
-🚌 Bus baru: Tambah di index.js (array buses)
+---
 
+### **E. DISPLAY SETTINGS**
 
-📞 11. KONTAK SUPPORT
-IssueKontakFirebase downFirebase Status: status.firebase.google.comHosting downCek status hosting masing-masingBug/ErrorDeveloper / IT SupportFeature RequestDeveloper
+#### **✅ TV/Monitor Configuration:**
 
-💰 12. ESTIMASI BIAYA BULANAN
-ItemBiayaHostingRp 0 (GitHub Pages/Netlify)FirebaseRp 0 (Free tier cukup)Domain (opsional)Rp 100.000/tahunInternet (unlimited)Rp 150.000 - 300.000/bulanListrik (laptop/modem)Rp 50.000/bulanTOTAL~Rp 200.000 - 350.000/bulan
+**Picture Settings:**
+```
+Picture Mode: Standard atau Movie
+Brightness: 50
+Contrast: 50
+Color: 45
+Sharpness: 15
+Backlight: 80 (untuk bright conditions)
 
-✅ 13. CHECKLIST HARIAN
-Sebelum Bus Berangkat:
+Advanced:
+  - Motion Smoothing: Off
+  - Game Mode: Off
+  - Energy Saving: Off
+```
 
- Modem/WiFi nyala & internet OK
- Display laptop terhubung ke TV
- Display login & full screen (F11)
- Camera panel aktif & streaming
- Admin panel login
- QR Code terpasang
- Test request 1 lagu dummy
+**Audio Settings:**
+```
+Audio Output: External Speakers (via 3.5mm/Optical)
+Internal Speakers: Off
+Volume: Fixed (control di mixer)
+Audio Format: PCM/Stereo
+```
 
-Selama Perjalanan:
+**Display Settings:**
+```
+Resolution: 1920x1080 (Full HD)
+Refresh Rate: 60Hz
+HDMI Mode: Full RGB Range
+Overscan: Off
+Screen Fit: 100% (no zoom)
+```
 
- Monitor antrean di admin panel
- Skip lagu yang error
- Bantu penumpang yang kesulitan
+---
 
-Setelah Perjalanan:
+## 4. 💻 DEVICE SETUP
 
- Logout semua panel
- Tutup browser
- Matikan modem
- Backup data (opsional)
+### **A. DISPLAY PC SETUP**
 
+#### **✅ Operating System**
 
-📖 14. LINK PENTING
-ResourceURLWebsitehttps://yourdomain.comFirebase Consolehttps://console.firebase.google.comGitHub Repo (jika pakai)https://github.com/username/repoNotes iniSimpan di Google Drive / Print
+**Windows 10/11 (Recommended):**
 
-🎯 KESIMPULAN
-Minimal Requirements:
+**Initial Setup:**
+1. Install Windows 10 Pro/Home
+2. Update semua drivers
+3. Windows Update ke latest
+4. Disable Windows Defender (optional, untuk performance)
+5. Disable Auto-Updates saat operational
 
-✅ 3 Device (Display + Camera + Admin)
-✅ Internet 10+ Mbps
-✅ Website sudah deploy
-✅ QR Code printed
-✅ Tahu semua password
+**Power Settings:**
+```
+Power Plan: High Performance
+Turn off display: Never
+Sleep: Never
+Hibernate: Never
+Fast Startup: Disabled
+USB Selective Suspend: Disabled
+```
 
-Ready dalam: 30 menit setup
-Biaya: ~Rp 200.000-350.000/bulan
+**Auto-Start Configuration:**
+```
+1. Buat shortcut ke default browser
+2. Set homepage ke: http://localhost/display.html
+   atau: https://your-domain.com/display.html
+3. Task Scheduler:
+   - Trigger: At startup
+   - Action: Start browser in fullscreen
+   - Delay: 30 seconds
+```
+
+---
+
+#### **✅ Browser Setup**
+
+**Google Chrome (Recommended):**
+
+**Extensions Needed:**
+- **Auto Refresh Plus** - refresh jika error
+- **Full Page Screen Capture** - untuk troubleshooting
+- **Video Speed Controller** - jika perlu
+
+**Chrome Flags:**
+```
+chrome://flags
+
+Enable:
+- Hardware-accelerated video decode
+- Override software rendering list
+- GPU rasterization
+
+Disable:
+- Smooth scrolling (reduce lag)
+```
+
+**Startup Command:**
+```batch
+"C:\Program Files\Google\Chrome\Application\chrome.exe" 
+  --start-fullscreen 
+  --kiosk 
+  --disable-infobars 
+  --disable-session-crashed-bubble 
+  --autoplay-policy=no-user-gesture-required
+  "https://your-domain.com/display.html"
+```
+
+**Create .bat file untuk auto-start:**
+```batch
+@echo off
+timeout /t 30
+start chrome --start-fullscreen --kiosk "https://your-domain.com/display.html"
+```
+
+Simpan sebagai `start-karaoke.bat` dan masukkan ke Startup folder.
+
+---
+
+#### **✅ Network Configuration**
+
+**Static IP Setup (Windows):**
+```
+1. Control Panel → Network → Change Adapter Settings
+2. Right-click WiFi/Ethernet → Properties
+3. IPv4 → Properties
+4. Use following IP:
+   - IP: 192.168.1.10
+   - Subnet: 255.255.255.0
+   - Gateway: 192.168.1.1
+   - DNS: 8.8.8.8, 8.8.4.4
+```
+
+---
+
+### **B. ADMIN LAPTOP SETUP**
+
+#### **✅ Software Installation**
+
+**Required Software:**
+```
+1. Web Browser (Chrome/Edge/Firefox)
+2. Zoom/TeamViewer (remote support)
+3. PDF Reader
+4. Text Editor (Notepad++/VS Code)
+5. File Manager (Total Commander - optional)
+6. Screenshot Tool (Greenshot/Lightshot)
+```
+
+**Bookmarks:**
+```
+- Admin Panel: https://domain.com/admin.html?room=BUS-001
+- Form QR: https://domain.com/form.html?room=BUS-001
+- Firebase Console: https://console.firebase.google.com
+- Router Admin: http://192.168.1.1
+```
+
+---
+
+#### **✅ Backup & Sync**
+
+**Setup Google Drive / Dropbox:**
+- Folder untuk backup logs
+- Folder untuk playlist/song history
+- Auto-sync setiap hari
+
+**Backup Checklist:**
+- Browser bookmarks
+- WiFi passwords
+- Firebase config backup
+- Emergency contacts
+
+---
+
+### **C. CAMERA DEVICE SETUP**
+
+#### **✅ Webcam Configuration**
+
+**Windows Camera App Settings:**
+```
+Resolution: 1080p
+Frame Rate: 30fps
+Auto-Focus: On
+Low-Light Mode: On
+Zoom: 100%
+Pan/Tilt: Center
+```
+
+**Browser Permissions:**
+```
+Chrome → Settings → Privacy → Site Settings
+- Camera: Allow
+- Microphone: Allow
+- Notifications: Block
+```
+
+---
+
+#### **✅ Smartphone as Camera**
+
+**Apps Needed:**
+- **DroidCam** (Android) - Rp 0 (free) / Rp 70k (pro)
+- **EpocCam** (iOS) - Rp 0 (free) / Rp 100k (pro)
+- **IP Webcam** (Android) - Rp 0 (free)
+
+**Setup Steps:**
+1. Install app di HP
+2. Connect ke WiFi yang sama
+3. Note IP address dari app
+4. Access dari browser: `http://192.168.1.XX:8080`
+5. Set sebagai video source di WebRTC
+
+**Power Management:**
+```
+- Keep screen on: Yes
+- Battery optimization: Off for camera app
+- Auto-lock: Never
+- Brightness: 50%
+```
+
+---
+
+## 5. 📱 SOFTWARE INSTALLATION
+
+### **A. WEB HOSTING**
+
+#### **Opsi 1: Firebase Hosting (Recommended)**
+
+**Pros:**
+- ✅ Free SSL certificate
+- ✅ CDN global
+- ✅ Fast deployment
+- ✅ Version control
+- ✅ Rollback capability
+
+**Setup:**
+```bash
+# Install Firebase CLI
+npm install -g firebase-tools
+
+# Login
+firebase login
+
+# Initialize
+firebase init hosting
+
+# Deploy
+firebase deploy --only hosting
+```
+
+**Cost:** FREE untuk 10GB storage + 360MB/day transfer
+
+---
+
+#### **Opsi 2: cPanel / Shared Hosting**
+
+**Requirements:**
+- Domain name (Rp 150k/year)
+- Shared hosting (Rp 300k - Rp 600k/year)
+- SSL certificate (Let's Encrypt - FREE)
+
+**Recommended Providers:**
+- Niagahoster (Rp 400k/year)
+- Hostinger (Rp 300k/year)
+- Dewaweb (Rp 600k/year)
+
+---
+
+#### **Opsi 3: Local Network (Offline Mode)**
+
+**Setup Local Server di Bus:**
+
+**Using XAMPP/WAMP:**
+1. Install XAMPP di Display PC
+2. Copy files ke `htdocs/karaoke/`
+3. Access via: `http://192.168.1.10/karaoke/`
+
+**Pros:**
+- ✅ No internet needed (kecuali YouTube)
+- ✅ Faster load times
+- ✅ No hosting cost
+
+**Cons:**
+- ❌ Manual updates
+- ❌ No remote management
+- ❌ Single point of failure
+
+---
+
+### **B. FIREBASE SETUP**
+
+#### **✅ Database Configuration**
+
+**Realtime Database Rules:**
