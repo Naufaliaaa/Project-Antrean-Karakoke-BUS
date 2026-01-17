@@ -55,6 +55,9 @@ body {
   display: flex;
   align-items: center;
   gap: 15px;
+  background: white;
+  padding: 10px 15px;
+  border-radius: 12px;
 }
 
 .logo {
