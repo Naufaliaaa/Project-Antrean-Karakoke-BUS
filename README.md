@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Hioo Logo](img/hioo.jpeg)
+![Hioo Logo](img/Logo.png)
 
 **Sistem Karaoke Bus Interaktif dengan WebRTC Streaming & Real-time Queue Management**
 
