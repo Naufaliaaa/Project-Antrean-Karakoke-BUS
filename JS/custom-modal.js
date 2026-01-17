@@ -306,38 +306,90 @@ window.customConfirm = function(message, options = {}) {
 };
 
 // ========= SUCCESS ALERT (Green) =========
-window.customSuccess = function(message, title = ' Berhasil!') {
+window.customSuccess = function(message, options = {}) {
+  // Support both old format (title string) and new format (options object)
+  if (typeof options === 'string') {
+    options = { title: options };
+  }
+  
+  const {
+    title = ' Berhasil!',
+    icon = '✅',
+    buttonText = 'OK',
+    buttonClass = 'custom-modal-btn-success'
+  } = options;
+
   return customAlert(message, {
     title: title,
-    icon: '✅',
-    buttonClass: 'custom-modal-btn-success'
+    icon: icon,
+    buttonText: buttonText,
+    buttonClass: buttonClass
   });
 };
 
 // ========= ERROR ALERT (Red) =========
-window.customError = function(message, title = '❌ Error!') {
+window.customError = function(message, options = {}) {
+  // Support both old format (title string) and new format (options object)
+  if (typeof options === 'string') {
+    options = { title: options };
+  }
+  
+  const {
+    title = '❌ Error!',
+    icon = '❌',
+    buttonText = 'OK',
+    buttonClass = 'custom-modal-btn-danger'
+  } = options;
+
   return customAlert(message, {
     title: title,
-    icon: '❌',
-    buttonClass: 'custom-modal-btn-danger'
+    icon: icon,
+    buttonText: buttonText,
+    buttonClass: buttonClass
   });
 };
 
 // ========= WARNING ALERT (Yellow) =========
-window.customWarning = function(message, title = '⚠️ Peringatan!') {
+window.customWarning = function(message, options = {}) {
+  // Support both old format (title string) and new format (options object)
+  if (typeof options === 'string') {
+    options = { title: options };
+  }
+  
+  const {
+    title = '⚠️ Peringatan!',
+    icon = '⚠️',
+    buttonText = 'OK',
+    buttonClass = 'custom-modal-btn-primary'
+  } = options;
+
   return customAlert(message, {
     title: title,
-    icon: '⚠️',
-    buttonClass: 'custom-modal-btn-primary'
+    icon: icon,
+    buttonText: buttonText,
+    buttonClass: buttonClass
   });
 };
 
 // ========= INFO ALERT (Blue) =========
-window.customInfo = function(message, title = 'ℹ️ Informasi') {
+window.customInfo = function(message, options = {}) {
+  // Support both old format (title string) and new format (options object)
+  if (typeof options === 'string') {
+    options = { title: options };
+  }
+  
+  const {
+    title = 'ℹ️ Informasi',
+    icon = 'ℹ️',
+    buttonText = 'OK',
+    buttonClass = 'custom-modal-btn-primary'
+  } = options;
+
   return customAlert(message, {
     title: title,
-    icon: 'ℹ️',
-    buttonClass: 'custom-modal-btn-primary'
+    icon: icon,
+    buttonText: buttonText,
+    buttonClass: buttonClass
   });
 };
 

@@ -559,7 +559,7 @@ window.skipCurrent = async function() {
     'Lagu yang sedang diputar akan dilewati.', 
     {
       title: 'Skip Lagu?',
-      icon: '⏭️',
+      icon: 'img/next.png',
       confirmText: 'Ya, Skip',
       cancelText: 'Batal'
     }

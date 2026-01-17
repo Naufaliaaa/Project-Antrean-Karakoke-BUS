@@ -18,7 +18,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
+  padding: 8px 25px;
   background: #7c5ceb;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   z-index: 1000;
@@ -30,7 +30,7 @@ body {
 }
 
 .navbar-logo {
-  height: 60px;
+  height: 45px;
   width: auto;
   border-radius: 8px;
   object-fit: contain;
@@ -41,11 +41,11 @@ body {
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 2px;
 }
 
 .navbar-title {
-  font-size: 28px;
+  font-size: 22px;
   font-weight: bold;
   color: white;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -53,7 +53,7 @@ body {
 }
 
 .navbar-subtitle {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.9);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -108,25 +108,25 @@ body {
 
 /* ===== LOGOUT BUTTON ===== */
 .display-logout-btn {
-  padding: 12px 24px;
+  padding: 8px 16px;
   background: rgba(239, 68, 68, 0.9);
   backdrop-filter: blur(10px);
   color: white;
   border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 12px;
+  border-radius: 10px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   transition: all 0.3s;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .logout-icon {
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
 }
 
@@ -144,7 +144,7 @@ body {
 #player-container {
   position: relative;
   width: 100%;
-  height: 55vh;
+  height: 58vh;
   background: #000;
   overflow: hidden;
 }
@@ -451,7 +451,10 @@ body {
   background: #111;
   padding: 20px 30px;
   height: calc(45vh - 90px);
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 .queue-header {
@@ -461,6 +464,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .queue-icon {
@@ -468,6 +472,47 @@ body {
   height: 28px;
   object-fit: contain;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+#queue-list {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+#queue-list::-webkit-scrollbar {
+  width: 12px;
+}
+
+#queue-list::-webkit-scrollbar-track {
+  background: #2a2a2a;
+  border-radius: 10px;
+  margin: 5px 0;
+}
+
+#queue-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #667eea, #764ba2);
+  border-radius: 10px;
+  border: 3px solid #2a2a2a;
+  transition: background 0.3s ease;
+}
+
+#queue-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #764ba2, #667eea);
+  transform: scaleX(1.1);
+}
+
+#queue-list::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #5a6fd6, #6a4190);
+}
+
+#queue-list::-webkit-scrollbar-corner {
+  background: #2a2a2a;
+}
+
+#queue-list {
+  scrollbar-width: thin;
+  scrollbar-color: #667eea #2a2a2a;
 }
 
 .queue-item {
@@ -506,6 +551,17 @@ body {
   font-size: 20px;
 }
 
+/* ===== QUEUE FOOTER ===== */
+.queue-footer {
+  flex-shrink: 0;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #333;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
 /* ===== ANIMATION ===== */
 @keyframes slideIn {
   from {
@@ -516,14 +572,4 @@ body {
     opacity: 1;
     transform: translateX(0);
   }
-}
-
-/* ===== SCROLLBAR ===== */
-.queue-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.queue-container::-webkit-scrollbar-thumb {
-  background: #667eea;
-  border-radius: 10px;
 }
