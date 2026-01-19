@@ -1,5 +1,5 @@
 /*************************************************
- * VIDEO-PANEL.JS - HiQo Karaoke Video Panel
+ * VIDEO-PANEL.JS - Hioo Karaoke Video Panel
  * Complete implementation with mute/unmute audio
  *************************************************/
 
