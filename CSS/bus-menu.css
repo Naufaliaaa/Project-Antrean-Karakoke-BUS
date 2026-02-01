@@ -326,6 +326,15 @@ body {
   border-color: rgba(67, 233, 123, 0.3);
 }
 
+/* Roulette Card - Pink */
+.menu-card.roulette-card::before {
+  background: linear-gradient(135deg, rgba(245, 87, 108, 0.05) 0%, rgba(240, 147, 251, 0.05) 100%);
+}
+
+.menu-card.roulette-card:hover {
+  border-color: rgba(245, 87, 108, 0.3);
+}
+
 /* ========================================
    MENU CARD CONTENT
 ======================================== */

@@ -127,6 +127,11 @@ function goToAdmin(e) {
   navigateWithLoading(e.currentTarget, `admin-login.html?room=${roomId}`);
 }
 
+function goToRoulette(e) {
+  e.preventDefault();
+  navigateWithLoading(e.currentTarget, `roulette.html?room=${roomId}`);
+}
+
 // ========= EVENT LISTENERS =========
 document.addEventListener('DOMContentLoaded', function() {
   // Set bus info
@@ -157,6 +162,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const adminBtn = document.getElementById('admin-btn');
   if (adminBtn) {
     adminBtn.addEventListener('click', goToAdmin);
+  }
+  
+  const rouletteBtn = document.getElementById('roulette-btn');
+  if (rouletteBtn) {
+    rouletteBtn.addEventListener('click', goToRoulette);
   }
   
   console.log('✅ Bus-menu.js loaded (Enhanced Version)');

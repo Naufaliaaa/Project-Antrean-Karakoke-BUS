@@ -1,0 +1,654 @@
+/* ========================================
+   ROULETTE.CSS - Roulette Feature for Arisan
+   Beautiful pink/purple gradient theme
+======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background: #f5f5f7;
+  color: #1d1d1f;
+  min-height: 100vh;
+}
+
+/* ========================================
+   TOP NAVBAR
+======================================== */
+.top-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.navbar-logo {
+  height: 40px;
+  width: auto;
+}
+
+/* ========================================
+   HERO HEADER
+======================================== */
+.hero-header {
+  margin-top: 70px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 40px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../img/background.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  color: #f5576c;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(245, 87, 108, 0.2);
+  margin-bottom: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-button:hover {
+  background: white;
+  border-color: #f5576c;
+  transform: translateX(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.back-icon {
+  font-size: 18px;
+}
+
+.hero-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 400;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================================
+   MAIN CONTENT
+======================================== */
+.main-content {
+  padding: 50px 20px;
+  background: #f5f5f7;
+  min-height: calc(100vh - 220px);
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   ROULETTE CONTAINER
+======================================== */
+.roulette-container {
+  background: white;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   ROULETTE WHEEL
+======================================== */
+.roulette-wheel-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto 30px;
+}
+
+.roulette-wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  position: relative;
+  box-shadow: 
+    0 0 0 8px white,
+    0 0 0 12px #f093fb,
+    0 0 0 16px white,
+    0 10px 40px rgba(240, 147, 251, 0.4);
+  transition: transform 0.1s ease-out;
+  overflow: hidden;
+}
+
+.roulette-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70px;
+  height: 70px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.roulette-center-text {
+  font-size: 28px;
+}
+
+.roulette-pointer {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px;
+  color: #f5576c;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  z-index: 20;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
+}
+
+/* Roulette slots */
+.roulette-slot {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  left: 50%;
+  top: 0;
+  transform-origin: 0% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.roulette-slot span {
+  position: absolute;
+  left: -100%;
+  width: 200%;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transform: rotate(90deg);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ========================================
+   WINNER DISPLAY
+======================================== */
+.winner-display {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 30px;
+  background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+  border-radius: 16px;
+  border: 3px solid #ffc107;
+  box-shadow: 0 4px 20px rgba(255, 193, 7, 0.3);
+}
+
+.winner-name {
+  font-size: 48px;
+  font-weight: 800;
+  color: #f5576c;
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+  text-shadow: 0 2px 10px rgba(245, 87, 108, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.winner-label {
+  font-size: 14px;
+  color: #856404;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* ========================================
+   INPUT SECTION
+======================================== */
+.input-section {
+  margin-bottom: 30px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 10px;
+}
+
+.section-subtitle {
+  font-size: 14px;
+  color: #86868b;
+  margin-bottom: 20px;
+}
+
+.names-input {
+  width: 100%;
+  padding: 20px;
+  border: 2px solid #e5e5e7;
+  border-radius: 16px;
+  font-size: 16px;
+  font-family: inherit;
+  resize: vertical;
+  transition: all 0.3s ease;
+  background: #fafafa;
+}
+
+.names-input:focus {
+  outline: none;
+  border-color: #f5576c;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(245, 87, 108, 0.1);
+}
+
+.names-input::placeholder {
+  color: #adb5bd;
+}
+
+.input-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ========================================
+   BUTTONS
+======================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.btn-icon {
+  font-size: 18px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 87, 108, 0.5);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #f5f5f7;
+  color: #1d1d1f;
+  border: 2px solid #e5e5e7;
+}
+
+.btn-secondary:hover {
+  background: #e5e5e7;
+  border-color: #d2d2d7;
+}
+
+/* ========================================
+   PARTICIPANTS SECTION
+======================================== */
+.participants-section {
+  animation: fadeIn 0.5s ease;
+}
+
+.participants-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #f5f5f7;
+  border-radius: 12px;
+}
+
+.participant-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  animation: popIn 0.3s ease backwards;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.participant-tag.winner {
+  background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+  font-size: 18px;
+  padding: 14px 24px;
+  animation: celebrate 0.6s ease;
+}
+
+@keyframes celebrate {
+  0% {
+    transform: scale(0.5);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.participant-remove {
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.participant-remove:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.participants-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+/* ========================================
+   SPINNING STATE
+======================================== */
+.roulette-wheel.spinning {
+  animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================================
+   CONFETTI CELEBRATION
+======================================== */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: confettiFall 3s ease-out forwards;
+  z-index: 10000;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+@media (max-width: 768px) {
+  .top-navbar {
+    height: 60px;
+  }
+
+  .navbar-logo {
+    height: 35px;
+  }
+
+  .hero-header {
+    margin-top: 60px;
+    padding: 30px 20px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .hero-subtitle {
+    font-size: 14px;
+  }
+
+  .back-button {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+
+  .main-content {
+    padding: 30px 15px;
+  }
+
+  .roulette-container {
+    padding: 25px;
+    border-radius: 20px;
+  }
+
+  .roulette-wheel-container {
+    width: 250px;
+    height: 250px;
+  }
+
+  .roulette-center {
+    width: 60px;
+    height: 60px;
+  }
+
+  .roulette-center-text {
+    font-size: 24px;
+  }
+
+  .roulette-pointer {
+    font-size: 32px;
+  }
+
+  .winner-display {
+    padding: 20px;
+  }
+
+  .winner-name {
+    font-size: 36px;
+  }
+
+  .section-title {
+    font-size: 18px;
+  }
+
+  .names-input {
+    padding: 15px;
+    font-size: 14px;
+  }
+
+  .btn {
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+
+  .participants-actions {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 24px;
+  }
+
+  .roulette-wheel-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  .roulette-center {
+    width: 50px;
+    height: 50px;
+  }
+
+  .roulette-center-text {
+    font-size: 20px;
+  }
+
+  .roulette-pointer {
+    font-size: 28px;
+    top: -15px;
+  }
+
+  .winner-name {
+    font-size: 28px;
+  }
+
+  .roulette-container {
+    padding: 20px;
+  }
+}
+
+/* ========================================
+   EMPTY STATE
+======================================== */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #86868b;
+}
+
+.empty-state-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.empty-state-text {
+  font-size: 16px;
+}
+
