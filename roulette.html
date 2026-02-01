@@ -30,68 +30,75 @@
     <!-- MAIN CONTENT -->
     <main class="main-content">
         <div class="container">
-            <!-- ROULETTE CONTAINER -->
-            <div class="roulette-container">
+            <!-- TWO COLUMN LAYOUT -->
+            <div class="roulette-layout">
                 
-                <!-- ROULETTE WHEEL -->
-                <div class="roulette-wheel-container">
-                    <div class="roulette-pointer">▼</div>
-                    <div class="roulette-wheel" id="roulette-wheel">
-                        <div class="roulette-center">
-                            <span class="roulette-center-text">🎯</span>
+                <!-- LEFT COLUMN: WHEEL -->
+                <div class="wheel-column">
+                    <div class="roulette-wheel-container">
+                        <div class="roulette-pointer">▼</div>
+                        <div class="roulette-wheel" id="roulette-wheel">
+                            <div class="roulette-center">
+                                <span class="roulette-center-text">🎯</span>
+                            </div>
                         </div>
-                        <!-- Name slots akan di-generate via JS -->
+                    </div>
+                    
+                    <!-- WINNER DISPLAY -->
+                    <div class="winner-display" id="winner-display" style="display: none;">
+                        <div class="winner-icon">🎊</div>
+                        <div class="winner-name" id="winner-name">?</div>
+                        <div class="winner-label">PEMENANG</div>
                     </div>
                 </div>
 
-                <!-- DISPLAY NAMA PEMENANG -->
-                <div class="winner-display" id="winner-display" style="display: none;">
-                    <div class="winner-name" id="winner-name">?</div>
-                    <div class="winner-label">PEMENANG</div>
-                </div>
+                <!-- RIGHT COLUMN: INPUT & RESULTS -->
+                <div class="control-column">
+                    
+                    <!-- INPUT SECTION -->
+                    <div class="input-section" id="input-section">
+                        <h3 class="section-title">📝 Masukkan Nama Peserta</h3>
+                        <p class="section-subtitle">Pisahkan dengan koma atau enter</p>
+                        <textarea 
+                            id="names-input" 
+                            class="names-input" 
+                            placeholder="Contoh:&#10;Fabio&#10;Eric&#10;Charles&#10;Gabriel&#10;Diya&#10;Beatriz&#10;Ali"
+                            rows="8"
+                        ></textarea>
+                        <div class="input-actions">
+                            <button class="btn btn-primary btn-block" id="start-roulette-btn">
+                                <span class="btn-icon">🎰</span>
+                                <span>Mulai Roulette</span>
+                            </button>
+                        </div>
+                    </div>
 
-                <!-- WINNERS LIST -->
-                <div class="winners-list-container" id="winners-list-container" style="display: none;">
-                    <h3 class="section-title">🏆 Urutan Pemenang</h3>
-                    <div class="winners-list" id="winners-list">
-                        <!-- Winners akan di-generate via JS -->
+                    <!-- WINNERS LIST -->
+                    <div class="winners-list-container" id="winners-list-container" style="display: none;">
+                        <h3 class="section-title">🏆 Urutan Pemenang</h3>
+                        <div class="winners-list" id="winners-list">
+                            <!-- Winners akan di-generate via JS -->
+                        </div>
                     </div>
-                </div>
 
-                <!-- INPUT SECTION -->
-                <div class="input-section" id="input-section">
-                    <h3 class="section-title">📝 Masukkan Nama Peserta</h3>
-                    <p class="section-subtitle">Pisahkan nama dengan koma atau satu nama per baris</p>
-                    <textarea 
-                        id="names-input" 
-                        class="names-input" 
-                        placeholder="Contoh:&#10;Ibu Sari,&#10;Ibu Dewi,&#10;Ibu Rita,&#10;Ibu Luna,&#10;Ibu Maya"
-                        rows="6"
-                    ></textarea>
-                    <div class="input-actions">
-                        <button class="btn btn-primary" id="start-roulette-btn">
-                            <span class="btn-icon">🎰</span>
-                            <span>Mulai Roulette</span>
-                        </button>
+                    <!-- PARTICIPANTS LIST -->
+                    <div class="participants-section" id="participants-section" style="display: none;">
+                        <h3 class="section-title">👥 Peserta Tersisa (<span id="participant-count">0</span>)</h3>
+                        <div class="participants-list" id="participants-list">
+                            <!-- Participants akan di-generate via JS -->
+                        </div>
+                        <div class="participants-actions">
+                            <button class="btn btn-secondary btn-half" id="reset-btn">
+                                <span class="btn-icon">🔄</span>
+                                <span>Reset</span>
+                            </button>
+                            <button class="btn btn-primary btn-half" id="spin-btn" disabled>
+                                <span class="btn-icon">🎲</span>
+                                <span>PUTAR</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
 
-                <!-- PARTICIPANTS LIST -->
-                <div class="participants-section" id="participants-section" style="display: none;">
-                    <h3 class="section-title">👥 Peserta Tersisa (<span id="participant-count">0</span>)</h3>
-                    <div class="participants-list" id="participants-list">
-                        <!-- Participants akan di-generate via JS -->
-                    </div>
-                    <div class="participants-actions">
-                        <button class="btn btn-secondary" id="reset-btn">
-                            <span class="btn-icon">🔄</span>
-                            <span>Reset Semua</span>
-                        </button>
-                        <button class="btn btn-primary" id="spin-btn" disabled>
-                            <span class="btn-icon">🎲</span>
-                            <span>PUTAR ROULETTE</span>
-                        </button>
-                    </div>
                 </div>
 
             </div>

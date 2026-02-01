@@ -32,18 +32,22 @@ const backButton = document.getElementById('back-button');
 
 // ========= COLOR PALETTES =========
 const colorPalettes = [
-  { bg: '#FF6B6B', light: '#FFE5E5' }, // Red
-  { bg: '#4ECDC4', light: '#E0F7F6' }, // Teal
-  { bg: '#45B7D1', light: '#E1F5FE' }, // Blue
-  { bg: '#FFA07A', light: '#FFE8DC' }, // Light Salmon
-  { bg: '#98D8C8', light: '#E8F6F3' }, // Mint
-  { bg: '#F7DC6F', light: '#FEF9E7' }, // Yellow
-  { bg: '#BB8FCE', light: '#F4ECF7' }, // Purple
-  { bg: '#85C1E2', light: '#EBF5FB' }, // Sky Blue
-  { bg: '#F8B739', light: '#FEF5E7' }, // Orange
-  { bg: '#52BE80', light: '#E8F8F5' }, // Green
-  { bg: '#EC7063', light: '#FADBD8' }, // Coral
-  { bg: '#5DADE2', light: '#EBF5FB' }  // Light Blue
+  '#FF6B6B', // Red
+  '#4ECDC4', // Teal
+  '#45B7D1', // Blue
+  '#FFA07A', // Light Salmon
+  '#98D8C8', // Mint
+  '#F7DC6F', // Yellow
+  '#BB8FCE', // Purple
+  '#85C1E2', // Sky Blue
+  '#F8B739', // Orange
+  '#52BE80', // Green
+  '#EC7063', // Coral
+  '#5DADE2', // Light Blue
+  '#FF9F1C', // Bright Orange
+  '#2EC4B6', // Turquoise
+  '#E71D36', // Crimson
+  '#FFB627'  // Golden Yellow
 ];
 
 // ========= PARSE NAMES =========
@@ -68,7 +72,6 @@ function updateRouletteWheel() {
   const count = participants.length;
   
   if (count === 0) {
-    // Jika tidak ada peserta tersisa
     return;
   }
   
@@ -87,7 +90,18 @@ function updateRouletteWheel() {
     
     // Get color for this slot
     const color = colorPalettes[index % colorPalettes.length];
-    slot.style.background = color.bg;
+    
+    // Create the colored background using pseudo-element
+    slot.style.setProperty('--slot-color', color);
+    
+    // Use CSS to create the pie slice
+    const slotBg = document.createElement('div');
+    slotBg.style.position = 'absolute';
+    slotBg.style.width = '100%';
+    slotBg.style.height = '100%';
+    slotBg.style.background = color;
+    slotBg.style.clipPath = 'polygon(0 0, 100% 0, 0 100%)';
+    slot.appendChild(slotBg);
     
     const content = document.createElement('div');
     content.className = 'roulette-slot-content';

@@ -132,13 +132,13 @@ body {
 }
 
 /* ========================================
-   ROULETTE CONTAINER
+   ROULETTE LAYOUT - TWO COLUMNS
 ======================================== */
-.roulette-container {
-  background: white;
-  border-radius: 24px;
-  padding: 40px;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+.roulette-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
   animation: fadeIn 0.5s ease;
 }
 
@@ -153,14 +153,39 @@ body {
   }
 }
 
+.wheel-column {
+  background: white;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 90px;
+}
+
+.control-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.control-column > div {
+  background: white;
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+}
+
 /* ========================================
    ROULETTE WHEEL
 ======================================== */
 .roulette-wheel-container {
   position: relative;
-  width: 400px;
-  height: 400px;
-  margin: 0 auto 40px;
+  width: 420px;
+  height: 420px;
+  margin: 0 auto 30px;
 }
 
 .roulette-wheel {
@@ -169,11 +194,12 @@ body {
   border-radius: 50%;
   position: relative;
   box-shadow: 
-    0 0 0 12px white,
-    0 0 0 16px rgba(0, 0, 0, 0.1),
-    0 10px 50px rgba(0, 0, 0, 0.2);
-  animation: continuousSpin 8s linear infinite;
-  overflow: hidden;
+    0 0 0 15px white,
+    0 0 0 18px #e0e0e0,
+    0 15px 60px rgba(0, 0, 0, 0.25);
+  animation: continuousSpin 6s linear infinite;
+  overflow: visible;
+  background: transparent;
 }
 
 /* Continuous spinning animation */
@@ -196,32 +222,32 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   background: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  z-index: 10;
-  border: 4px solid #f5f5f7;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  border: 6px solid #f5f5f5;
 }
 
 .roulette-center-text {
-  font-size: 32px;
+  font-size: 42px;
 }
 
 .roulette-pointer {
   position: absolute;
-  top: -25px;
+  top: -35px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 50px;
-  color: #f5576c;
-  filter: drop-shadow(0 4px 12px rgba(245, 87, 108, 0.5));
-  z-index: 20;
-  animation: pointerBounce 1.5s ease-in-out infinite;
+  font-size: 60px;
+  color: #4caf50;
+  filter: drop-shadow(0 6px 15px rgba(76, 175, 80, 0.6));
+  z-index: 200;
+  animation: pointerBounce 1.2s ease-in-out infinite;
 }
 
 @keyframes pointerBounce {
@@ -229,7 +255,7 @@ body {
     transform: translateX(-50%) translateY(0);
   }
   50% {
-    transform: translateX(-50%) translateY(-8px);
+    transform: translateX(-50%) translateY(-10px);
   }
 }
 
@@ -241,30 +267,37 @@ body {
   left: 50%;
   top: 0;
   transform-origin: 0% 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  overflow: hidden;
+  overflow: visible;
+}
+
+.roulette-slot::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
   clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
 .roulette-slot-content {
   position: absolute;
-  top: 30%;
-  left: 20%;
+  top: 35%;
+  left: 25%;
   transform: rotate(90deg);
   transform-origin: center;
-  font-size: 14px;
-  font-weight: 700;
-  color: white;
+  font-size: 16px;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.8);
   text-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.3),
-    0 0 10px rgba(0, 0, 0, 0.2);
+    0 1px 2px rgba(255, 255, 255, 0.8),
+    0 0 20px rgba(255, 255, 255, 0.5);
   white-space: nowrap;
-  max-width: 120px;
+  max-width: 140px;
   overflow: hidden;
   text-overflow: ellipsis;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
+  text-transform: capitalize;
 }
 
 /* ========================================
@@ -272,15 +305,16 @@ body {
 ======================================== */
 .winner-display {
   text-align: center;
-  margin-bottom: 30px;
-  padding: 30px;
-  background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
+  margin-top: 30px;
+  padding: 35px 30px;
+  background: linear-gradient(135deg, #fff9e6 0%, #fffbea 100%);
   border-radius: 20px;
   border: 4px solid #ffc107;
   box-shadow: 
-    0 8px 30px rgba(255, 193, 7, 0.4),
-    inset 0 2px 10px rgba(255, 193, 7, 0.1);
+    0 10px 40px rgba(255, 193, 7, 0.35),
+    inset 0 2px 15px rgba(255, 193, 7, 0.15);
   animation: winnerAppear 0.6s ease;
+  width: 100%;
 }
 
 @keyframes winnerAppear {
@@ -297,14 +331,33 @@ body {
   }
 }
 
+.winner-icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+  animation: rotateIcon 0.8s ease;
+}
+
+@keyframes rotateIcon {
+  0% {
+    transform: rotate(0deg) scale(0.5);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
 .winner-name {
-  font-size: 52px;
+  font-size: 42px;
   font-weight: 900;
   color: #f5576c;
   margin-bottom: 12px;
-  letter-spacing: -1px;
-  text-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+  letter-spacing: -0.5px;
+  text-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
   animation: winnerPulse 2s ease-in-out infinite;
+  word-break: break-word;
 }
 
 @keyframes winnerPulse {
@@ -317,7 +370,7 @@ body {
 }
 
 .winner-label {
-  font-size: 16px;
+  font-size: 14px;
   color: #856404;
   font-weight: 700;
   text-transform: uppercase;
@@ -328,7 +381,6 @@ body {
    WINNERS LIST
 ======================================== */
 .winners-list-container {
-  margin-bottom: 30px;
   animation: fadeIn 0.5s ease;
 }
 
@@ -337,18 +389,25 @@ body {
   border-radius: 16px;
   padding: 20px;
   margin-top: 15px;
+  max-height: 350px;
+  overflow-y: auto;
 }
 
 .winner-item {
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 15px 20px;
+  padding: 14px 18px;
   background: white;
   border-radius: 12px;
   margin-bottom: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
   animation: slideIn 0.4s ease backwards;
+  transition: transform 0.2s ease;
+}
+
+.winner-item:hover {
+  transform: translateX(5px);
 }
 
 .winner-item:last-child {
@@ -358,7 +417,7 @@ body {
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-30px);
   }
   to {
     opacity: 1;
@@ -367,37 +426,41 @@ body {
 }
 
 .winner-rank {
-  font-size: 24px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 900;
   color: white;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  width: 45px;
-  height: 45px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 3px 10px rgba(245, 87, 108, 0.4);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  flex-shrink: 0;
 }
 
 .winner-rank.gold {
   background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
   color: #856404;
+  font-size: 22px;
 }
 
 .winner-rank.silver {
   background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
   color: #495057;
+  font-size: 22px;
 }
 
 .winner-rank.bronze {
   background: linear-gradient(135deg, #cd7f32 0%, #d4a574 100%);
   color: white;
+  font-size: 22px;
 }
 
 .winner-name-item {
   flex: 1;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   color: #1d1d1f;
 }
@@ -506,6 +569,14 @@ body {
   border-color: #d2d2d7;
 }
 
+.btn-block {
+  width: 100%;
+}
+
+.btn-half {
+  flex: 1;
+}
+
 /* ========================================
    PARTICIPANTS SECTION
 ======================================== */
@@ -516,12 +587,12 @@ body {
 .participants-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   margin: 20px 0;
-  max-height: 250px;
+  max-height: 200px;
   overflow-y: auto;
   padding: 15px;
-  background: #f5f5f7;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   border-radius: 12px;
 }
 
@@ -529,11 +600,11 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 18px;
+  padding: 10px 16px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border-radius: 25px;
-  font-size: 15px;
+  border-radius: 20px;
+  font-size: 14px;
   font-weight: 600;
   animation: popIn 0.3s ease backwards;
   box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
@@ -552,9 +623,9 @@ body {
 
 .participants-actions {
   display: flex;
-  gap: 15px;
-  justify-content: center;
-  margin-top: 25px;
+  gap: 12px;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
 /* ========================================
@@ -583,6 +654,23 @@ body {
 /* ========================================
    RESPONSIVE DESIGN
 ======================================== */
+@media (max-width: 1024px) {
+  .roulette-layout {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .wheel-column {
+    position: relative;
+    top: 0;
+  }
+
+  .roulette-wheel-container {
+    width: 380px;
+    height: 380px;
+  }
+}
+
 @media (max-width: 768px) {
   .top-navbar {
     height: 60px;
@@ -614,40 +702,45 @@ body {
     padding: 30px 15px;
   }
 
-  .roulette-container {
+  .wheel-column,
+  .control-column > div {
     padding: 25px;
     border-radius: 20px;
   }
 
   .roulette-wheel-container {
-    width: 300px;
-    height: 300px;
+    width: 320px;
+    height: 320px;
   }
 
   .roulette-center {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
   }
 
   .roulette-center-text {
-    font-size: 26px;
+    font-size: 34px;
   }
 
   .roulette-pointer {
-    font-size: 40px;
-    top: -20px;
+    font-size: 50px;
+    top: -30px;
   }
 
   .roulette-slot-content {
-    font-size: 11px;
+    font-size: 13px;
   }
 
   .winner-display {
-    padding: 20px;
+    padding: 25px 20px;
+  }
+
+  .winner-icon {
+    font-size: 40px;
   }
 
   .winner-name {
-    font-size: 40px;
+    font-size: 34px;
   }
 
   .section-title {
@@ -663,14 +756,6 @@ body {
     padding: 14px 24px;
     font-size: 14px;
   }
-
-  .participants-actions {
-    flex-direction: column;
-  }
-
-  .btn {
-    width: 100%;
-  }
 }
 
 @media (max-width: 480px) {
@@ -678,65 +763,88 @@ body {
     font-size: 24px;
   }
 
+  .container {
+    max-width: 100%;
+  }
+
   .roulette-wheel-container {
-    width: 260px;
-    height: 260px;
+    width: 280px;
+    height: 280px;
   }
 
   .roulette-center {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
   }
 
   .roulette-center-text {
-    font-size: 22px;
+    font-size: 28px;
   }
 
   .roulette-pointer {
-    font-size: 35px;
-    top: -18px;
+    font-size: 45px;
+    top: -25px;
   }
 
   .roulette-slot-content {
-    font-size: 10px;
+    font-size: 11px;
   }
 
   .winner-name {
-    font-size: 32px;
+    font-size: 28px;
   }
 
-  .roulette-container {
+  .wheel-column,
+  .control-column > div {
     padding: 20px;
   }
 
   .winner-rank {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+
+  .winner-rank.gold,
+  .winner-rank.silver,
+  .winner-rank.bronze {
     font-size: 20px;
   }
 
   .winner-name-item {
-    font-size: 16px;
+    font-size: 15px;
+  }
+
+  .participants-actions {
+    flex-direction: column;
+  }
+
+  .btn-half {
+    width: 100%;
   }
 }
 
 /* ========================================
    SCROLLBAR STYLING
 ======================================== */
-.participants-list::-webkit-scrollbar {
+.participants-list::-webkit-scrollbar,
+.winners-list::-webkit-scrollbar {
   width: 8px;
 }
 
-.participants-list::-webkit-scrollbar-track {
+.participants-list::-webkit-scrollbar-track,
+.winners-list::-webkit-scrollbar-track {
   background: #e9ecef;
   border-radius: 10px;
 }
 
-.participants-list::-webkit-scrollbar-thumb {
+.participants-list::-webkit-scrollbar-thumb,
+.winners-list::-webkit-scrollbar-thumb {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   border-radius: 10px;
 }
 
-.participants-list::-webkit-scrollbar-thumb:hover {
+.participants-list::-webkit-scrollbar-thumb:hover,
+.winners-list::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(135deg, #e082ea 0%, #e4465b 100%);
 }
