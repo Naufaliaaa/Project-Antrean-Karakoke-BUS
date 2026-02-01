@@ -91,7 +91,22 @@
 - Volume adjustment from admin
 - Connection status monitoring
 
-### 5. 🔐 **Security System**
+### 5. 🎰 **Roulette Arisan (Wheel of Names)**
+- **Real-time Wheel Updates** - Wheel updates automatically as you type names
+- **Continuous Spin Animation** - Wheel spins smoothly while editing
+- **Instant Apply** - Click "Terapkan" to lock entries and stop spinning
+- **Smart Spin Button** - Disabled until "Terapkan" is clicked
+- **Editable Before Apply** - Can modify names before clicking apply
+- **Locked After Apply** - Textarea and apply button disabled after apply
+- **Reset to Start Over** - Use "Reset Semua" button to clear and start fresh
+- **Last Nomination Support** - Can spin until only 1 name remains
+- **Multiple Winners** - Winner list with rankings (Gold, Silver, Bronze)
+- **Confetti Celebration** - Animated confetti when winner is selected
+- **Visual Wheel Center** - White circle center design
+- **Colorful Slices** - Each entry gets a unique color
+- **Keyboard Shortcuts** - ESC to go back, Ctrl+Space to spin
+
+### 6. 🔐 **Security System**
 - **PIN Authentication** - 6-digit PIN untuk akses bus
 - **Password Protection** - Terpisah untuk Admin, Display, dan Camera
 - **Session Management** - Token-based dengan auto-expiry
@@ -152,6 +167,7 @@ karaoke-bus/
 │
 ├── form.html                    # Song request form
 ├── emote.html                   # Standalone emote sender
+├── roulette.html                # Roulette Arisan (Wheel of Names)
 │
 ├── css/
 │   ├── index.css               # Bus selection styles
@@ -164,7 +180,8 @@ karaoke-bus/
 │   ├── camera-login.css        # Camera login styles
 │   ├── video-panel.css         # Video panel styles
 │   ├── form.css                # Request form styles
-│   └── emote.css               # Emote page styles
+│   ├── emote.css               # Emote page styles
+│   └── roulette.css            # Roulette Arisan styles
 │
 ├── js/
 │   ├── firebase.js             # Firebase configuration
@@ -189,7 +206,8 @@ karaoke-bus/
 │   ├── camera-stream.js        # Camera streaming logic
 │   │
 │   ├── form.js                 # Request form logic
-│   └── emote.js                # Emote sender logic
+│   ├── emote.js                # Emote sender logic
+│   └── roulette.js             # Roulette Arisan logic
 │
 ├── img/
 │   ├── hioo.jpeg               # Main logo
