@@ -12,4 +12,7 @@
    - Back button: Positioned at top left corner (outside navbar)
    - Removed: Hero header with title and subtitle
 3. **Reset button**: Changed from "Hapus Semua" to "Reset Semua" with reset.png icon
+4. **Real-time wheel update**:
+   - Wheel updates in real-time as user types in textarea
+   - When Enter is pressed, new entries are added to wheel immediately with colors
 

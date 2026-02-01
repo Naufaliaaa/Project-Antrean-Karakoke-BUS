@@ -342,6 +342,39 @@ async function goBack(e) {
   window.location.href = `bus-menu.html?room=${roomId}`;
 }
 
+// ========= TEXTAREA INPUT - REALTIME UPDATE =========
+function handleTextareaInput() {
+  const text = entriesTextarea.value.trim();
+  const tempEntries = parseEntries(text);
+  entriesCount.textContent = `${tempEntries.length} peserta`;
+  
+  // Update wheel in real-time
+  entries = tempEntries;
+  createWheelSlices();
+  
+  // Enable/disable spin button based on entry count
+  spinButton.disabled = entries.length < 2;
+}
+
+function handleTextareaKeydown(e) {
+  // When Enter is pressed, add to wheel immediately
+  if (e.key === 'Enter') {
+    // Get current cursor position and text
+    const cursorPosition = entriesTextarea.selectionStart;
+    const text = entriesTextarea.value;
+    
+    // Check if Enter was pressed at the end of a line
+    const textBeforeCursor = text.substring(0, cursorPosition);
+    const textAfterCursor = text.substring(entriesTextarea.selectionEnd);
+    
+    // If there's content after the cursor that starts with newline, this is a line completion
+    if (textAfterCursor.startsWith('\n') || textAfterCursor === '') {
+      // Process current entries and update wheel
+      handleTextareaInput();
+    }
+  }
+}
+
 // ========= EVENT LISTENERS =========
 document.addEventListener('DOMContentLoaded', function() {
   // Apply button
@@ -364,13 +397,10 @@ document.addEventListener('DOMContentLoaded', function() {
     backButton.addEventListener('click', goBack);
   }
   
-  // Textarea input
+  // Textarea input - realtime update
   if (entriesTextarea) {
-    entriesTextarea.addEventListener('input', () => {
-      const text = entriesTextarea.value.trim();
-      const tempEntries = parseEntries(text);
-      entriesCount.textContent = `${tempEntries.length} peserta`;
-    });
+    entriesTextarea.addEventListener('input', handleTextareaInput);
+    entriesTextarea.addEventListener('keydown', handleTextareaKeydown);
   }
   
   console.log('✅ Roulette.js loaded (Wheel of Names style)');
