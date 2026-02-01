@@ -9,9 +9,11 @@ const roomId = urlParams.get('room');
 
 // ========= STATE =========
 let entries = [];
+let appliedEntries = []; // Track applied entries
 let currentRotation = 0;
 let isSpinning = false;
 let winners = [];
+let isApplied = false; // Track if entries have been applied
 
 // ========= DOM ELEMENTS =========
 const entriesTextarea = document.getElementById('entries-textarea');
@@ -51,7 +53,8 @@ function parseEntries(text) {
 function updateEntriesCount() {
   const count = entries.length;
   entriesCount.textContent = `${count} peserta`;
-  spinButton.disabled = count < 2;
+  // Enable spin button if entries are applied and have at least 1 entry
+  spinButton.disabled = !isApplied || count < 1;
 }
 
 // ========= CREATE WHEEL SLICES =========
@@ -128,12 +131,19 @@ async function applyEntries() {
   
   const newEntries = parseEntries(text);
   
-  if (newEntries.length < 2) {
-    await customWarning('Minimal perlu ada 2 peserta untuk roulette!', 'Peserta Kurang');
+  if (newEntries.length < 1) {
+    await customWarning('Minimal perlu ada 1 peserta untuk roulette!', 'Peserta Kurang');
     return;
   }
   
   entries = newEntries;
+  appliedEntries = [...entries]; // Store applied entries
+  isApplied = true; // Mark as applied
+  
+  // Disable textarea after apply
+  entriesTextarea.disabled = true;
+  applyButton.disabled = true;
+  
   updateEntriesCount();
   createWheelSlices();
   
@@ -159,8 +169,14 @@ async function clearAll() {
   if (!result) return;
   
   entries = [];
+  appliedEntries = [];
   winners = [];
+  isApplied = false;
+  
   entriesTextarea.value = '';
+  entriesTextarea.disabled = false;
+  applyButton.disabled = false;
+  
   updateEntriesCount();
   wheelSlices.innerHTML = '';
   winnerAnnouncement.style.display = 'none';
@@ -173,7 +189,7 @@ async function clearAll() {
 
 // ========= SPIN WHEEL =========
 async function spinWheel() {
-  if (isSpinning || entries.length < 2) return;
+  if (isSpinning || entries.length < 1) return;
   
   isSpinning = true;
   spinButton.disabled = true;
@@ -246,22 +262,32 @@ async function finishSpin(winner) {
     entries = entries.filter(e => e !== winner);
     updateEntriesCount();
     
-    // Update textarea
+    // Update textarea with remaining entries
     entriesTextarea.value = entries.join('\n');
     
     // Recreate wheel
     createWheelSlices();
     
-    if (entries.length < 2) {
+    if (entries.length === 1) {
+      // Last winner - show special message and allow spinning
+      await customSuccess(`${entries[0]} adalah nominasi terakhir!`, {
+        title: '🎯 Nominasi Terakhir',
+        icon: '🏁'
+      });
+      // Button stays enabled for the last spin
+    } else if (entries.length < 1) {
+      // All winners selected
       await customSuccess('Semua pemenang telah terpilih!', {
         title: '✅ Selesai',
         icon: '🏁'
       });
+      spinButton.disabled = true;
     }
   }
   
   isSpinning = false;
-  spinButton.disabled = entries.length < 2;
+  // Enable spin button if entries are applied and have at least 1 entry
+  spinButton.disabled = !isApplied || entries.length < 1;
 }
 
 // ========= UPDATE WINNERS LIST =========
@@ -344,6 +370,9 @@ async function goBack(e) {
 
 // ========= TEXTAREA INPUT - REALTIME UPDATE =========
 function handleTextareaInput() {
+  // Only allow input if not yet applied
+  if (isApplied) return;
+  
   const text = entriesTextarea.value.trim();
   const tempEntries = parseEntries(text);
   entriesCount.textContent = `${tempEntries.length} peserta`;
@@ -351,27 +380,15 @@ function handleTextareaInput() {
   // Update wheel in real-time
   entries = tempEntries;
   createWheelSlices();
-  
-  // Enable/disable spin button based on entry count
-  spinButton.disabled = entries.length < 2;
 }
 
 function handleTextareaKeydown(e) {
+  // Only allow Enter if not yet applied
+  if (isApplied) return;
+  
   // When Enter is pressed, add to wheel immediately
   if (e.key === 'Enter') {
-    // Get current cursor position and text
-    const cursorPosition = entriesTextarea.selectionStart;
-    const text = entriesTextarea.value;
-    
-    // Check if Enter was pressed at the end of a line
-    const textBeforeCursor = text.substring(0, cursorPosition);
-    const textAfterCursor = text.substring(entriesTextarea.selectionEnd);
-    
-    // If there's content after the cursor that starts with newline, this is a line completion
-    if (textAfterCursor.startsWith('\n') || textAfterCursor === '') {
-      // Process current entries and update wheel
-      handleTextareaInput();
-    }
+    handleTextareaInput();
   }
 }
 
@@ -397,7 +414,7 @@ document.addEventListener('DOMContentLoaded', function() {
     backButton.addEventListener('click', goBack);
   }
   
-  // Textarea input - realtime update
+  // Textarea input - realtime update (only before apply)
   if (entriesTextarea) {
     entriesTextarea.addEventListener('input', handleTextareaInput);
     entriesTextarea.addEventListener('keydown', handleTextareaKeydown);
@@ -417,7 +434,7 @@ document.addEventListener('keydown', function(e) {
   }
   
   // Space or Enter to spin
-  if ((e.key === ' ' || e.key === 'Enter') && e.ctrlKey && entries.length >= 2 && !isSpinning) {
+  if ((e.key === ' ' || e.key === 'Enter') && e.ctrlKey && entries.length >= 1 && !isSpinning && isApplied) {
     e.preventDefault();
     spinWheel();
   }
@@ -431,3 +448,4 @@ if (typeof module !== 'undefined' && module.exports) {
     clearAll
   };
 }
+

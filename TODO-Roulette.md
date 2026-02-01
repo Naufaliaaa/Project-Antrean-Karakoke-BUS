@@ -15,4 +15,9 @@
 4. **Real-time wheel update**:
    - Wheel updates in real-time as user types in textarea
    - When Enter is pressed, new entries are added to wheel immediately with colors
+5. **Spin button logic**:
+   - Button is disabled until "Terapkan" is clicked
+   - After apply, textarea is locked (cannot edit names)
+   - Can spin until only 1 name remains (last nomination can still spin)
+   - Use "Reset Semua" to clear and start over
 
