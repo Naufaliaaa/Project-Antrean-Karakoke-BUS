@@ -120,6 +120,19 @@ function createWheelSlices() {
   });
 }
 
+// ========= START CONTINUOUS SPIN (While Editing) =========
+function startContinuousSpin() {
+  wheelSvg.classList.add('continuous-spin');
+}
+
+// ========= STOP CONTINUOUS SPIN (When Applied) =========
+function stopContinuousSpin() {
+  wheelSvg.classList.remove('continuous-spin');
+  // Reset rotation to 0 for clean start
+  wheelSvg.style.transform = 'rotate(0deg)';
+  currentRotation = 0;
+}
+
 // ========= APPLY ENTRIES =========
 async function applyEntries() {
   const text = entriesTextarea.value.trim();
@@ -139,6 +152,9 @@ async function applyEntries() {
   entries = newEntries;
   appliedEntries = [...entries]; // Store applied entries
   isApplied = true; // Mark as applied
+  
+  // Stop continuous spin when applied
+  stopContinuousSpin();
   
   // Disable textarea after apply
   entriesTextarea.disabled = true;
@@ -380,6 +396,9 @@ function handleTextareaInput() {
   // Update wheel in real-time
   entries = tempEntries;
   createWheelSlices();
+  
+  // Start continuous spin while editing
+  startContinuousSpin();
 }
 
 function handleTextareaKeydown(e) {

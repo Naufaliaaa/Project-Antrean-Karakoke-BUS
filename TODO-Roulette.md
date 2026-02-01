@@ -20,4 +20,8 @@
    - After apply, textarea is locked (cannot edit names)
    - Can spin until only 1 name remains (last nomination can still spin)
    - Use "Reset Semua" to clear and start over
+6. **Continuous spin animation**:
+   - Wheel spins continuously while editing (smooth animation)
+   - Stops immediately when "Terapkan" is clicked
+   - Uses CSS animation for smooth spinning
 

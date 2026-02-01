@@ -149,6 +149,20 @@ body {
   transition: none;
 }
 
+/* Continuous spin animation while editing */
+.wheel-svg.continuous-spin {
+  animation: continuousSpin 8s linear infinite;
+}
+
+@keyframes continuousSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Wheel Slices */
 .wheel-slice {
   cursor: pointer;
