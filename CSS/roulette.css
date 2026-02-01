@@ -1,6 +1,6 @@
 /* ========================================
-   ROULETTE.CSS - Roulette Feature for Arisan
-   Beautiful pink/purple gradient theme
+   ROULETTE.CSS - Wheel of Names Style
+   Modern, clean design
 ======================================== */
 
 * {
@@ -10,11 +10,640 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  background: #f5f5f7;
-  color: #1d1d1f;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Helvetica', 'Arial', sans-serif;
+  background: #f5f7fa;
+  color: #2c3e50;
   min-height: 100vh;
 }
+
+/* ========================================
+   TOP NAVBAR
+======================================== */
+.top-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+}
+
+.navbar-logo {
+  height: 40px;
+  width: auto;
+}
+
+/* ========================================
+   HERO HEADER
+======================================== */
+.hero-header {
+  margin-top: 70px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 20px;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(-3px);
+}
+
+.back-icon {
+  font-size: 18px;
+}
+
+.hero-title {
+  font-size: 42px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+}
+
+/* ========================================
+   MAIN CONTENT
+======================================== */
+.main-content {
+  padding: 40px 20px;
+  min-height: calc(100vh - 200px);
+}
+
+.wheel-container-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ========================================
+   WHEEL SECTION
+======================================== */
+.wheel-section {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 90px;
+}
+
+.wheel-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1;
+  margin-bottom: 30px;
+}
+
+/* Triangle Pointer */
+.wheel-pointer {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 35px solid #e74c3c;
+  z-index: 100;
+  filter: drop-shadow(0 4px 8px rgba(231, 76, 60, 0.5));
+}
+
+/* SVG Wheel */
+.wheel-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.15));
+  transition: transform 0.05s ease-out;
+}
+
+.wheel-svg.spinning {
+  transition: none;
+}
+
+/* Wheel Slices */
+.wheel-slice {
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.wheel-slice:hover {
+  opacity: 0.9;
+}
+
+.slice-text {
+  font-size: 18px;
+  font-weight: 700;
+  fill: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  text-anchor: middle;
+}
+
+/* ========================================
+   SPIN BUTTON
+======================================== */
+.spin-button {
+  width: 100%;
+  max-width: 300px;
+  padding: 18px 40px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.spin-button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.spin-button:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.spin-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.spin-icon {
+  font-size: 24px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* ========================================
+   WINNER ANNOUNCEMENT
+======================================== */
+.winner-announcement {
+  margin-top: 30px;
+  padding: 25px 30px;
+  background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  box-shadow: 0 4px 15px rgba(253, 203, 110, 0.4);
+  animation: slideDown 0.5s ease;
+  width: 100%;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.winner-confetti {
+  font-size: 32px;
+  animation: rotate 1s ease-in-out;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.winner-text {
+  font-size: 28px;
+  font-weight: 800;
+  color: #2c3e50;
+  text-align: center;
+}
+
+/* ========================================
+   ENTRIES SECTION
+======================================== */
+.entries-section {
+  background: white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+}
+
+.entries-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.entries-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.entries-count {
+  font-size: 14px;
+  color: #7f8c8d;
+  background: #ecf0f1;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.entries-input-wrapper {
+  margin-bottom: 20px;
+}
+
+.entries-textarea {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+  resize: vertical;
+  transition: all 0.3s ease;
+  background: #fafafa;
+  line-height: 1.6;
+}
+
+.entries-textarea:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.entries-textarea::placeholder {
+  color: #bdc3c7;
+}
+
+/* ========================================
+   ACTION BUTTONS
+======================================== */
+.entries-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.action-button {
+  flex: 1;
+  padding: 14px 24px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.action-button:hover {
+  background: #5568d3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.action-button.secondary {
+  background: #95a5a6;
+}
+
+.action-button.secondary:hover {
+  background: #7f8c8d;
+}
+
+/* ========================================
+   WINNERS SECTION
+======================================== */
+.winners-section {
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 2px solid #ecf0f1;
+}
+
+.winners-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.winners-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.winner-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  animation: fadeIn 0.4s ease;
+  transition: transform 0.2s;
+}
+
+.winner-item:hover {
+  transform: translateX(5px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.winner-rank {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.winner-rank.gold {
+  background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
+  font-size: 18px;
+}
+
+.winner-rank.silver {
+  background: linear-gradient(135deg, #95a5a6 0%, #bdc3c7 100%);
+  font-size: 18px;
+}
+
+.winner-rank.bronze {
+  background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);
+  font-size: 18px;
+}
+
+.winner-name-item {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* ========================================
+   OPTIONS SECTION
+======================================== */
+.options-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 2px solid #ecf0f1;
+}
+
+.option-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.option-checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: #667eea;
+}
+
+.option-checkbox span {
+  font-size: 15px;
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+/* ========================================
+   CONFETTI ANIMATION
+======================================== */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: #f1c40f;
+  top: -20px;
+  z-index: 10000;
+  animation: confettiFall 4s linear forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ========================================
+   SCROLLBAR
+======================================== */
+.winners-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.winners-list::-webkit-scrollbar-track {
+  background: #ecf0f1;
+  border-radius: 10px;
+}
+
+.winners-list::-webkit-scrollbar-thumb {
+  background: #667eea;
+  border-radius: 10px;
+}
+
+.winners-list::-webkit-scrollbar-thumb:hover {
+  background: #5568d3;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+======================================== */
+@media (max-width: 1024px) {
+  .wheel-container-wrapper {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .wheel-section {
+    position: relative;
+    top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-navbar {
+    height: 60px;
+  }
+
+  .navbar-logo {
+    height: 35px;
+  }
+
+  .hero-header {
+    margin-top: 60px;
+    padding: 30px 20px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+  }
+
+  .main-content {
+    padding: 25px 15px;
+  }
+
+  .wheel-section,
+  .entries-section {
+    padding: 25px 20px;
+  }
+
+  .wheel-wrapper {
+    max-width: 400px;
+  }
+
+  .spin-button {
+    font-size: 18px;
+    padding: 16px 32px;
+  }
+
+  .winner-text {
+    font-size: 22px;
+  }
+
+  .entries-title {
+    font-size: 20px;
+  }
+
+  .entries-textarea {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 26px;
+  }
+
+  .wheel-wrapper {
+    max-width: 320px;
+  }
+
+  .wheel-pointer {
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 28px solid #e74c3c;
+  }
+
+  .spin-button {
+    font-size: 16px;
+    padding: 14px 28px;
+  }
+
+  .winner-confetti {
+    font-size: 24px;
+  }
+
+  .winner-text {
+    font-size: 18px;
+  }
+
+  .entries-actions {
+    flex-direction: column;
+  }
+
+  .action-button {
+    width: 100%;
+  }
+}
+
 
 /* ========================================
    TOP NAVBAR

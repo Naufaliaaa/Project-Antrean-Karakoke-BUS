@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Favicon (dengan version parameter untuk bypass cache) -->
     <link rel="icon" type="image/jpeg" href="img/logbro.jpeg?v=2">
     <link rel="apple-touch-icon" href="img/logbro.jpeg?v=2">
     <title>Roulette Arisan - Karaoke Bus</title>
@@ -23,84 +22,79 @@
                 <span>Kembali ke Menu</span>
             </div>
             <h1 class="hero-title">Roulette Arisan</h1>
-            <p class="hero-subtitle">Pilih nama secara acak untuk arisan</p>
+            <p class="hero-subtitle">Pilih pemenang secara acak dengan memutar roda</p>
         </div>
     </header>
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-        <div class="container">
-            <!-- TWO COLUMN LAYOUT -->
-            <div class="roulette-layout">
+        <div class="wheel-container-wrapper">
+            <!-- LEFT SIDE: WHEEL -->
+            <div class="wheel-section">
+                <div class="wheel-wrapper">
+                    <!-- Triangle Pointer -->
+                    <div class="wheel-pointer"></div>
+                    
+                    <!-- SVG Wheel -->
+                    <svg id="wheel-svg" class="wheel-svg" viewBox="0 0 500 500">
+                        <g id="wheel-slices"></g>
+                        <circle cx="250" cy="250" r="50" fill="white" stroke="#ddd" stroke-width="3"/>
+                        <text x="250" y="265" text-anchor="middle" font-size="30" fill="#666">🎯</text>
+                    </svg>
+                </div>
                 
-                <!-- LEFT COLUMN: WHEEL -->
-                <div class="wheel-column">
-                    <div class="roulette-wheel-container">
-                        <div class="roulette-pointer">▼</div>
-                        <div class="roulette-wheel" id="roulette-wheel">
-                            <div class="roulette-center">
-                                <span class="roulette-center-text">🎯</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- WINNER DISPLAY -->
-                    <div class="winner-display" id="winner-display" style="display: none;">
-                        <div class="winner-icon">🎊</div>
-                        <div class="winner-name" id="winner-name">?</div>
-                        <div class="winner-label">PEMENANG</div>
-                    </div>
+                <!-- Spin Button -->
+                <button class="spin-button" id="spin-button" disabled>
+                    <span class="spin-icon">▶</span>
+                    <span>PUTAR</span>
+                </button>
+
+                <!-- Winner Display -->
+                <div class="winner-announcement" id="winner-announcement" style="display: none;">
+                    <div class="winner-confetti">🎉</div>
+                    <div class="winner-text" id="winner-text">Pemenang</div>
+                    <div class="winner-confetti">🎊</div>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE: ENTRIES -->
+            <div class="entries-section">
+                <div class="entries-header">
+                    <h2 class="entries-title">Daftar Peserta</h2>
+                    <div class="entries-count" id="entries-count">0 peserta</div>
                 </div>
 
-                <!-- RIGHT COLUMN: INPUT & RESULTS -->
-                <div class="control-column">
-                    
-                    <!-- INPUT SECTION -->
-                    <div class="input-section" id="input-section">
-                        <h3 class="section-title">📝 Masukkan Nama Peserta</h3>
-                        <p class="section-subtitle">Pisahkan dengan koma atau enter</p>
-                        <textarea 
-                            id="names-input" 
-                            class="names-input" 
-                            placeholder="Contoh:&#10;Fabio&#10;Eric&#10;Charles&#10;Gabriel&#10;Diya&#10;Beatriz&#10;Ali"
-                            rows="8"
-                        ></textarea>
-                        <div class="input-actions">
-                            <button class="btn btn-primary btn-block" id="start-roulette-btn">
-                                <span class="btn-icon">🎰</span>
-                                <span>Mulai Roulette</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- WINNERS LIST -->
-                    <div class="winners-list-container" id="winners-list-container" style="display: none;">
-                        <h3 class="section-title">🏆 Urutan Pemenang</h3>
-                        <div class="winners-list" id="winners-list">
-                            <!-- Winners akan di-generate via JS -->
-                        </div>
-                    </div>
-
-                    <!-- PARTICIPANTS LIST -->
-                    <div class="participants-section" id="participants-section" style="display: none;">
-                        <h3 class="section-title">👥 Peserta Tersisa (<span id="participant-count">0</span>)</h3>
-                        <div class="participants-list" id="participants-list">
-                            <!-- Participants akan di-generate via JS -->
-                        </div>
-                        <div class="participants-actions">
-                            <button class="btn btn-secondary btn-half" id="reset-btn">
-                                <span class="btn-icon">🔄</span>
-                                <span>Reset</span>
-                            </button>
-                            <button class="btn btn-primary btn-half" id="spin-btn" disabled>
-                                <span class="btn-icon">🎲</span>
-                                <span>PUTAR</span>
-                            </button>
-                        </div>
-                    </div>
-
+                <div class="entries-input-wrapper">
+                    <textarea 
+                        id="entries-textarea" 
+                        class="entries-textarea"
+                        placeholder="Masukkan nama peserta (satu per baris)&#10;&#10;Contoh:&#10;Fabio&#10;Eric&#10;Charles&#10;Gabriel&#10;Diya&#10;Beatriz&#10;Ali"
+                        rows="15"
+                    ></textarea>
                 </div>
 
+                <div class="entries-actions">
+                    <button class="action-button" id="apply-button">
+                        <span>✓</span> Terapkan
+                    </button>
+                    <button class="action-button secondary" id="clear-button">
+                        <span>×</span> Hapus Semua
+                    </button>
+                </div>
+
+                <!-- Winners List -->
+                <div class="winners-section" id="winners-section" style="display: none;">
+                    <h3 class="winners-title">🏆 Urutan Pemenang</h3>
+                    <div class="winners-list" id="winners-list"></div>
+                </div>
+
+                <!-- Options -->
+                <div class="options-section">
+                    <label class="option-checkbox">
+                        <input type="checkbox" id="remove-winner-checkbox" checked>
+                        <span>Hapus pemenang dari roda</span>
+                    </label>
+                </div>
             </div>
         </div>
     </main>
