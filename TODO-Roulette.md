@@ -1,27 +1,15 @@
-# TODO - Roulette Feature untuk Arisan
+# TODO - Roulette Updates
 
-## Files Baru
-- [x] roulette.html - Halaman utama roulette
-- [x] JS/roulette.js - Logika roulette (input nama, spin, random)
-- [x] CSS/roulette.css - Styling halaman roulette
-- [x] img/roulette.svg - Ikon roulette
+## Task: Update Roulette UI
+- [x] Update roulette.html - navbar with back button left, logo center; remove hero header
+- [x] Update CSS/roulette.css - navbar styles and center circle styles
+- [x] Update JS/roulette.js - change center emoji to empty (handled in HTML)
 
-## Files yang Diedit
-- [x] bus-menu.html - Tambah menu card "Roulette Arisan"
-- [x] JS/bus-menu.js - Tambah fungsi navigasi ke roulette
-- [x] CSS/bus-menu.css - Tambah styling menu card baru
-
-## Fitur
-- [x] Modal input untuk masukkan nama-nama
-- [x] Tampilan roulet visual dengan animasi spin
-- [x] Random selection dengan efek visual
-- [x] Tampilkan nama pemenang dengan celebration
-
-## Progress
-- [x] Step 1: Buat file roulette.html, roulette.js, roulette.css
-- [x] Step 2: Update bus-menu.html dengan menu card baru
-- [x] Step 3: Update bus-menu.js dengan fungsi navigasi
-- [x] Step 4: Update bus-menu.css dengan styling menu card
-
-## Status: SELESAI ✅
+## Changes Summary:
+1. **Emote di tengah roda**: Changed to white circle (white background with gray border)
+2. **Header simplification**:
+   - Navbar: Logo centered
+   - Back button: Positioned at top left corner (outside navbar)
+   - Removed: Hero header with title and subtitle
+3. **Reset button**: Changed from "Hapus Semua" to "Reset Semua" with reset.png icon
 

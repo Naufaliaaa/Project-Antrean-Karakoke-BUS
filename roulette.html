@@ -13,18 +13,12 @@
     <nav class="top-navbar">
         <img src="img/hioo.jpeg" alt="Hioo Logo" class="navbar-logo">
     </nav>
-
-    <!-- HERO HEADER -->
-    <header class="hero-header">
-        <div class="hero-content">
-            <div class="back-button" id="back-button">
-                <span class="back-icon">←</span>
-                <span>Kembali ke Menu</span>
-            </div>
-            <h1 class="hero-title">Roulette Arisan</h1>
-            <p class="hero-subtitle">Pilih pemenang secara acak dengan memutar roda</p>
-        </div>
-    </header>
+    
+    <!-- BACK BUTTON (Outside Navbar - Top Left) -->
+    <div class="back-button" id="back-button">
+        <span class="back-icon">←</span>
+        <span>Kembali</span>
+    </div>
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
@@ -39,7 +33,6 @@
                     <svg id="wheel-svg" class="wheel-svg" viewBox="0 0 500 500">
                         <g id="wheel-slices"></g>
                         <circle cx="250" cy="250" r="50" fill="white" stroke="#ddd" stroke-width="3"/>
-                        <text x="250" y="265" text-anchor="middle" font-size="30" fill="#666">🎯</text>
                     </svg>
                 </div>
                 
@@ -78,7 +71,7 @@
                         <span>✓</span> Terapkan
                     </button>
                     <button class="action-button secondary" id="clear-button">
-                        <span>×</span> Hapus Semua
+                        <span><img src="img/reset.png" alt="reset" style="width:16px;height:16px;vertical-align:middle;"></span> Reset Semua
                     </button>
                 </div>
 
