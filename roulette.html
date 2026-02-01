@@ -1,101 +1,110 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Favicon (dengan version parameter untuk bypass cache) -->
-<link rel="icon" type="image/jpeg" href="img/logbro.jpeg?v=2">
-<link="apple-touch-icon" href="img/logbro.jpeg?v=2">
-<title>Roulette Arisan - Karaoke Bus</title>
-<link rel="stylesheet" href="css/roulette.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon (dengan version parameter untuk bypass cache) -->
+    <link rel="icon" type="image/jpeg" href="img/logbro.jpeg?v=2">
+    <link rel="apple-touch-icon" href="img/logbro.jpeg?v=2">
+    <title>Roulette Arisan - Karaoke Bus</title>
+    <link rel="stylesheet" href="css/roulette.css">
 </head>
 <body>
-<!-- NAVBAR -->
-<nav class="top-navbar">
-<img src="img/hioo.jpeg" alt="Hioo Logo" class="navbar-logo">
-</nav>
+    <!-- NAVBAR -->
+    <nav class="top-navbar">
+        <img src="img/hioo.jpeg" alt="Hioo Logo" class="navbar-logo">
+    </nav>
 
-<!-- HERO HEADER -->
-<header class="hero-header">
-<div class="hero-content">
-<div class="back-button" id="back-button">
-<span class="back-icon">←</span>
-<span>Kembali ke Menu</span>
-</div>
-<h1 class="hero-title">Roulette Arisan</h1>
-<p class="hero-subtitle">Pilih nama secara acak untuk arisan</p>
-</div>
-</header>
+    <!-- HERO HEADER -->
+    <header class="hero-header">
+        <div class="hero-content">
+            <div class="back-button" id="back-button">
+                <span class="back-icon">←</span>
+                <span>Kembali ke Menu</span>
+            </div>
+            <h1 class="hero-title">Roulette Arisan</h1>
+            <p class="hero-subtitle">Pilih nama secara acak untuk arisan</p>
+        </div>
+    </header>
 
-<!-- MAIN CONTENT -->
-<main class="main-content">
-<div class="container">
-<!-- ROULETTE CONTAINER -->
-<div class="roulette-container">
-<!-- ROULETTE WHEEL -->
-<div class="roulette-wheel-container">
-<div class="roulette-wheel" id="roulette-wheel">
-<div class="roulette-center">
-<span class="roulette-center-text">🎯</span>
-</div>
-<!-- Name slots akan di-generate via JS -->
-</div>
-<!-- POINTER -->
-<div class="roulette-pointer">▼</div>
-</div>
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <div class="container">
+            <!-- ROULETTE CONTAINER -->
+            <div class="roulette-container">
+                
+                <!-- ROULETTE WHEEL -->
+                <div class="roulette-wheel-container">
+                    <div class="roulette-pointer">▼</div>
+                    <div class="roulette-wheel" id="roulette-wheel">
+                        <div class="roulette-center">
+                            <span class="roulette-center-text">🎯</span>
+                        </div>
+                        <!-- Name slots akan di-generate via JS -->
+                    </div>
+                </div>
 
-<!-- DISPLAY NAMA PEMENANG -->
-<div class="winner-display" id="winner-display">
-<div class="winner-name" id="winner-name">?</div>
-<div class="winner-label">PEMENANG ARISAN</div>
-</div>
+                <!-- DISPLAY NAMA PEMENANG -->
+                <div class="winner-display" id="winner-display" style="display: none;">
+                    <div class="winner-name" id="winner-name">?</div>
+                    <div class="winner-label">PEMENANG</div>
+                </div>
 
-<!-- INPUT SECTION -->
-<div class="input-section" id="input-section">
-<h3 class="section-title">📝 Masukkan Nama Peserta</h3>
-<p class="section-subtitle">Pisahkan nama dengan koma atau satu nama per baris</p>
-<textarea 
-id="names-input" 
-class="names-input" 
-placeholder="Contoh:&#10;Ibu Sari,&#10;Ibu Dewi,&#10;Ibu Rita,&#10;Ibu Luna,&#10;Ibu Maya"
-rows="6"
-></textarea>
-<div class="input-actions">
-<button class="btn btn-secondary" id="add-names-btn">
-<span class="btn-icon">➕</span>
-<span>Mulai Roulette</span>
-</button>
-</div>
-</div>
+                <!-- WINNERS LIST -->
+                <div class="winners-list-container" id="winners-list-container" style="display: none;">
+                    <h3 class="section-title">🏆 Urutan Pemenang</h3>
+                    <div class="winners-list" id="winners-list">
+                        <!-- Winners akan di-generate via JS -->
+                    </div>
+                </div>
 
-<!-- PARTICIPANTS LIST -->
-<div class="participants-section" id="participants-section" style="display: none;">
-<h3 class="section-title">👥 Peserta Arisan (<span id="participant-count">0</span>)</h3>
-<div class="participants-list" id="participants-list">
-<!-- Participants akan di-generate via JS -->
-</div>
-<div class="participants-actions">
-<button class="btn btn-secondary" id="reset-btn">
-<span class="btn-icon">🔄</span>
-<span>Ulangi</span>
-</button>
-<button class="btn btn-primary" id="spin-btn" disabled>
-<span class="btn-icon">🎰</span>
-<span>PUTAR ROULETTE</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-</main>
+                <!-- INPUT SECTION -->
+                <div class="input-section" id="input-section">
+                    <h3 class="section-title">📝 Masukkan Nama Peserta</h3>
+                    <p class="section-subtitle">Pisahkan nama dengan koma atau satu nama per baris</p>
+                    <textarea 
+                        id="names-input" 
+                        class="names-input" 
+                        placeholder="Contoh:&#10;Ibu Sari,&#10;Ibu Dewi,&#10;Ibu Rita,&#10;Ibu Luna,&#10;Ibu Maya"
+                        rows="6"
+                    ></textarea>
+                    <div class="input-actions">
+                        <button class="btn btn-primary" id="start-roulette-btn">
+                            <span class="btn-icon">🎰</span>
+                            <span>Mulai Roulette</span>
+                        </button>
+                    </div>
+                </div>
 
-<!-- Custom Modal -->
-<script src="js/custom-modal.js"></script>
-<!-- Firebase -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script src="js/firebase.js"></script>
-<script src="js/room.js"></script>
-<script src="js/roulette.js"></script>
+                <!-- PARTICIPANTS LIST -->
+                <div class="participants-section" id="participants-section" style="display: none;">
+                    <h3 class="section-title">👥 Peserta Tersisa (<span id="participant-count">0</span>)</h3>
+                    <div class="participants-list" id="participants-list">
+                        <!-- Participants akan di-generate via JS -->
+                    </div>
+                    <div class="participants-actions">
+                        <button class="btn btn-secondary" id="reset-btn">
+                            <span class="btn-icon">🔄</span>
+                            <span>Reset Semua</span>
+                        </button>
+                        <button class="btn btn-primary" id="spin-btn" disabled>
+                            <span class="btn-icon">🎲</span>
+                            <span>PUTAR ROULETTE</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Custom Modal -->
+    <script src="js/custom-modal.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/room.js"></script>
+    <script src="js/roulette.js"></script>
 </body>
 </html>

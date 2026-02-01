@@ -127,7 +127,7 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -158,24 +158,37 @@ body {
 ======================================== */
 .roulette-wheel-container {
   position: relative;
-  width: 300px;
-  height: 300px;
-  margin: 0 auto 30px;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto 40px;
 }
 
 .roulette-wheel {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   position: relative;
   box-shadow: 
-    0 0 0 8px white,
-    0 0 0 12px #f093fb,
-    0 0 0 16px white,
-    0 10px 40px rgba(240, 147, 251, 0.4);
-  transition: transform 0.1s ease-out;
+    0 0 0 12px white,
+    0 0 0 16px rgba(0, 0, 0, 0.1),
+    0 10px 50px rgba(0, 0, 0, 0.2);
+  animation: continuousSpin 8s linear infinite;
   overflow: hidden;
+}
+
+/* Continuous spinning animation */
+@keyframes continuousSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Spin for winner selection */
+.roulette-wheel.selecting {
+  animation: none;
 }
 
 .roulette-center {
@@ -183,39 +196,40 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   background: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   z-index: 10;
+  border: 4px solid #f5f5f7;
 }
 
 .roulette-center-text {
-  font-size: 28px;
+  font-size: 32px;
 }
 
 .roulette-pointer {
   position: absolute;
-  top: -20px;
+  top: -25px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 40px;
+  font-size: 50px;
   color: #f5576c;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 4px 12px rgba(245, 87, 108, 0.5));
   z-index: 20;
-  animation: bounce 1s ease-in-out infinite;
+  animation: pointerBounce 1.5s ease-in-out infinite;
 }
 
-@keyframes bounce {
+@keyframes pointerBounce {
   0%, 100% {
     transform: translateX(-50%) translateY(0);
   }
   50% {
-    transform: translateX(-50%) translateY(-10px);
+    transform: translateX(-50%) translateY(-8px);
   }
 }
 
@@ -228,24 +242,29 @@ body {
   top: 0;
   transform-origin: 0% 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   overflow: hidden;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
-.roulette-slot span {
+.roulette-slot-content {
   position: absolute;
-  left: -100%;
-  width: 200%;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 600;
-  color: white;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  top: 30%;
+  left: 20%;
   transform: rotate(90deg);
+  transform-origin: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+  text-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    0 0 10px rgba(0, 0, 0, 0.2);
   white-space: nowrap;
+  max-width: 120px;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 0.5px;
 }
 
 /* ========================================
@@ -253,39 +272,134 @@ body {
 ======================================== */
 .winner-display {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   padding: 30px;
   background: linear-gradient(135deg, #fff9e6 0%, #fff3cd 100%);
-  border-radius: 16px;
-  border: 3px solid #ffc107;
-  box-shadow: 0 4px 20px rgba(255, 193, 7, 0.3);
+  border-radius: 20px;
+  border: 4px solid #ffc107;
+  box-shadow: 
+    0 8px 30px rgba(255, 193, 7, 0.4),
+    inset 0 2px 10px rgba(255, 193, 7, 0.1);
+  animation: winnerAppear 0.6s ease;
+}
+
+@keyframes winnerAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+  60% {
+    transform: scale(1.05) translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .winner-name {
-  font-size: 48px;
-  font-weight: 800;
+  font-size: 52px;
+  font-weight: 900;
   color: #f5576c;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   letter-spacing: -1px;
-  text-shadow: 0 2px 10px rgba(245, 87, 108, 0.3);
-  animation: pulse 2s ease-in-out infinite;
+  text-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+  animation: winnerPulse 2s ease-in-out infinite;
 }
 
-@keyframes pulse {
+@keyframes winnerPulse {
   0%, 100% {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.02);
+    transform: scale(1.05);
   }
 }
 
 .winner-label {
-  font-size: 14px;
+  font-size: 16px;
   color: #856404;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+}
+
+/* ========================================
+   WINNERS LIST
+======================================== */
+.winners-list-container {
+  margin-bottom: 30px;
+  animation: fadeIn 0.5s ease;
+}
+
+.winners-list {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 16px;
+  padding: 20px;
+  margin-top: 15px;
+}
+
+.winner-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  animation: slideIn 0.4s ease backwards;
+}
+
+.winner-item:last-child {
+  margin-bottom: 0;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.winner-rank {
+  font-size: 24px;
+  font-weight: 800;
+  color: white;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(245, 87, 108, 0.4);
+}
+
+.winner-rank.gold {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  color: #856404;
+}
+
+.winner-rank.silver {
+  background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+  color: #495057;
+}
+
+.winner-rank.bronze {
+  background: linear-gradient(135deg, #cd7f32 0%, #d4a574 100%);
+  color: white;
+}
+
+.winner-name-item {
+  flex: 1;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1d1d1f;
 }
 
 /* ========================================
@@ -327,6 +441,12 @@ body {
   box-shadow: 0 0 0 4px rgba(245, 87, 108, 0.1);
 }
 
+.names-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #e9ecef;
+}
+
 .names-input::placeholder {
   color: #adb5bd;
 }
@@ -334,7 +454,7 @@ body {
 .input-actions {
   margin-top: 20px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 /* ========================================
@@ -398,9 +518,9 @@ body {
   flex-wrap: wrap;
   gap: 12px;
   margin: 20px 0;
-  max-height: 200px;
+  max-height: 250px;
   overflow-y: auto;
-  padding: 10px;
+  padding: 15px;
   background: #f5f5f7;
   border-radius: 12px;
 }
@@ -409,13 +529,14 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 16px;
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  padding: 12px 18px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border-radius: 25px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   animation: popIn 0.3s ease backwards;
+  box-shadow: 0 3px 10px rgba(102, 126, 234, 0.3);
 }
 
 @keyframes popIn {
@@ -429,44 +550,6 @@ body {
   }
 }
 
-.participant-tag.winner {
-  background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
-  font-size: 18px;
-  padding: 14px 24px;
-  animation: celebrate 0.6s ease;
-}
-
-@keyframes celebrate {
-  0% {
-    transform: scale(0.5);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.participant-remove {
-  background: rgba(255, 255, 255, 0.3);
-  border: none;
-  color: white;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  transition: background 0.2s;
-}
-
-.participant-remove:hover {
-  background: rgba(255, 255, 255, 0.5);
-}
-
 .participants-actions {
   display: flex;
   gap: 15px;
@@ -475,30 +558,14 @@ body {
 }
 
 /* ========================================
-   SPINNING STATE
-======================================== */
-.roulette-wheel.spinning {
-  animation: spin 0.5s linear infinite;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ========================================
    CONFETTI CELEBRATION
 ======================================== */
 .confetti {
   position: fixed;
-  width: 10px;
-  height: 10px;
-  top: -10px;
-  animation: confettiFall 3s ease-out forwards;
+  width: 12px;
+  height: 12px;
+  top: -20px;
+  animation: confettiFall 4s ease-out forwards;
   z-index: 10000;
 }
 
@@ -553,8 +620,8 @@ body {
   }
 
   .roulette-wheel-container {
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
   }
 
   .roulette-center {
@@ -563,11 +630,16 @@ body {
   }
 
   .roulette-center-text {
-    font-size: 24px;
+    font-size: 26px;
   }
 
   .roulette-pointer {
-    font-size: 32px;
+    font-size: 40px;
+    top: -20px;
+  }
+
+  .roulette-slot-content {
+    font-size: 11px;
   }
 
   .winner-display {
@@ -575,7 +647,7 @@ body {
   }
 
   .winner-name {
-    font-size: 36px;
+    font-size: 40px;
   }
 
   .section-title {
@@ -607,8 +679,8 @@ body {
   }
 
   .roulette-wheel-container {
-    width: 200px;
-    height: 200px;
+    width: 260px;
+    height: 260px;
   }
 
   .roulette-center {
@@ -617,38 +689,54 @@ body {
   }
 
   .roulette-center-text {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .roulette-pointer {
-    font-size: 28px;
-    top: -15px;
+    font-size: 35px;
+    top: -18px;
+  }
+
+  .roulette-slot-content {
+    font-size: 10px;
   }
 
   .winner-name {
-    font-size: 28px;
+    font-size: 32px;
   }
 
   .roulette-container {
     padding: 20px;
   }
+
+  .winner-rank {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .winner-name-item {
+    font-size: 16px;
+  }
 }
 
 /* ========================================
-   EMPTY STATE
+   SCROLLBAR STYLING
 ======================================== */
-.empty-state {
-  text-align: center;
-  padding: 40px 20px;
-  color: #86868b;
+.participants-list::-webkit-scrollbar {
+  width: 8px;
 }
 
-.empty-state-icon {
-  font-size: 48px;
-  margin-bottom: 15px;
+.participants-list::-webkit-scrollbar-track {
+  background: #e9ecef;
+  border-radius: 10px;
 }
 
-.empty-state-text {
-  font-size: 16px;
+.participants-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  border-radius: 10px;
 }
 
+.participants-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #e082ea 0%, #e4465b 100%);
+}
