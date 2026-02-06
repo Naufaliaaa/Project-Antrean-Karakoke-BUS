@@ -1,13 +1,18 @@
-//display-login.js
-console.log('📺 DISPLAY-LOGIN.JS LOADING...');
+/*************************************************
+ * DISPLAY-LOGIN.JS - Display Login Authentication
+ * Password loaded from config.js
+ *************************************************/
 
+// Import password from config (loaded via script tag in HTML)
+const DISPLAY_PASSWORD = window.DISPLAY_PASSWORD || "default_password";
+
+// ========= DOM ELEMENTS =========
 const passwordInput = document.getElementById('password');
 const loginBtn = document.getElementById('login-btn');
 const backLink = document.getElementById('back-link');
 const errorDiv = document.getElementById('error-message');
 
-// Password display
-const DISPLAY_PASSWORD = "displaybus9999";
+console.log('📺 DISPLAY-LOGIN.JS LOADING...');
 
 function getRoomId() {
   const urlParams = new URLSearchParams(window.location.search);

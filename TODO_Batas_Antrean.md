@@ -1,38 +1,39 @@
-# TODO - Batas Antrean Karaoke 25 Orang
+# TODO - Batas Antrean Karaoke 25 Orang + Keamanan Password
 
-## Task: Menambahkan batas antrean max 25 orang dengan validasi
+## Task: Menambahkan batas antrean max 25 orang dengan validasi + Amankan Password
 
-### Steps:
+### Steps - Batas Antrean (COMPLETED) ✅
 
 - [x] 1. Modify JS/form.js - Add queue limit validation (MAX_QUEUE = 25)
 - [x] 2. Modify form.html - Update queue display to show "X/25" format
 - [x] 3. Modify JS/admin.js - Update queue count display to show "X/25"
-- [x] 4. Modify admin.html - Update queue display to show "X/25" format
+- [x] 4. Modify admin.html - Update queue display to show "X/25"
 
-### Details:
+### Steps - Keamanan Password (COMPLETED) ✅
 
-#### Step 1: JS/form.js ✅
-- [x] Add constant: MAX_QUEUE = 25
-- [x] Add checkQueueCount() helper function
-- [x] Add isQueueFull() helper function
-- [x] Add validation in submitSong() function
-- [x] Show error alert "Mohon maaf antrean penuh Silahkan Tunggu beberapa saat lagi" when queue >= 25
-- [x] Update queue count display to show "X/25"
-
-#### Step 2: form.html ✅
-- [x] Change `<span id="queue-count">0</span>` to `<span id="queue-count">0/25</span>`
-
-#### Step 3: admin.html ✅
-- [x] Update queue count display to show "X/25"
-- [x] Change "/20" to "/25"
-
-#### Step 4: JS/admin.js ✅
-- [x] Add constant: MAX_QUEUE = 25
-- [x] Update queue count display to show "X/25"
+- [x] 1. Create JS/config.js - File konfigurasi terpusat untuk password
+- [x] 2. Update JS/admin-login.js - Load password dari config.js
+- [x] 3. Update JS/display-login.js - Load password dari config.js
+- [x] 4. Update JS/camera-login.js - Load password dari config.js
+- [x] 5. Update admin-login.html - Load config.js sebelum login script
+- [x] 6. Update display-login.html - Load config.js sebelum login script
+- [x] 7. Update camera-login.html - Load config.js sebelum login script
+- [x] 8. Update .gitignore - Tambahkan js/config.js agar tidak di-commit
 
 ---
 
 ## Status: COMPLETED ✅
-## Completed: [Current Date]
+
+## Perubahan Utama:
+
+### Batas Antrean:
+- Maksimum antrean: 25 orang
+- Format display: "X/25"
+- Pesan error: "Mohon maaf antrean penuh Silahkan Tunggu beberapa saat lagi"
+
+### Keamanan Password:
+- Password dipindahkan ke JS/config.js
+- JS/config.js sudah di-gitignore
+- ⚠️ Untuk keamanan maksimal, buat JS/config.local.js dengan password berbeda
 
 

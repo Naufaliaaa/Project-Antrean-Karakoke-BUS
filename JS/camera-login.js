@@ -1,10 +1,10 @@
 /*************************************************
  * CAMERA-LOGIN.JS - Camera Panel Authentication
- * Password: panelcamerabushioo021
+ * Password loaded from config.js
  *************************************************/
 
-// ========= PASSWORD CAMERA PANEL =========
-const CAMERA_PASSWORD = "panelcamerabushioo021";
+// Import password from config (loaded via script tag in HTML)
+const CAMERA_PASSWORD = window.CAMERA_PASSWORD || "default_password";
 
 // ========= GET ROOM ID =========
 const urlParams = new URLSearchParams(window.location.search);
@@ -16,7 +16,7 @@ if (!roomId) {
   window.location.href = 'index.html';
 }
 
-// ========= ELEMENTS =========
+// ========= DOM ELEMENTS =========
 const passwordInput = document.getElementById('password');
 const loginBtn = document.getElementById('login-btn');
 const errorEl = document.getElementById('error-message');
@@ -187,4 +187,3 @@ window.addEventListener('popstate', function(e) {
 });
 
 console.log('✅ Camera-login.js loaded');
-console.log('🔐 Required password: panelcamerabushioo021');

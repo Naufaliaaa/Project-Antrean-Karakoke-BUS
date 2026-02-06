@@ -1,13 +1,18 @@
-//admin-login.js
-console.log('🔐 ADMIN-LOGIN.JS LOADING...');
+/*************************************************
+ * ADMIN-LOGIN.JS - Admin Panel Authentication
+ * Password loaded from config.js
+ *************************************************/
 
+// Import password from config (loaded via script tag in HTML)
+const ADMIN_PASSWORD = window.ADMIN_PASSWORD || "default_password";
+
+// ========= DOM ELEMENTS =========
 const passwordInput = document.getElementById('password');
 const loginBtn = document.getElementById('login-btn');
 const backLink = document.getElementById('back-link');
 const errorDiv = document.getElementById('error-message');
 
-// Password admin
-const ADMIN_PASSWORD = "karaokebushioo0001";
+console.log('🔐 ADMIN-LOGIN.JS LOADING...');
 
 function getRoomId() {
   const urlParams = new URLSearchParams(window.location.search);
