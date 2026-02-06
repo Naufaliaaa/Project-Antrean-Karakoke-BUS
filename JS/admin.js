@@ -8,7 +8,7 @@
 
 console.log('🚀 Admin Redesign JS Loading...');
 
-// ========= GLOBAL STATE =========
+// ========= CONSTANTS =========
 let queueRef = null;
 let roomRef = null;
 let emotesRef = null;
@@ -17,6 +17,7 @@ let dragSourceKey = null;
 let displayStatusListener = null;
 let cameraStatusListener = null;
 let totalRequestCount = 0;
+const MAX_QUEUE = 25;
 
 // ========= SESSION COUNTER =========
 let sessionStartTime = null;
@@ -337,7 +338,7 @@ function renderQueue(snapshot) {
 
   console.log(`✅ ${items.length} items in queue`);
 
-  if (count) count.textContent = items.length;
+  if (count) count.textContent = `${items.length}/${MAX_QUEUE}`;
   if (totalCount) totalCount.textContent = items.length;
 
   // NOW PLAYING (First Item)

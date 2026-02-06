@@ -1,6 +1,9 @@
 /*************************************************
- * FORM.JS – WITH YOUTUBE EMBED VALIDATION + EMOTE (FINAL)
+ * FORM.JS – WITH YOUTUBE EMBED VALIDATION + EMOTE + QUEUE LIMIT (FINAL)
  *************************************************/
+
+// ================= CONSTANTS =================
+const MAX_QUEUE = 25;
 
 // ================= INIT ROOM SYSTEM =================
 console.log('🔄 Initializing room system...');
@@ -90,6 +93,27 @@ function checkDeviceInQueue(deviceId) {
   });
 }
 
+// ================= CEK JUMLAH ANTREAN =================
+function checkQueueCount() {
+  return new Promise((resolve) => {
+    queueRef.once("value", snap => {
+      if (!snap.exists()) {
+        resolve(0);
+        return;
+      }
+      
+      const count = Object.keys(snap.val()).length;
+      resolve(count);
+    });
+  });
+}
+
+// ================= CEK ANTREAN PENUH =================
+async function isQueueFull() {
+  const count = await checkQueueCount();
+  return count >= MAX_QUEUE;
+}
+
 // ================= GET NAMA DARI DEVICE =================
 function getNameFromDevice(deviceId) {
   return new Promise((resolve) => {
@@ -159,6 +183,12 @@ async function submitSong() {
   const videoId = extractVideoId(link);
   if (!videoId) {
     showAlert("❌ Link YouTube tidak valid!", "error");
+    return;
+  }
+  
+  // Validasi batas antrean
+  if (await isQueueFull()) {
+    showAlert("⚠️ Mohon maaf antrean penuh Silahkan Tunggu beberapa saat lagi", "error");
     return;
   }
 
@@ -291,7 +321,7 @@ queueRef.on("value", snap => {
   const queueStatus = document.getElementById("queue-status");
   
   if (!snap.exists()) {
-    queueCount.textContent = "0";
+    queueCount.textContent = `0/${MAX_QUEUE}`;
     queueStatus.innerHTML = "⏳ Menunggu antrean...";
     queueStatus.style.background = "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)";
     queueStatus.style.color = "#0369a1";
@@ -302,7 +332,7 @@ queueRef.on("value", snap => {
   const items = Object.values(data);
   const count = items.length;
   
-  queueCount.textContent = count;
+  queueCount.textContent = `${count}/${MAX_QUEUE}`;
   
   const myRequest = items.find(item => item.deviceId === DEVICE_ID);
   
