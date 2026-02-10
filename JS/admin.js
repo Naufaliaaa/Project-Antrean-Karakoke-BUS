@@ -1,5 +1,5 @@
 /*************************************************
- * admin.js - HiOO Karaoke Admin Panel
+ * admin.js 
  * ✅ System Control (Display & Video Panel Status)
  * ✅ Audio Control (YouTube & Mic Volume)
  * ✅ Live Reaction (Admin Emotes)
