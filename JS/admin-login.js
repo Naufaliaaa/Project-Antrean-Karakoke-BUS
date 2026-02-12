@@ -1,31 +1,48 @@
 /*************************************************
  * ADMIN-LOGIN.JS - Admin Panel Authentication
- * Password loaded from config.js OR Firebase
- * Using password-loader.js for fallback support
+ * Password from: config.js OR Netlify ENV OR Firebase
+ * 
+ * Priority:
+ * 1. window.ENV_ADMIN_PASSWORD (Netlify ENV)
+ * 2. window.ADMIN_PASSWORD (config.js)
+ * 3. Firebase (fallback)
  *************************************************/
 
-// Get password - will be loaded asynchronously via password-loader.js
+// Get password - will be loaded asynchronously
 let ADMIN_PASSWORD = null;
 
-// Initialize password from config or Firebase
+// Initialize password
 async function initAdminPassword() {
-  // First check config.js
+  // 1. First check Netlify Environment Variables
+  if (typeof window.ENV_ADMIN_PASSWORD !== 'undefined' && window.ENV_ADMIN_PASSWORD) {
+    ADMIN_PASSWORD = window.ENV_ADMIN_PASSWORD;
+    console.log('✅ Admin password loaded from Netlify ENV');
+    return ADMIN_PASSWORD;
+  }
+  
+  // 2. Check config.js
   if (typeof window.ADMIN_PASSWORD !== 'undefined') {
     ADMIN_PASSWORD = window.ADMIN_PASSWORD;
     console.log('✅ Admin password loaded from config.js');
     return ADMIN_PASSWORD;
   }
   
-  // If not in config.js, fetch from Firebase
-  ADMIN_PASSWORD = await window.getAdminPassword();
-  if (ADMIN_PASSWORD) {
-    console.log('✅ Admin password loaded from Firebase');
-    return ADMIN_PASSWORD;
+  // 3. Try Firebase as last resort
+  try {
+    if (window.getAdminPassword) {
+      ADMIN_PASSWORD = await window.getAdminPassword();
+      if (ADMIN_PASSWORD) {
+        console.log('✅ Admin password loaded from Firebase');
+        return ADMIN_PASSWORD;
+      }
+    }
+  } catch (e) {
+    console.warn('⚠️ Could not load from Firebase');
   }
   
-  // Fallback for development
-  console.warn('⚠️ Using default admin password');
-  ADMIN_PASSWORD = "hioo_default_admin";
+  // Fallback - ONLY for development
+  console.warn('⚠️ Using default admin password - CONFIGURE NETLIFY ENV!');
+  ADMIN_PASSWORD = "hioo_default_admin_please_setup";
   return ADMIN_PASSWORD;
 }
 

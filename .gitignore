@@ -3,9 +3,12 @@
 #Hehehe Booooy UDAH GUA AMANIN BIAR GAK BISA LU MASUKIN
 JS/config.js
 
-# Setup scripts (untuk keamanan, hapus setelah setup)
+# File setup - hapus setelah setup password di Netlify
 admin-password-setup.html
 setup-passwords.js
+JS/password-loader.js
+PASSWORD-SETUP-GUIDE.md
+NETLIFY-SETUP-GUIDE.md
 
 # VSCode settings
 .vscode/

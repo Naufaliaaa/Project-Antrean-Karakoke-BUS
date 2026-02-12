@@ -1,31 +1,48 @@
 /*************************************************
  * CAMERA-LOGIN.JS - Camera Panel Authentication
- * Password loaded from config.js OR Firebase
- * Using password-loader.js for fallback support
+ * Password from: config.js OR Netlify ENV OR Firebase
+ * 
+ * Priority:
+ * 1. window.ENV_CAMERA_PASSWORD (Netlify ENV)
+ * 2. window.CAMERA_PASSWORD (config.js)
+ * 3. Firebase (fallback)
  *************************************************/
 
-// Get password - will be loaded asynchronously via password-loader.js
+// Get password - will be loaded asynchronously
 let CAMERA_PASSWORD = null;
 
-// Initialize password from config or Firebase
+// Initialize password
 async function initCameraPassword() {
-  // First check config.js
+  // 1. First check Netlify Environment Variables
+  if (typeof window.ENV_CAMERA_PASSWORD !== 'undefined' && window.ENV_CAMERA_PASSWORD) {
+    CAMERA_PASSWORD = window.ENV_CAMERA_PASSWORD;
+    console.log('✅ Camera password loaded from Netlify ENV');
+    return CAMERA_PASSWORD;
+  }
+  
+  // 2. Check config.js
   if (typeof window.CAMERA_PASSWORD !== 'undefined') {
     CAMERA_PASSWORD = window.CAMERA_PASSWORD;
     console.log('✅ Camera password loaded from config.js');
     return CAMERA_PASSWORD;
   }
   
-  // If not in config.js, fetch from Firebase
-  CAMERA_PASSWORD = await window.getCameraPassword();
-  if (CAMERA_PASSWORD) {
-    console.log('✅ Camera password loaded from Firebase');
-    return CAMERA_PASSWORD;
+  // 3. Try Firebase as last resort
+  try {
+    if (window.getCameraPassword) {
+      CAMERA_PASSWORD = await window.getCameraPassword();
+      if (CAMERA_PASSWORD) {
+        console.log('✅ Camera password loaded from Firebase');
+        return CAMERA_PASSWORD;
+      }
+    }
+  } catch (e) {
+    console.warn('⚠️ Could not load from Firebase');
   }
   
-  // Fallback for development
-  console.warn('⚠️ Using default camera password');
-  CAMERA_PASSWORD = "hioo_default_camera";
+  // Fallback - ONLY for development
+  console.warn('⚠️ Using default camera password - CONFIGURE NETLIFY ENV!');
+  CAMERA_PASSWORD = "hioo_default_camera_please_setup";
   return CAMERA_PASSWORD;
 }
 

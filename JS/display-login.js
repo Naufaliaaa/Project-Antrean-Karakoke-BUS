@@ -1,31 +1,48 @@
 /*************************************************
  * DISPLAY-LOGIN.JS - Display Login Authentication
- * Password loaded from config.js OR Firebase
- * Using password-loader.js for fallback support
+ * Password from: config.js OR Netlify ENV OR Firebase
+ * 
+ * Priority:
+ * 1. window.ENV_DISPLAY_PASSWORD (Netlify ENV)
+ * 2. window.DISPLAY_PASSWORD (config.js)
+ * 3. Firebase (fallback)
  *************************************************/
 
-// Get password - will be loaded asynchronously via password-loader.js
+// Get password - will be loaded asynchronously
 let DISPLAY_PASSWORD = null;
 
-// Initialize password from config or Firebase
+// Initialize password
 async function initDisplayPassword() {
-  // First check config.js
+  // 1. First check Netlify Environment Variables
+  if (typeof window.ENV_DISPLAY_PASSWORD !== 'undefined' && window.ENV_DISPLAY_PASSWORD) {
+    DISPLAY_PASSWORD = window.ENV_DISPLAY_PASSWORD;
+    console.log('✅ Display password loaded from Netlify ENV');
+    return DISPLAY_PASSWORD;
+  }
+  
+  // 2. Check config.js
   if (typeof window.DISPLAY_PASSWORD !== 'undefined') {
     DISPLAY_PASSWORD = window.DISPLAY_PASSWORD;
     console.log('✅ Display password loaded from config.js');
     return DISPLAY_PASSWORD;
   }
   
-  // If not in config.js, fetch from Firebase
-  DISPLAY_PASSWORD = await window.getDisplayPassword();
-  if (DISPLAY_PASSWORD) {
-    console.log('✅ Display password loaded from Firebase');
-    return DISPLAY_PASSWORD;
+  // 3. Try Firebase as last resort
+  try {
+    if (window.getDisplayPassword) {
+      DISPLAY_PASSWORD = await window.getDisplayPassword();
+      if (DISPLAY_PASSWORD) {
+        console.log('✅ Display password loaded from Firebase');
+        return DISPLAY_PASSWORD;
+      }
+    }
+  } catch (e) {
+    console.warn('⚠️ Could not load from Firebase');
   }
   
-  // Fallback for development
-  console.warn('⚠️ Using default display password');
-  DISPLAY_PASSWORD = "hioo_default_display";
+  // Fallback - ONLY for development
+  console.warn('⚠️ Using default display password - CONFIGURE NETLIFY ENV!');
+  DISPLAY_PASSWORD = "hioo_default_display_please_setup";
   return DISPLAY_PASSWORD;
 }
 
