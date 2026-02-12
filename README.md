@@ -107,11 +107,45 @@
 - **Keyboard Shortcuts** - ESC to go back, Ctrl+Space to spin
 
 ### 6. 🔐 **Security System**
-- **PIN Authentication** - 6-digit PIN untuk akses bus (disimpan di Firebase)
-- **Password Protection** - Terpisah untuk Admin, Display, dan Camera (disimpan di Firebase)
-- **Session Management** - Token-based dengan auto-expiry
-- **Room Isolation** - Data terpisah per bus unit
-- **Secure Password Storage** - Password disimpan di Firebase, bukan di GitHub
+
+#### **Multi-Layer Authentication System**
+
+| Layer | Type | Description |
+|-------|------|-------------|
+| **Level 1** | PIN Login | 6-digit numeric PIN untuk akses bus (modal-style input) |
+| **Level 2** | Admin Password | Password terpisah untuk akses admin panel |
+| **Level 3** | Display Password | Password untuk layar karaoke utama |
+| **Level 4** | Camera Password | Password untuk video panel & streaming |
+
+#### **Fitur Keamanan**
+
+- **🔑 PIN Authentication (6 digit)**
+  - Auto-focus & auto-submit pada input
+  - Support paste untuk input cepat
+  - Error animation pada login gagal
+  - Token-based session dengan expiry
+  
+- **🔐 Password Protection**
+  - Prioritas: Firebase → config.js → default values
+  - Password **TIDAK** disimpan di GitHub
+  - Validasi client-side dengan feedback real-time
+  - Rate limiting pada attempts
+  
+- **🪙 Token-Based Sessions**
+  - Admin: `adminAuth` token dengan login timestamp
+  - Display: `display_token` dengan hash generation
+  - Camera: `videoPanel_token` dengan force re-login
+  - Auto-clear pada browser close/refresh
+
+- **🚪 Room Isolation**
+  - Data terpisah per bus unit (BUS-001 s/d BUS-007)
+  - PIN diverifikasi per room di Firebase
+  - Token diikat ke room ID tertentu
+
+- **🔒 Secure Storage**
+  - Password di Firebase: `karaoke/system/passwords/`
+  - PIN di Firebase: `karaoke/room/{roomId}/Setting/pin`
+  - config.js hanya untuk development lokal
 
 ---
 
@@ -297,19 +331,19 @@ karaoke/
 ├── room/
 │   └── BUS-001/
 │       └── Setting/
-│           ├── pin: 101010
+│           ├── pin: 101010          # 6-digit PIN
 │           └── busName: "Hiace 1"
 └── system/
     └── passwords/
-        ├── admin: "password_admin_anda"
-        ├── display: "password_display_anda"
-        └── camera: "password_camera_anda"
+        ├── admin: "********"        # Admin panel password
+        ├── display: "********"       # Display karaoke password
+        └── camera: "********"       # Camera/video panel password
 ```
 
 **Urutan Pencarian Password:**
 1. **Prioritas Utama:** Firebase (`karaoke/system/passwords/`)
 2. **Cadangan:** `config.js` (hanya untuk development lokal)
-3. **Default:** `hioo_default_admin`, `hioo_default_display`, `hioo_default_camera`
+3. **Default:** Password default untuk development
 
 #### 5️⃣ Deploy ke Server
 
@@ -405,9 +439,9 @@ Buat file `.env` untuk production:
 FIREBASE_API_KEY=your_api_key
 FIREBASE_AUTH_DOMAIN=your_domain
 FIREBASE_DATABASE_URL=your_database_url
-ADMIN_PASSWORD=k**************
-DISPLAY_PASSWORD=d*************
-CAMERA_PASSWORD=p*************
+ADMIN_PASSWORD=your_admin_password
+DISPLAY_PASSWORD=your_display_password
+CAMERA_PASSWORD=your_camera_password
 ```
 
 ---
@@ -421,7 +455,7 @@ CAMERA_PASSWORD=p*************
 │  1. Pilih   │
 │    Bus      │ → PIN Login (6 digit)
 └─────────────┘
-
+      ↓
 ┌─────────────┐
 │  2. Menu    │
 │    Bus      │ → Pilih Fitur:
@@ -429,15 +463,23 @@ CAMERA_PASSWORD=p*************
                   ├─ Form Request
                   ├─ Video Panel (password)
                   └─ Admin Panel (password)
-
-┌─────────────┐
-│  3. Admin   │
-│    Panel    │ → Control system
-└─────────────┘   ├─ Monitor status
-                  ├─ Manage queue
-                  ├─ Audio control
-                  └─ Send emotes
-
+      ↓
+┌─────────────────────────────────────────┐
+│  3. Login Flow dengan Multi-Auth        │
+├─────────────────────────────────────────┤
+│  🔐 Admin Panel                         │
+│     → password → adminAuth token        │
+│     → sessionStorage + login timestamp  │
+├─────────────────────────────────────────┤
+│  📺 Display Karaoke                     │
+│     → password → display_token (hash)   │
+│     → sessionStorage + auto-expiry      │
+├─────────────────────────────────────────┤
+│  🎥 Video Panel (Camera)               │
+│     → password → videoPanel_token       │
+│     → force re-login (clear old token)  │
+└─────────────────────────────────────────┘
+      ↓
 ┌─────────────┐
 │  4. Display │
 │   Karaoke   │ → Main screen
@@ -455,19 +497,59 @@ CAMERA_PASSWORD=p*************
                   └─ Mute/unmute
 ```
 
+### **Authentication Flow Details**
+
+#### **PIN Login Flow (6-digit)**
+```
+1. User pilih bus → redirect ke pin-login.html?room={busId}
+2. Modal PIN boxes tampil (auto-focus box pertama)
+3. User input 6 digit (bisa paste 6 digit langsung)
+4. Sistem verifikasi ke Firebase: karaoke/room/{roomId}/Setting/pin
+5. Jika benar → generate token → redirect ke bus-menu.html
+6. Token disimpan: sessionStorage.setItem(`room_token_${roomId}`, token)
+```
+
+#### **Admin Login Flow**
+```
+1. Dari bus-menu → klik "Panel Admin" → redirect ke admin-login.html
+2. Input password (masked dengan ****
+3. Sistem cek: Firebase → config.js → default
+4. Jika benar → set adminAuth + loginTime + requestCount
+5. Redirect ke admin.html
+```
+
+#### **Display Login Flow**
+```
+1. Dari bus-menu → klik "Layar Karaoke" → redirect ke display-login.html
+2. Input password (masked)
+3. Generate hash token: DISPLAY_TOKEN_{hash}_{timestamp}
+4. Set sessionStorage: displayAuth, displayLoginTime, display_token
+5. Redirect ke display.html
+```
+
+#### **Camera Login Flow**
+```
+1. Dari bus-menu → klik "Video Panel" → redirect ke camera-login.html
+2. Input password (masked)
+3. Hapus token lama (force re-login)
+4. Generate CAMERA_TOKEN_{hash}_{timestamp}
+5. Set sessionStorage: videoPanelAuth, videoPanel_token, videoPanel_login_time
+6. Redirect ke video-panel.html
+```
+
 ### **Untuk Admin:**
 
 1. Akses `index.html` → Pilih bus
-2. Masukkan PIN (default: `1*****`)
+2. Masukkan **6-digit PIN** (sesuai konfigurasi bus di Firebase)
 3. Klik "Panel Admin"
-4. Login dengan password: `k**************`
+4. Login dengan **Admin Password** (sesuai `karaoke/system/passwords/admin` di Firebase)
 5. Kelola sistem dari admin panel
 
 ### **Untuk Display:**
 
 1. Akses `index.html` → Pilih bus → PIN
 2. Klik "Layar Karaoke"
-3. Login dengan password: `d**************`
+3. Login dengan **Display Password** (sesuai `karaoke/system/passwords/display` di Firebase)
 4. Klik "MULAI KARAOKE" untuk aktivasi
 
 ### **Untuk Penumpang:**
@@ -481,7 +563,7 @@ CAMERA_PASSWORD=p*************
 
 1. Akses `index.html` → Pilih bus → PIN
 2. Klik "Video Panel"
-3. Login dengan password: `p**************`
+3. Login dengan **Camera Password** (sesuai `karaoke/system/passwords/camera` di Firebase)
 4. Klik "Aktifkan Kamera" untuk streaming
 
 ---
@@ -598,9 +680,9 @@ CAMERA_PASSWORD=p*************
     },
     "system": {
       "passwords": {
-        "admin": "rahasia123",
-        "display": "display123",
-        "camera": "camera123"
+        "admin": "********",
+        "display": "********",
+        "camera": "********"
       }
     }
   }
@@ -663,27 +745,104 @@ queueRef.push({
 
 ### **Security Layers**
 
-1. **Level 1: PIN Authentication**
-   - 6-digit numeric PIN per bus
-   - Stored in Firebase
-   - Session-based verification
+| Level | Authentication | Storage | Expiry |
+|-------|----------------|---------|--------|
+| **1** | PIN Login (6 digit) | sessionStorage + Firebase | Browser session |
+| **2** | Admin Password | sessionStorage (adminAuth) | Manual logout |
+| **3** | Display Password | sessionStorage (display_token) | Manual logout |
+| **4** | Camera Password | sessionStorage (videoPanelAuth) | Force re-login |
 
-2. **Level 2: Password Protection**
-   - Separate passwords for Admin, Display, Camera
-   - Client-side validation
-   - Token-based session
+### **Token Generation System**
 
-3. **Level 3: Session Management**
-   - SessionStorage untuk tokens
-   - Auto-expiry (2-8 hours)
-   - Logout functionality
+#### **PIN Token**
+```javascript
+function generateSecureToken(roomId, pin) {
+  const timestamp = Date.now();
+  const random = Math.random().toString(36).substring(2, 15);
+  const data = `${roomId}-${pin}-${timestamp}-${random}`;
+  
+  // Simple hash function
+  let hash = 0;
+  for (let i = 0; i < data.length; i++) {
+    const char = data.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  
+  return `TOKEN_${Math.abs(hash).toString(36)}_${timestamp}`;
+}
+```
 
-4. **Level 4: Firebase Rules**
-   - Read/write validation
-   - Data structure enforcement
-   - No anonymous access to sensitive data
+#### **Display Token**
+```javascript
+const timestamp = Date.now();
+const random = Math.random().toString(36).substring(2, 15);
+const token = `DISPLAY_TOKEN_${Math.abs((timestamp + random).split('')
+  .reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0))
+  .toString(36)}_${timestamp}`;
+```
 
-### **Best Practices**
+#### **Camera Token**
+```javascript
+function generateCameraToken(roomId, password) {
+  const timestamp = Date.now();
+  const random = Math.random().toString(36).substring(2, 15);
+  const data = `CAMERA-${roomId}-${password}-${timestamp}-${random}`;
+  
+  let hash = 0;
+  for (let i = 0; i < data.length; i++) {
+    const char = data.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
+  }
+  
+  return `CAMERA_TOKEN_${Math.abs(hash).toString(36).toUpperCase()}_${timestamp}`;
+}
+```
+
+### **Session Storage Structure**
+
+```javascript
+// PIN Login
+sessionStorage.setItem(`room_token_${roomId}`, token);
+sessionStorage.setItem(`room_pin_verified_${roomId}`, timestamp);
+
+// Admin Login
+sessionStorage.setItem('adminAuth', 'authenticated');
+sessionStorage.setItem('loginTime', Date.now().toString());
+sessionStorage.setItem('adminRequestCount', '0');
+
+// Display Login
+sessionStorage.setItem('displayAuth', 'authenticated');
+sessionStorage.setItem('displayLoginTime', Date.now().toString());
+sessionStorage.setItem('display_token', token);
+
+// Camera Login
+sessionStorage.setItem('videoPanelAuth', 'authenticated');
+sessionStorage.setItem('videoPanel_token', token);
+sessionStorage.setItem('videoPanel_login_time', Date.now());
+```
+
+### **Password Priority Order**
+
+```
+1. Firebase (Highest Priority)
+   └── karaoke/system/passwords/admin
+   └── karaoke/system/passwords/display
+   └── karaoke/system/passwords/camera
+
+2. config.js (Development Only)
+   └── window.ADMIN_PASSWORD
+   └── window.DISPLAY_PASSWORD
+   └── window.CAMERA_PASSWORD
+
+3. Default Values (Fallback)
+   └── hioo_default_admin
+   └── hioo_default_display
+   └── hioo_default_camera
+```
+
+### **Security Best Practices**
 
 ```javascript
 // ✅ DO: Use token-based auth
@@ -699,9 +858,15 @@ if (!isAuthenticated()) {
   redirectToLogin();
 }
 
+// ✅ DO: Clear tokens on logout
+sessionStorage.removeItem('adminAuth');
+sessionStorage.removeItem('display_token');
+sessionStorage.removeItem('videoPanelAuth');
+
 // ❌ DON'T: Store passwords in localStorage
 // ❌ DON'T: Trust client-side validation only
 // ❌ DON'T: Expose Firebase config in public repos
+// ❌ DON'T: Hardcode passwords in source code
 ```
 
 ### **Rekomendasi Production**
@@ -712,6 +877,8 @@ if (!isAuthenticated()) {
 - 🔐 Setup CORS untuk domain spesifik
 - 🔐 Encrypt sensitive data di database
 - 🔐 Regular security audits
+- 🔐 Ganti password default segera setelah deployment
+- 🔐 Gunakan HTTPS everywhere
 
 ---
 
@@ -722,7 +889,9 @@ if (!isAuthenticated()) {
 #### **Bus Selection & Authentication**
 - [ ] Bus cards tampil dengan benar
 - [ ] Custom room ID berfungsi
-- [ ] PIN validation (6 digit)
+- [ ] PIN validation (6 digit) dengan modal-style input
+- [ ] Auto-focus & auto-submit pada PIN boxes
+- [ ] Paste support untuk PIN input
 - [ ] Token generation & storage
 - [ ] Session persistence
 
