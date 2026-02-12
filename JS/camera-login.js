@@ -1,50 +1,13 @@
 /*************************************************
  * CAMERA-LOGIN.JS - Camera Panel Authentication
- * Password from: config.js OR Netlify ENV OR Firebase
  * 
- * Priority:
- * 1. window.ENV_CAMERA_PASSWORD (Netlify ENV)
- * 2. window.CAMERA_PASSWORD (config.js)
- * 3. Firebase (fallback)
+ * Password優先:
+ * 1. Firebase (karaoke/system/passwords/camera)
+ * 2. config.js (window.CAMERA_PASSWORD)
  *************************************************/
 
-// Get password - will be loaded asynchronously
-let CAMERA_PASSWORD = null;
-
-// Initialize password
-async function initCameraPassword() {
-  // 1. First check Netlify Environment Variables
-  if (typeof window.ENV_CAMERA_PASSWORD !== 'undefined' && window.ENV_CAMERA_PASSWORD) {
-    CAMERA_PASSWORD = window.ENV_CAMERA_PASSWORD;
-    console.log('✅ Camera password loaded from Netlify ENV');
-    return CAMERA_PASSWORD;
-  }
-  
-  // 2. Check config.js
-  if (typeof window.CAMERA_PASSWORD !== 'undefined') {
-    CAMERA_PASSWORD = window.CAMERA_PASSWORD;
-    console.log('✅ Camera password loaded from config.js');
-    return CAMERA_PASSWORD;
-  }
-  
-  // 3. Try Firebase as last resort
-  try {
-    if (window.getCameraPassword) {
-      CAMERA_PASSWORD = await window.getCameraPassword();
-      if (CAMERA_PASSWORD) {
-        console.log('✅ Camera password loaded from Firebase');
-        return CAMERA_PASSWORD;
-      }
-    }
-  } catch (e) {
-    console.warn('⚠️ Could not load from Firebase');
-  }
-  
-  // Fallback - ONLY for development
-  console.warn('⚠️ Using default camera password - CONFIGURE NETLIFY ENV!');
-  CAMERA_PASSWORD = "hioo_default_camera_please_setup";
-  return CAMERA_PASSWORD;
-}
+// Fallback dari config.js
+const LOCAL_CAMERA_PASSWORD = window.CAMERA_PASSWORD || "hioo_default_camera";
 
 // ========= GET ROOM ID =========
 const urlParams = new URLSearchParams(window.location.search);
@@ -68,21 +31,6 @@ sessionStorage.removeItem('videoPanel_token');
 sessionStorage.removeItem('videoPanel_login_time');
 
 console.log('🎥 Camera login page loaded for room:', roomId);
-
-// ========= CHECK IF ALREADY LOGGED IN =========
-// (Disabled untuk force login setiap kali)
-/*
-const existingToken = sessionStorage.getItem('videoPanel_token');
-const loginTime = sessionStorage.getItem('videoPanel_login_time');
-
-if (existingToken && loginTime) {
-  const fourHours = 4 * 60 * 60 * 1000;
-  if (Date.now() - parseInt(loginTime) < fourHours) {
-    console.log('✅ Already authenticated, redirecting...');
-    window.location.href = `video-panel.html?room=${roomId}`;
-  }
-}
-*/
 
 // ========= EVENT LISTENERS =========
 passwordInput.addEventListener('keypress', function(e) {
@@ -110,17 +58,32 @@ async function login() {
   loginBtn.textContent = 'Memverifikasi...';
   
   try {
-    // Load password from config or Firebase
-    await initCameraPassword();
+    console.log('🎥 Verifying password...');
+    
+    // Load password dari Firebase atau config.js
+    let correctPassword = LOCAL_CAMERA_PASSWORD;
+    
+    try {
+      if (window.db) {
+        const snapshot = await window.db.ref('karaoke/system/passwords/camera').once('value');
+        const fbPassword = snapshot.val();
+        if (fbPassword) {
+          correctPassword = fbPassword;
+          console.log('✅ Camera password loaded dari Firebase');
+        }
+      }
+    } catch (e) {
+      console.warn('⚠️ Firebase not available, using config.js');
+    }
     
     // Cek password
-    if (input === CAMERA_PASSWORD) {
+    if (input === correctPassword) {
       console.log('✅ Password correct!');
       
       // Generate secure token
       const token = generateCameraToken(roomId, input);
       
-      // Set authentication data (MATCH with video-panel-page.js)
+      // Set authentication data
       sessionStorage.setItem('videoPanelAuth', 'authenticated');
       sessionStorage.setItem('videoPanel_token', token);
       sessionStorage.setItem('videoPanel_login_time', Date.now());
@@ -190,7 +153,7 @@ function generateCameraToken(roomId, password) {
   for (let i = 0; i < data.length; i++) {
     const char = data.charCodeAt(i);
     hash = ((hash << 5) - hash) + char;
-    hash = hash & hash; // Convert to 32bit integer
+    hash = hash & hash;
   }
   
   return `CAMERA_TOKEN_${Math.abs(hash).toString(36).toUpperCase()}_${timestamp}`;
@@ -218,7 +181,6 @@ async function goBackToBusMenu(e) {
 
 // ========= PREVENT BACK BUTTON AFTER LOGIN =========
 window.addEventListener('popstate', function(e) {
-  // User mencoba back setelah login
   const isAuthenticated = sessionStorage.getItem('videoPanelAuth');
   
   if (isAuthenticated) {
@@ -230,3 +192,4 @@ window.addEventListener('popstate', function(e) {
 });
 
 console.log('✅ Camera-login.js loaded');
+

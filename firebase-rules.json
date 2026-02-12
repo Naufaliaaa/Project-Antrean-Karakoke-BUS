@@ -1,0 +1,42 @@
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+    "karaoke": {
+      "room": {
+        "$roomId": {
+          ".read": true,
+          ".write": true,
+          "queue": {
+            ".read": true,
+            ".write": true,
+            "$songId": {
+              ".validate": "newData.hasChildren(['name','videoId','order','deviceId','createdAt']) && newData.child('name').isString() && newData.child('videoId').isString() && newData.child('order').isNumber()"
+            }
+          },
+          "emotes": {
+            ".read": true,
+            ".write": true,
+            "$emoteId": {
+              ".validate": "newData.hasChildren(['name','emote','timestamp']) && newData.child('name').isString() && newData.child('emote').isString() && newData.child('timestamp').isNumber()"
+            }
+          },
+          "Setting": {
+            ".read": true,
+            ".write": true
+          },
+          "videoSession": {
+            ".read": true,
+            ".write": true
+          }
+        }
+      },
+      "system": {
+        "passwords": {
+          ".read": true,
+          ".write": true
+        }
+      }
+    }
+  }
+}

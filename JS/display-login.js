@@ -1,50 +1,13 @@
 /*************************************************
  * DISPLAY-LOGIN.JS - Display Login Authentication
- * Password from: config.js OR Netlify ENV OR Firebase
  * 
- * Priority:
- * 1. window.ENV_DISPLAY_PASSWORD (Netlify ENV)
- * 2. window.DISPLAY_PASSWORD (config.js)
- * 3. Firebase (fallback)
+ * Password优先序:
+ * 1. Firebase (karaoke/system/passwords/display)
+ * 2. config.js (window.DISPLAY_PASSWORD)
  *************************************************/
 
-// Get password - will be loaded asynchronously
-let DISPLAY_PASSWORD = null;
-
-// Initialize password
-async function initDisplayPassword() {
-  // 1. First check Netlify Environment Variables
-  if (typeof window.ENV_DISPLAY_PASSWORD !== 'undefined' && window.ENV_DISPLAY_PASSWORD) {
-    DISPLAY_PASSWORD = window.ENV_DISPLAY_PASSWORD;
-    console.log('✅ Display password loaded from Netlify ENV');
-    return DISPLAY_PASSWORD;
-  }
-  
-  // 2. Check config.js
-  if (typeof window.DISPLAY_PASSWORD !== 'undefined') {
-    DISPLAY_PASSWORD = window.DISPLAY_PASSWORD;
-    console.log('✅ Display password loaded from config.js');
-    return DISPLAY_PASSWORD;
-  }
-  
-  // 3. Try Firebase as last resort
-  try {
-    if (window.getDisplayPassword) {
-      DISPLAY_PASSWORD = await window.getDisplayPassword();
-      if (DISPLAY_PASSWORD) {
-        console.log('✅ Display password loaded from Firebase');
-        return DISPLAY_PASSWORD;
-      }
-    }
-  } catch (e) {
-    console.warn('⚠️ Could not load from Firebase');
-  }
-  
-  // Fallback - ONLY for development
-  console.warn('⚠️ Using default display password - CONFIGURE NETLIFY ENV!');
-  DISPLAY_PASSWORD = "hioo_default_display_please_setup";
-  return DISPLAY_PASSWORD;
-}
+// Fallback dari config.js
+const LOCAL_DISPLAY_PASSWORD = window.DISPLAY_PASSWORD || "hioo_default_display";
 
 // ========= DOM ELEMENTS =========
 const passwordInput = document.getElementById('password');
@@ -54,6 +17,7 @@ const errorDiv = document.getElementById('error-message');
 
 console.log('📺 DISPLAY-LOGIN.JS LOADING...');
 
+// Get room ID
 function getRoomId() {
   const urlParams = new URLSearchParams(window.location.search);
   let roomId = urlParams.get('room');
@@ -78,7 +42,7 @@ if (isAuthenticated && displayToken) {
 }
 
 // Initialize
-function initialize() {
+async function initialize() {
   console.log('📺 Initializing Display Login...');
   
   const roomId = getRoomId();
@@ -112,13 +76,26 @@ async function handleSubmit() {
   try {
     console.log('📺 Verifying password...');
     
-    // Load password from config or Firebase
-    await initDisplayPassword();
+    // Load password dari Firebase atau config.js
+    let correctPassword = LOCAL_DISPLAY_PASSWORD;
+    
+    try {
+      if (window.db) {
+        const snapshot = await window.db.ref('karaoke/system/passwords/display').once('value');
+        const fbPassword = snapshot.val();
+        if (fbPassword) {
+          correctPassword = fbPassword;
+          console.log('✅ Display password loaded dari Firebase');
+        }
+      }
+    } catch (e) {
+      console.warn('⚠️ Firebase not available, using config.js');
+    }
     
     // Simulasi delay untuk UX
     await new Promise(resolve => setTimeout(resolve, 500));
     
-    if (password === DISPLAY_PASSWORD) {
+    if (password === correctPassword) {
       console.log('✅ Password verified successfully!');
       
       // Generate token

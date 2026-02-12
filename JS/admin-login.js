@@ -1,50 +1,13 @@
 /*************************************************
  * ADMIN-LOGIN.JS - Admin Panel Authentication
- * Password from: config.js OR Netlify ENV OR Firebase
  * 
- * Priority:
- * 1. window.ENV_ADMIN_PASSWORD (Netlify ENV)
- * 2. window.ADMIN_PASSWORD (config.js)
- * 3. Firebase (fallback)
+ * Password优先순:
+ * 1. Firebase (karaoke/system/passwords/admin)
+ * 2. config.js (window.ADMIN_PASSWORD)
  *************************************************/
 
-// Get password - will be loaded asynchronously
-let ADMIN_PASSWORD = null;
-
-// Initialize password
-async function initAdminPassword() {
-  // 1. First check Netlify Environment Variables
-  if (typeof window.ENV_ADMIN_PASSWORD !== 'undefined' && window.ENV_ADMIN_PASSWORD) {
-    ADMIN_PASSWORD = window.ENV_ADMIN_PASSWORD;
-    console.log('✅ Admin password loaded from Netlify ENV');
-    return ADMIN_PASSWORD;
-  }
-  
-  // 2. Check config.js
-  if (typeof window.ADMIN_PASSWORD !== 'undefined') {
-    ADMIN_PASSWORD = window.ADMIN_PASSWORD;
-    console.log('✅ Admin password loaded from config.js');
-    return ADMIN_PASSWORD;
-  }
-  
-  // 3. Try Firebase as last resort
-  try {
-    if (window.getAdminPassword) {
-      ADMIN_PASSWORD = await window.getAdminPassword();
-      if (ADMIN_PASSWORD) {
-        console.log('✅ Admin password loaded from Firebase');
-        return ADMIN_PASSWORD;
-      }
-    }
-  } catch (e) {
-    console.warn('⚠️ Could not load from Firebase');
-  }
-  
-  // Fallback - ONLY for development
-  console.warn('⚠️ Using default admin password - CONFIGURE NETLIFY ENV!');
-  ADMIN_PASSWORD = "hioo_default_admin_please_setup";
-  return ADMIN_PASSWORD;
-}
+// Fallback dari config.js
+const LOCAL_ADMIN_PASSWORD = window.ADMIN_PASSWORD || "hioo_default_admin";
 
 // ========= DOM ELEMENTS =========
 const passwordInput = document.getElementById('password');
@@ -54,6 +17,7 @@ const errorDiv = document.getElementById('error-message');
 
 console.log('🔐 ADMIN-LOGIN.JS LOADING...');
 
+// Get room ID
 function getRoomId() {
   const urlParams = new URLSearchParams(window.location.search);
   let roomId = urlParams.get('room');
@@ -114,13 +78,26 @@ async function handleSubmit() {
   try {
     console.log('🔐 Verifying password...');
     
-    // Load password from config or Firebase
-    await initAdminPassword();
+    // Load password dari Firebase atau config.js
+    let correctPassword = LOCAL_ADMIN_PASSWORD;
+    
+    try {
+      if (window.db) {
+        const snapshot = await window.db.ref('karaoke/system/passwords/admin').once('value');
+        const fbPassword = snapshot.val();
+        if (fbPassword) {
+          correctPassword = fbPassword;
+          console.log('✅ Admin password loaded dari Firebase');
+        }
+      }
+    } catch (e) {
+      console.warn('⚠️ Firebase not available, using config.js');
+    }
     
     // Simulasi delay untuk UX
     await new Promise(resolve => setTimeout(resolve, 500));
     
-    if (password === ADMIN_PASSWORD) {
+    if (password === correctPassword) {
       console.log('✅ Password verified successfully!');
       
       // Set session
