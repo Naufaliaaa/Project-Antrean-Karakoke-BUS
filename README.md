@@ -294,19 +294,22 @@ Di Firebase Console, buat structure:
 
 ```
 karaoke/
-  ├── room/
-  │   └── BUS-001/
-  │       └── Setting/
-  │           ├── pin: 101010
-  │           └── busName: "Hiace 1"
-  └── system/
-      └── passwords/
-          ├── admin: "password_admin_anda"
-          ├── display: "password_display_anda"
-          └── camera: "password_camera_anda"
+├── room/
+│   └── BUS-001/
+│       └── Setting/
+│           ├── pin: 101010
+│           └── busName: "Hiace 1"
+└── system/
+    └── passwords/
+        ├── admin: "password_admin_anda"
+        ├── display: "password_display_anda"
+        └── camera: "password_camera_anda"
 ```
 
-**Catatan:** Password tidak perlu di-edit di file JS lagi. Sistem akan otomatis mengambil dari Firebase.
+**Urutan Pencarian Password:**
+1. **Prioritas Utama:** Firebase (`karaoke/system/passwords/`)
+2. **Cadangan:** `config.js` (hanya untuk development lokal)
+3. **Default:** `hioo_default_admin`, `hioo_default_display`, `hioo_default_camera`
 
 #### 5️⃣ Deploy ke Server
 
