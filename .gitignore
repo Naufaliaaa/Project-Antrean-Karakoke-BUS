@@ -3,6 +3,10 @@
 #Hehehe Booooy UDAH GUA AMANIN BIAR GAK BISA LU MASUKIN
 JS/config.js
 
+# Setup scripts (untuk keamanan, hapus setelah setup)
+admin-password-setup.html
+setup-passwords.js
+
 # VSCode settings
 .vscode/
 

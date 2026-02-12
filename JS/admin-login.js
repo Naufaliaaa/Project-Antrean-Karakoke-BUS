@@ -1,10 +1,33 @@
 /*************************************************
  * ADMIN-LOGIN.JS - Admin Panel Authentication
- * Password loaded from config.js
+ * Password loaded from config.js OR Firebase
+ * Using password-loader.js for fallback support
  *************************************************/
 
-// Import password from config (loaded via script tag in HTML)
-const ADMIN_PASSWORD = window.ADMIN_PASSWORD || "default_password";
+// Get password - will be loaded asynchronously via password-loader.js
+let ADMIN_PASSWORD = null;
+
+// Initialize password from config or Firebase
+async function initAdminPassword() {
+  // First check config.js
+  if (typeof window.ADMIN_PASSWORD !== 'undefined') {
+    ADMIN_PASSWORD = window.ADMIN_PASSWORD;
+    console.log('✅ Admin password loaded from config.js');
+    return ADMIN_PASSWORD;
+  }
+  
+  // If not in config.js, fetch from Firebase
+  ADMIN_PASSWORD = await window.getAdminPassword();
+  if (ADMIN_PASSWORD) {
+    console.log('✅ Admin password loaded from Firebase');
+    return ADMIN_PASSWORD;
+  }
+  
+  // Fallback for development
+  console.warn('⚠️ Using default admin password');
+  ADMIN_PASSWORD = "hioo_default_admin";
+  return ADMIN_PASSWORD;
+}
 
 // ========= DOM ELEMENTS =========
 const passwordInput = document.getElementById('password');
@@ -73,6 +96,9 @@ async function handleSubmit() {
   
   try {
     console.log('🔐 Verifying password...');
+    
+    // Load password from config or Firebase
+    await initAdminPassword();
     
     // Simulasi delay untuk UX
     await new Promise(resolve => setTimeout(resolve, 500));

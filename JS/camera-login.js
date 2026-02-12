@@ -1,10 +1,33 @@
 /*************************************************
  * CAMERA-LOGIN.JS - Camera Panel Authentication
- * Password loaded from config.js
+ * Password loaded from config.js OR Firebase
+ * Using password-loader.js for fallback support
  *************************************************/
 
-// Import password from config (loaded via script tag in HTML)
-const CAMERA_PASSWORD = window.CAMERA_PASSWORD || "default_password";
+// Get password - will be loaded asynchronously via password-loader.js
+let CAMERA_PASSWORD = null;
+
+// Initialize password from config or Firebase
+async function initCameraPassword() {
+  // First check config.js
+  if (typeof window.CAMERA_PASSWORD !== 'undefined') {
+    CAMERA_PASSWORD = window.CAMERA_PASSWORD;
+    console.log('✅ Camera password loaded from config.js');
+    return CAMERA_PASSWORD;
+  }
+  
+  // If not in config.js, fetch from Firebase
+  CAMERA_PASSWORD = await window.getCameraPassword();
+  if (CAMERA_PASSWORD) {
+    console.log('✅ Camera password loaded from Firebase');
+    return CAMERA_PASSWORD;
+  }
+  
+  // Fallback for development
+  console.warn('⚠️ Using default camera password');
+  CAMERA_PASSWORD = "hioo_default_camera";
+  return CAMERA_PASSWORD;
+}
 
 // ========= GET ROOM ID =========
 const urlParams = new URLSearchParams(window.location.search);
@@ -70,6 +93,9 @@ async function login() {
   loginBtn.textContent = 'Memverifikasi...';
   
   try {
+    // Load password from config or Firebase
+    await initCameraPassword();
+    
     // Cek password
     if (input === CAMERA_PASSWORD) {
       console.log('✅ Password correct!');

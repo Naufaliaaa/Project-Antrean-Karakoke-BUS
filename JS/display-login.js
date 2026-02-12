@@ -1,10 +1,33 @@
 /*************************************************
  * DISPLAY-LOGIN.JS - Display Login Authentication
- * Password loaded from config.js
+ * Password loaded from config.js OR Firebase
+ * Using password-loader.js for fallback support
  *************************************************/
 
-// Import password from config (loaded via script tag in HTML)
-const DISPLAY_PASSWORD = window.DISPLAY_PASSWORD || "default_password";
+// Get password - will be loaded asynchronously via password-loader.js
+let DISPLAY_PASSWORD = null;
+
+// Initialize password from config or Firebase
+async function initDisplayPassword() {
+  // First check config.js
+  if (typeof window.DISPLAY_PASSWORD !== 'undefined') {
+    DISPLAY_PASSWORD = window.DISPLAY_PASSWORD;
+    console.log('✅ Display password loaded from config.js');
+    return DISPLAY_PASSWORD;
+  }
+  
+  // If not in config.js, fetch from Firebase
+  DISPLAY_PASSWORD = await window.getDisplayPassword();
+  if (DISPLAY_PASSWORD) {
+    console.log('✅ Display password loaded from Firebase');
+    return DISPLAY_PASSWORD;
+  }
+  
+  // Fallback for development
+  console.warn('⚠️ Using default display password');
+  DISPLAY_PASSWORD = "hioo_default_display";
+  return DISPLAY_PASSWORD;
+}
 
 // ========= DOM ELEMENTS =========
 const passwordInput = document.getElementById('password');
@@ -71,6 +94,9 @@ async function handleSubmit() {
   
   try {
     console.log('📺 Verifying password...');
+    
+    // Load password from config or Firebase
+    await initDisplayPassword();
     
     // Simulasi delay untuk UX
     await new Promise(resolve => setTimeout(resolve, 500));
