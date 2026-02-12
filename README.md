@@ -107,10 +107,11 @@
 - **Keyboard Shortcuts** - ESC to go back, Ctrl+Space to spin
 
 ### 6. 🔐 **Security System**
-- **PIN Authentication** - 6-digit PIN untuk akses bus
-- **Password Protection** - Terpisah untuk Admin, Display, dan Camera
+- **PIN Authentication** - 6-digit PIN untuk akses bus (disimpan di Firebase)
+- **Password Protection** - Terpisah untuk Admin, Display, dan Camera (disimpan di Firebase)
 - **Session Management** - Token-based dengan auto-expiry
 - **Room Isolation** - Data terpisah per bus unit
+- **Secure Password Storage** - Password disimpan di Firebase, bukan di GitHub
 
 ---
 
@@ -287,21 +288,25 @@ const buses = [
 
 #### 4️⃣ Setup Passwords & PINs
 
+Password disimpan di Firebase untuk keamanan (tidak tersimpan di GitHub).
+
 Di Firebase Console, buat structure:
 
 ```
 karaoke/
-  └── room/
-      └── BUS-001/
-          └── Setting/
-              ├── pin: 101010
-              ├── busName: "Hiace 1"
+  ├── room/
+  │   └── BUS-001/
+  │       └── Setting/
+  │           ├── pin: 101010
+  │           └── busName: "Hiace 1"
+  └── system/
+      └── passwords/
+          ├── admin: "password_admin_anda"
+          ├── display: "password_display_anda"
+          └── camera: "password_camera_anda"
 ```
 
-Edit default passwords di file JS:
-- `admin-login.js` → `ADMIN_PASSWORD`
-- `display-login.js` → `DISPLAY_PASSWORD`
-- `camera-login.js` → `CAMERA_PASSWORD`
+**Catatan:** Password tidak perlu di-edit di file JS lagi. Sistem akan otomatis mengambil dari Firebase.
 
 #### 5️⃣ Deploy ke Server
 
@@ -339,6 +344,8 @@ Paste ke Firebase Console → Realtime Database → Rules:
 ```json
 {
   "rules": {
+    ".read": true,
+    ".write": true,
     "karaoke": {
       "room": {
         "$roomId": {
@@ -374,6 +381,12 @@ Paste ke Firebase Console → Realtime Database → Rules:
             ".read": true,
             ".write": true
           }
+        }
+      },
+      "system": {
+        "passwords": {
+          ".read": true,
+          ".write": true
         }
       }
     }
@@ -578,6 +591,13 @@ CAMERA_PASSWORD=p*************
           "micVolume": 100
         },
         "displayStatus": "active"
+      }
+    },
+    "system": {
+      "passwords": {
+        "admin": "rahasia123",
+        "display": "display123",
+        "camera": "camera123"
       }
     }
   }
