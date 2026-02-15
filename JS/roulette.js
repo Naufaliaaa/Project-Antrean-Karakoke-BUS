@@ -235,7 +235,7 @@ async function spinWheel() {
   const totalRotation = currentRotation + (360 * fullRotations) - targetSliceRotation + 90;
 
   // Animate
-  const duration = 5000; // 5 seconds
+  const duration = 7000; // 7 seconds
   const startTime = Date.now();
   const startRotation = currentRotation;
 
