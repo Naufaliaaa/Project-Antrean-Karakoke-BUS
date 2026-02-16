@@ -17,7 +17,7 @@ let isApplied = false; // Track if entries have been applied
 
 // ========= SOUND EFFECTS =========
 const spinSound = new Audio('sounds/roulette.mp3');
-const winSound = new Audio('sounds/win.wav');
+const winSound = new Audio('sounds/win.mp3');
 spinSound.loop = true; // Loop the spin sound while spinning
 
 // ========= DOM ELEMENTS =========
