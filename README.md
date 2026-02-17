@@ -31,6 +31,7 @@
 - [Penggunaan](#-penggunaan)
 - [Arsitektur Sistem](#-arsitektur-sistem)
 - [API & Database](#-api--database-structure)
+- [Sound System](#-sound--audio-system)
 - [Security](#-keamanan)
 - [Contributing](#-kontribusi)
 - [License](#-lisensi)
@@ -78,6 +79,7 @@
 - Complete queue management (add, delete, reorder)
 - System monitoring (Display & Camera status)
 - Audio control (YouTube & Mic volume)
+- Sound effects management
 - Manual song addition
 - Live reaction emotes
 - Session-based request counter
@@ -92,6 +94,9 @@
 - Connection status monitoring
 
 ### 5. 🎰 **Roulette Arisan (Wheel of Names)**
+- **Sound Effects (Baru!)** - Audio feedback untuk pengalaman lebih seru
+  - **Spin Sound** - Suara putar roda berputar selama undian
+  - **Win Sound** - Suara kemenangan/celebration saat pemenang dipilih
 - **Real-time Wheel Updates** - Wheel updates automatically as you type names
 - **Continuous Spin Animation** - Wheel spins smoothly while editing
 - **Instant Apply** - Click "Terapkan" to lock entries and stop spinning
@@ -106,7 +111,26 @@
 - **Colorful Slices** - Each entry gets a unique color
 - **Keyboard Shortcuts** - ESC to go back, Ctrl+Space to spin
 
-### 6. 🔐 **Security System**
+### 6. 🔊 **Sound & Audio System**
+- **Sound Effects (SFX)**
+  - Roulette spin sound - Audio feedback selama roda berputar
+  - Win/Celebration sound - Audio celebration saat pemenang keluar
+  - Loop support untuk spin sound
+  - Auto-reset audio position untuk replay
+- **Audio Control (Admin)**
+  - YouTube volume control (0-100%)
+  - Microphone volume control (0-100%)
+  - Real-time synchronization via Firebase
+  - Persistent volume settings per session
+- **Camera Audio**
+  - Mute/unmute microphone functionality
+  - Volume adjustment dari admin panel
+  - Audio track management untuk WebRTC stream
+- **Display Audio**
+  - Automatic volume sync dari Firebase
+  - Responsive volume control dari admin
+
+### 7. 🔐 **Security System**
 
 #### **Multi-Layer Authentication System**
 
@@ -262,7 +286,12 @@ karaoke-bus/
 │   ├── video-record.png        # Record icon
 │   ├── reset.png               # Reset icon
 │   ├── next.png                # Next icon
-│   └── exit.png                # Exit icon
+│   ├── exit.png                # Exit icon
+│   └── roulette.png            # Roulette icon
+│
+├── sounds/                     # Audio files
+│   ├── roulette.mp3           # Spin wheel sound effect
+│   └── win.mp3                # Winner celebration sound effect
 │
 ├── README.md                    # Project documentation
 └── .firebaserc / firebase.json  # Firebase config (optional)
