@@ -504,7 +504,7 @@ CAMERA_PASSWORD=your_camera_password
 │     → password → display_token (hash)   │
 │     → sessionStorage + auto-expiry      │
 ├─────────────────────────────────────────┤
-│  🎥 Video Panel (Camera)               │
+│  🎥 Video Panel (Camera)                │
 │     → password → videoPanel_token       │
 │     → force re-login (clear old token)  │
 └─────────────────────────────────────────┘
