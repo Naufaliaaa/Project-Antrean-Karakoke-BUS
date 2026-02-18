@@ -12,51 +12,51 @@
 
 ## 📋 DAFTAR ISI
 
-1. [Hardware Requirements](#1-hardware-requirements)
-2. [Software Requirements](#2-software-requirements)
-3. [Network & Internet](#3-network--internet)
-4. [Audio Visual Equipment](#4-audio-visual-equipment)
-5. [Device Setup](#5-device-setup)
-6. [Software Installation](#6-software-installation)
-7. [Wiring & Installation](#7-wiring--installation)
-8. [Testing & Calibration](#8-testing--calibration)
-9. [Maintenance & Backup](#9-maintenance--backup)
-10. [Emergency Procedures](#10-emergency-procedures)
-11. [Cost Estimation](#11-estimasi-biaya)
+1. [Kebutuhan Hardware](#1-kebutuhan-hardware)
+2. [Kebutuhan Software](#2-kebutuhan-software)
+3. [Jaringan & Internet](#3-jaringan--internet)
+4. [Peralatan Audio Visual](#4-peralatan-audio-visual)
+5. [Setup Perangkat](#5-setup-perangkat)
+6. [Instalasi Software](#6-instalasi-software)
+7. [Pengkabelan & Instalasi](#7-pengkabelan--instalasi)
+8. [Pengujian & Kalibrasi](#8-pengujian--kalibrasi)
+9. [Perawatan & Backup](#9-perawatan--backup)
+10. [Prosedur Darurat](#10-prosedur-darurat)
+11. [Estimasi Biaya](#11-estimasi-biaya)
 
 ---
 
-## 1. 🖥️ HARDWARE REQUIREMENTS
+## 1. 🖥️ KEBUTUHAN HARDWARE
 
-### **A. DISPLAY SYSTEM (Layar Utama)**
+### **A. SISTEM TAMPILAN (Layar Utama)**
 
 #### **✅ TV/Monitor (Layar Karaoke Utama)**
 - **Ukuran:** 32" - 55" (Rekomendasi: 43")
 - **Resolusi:** Minimum Full HD (1920x1080)
 - **Tipe:** Smart TV atau TV + Mini PC
 - **Fitur Wajib:**
-  - HDMI input
-  - Audio output (3.5mm atau optical)
-  - Mounting VESA compatible
+  - Input HDMI
+  - Output audio (3.5mm atau optical)
+  - Kompatibel mounting VESA
 - **Merk Rekomendasi:**
   - Samsung, LG, Sony, TCL
 - **Harga:** Rp 3.000.000 - Rp 8.000.000
 
-**Alternatif Budget:**
+**Alternatif Hemat:**
 - Proyektor + Layar (untuk bus besar)
 - Proyektor: Rp 2.000.000 - Rp 5.000.000
 
 ---
 
-#### **✅ Mini PC / Stick PC (Display Controller)**
+#### **✅ Mini PC / Stick PC (Pengontrol Tampilan)**
 
-**Opsi 1: Mini PC (Recommended)**
+**Opsi 1: Mini PC (Disarankan)**
 - **Processor:** Intel Celeron N4020 atau lebih tinggi
 - **RAM:** Minimum 4GB
-- **Storage:** 64GB SSD/eMMC
-- **OS:** Windows 10/11 atau Linux
+- **Penyimpanan:** 64GB SSD/eMMC
+- **Sistem Operasi:** Windows 10/11 atau Linux
 - **Port:** HDMI, USB, Ethernet, WiFi
-- **Contoh Device:**
+- **Contoh Perangkat:**
   - Intel NUC (Rp 2.500.000)
   - Beelink Mini PC (Rp 1.500.000)
   - Asus PN Series (Rp 3.000.000)
@@ -65,43 +65,43 @@
 - Intel Compute Stick (Rp 1.500.000)
 - ASUS Chromebit (Rp 1.200.000)
 
-**Opsi 3: Android TV Box (Budget)**
+**Opsi 3: Android TV Box (Hemat)**
 - Mi Box S (Rp 800.000)
 - Xiaomi TV Stick (Rp 600.000)
-- ⚠️ **Note:** Fitur terbatas, tidak support semua features
+- ⚠️ **Catatan:** Fitur terbatas, tidak mendukung semua fitur
 
 ---
 
-### **B. ADMIN CONTROL STATION**
+### **B. STASIUN KONTROL ADMIN**
 
 #### **✅ Laptop/Tablet Admin**
 - **Processor:** Core i3 / Ryzen 3 (minimal)
 - **RAM:** 4GB minimum
-- **OS:** Windows 10/11, macOS, atau Chrome OS
-- **Screen:** 13" - 15.6"
-- **Battery:** Minimum 4 jam
-- **Connectivity:** WiFi, Bluetooth
+- **Sistem Operasi:** Windows 10/11, macOS, atau Chrome OS
+- **Layar:** 13" - 15.6"
+- **Baterai:** Minimum 4 jam
+- **Konektivitas:** WiFi, Bluetooth
 - **Harga:** Rp 4.000.000 - Rp 8.000.000
 
-**Alternatif Budget:**
+**Alternatif Hemat:**
 - Tablet Android 10" + Keyboard
 - iPad + Keyboard
 - Chromebook (Rp 3.000.000)
 
 ---
 
-### **C. CAMERA SYSTEM (Video Panel)**
+### **C. SISTEM KAMERA (Panel Video)**
 
 #### **✅ Webcam / Action Camera**
 
-**Opsi 1: Webcam Eksternal (Recommended)**
+**Opsi 1: Webcam Eksternal (Disarankan)**
 - **Resolusi:** Minimum 720p (Rekomendasi: 1080p)
 - **Frame Rate:** 30fps minimum
-- **Fitur:** Auto-focus, low-light capability
-- **Connection:** USB atau WiFi
+- **Fitur:** Auto-focus, kemampuan low-light
+- **Koneksi:** USB atau WiFi
 - **Contoh:**
   - Logitech C920 (Rp 1.200.000)
-  - Logitech C270 (Rp 400.000 - budget)
+  - Logitech C270 (Rp 400.000 - hemat)
   - Microsoft LifeCam (Rp 600.000)
 
 **Opsi 2: Action Camera**
@@ -110,58 +110,58 @@
 - Insta360 GO 2 (Rp 3.500.000)
 
 **Opsi 3: Smartphone Bekas**
-- Android 8.0+ dengan camera decent
-- Bisa pakai HP lama sebagai dedicated camera
-- Install DroidCam atau IP Webcam app
+- Android 8.0+ dengan kamera bagus
+- Bisa pakai HP lama sebagai kamera khusus
+- Install aplikasi DroidCam atau IP Webcam
 - **Harga:** Rp 500.000 - Rp 1.500.000
 
 ---
 
-#### **✅ Camera Controller Device**
+#### **✅ Perangkat Pengontrol Kamera**
 
-**Dedicated Device untuk Camera Panel:**
-- **Option 1:** Laptop/PC terpisah
-- **Option 2:** Tablet Android dengan USB camera
-- **Option 3:** Smartphone dengan tripod stand
+**Perangkat Khusus untuk Panel Kamera:**
+- **Opsi 1:** Laptop/PC terpisah
+- **Opsi 2:** Tablet Android dengan kamera USB
+- **Opsi 3:** Smartphone dengan tripod stand
 
-**Specs Minimum:**
+**Spesifikasi Minimum:**
 - Processor: Snapdragon 660 / MediaTek G80
 - RAM: 3GB
-- Storage: 32GB
-- Camera: 8MP (jika pakai built-in)
-- Battery: 4000mAh
+- Penyimpanan: 32GB
+- Kamera: 8MP (jika pakai bawaan)
+- Baterai: 4000mAh
 
 ---
 
-### **D. AUDIO EQUIPMENT**
+### **D. PERALATAN AUDIO**
 
-#### **✅ Microphone System**
+#### **✅ Sistem Microphone**
 
-**Wireless Microphone (Wajib)**
+**Microphone Wireless (Wajib)**
 - **Tipe:** UHF Wireless Microphone
 - **Jumlah:** 2 unit (untuk duet)
-- **Range:** 50-100 meter
+- **Jangkauan:** 50-100 meter
 - **Fitur:** 
-  - Rechargeable battery
+  - Baterai rechargeable
   - Multiple frequency channels
   - Anti-interference
 - **Contoh:**
   - Shure SM58 Wireless (Rp 3.000.000/set)
   - Sennheiser EW Series (Rp 5.000.000/set)
-  - Behringer ULM Series (Rp 1.500.000/set - budget)
-  - **Budget:** TOA/Ashley Wireless (Rp 800.000)
+  - Behringer ULM Series (Rp 1.500.000/set - hemat)
+  - **Hemat:** TOA/Ashley Wireless (Rp 800.000)
 
 ---
 
 #### **✅ Audio Mixer**
 
 **Digital Audio Mixer**
-- **Channels:** Minimum 4-8 channel
+- **Channel:** Minimum 4-8 channel
 - **Fitur Wajib:**
-  - Echo/Reverb effect
-  - EQ controls
+  - Efek Echo/Reverb
+  - Kontrol EQ
   - Volume per channel
-  - USB/Bluetooth input
+  - Input USB/Bluetooth
 - **Contoh:**
   - Yamaha MG Series (Rp 2.500.000)
   - Behringer Xenyx (Rp 1.200.000)
@@ -176,8 +176,8 @@
 
 **Power Amplifier**
 - **Power:** 100W - 300W RMS
-- **Channels:** 2 channel (stereo)
-- **Protection:** Overload, thermal protection
+- **Channel:** 2 channel (stereo)
+- **Proteksi:** Overload, thermal protection
 - **Contoh:**
   - Ashley KA Series (Rp 1.500.000)
   - TOA PA Amplifier (Rp 2.000.000)
@@ -185,43 +185,43 @@
 
 ---
 
-#### **✅ Speaker System**
+#### **✅ Sistem Speaker**
 
-**Main Speakers (2 unit)**
-- **Type:** 2-way speaker system
+**Speaker Utama (2 unit)**
+- **Tipe:** 2-way speaker system
 - **Power:** 50W - 100W per speaker
-- **Impedance:** 8 ohm
-- **Mounting:** Wall/ceiling mount brackets
+- **Impedansi:** 8 ohm
+- **Mounting:** Bracket dinding/plafon
 - **Contoh:**
   - JBL Control Series (Rp 1.500.000/pair)
   - Yamaha NS Series (Rp 2.000.000/pair)
   - TOA Column Speaker (Rp 1.200.000/pair)
 
-**Optional: Subwoofer**
+**Opsional: Subwoofer**
 - 8" atau 10" active subwoofer
 - Untuk bass yang lebih powerful
 - Harga: Rp 1.500.000 - Rp 3.000.000
 
 ---
 
-### **E. NETWORKING EQUIPMENT**
+### **E. PERALATAN JARINGAN**
 
 #### **✅ Router WiFi (Wajib)**
 
-**Specifications:**
-- **Standard:** WiFi 5 (802.11ac) minimum
-- **Frequency:** Dual-band (2.4GHz + 5GHz)
-- **Coverage:** 50-100 meter
-- **Speed:** AC1200 atau lebih tinggi
-- **Ports:** 4x LAN ports minimum
+**Spesifikasi:**
+- **Standar:** WiFi 5 (802.11ac) minimum
+- **Frekuensi:** Dual-band (2.4GHz + 5GHz)
+- **Cakupan:** 50-100 meter
+- **Kecepatan:** AC1200 atau lebih tinggi
+- **Port:** 4x port LAN minimum
 - **Fitur:**
-  - Guest network support
+  - Dukungan guest network
   - QoS (Quality of Service)
   - DHCP server
-  - Password protection
+  - Proteksi password
 
 **Contoh Produk:**
-- **Tenda AC10** (Rp 350.000) - Budget
+- **Tenda AC10** (Rp 350.000) - Hemat
 - **TP-Link Archer C6** (Rp 450.000)
 - **Xiaomi Mi Router 4A Gigabit** (Rp 400.000)
 - **ASUS RT-AC1200** (Rp 600.000)
@@ -233,15 +233,15 @@
 
 **Mobile Broadband Modem:**
 - **Tipe:** 4G LTE Cat6 atau lebih tinggi
-- **Speed:** Download 150Mbps+ / Upload 50Mbps+
-- **Ports:** WAN port untuk router
-- **Battery Backup:** Optional
-- **SIM Card Slot:** Minimum 1 slot
+- **Kecepatan:** Download 150Mbps+ / Upload 50Mbps+
+- **Port:** Port WAN untuk router
+- **Backup Baterai:** Opsional
+- **Slot SIM Card:** Minimum 1 slot
 
 **Contoh:**
 - **Huawei E5577** (Rp 700.000) - Portable
-- **TP-Link MR6400** (Rp 1.200.000) - With WiFi
-- **Huawei B315** (Rp 1.500.000) - Home router
+- **TP-Link MR6400** (Rp 1.200.000) - Dengan WiFi
+- **Huawei B315** (Rp 1.500.000) - Router rumah
 - **Teltonika RUT240** (Rp 2.500.000) - Industrial
 
 **Alternatif:**
@@ -250,21 +250,21 @@
 
 ---
 
-#### **✅ Ethernet Cables**
+#### **✅ Kabel Ethernet**
 
 - **Cat5e atau Cat6**
 - **Panjang:** 
-  - 3m x 2 (device to router)
-  - 5m x 1 (router to modem)
-  - 10m x 1 (backup/extension)
+  - 3m x 2 (perangkat ke router)
+  - 5m x 1 (router ke modem)
+  - 10m x 1 (cadangan/extension)
 - **Harga:** Rp 50.000 - Rp 200.000 total
 
 ---
 
-#### **✅ Network Switch (Optional)**
+#### **✅ Network Switch (Opsional)**
 
 **Untuk koneksi lebih banyak:**
-- **Ports:** 5-8 port Gigabit
+- **Port:** 5-8 port Gigabit
 - **Tipe:** Unmanaged switch
 - **Contoh:**
   - TP-Link TL-SG108 (Rp 300.000)
@@ -272,14 +272,14 @@
 
 ---
 
-### **F. POWER SUPPLY & PROTECTION**
+### **F. SUPPLY DAYA & PROTEKSI**
 
 #### **✅ UPS (Uninterruptible Power Supply)**
 
-**Untuk Backup Power:**
-- **Capacity:** 600VA - 1000VA
-- **Battery Backup:** 15-30 menit
-- **Outlets:** Minimum 4 outlets
+**Untuk Backup Daya:**
+- **Kapasitas:** 600VA - 1000VA
+- **Backup Baterai:** 15-30 menit
+- **Outlet:** Minimum 4 outlet
 - **Fitur:**
   - Surge protection
   - Voltage regulation
@@ -293,10 +293,10 @@
 
 #### **✅ Power Strip / Extension**
 
-- **Outlets:** 6-8 outlets
-- **Cable Length:** 3-5 meter
+- **Outlet:** 6-8 outlet
+- **Panjang Kabel:** 3-5 meter
 - **Surge Protection:** Wajib
-- **Switch:** Individual switch per outlet
+- **Switch:** Switch individual per outlet
 - **Harga:** Rp 100.000 - Rp 300.000
 
 ---
@@ -304,26 +304,26 @@
 #### **✅ DC-DC Converter (Untuk Bus)**
 
 **Mengubah 12V/24V Bus ke 220V AC:**
-- **Type:** Pure Sine Wave Inverter
+- **Tipe:** Pure Sine Wave Inverter
 - **Power:** 300W - 1000W
-- **Input:** 12V/24V DC (dari bus battery)
+- **Input:** 12V/24V DC (dari baterai bus)
 - **Output:** 220V AC 50Hz
-- **Protection:** Overload, short circuit, over temperature
+- **Proteksi:** Overload, short circuit, over temperature
 - **Contoh:**
   - Suoer Power Inverter (Rp 500.000 - 300W)
   - Energizer EN500 (Rp 800.000 - 500W)
   - Microtek UPS SW1000 (Rp 1.500.000 - 1000W)
 
-**⚠️ PENTING:** Hitung total wattage semua device!
+**⚠️ PENTING:** Hitung total wattage semua perangkat!
 
 ---
 
-### **G. ACCESSORIES & MOUNTING**
+### **G. AKSESORI & MOUNTING**
 
-#### **✅ Mounting Hardware**
+#### **✅ Hardware Mounting**
 
 **TV Wall Mount:**
-- VESA compatible bracket
+- Bracket kompatibel VESA
 - Tilt/swivel mount
 - Harga: Rp 150.000 - Rp 500.000
 
@@ -339,23 +339,23 @@
 
 ---
 
-#### **✅ Cooling & Ventilation**
+#### **✅ Pendinginan & Ventilasi**
 
 **USB Fans (untuk Mini PC):**
 - 2-3 unit USB cooling fans
 - Harga: Rp 50.000 - Rp 100.000/unit
 
-**Ventilation:**
-- Pastikan area equipment punya sirkulasi udara
-- Jangan tutup rapat device yang panas
+**Ventilasi:**
+- Pastikan area peralatan punya sirkulasi udara
+- Jangan tutup rapat perangkat yang panas
 
 ---
 
-#### **✅ Storage & Organization**
+#### **✅ Penyimpanan & Organisasi**
 
 **Equipment Box/Rack:**
 - Kotak plastik/metal untuk router, modem
-- 19" rack mount (optional, untuk professional setup)
+- 19" rack mount (opsional, untuk setup profesional)
 - Harga: Rp 200.000 - Rp 1.000.000
 
 **Cable Organizer:**
@@ -365,12 +365,12 @@
 
 ---
 
-## 2. 💻 SOFTWARE REQUIREMENTS
+## 2. 💻 KEBUTUHAN SOFTWARE
 
-### **A. CORE SOFTWARE (WAJIB)**
+### **A. SOFTWARE UTAMA (WAJIB)**
 
 #### **✅ Web Browser**
-- **Google Chrome** (Recommended - versi terbaru)
+- **Google Chrome** (Disarankan - versi terbaru)
   - Versi: 90+
   - Ekstensi yang diperlukan:
     - Auto Refresh Plus
@@ -384,27 +384,27 @@
 - **Tipe:** Cloud-based Real-time Database
 - **Provider:** Google Firebase
 - **Fitur:**
-  - Real-time synchronization
+  - Sinkronisasi real-time
   - Offline support
   - REST API
-- **Cost:** 
-  - Free tier: 100 simultaneous connections
-  - Paid: Mulai $25/bln untuk lebih banyak koneksi
+- **Biaya:** 
+  - Gratis: 100 simultaneous connections
+  - Berbayar: Mulai $25/bulan untuk lebih banyak koneksi
 
 ---
 
 #### **✅ Web Server / Hosting**
 
-**Opsi 1: Firebase Hosting (Recommended)**
+**Opsi 1: Firebase Hosting (Disarankan)**
 - **Fitur:**
-  - Free SSL certificate
+  - Gratis SSL certificate
   - CDN global
   - Fast deployment
   - Version control
   - Rollback capability
-- **Cost:** FREE untuk 10GB storage + 360MB/day transfer
+- **Biaya:** FREE untuk 10GB storage + 360MB/hari transfer
 
-**Opsi 2: Local Server (Offline Mode)**
+**Opsi 2: Local Server (Mode Offline)**
 - **Software:**
   - XAMPP (Windows/Linux)
   - WAMP (Windows)
@@ -414,8 +414,8 @@
 
 **Opsi 3: cPanel / Shared Hosting**
 - **Requirements:**
-  - Domain name (Rp 150k/tahun)
-  - Shared hosting (Rp 300k - Rp 600k/tahun)
+  - Nama domain (Rp 150rb/tahun)
+  - Shared hosting (Rp 300rb - Rp 600rb/tahun)
   - SSL certificate (Let's Encrypt - FREE)
 
 ---
@@ -427,58 +427,66 @@
   - Playback control
   - Event listeners
   - Volume control
-- **Cost:** FREE (dengan batas quota)
+- **Biaya:** FREE (dengan batas quota)
 
 ---
 
-### **B. SYSTEM SOFTWARE (PERANGKAT)**
+### **B. SOFTWARE SISTEM (PERANGKAT)**
 
-#### **✅ Display PC Software**
+#### **✅ Software Display PC**
 
-**Operating System:**
-- **Windows 10/11 Pro** (Recommended)
+**Sistem Operasi:**
+- **Windows 10/11 Pro** (Disarankan)
 - **Chrome OS**
 - **Linux (Ubuntu/Debian)**
 
-**Required Software:**
+**Software yang Diperlukan:**
 ```
-1. Google Chrome / Firefox / Edge (Latest version)
-2. Adobe Flash Player (optional, untuk legacy content)
+1. Google Chrome / Firefox / Edge (Versi terbaru)
+2. Adobe Flash Player (opsional, untuk legacy content)
 3. VLC Media Player (untuk testing video)
 4. Notepad++ / VS Code (untuk editing konfigurasi)
 5. Git (untuk deployment)
 ```
 
-**Browser Settings:**
+**Pengaturan Browser:**
 ```
 - Set homepage ke display.html
-- Disable notifications
-- Disable auto-updates saat operational
-- Enable Hardware acceleration
+- Nonaktifkan notifications
+- Nonaktifkan auto-updates saat operasional
+- Aktifkan Hardware acceleration
 - Autoplay policy: No user gesture required
 ```
 
 ---
 
-#### **✅ Admin Laptop Software**
+#### **✅ Software Admin Laptop**
 
-**Operating System:**
+**Sistem Operasi:**
 - Windows 10/11, macOS, atau Chrome OS
 
-**Required Software:**
+**Software yang Diperlukan:**
 ```
-1. Web Browser (Chrome/Edge/Firefox - Latest)
-2. Zoom / TeamViewer (remote support)
+1. Web Browser (Chrome/Edge/Firefox - Terbaru)
+2. Zoom / TeamViewer (dukungan remote)
 3. PDF Reader
 4. Text Editor (Notepad++ / VS Code)
-5. File Manager (Total Commander - optional)
+5. File Manager (Total Commander - opsional)
 6. Screenshot Tool (Greenshot / Lightshot)
 7. Google Drive / Dropbox (backup)
 ```
 
+**Bookmarks:**
+```
+- Admin Panel: https://domain.com/admin.html?room=BUS-001
+- Form QR: https://domain.com/form.html?room=BUS-001
+- Firebase Console: https://console.firebase.google.com
+- Router Admin: http://192.168.1.1
+```
+
 ---
 
-#### **✅ Camera Device Software**
+#### **✅ Software Perangkat Kamera**
 
 **Untuk Smartphone sebagai Kamera:**
 - **Android:**
@@ -491,82 +499,82 @@
 
 **Untuk Webcam PC:**
 - Driver webcam terbaru
-- Windows Camera App (built-in)
+- Windows Camera App (bawaan)
 
 ---
 
-### **C. APPLICATION SOFTWARE (FITUR SISTEM)**
+### **C. SOFTWARE APLIKASI (FITUR SISTEM)**
 
-#### **✅ Karaoke System Files**
+#### **✅ File Sistem Karaoke**
 
-**Frontend Files (Web-based):**
+**File Frontend (Web-based):**
 ```
-├── index.html                    # Bus selection page
-├── pin-login.html               # PIN authentication
-├── bus-menu.html                # Bus menu navigation
+├── index.html                    # Halaman pemilihan bus
+├── pin-login.html               # Autentikasi PIN
+├── bus-menu.html                # Navigasi menu bus
 │
-├── admin-login.html             # Admin authentication
-├── admin.html                   # Admin control panel
+├── admin-login.html             # Autentikasi admin
+├── admin.html                   # Panel kontrol admin
 │
-├── display-login.html           # Display authentication
-├── display.html                 # Main karaoke display
+├── display-login.html           # Autentikasi tampilan
+├── display.html                 # Tampilan karaoke utama
 │
-├── camera-login.html            # Camera panel auth
-├── video-panel.html             # Camera control panel
-├── camera-stream.html           # Camera streaming page
+├── camera-login.html            # Auth panel kamera
+├── video-panel.html             # Panel kontrol kamera
+├── camera-stream.html           # Halaman streaming kamera
 │
-├── form.html                    # Song request form
-├── emote.html                   # Standalone emote sender
-├── roulette.html                # Roulette Arisan (Wheel of Names)
-```
-
-**CSS Files:**
-```
-├── css/index.css               # Bus selection styles
-├── css/pin-login.css           # PIN login styles
-├── css/bus-menu.css            # Menu styles
-├── css/admin-login.css         # Admin login styles
-├── css/admin.css               # Admin panel styles
-├── css/display-login.css       # Display login styles
-├── css/display.css            # Display karaoke styles
-├── css/camera-login.css        # Camera login styles
-├── css/video-panel.css         # Video panel styles
-├── css/form.css                # Request form styles
-├── css/emote.css               # Emote page styles
-├── css/roulette.css            # Roulette Arisan styles
+├── form.html                    # Form permintaan lagu
+├── emote.html                   # Pengirim emote mandiri
+├── roulette.html                # Roulette Arisan (Roda Nama)
 ```
 
-**JavaScript Files:**
+**File CSS:**
 ```
-├── js/firebase.js              # Firebase configuration
-├── js/room.js                  # Room management system
+├── css/index.css               # Gaya pemilihan bus
+├── css/pin-login.css           # Gaya login PIN
+├── css/bus-menu.css            # Gaya menu
+├── css/admin-login.css         # Gaya login admin
+├── css/admin.css               # Gaya panel admin
+├── css/display-login.css       # Gaya login tampilan
+├── css/display.css             # Gaya tampilan karaoke
+├── css/camera-login.css        # Gaya login kamera
+├── css/video-panel.css         # Gaya panel video
+├── css/form.css                # Gaya form permintaan
+├── css/emote.css               # Gaya halaman emote
+├── css/roulette.css            # Gaya Roulette Arisan
+```
+
+**File JavaScript:**
+```
+├── js/firebase.js              # Konfigurasi Firebase
+├── js/room.js                 # Sistem manajemen room
 ├── js/custom-modal.js          # Custom alert/confirm modals
 │
-├── js/index.js                 # Bus selection logic
-├── js/pin-login.js             # PIN authentication
-├── js/bus-menu.js              # Menu navigation logic
+├── js/index.js                 # Logika pemilihan bus
+├── js/pin-login.js             # Autentikasi PIN
+├── js/bus-menu.js              # Logika navigasi menu
 │
-├── js/admin-login.js           # Admin auth logic
-├── js/admin-page.js            # Admin page init
-├── js/admin.js                 # Admin panel logic
+├── js/admin-login.js           # Logika auth admin
+├── js/admin-page.js            # Inisialisasi halaman admin
+├── js/admin.js                 # Logika panel admin
 │
-├── js/display-login.js         # Display auth logic
-├── js/display-page.js          # Display page init
-├── js/display.js               # Display karaoke logic
+├── js/display-login.js         # Logika auth tampilan
+├── js/display-page.js          # Inisialisasi halaman tampilan
+├── js/display.js               # Logika tampilan karaoke
 │
-├── js/camera-login.js          # Camera auth logic
-├── js/video-panel-page.js      # Video panel init
-├── js/video-panel.js           # Video panel logic
-├── js/camera-stream.js         # Camera streaming logic
+├── js/camera-login.js         # Logika auth kamera
+├── js/video-panel-page.js      # Inisialisasi panel video
+├── js/video-panel.js           # Logika panel video
+├── js/camera-stream.js         # Logika streaming kamera
 │
-├── js/form.js                  # Request form logic
-├── js/emote.js                 # Emote sender logic
-├── js/roulette.js              # Roulette Arisan logic
+├── js/form.js                  # Logika form permintaan
+├── js/emote.js                 # Logika pengirim emote
+├── js/roulette.js              # Logika Roulette Arisan
 ```
 
 ---
 
-#### **✅ Database Schema (Firebase)**
+#### **✅ Skema Database (Firebase)**
 
 **Struktur Data Wajib:**
 ```javascript
@@ -574,8 +582,8 @@
   "karaoke": {
     "room": {
       "BUS-001": {
-        "queue": { /* Song requests */ },
-        "emotes": { /* Live reactions */ },
+        "queue": { /* Permintaan lagu */ },
+        "emotes": { /* Reaksi langsung */ },
         "Setting": { "pin": "xxxxxx", "busName": "Hiace 1" },
         "videoSession": { /* WebRTC signaling */ },
         "audioControl": { "youtubeVolume": 100, "micVolume": 100 },
@@ -595,72 +603,72 @@
 
 ---
 
-### **D. SECURITY SOFTWARE**
+### **D. SOFTWARE KEAMANAN**
 
-#### **✅ Authentication System**
+#### **✅ Sistem Autentikasi**
 
-**Multi-Layer Security:**
-| Layer | Type | Implementation |
+**Keamanan Multi-Layer:**
+| Layer | Tipe | Implementasi |
 |-------|------|----------------|
-| **Level 1** | PIN Login | 6-digit numeric PIN (Firebase validated) |
-| **Level 2** | Admin Password | Token-based session |
-| **Level 3** | Display Password | Hash-based token |
-| **Level 4** | Camera Password | Token dengan force re-login |
+| **Level 1** | Login PIN | PIN numerik 6 digit (Firebase validated) |
+| **Level 2** | Password Admin | Token-based session |
+| **Level 3** | Password Tampilan | Hash-based token |
+| **Level 4** | Password Kamera | Token dengan force re-login |
 
-**Password Storage Priority:**
+**Prioritas Penyimpanan Password:**
 1. Firebase: `karaoke/system/passwords/`
 2. config.js (development only)
 3. Default values (fallback)
 
 ---
 
-### **E. AUXILIARY SOFTWARE**
+### **E. SOFTWARE PENDUKUNG**
 
 #### **✅ QR Code Generator**
 - **Library:** QRCode.js / API
-- **Usage:** Generate QR untuk passenger form access
+- **Kegunaan:** Generate QR untuk akses form penumpang
 
-#### **✅ Sound Effects**
-- **Files Required:**
-  - `sounds/roulette.mp3` - Spin wheel sound
-  - `sounds/win.mp3` - Winner celebration sound
+#### **✅ Efek Suara**
+- **File yang Diperlukan:**
+  - `sounds/roulette.mp3` - Suara putar roda
+  - `sounds/win.mp3` - Suara celebration pemenang
 
-#### **✅ Media Players**
-- **VLC Media Player** - Untuk testing dan backup playback
-- **Windows Media Player** - Built-in untuk Windows
+#### **✅ Media Player**
+- **VLC Media Player** - Untuk testing dan backup pemutaran
+- **Windows Media Player** - Bawaan untuk Windows
 
 #### **✅ Remote Access**
-- **TeamViewer** - Remote support
+- **TeamViewer** - Dukungan remote
 - **AnyDesk** - Alternatif remote access
-- **Chrome Remote Desktop** - Free alternative
+- **Chrome Remote Desktop** - Alternatif gratis
 
 ---
 
-### **F. SOFTWARE VERSIONS & COMPATIBILITY**
+### **F. VERSI SOFTWARE & KOMPATIBILITAS**
 
-#### **✅ Minimum Requirements per Device**
+#### **✅ Persyaratan Minimum per Perangkat**
 
 **Display PC:**
 ```
-OS: Windows 10/11, Chrome OS, atau Linux
+Sistem Operasi: Windows 10/11, Chrome OS, atau Linux
 Processor: Intel Celeron N4020 / AMD Ryzen 3
 RAM: 4GB
-Storage: 64GB
+Penyimpanan: 64GB
 Browser: Chrome 90+, Firefox 88+, Edge 90+
 Internet: 10Mbps+ (untuk streaming)
 ```
 
 **Admin Laptop:**
 ```
-OS: Windows 10/11, macOS, Chrome OS
+Sistem Operasi: Windows 10/11, macOS, Chrome OS
 Processor: Core i3 / Ryzen 3
 RAM: 4GB
-Storage: 128GB
+Penyimpanan: 128GB
 Browser: Chrome 90+
 Internet: 5Mbps+
 ```
 
-**Camera Device:**
+**Perangkat Kamera:**
 ```
 Smartphone: Android 8.0+ / iOS 12+
 atau
@@ -670,13 +678,13 @@ PC: Windows 10/11, RAM 4GB
 
 ---
 
-## 3. 🌐 NETWORK & INTERNET
+## 3. 🌐 JARINGAN & INTERNET
 
-### **A. INTERNET CONNECTION**
+### **A. KONEKSI INTERNET**
 
-#### **✅ Provider Selection**
+#### **✅ Pemilihan Provider**
 
-**Primary Provider (Wajib):**
+**Provider Utama (Wajib):**
 - **Telkomsel** (coverage terbaik)
 - **Indosat Ooredoo** (alternatif)
 - **XL Axiata** (backup)
@@ -696,18 +704,18 @@ PC: Windows 10/11, RAM 4GB
 - **Estimasi:** Bus jalan 8 jam/hari dengan karaoke aktif = 20-40GB/hari
 
 **Rekomendasi Kuota:**
-- **Light usage** (2-3 jam/hari): 50GB/bulan
-- **Medium usage** (4-6 jam/hari): 100GB/bulan
-- **Heavy usage** (8+ jam/hari): 200GB+/bulan
+- **Pemakaian Ringan** (2-3 jam/hari): 50GB/bulan
+- **Pemakaian Sedang** (4-6 jam/hari): 100GB/bulan
+- **Pemakaian Berat** (8+ jam/hari): 200GB+/bulan
 
 ---
 
-#### **✅ Backup Internet (Recommended)**
+#### **✅ Backup Internet (Disarankan)**
 
-**Dual SIM Setup:**
-- Primary: Telkomsel
-- Backup: Indosat/XL
-- Auto failover jika primary down
+**Setup Dual SIM:**
+- Utama: Telkomsel
+- Cadangan: Indosat/XL
+- Auto failover jika utama down
 
 **Hardware:**
 - Modem dual-SIM (Teltonika RUT240)
@@ -717,140 +725,140 @@ PC: Windows 10/11, RAM 4GB
 
 #### **✅ Signal Booster (Jika Perlu)**
 
-**External Antenna:**
+**Antena Eksternal:**
 - 4G LTE Outdoor Antenna
 - Gain: 20-30 dBi
-- Cable: RG58 atau better
+- Kabel: RG58 atau lebih baik
 - Harga: Rp 300.000 - Rp 800.000
 
-**Installation:**
+**Instalasi:**
 - Mount di atap bus
 - Connect ke modem via pigtail cable
 
 ---
 
-### **B. NETWORK SETUP**
+### **B. SETUP JARINGAN**
 
-#### **✅ WiFi Configuration**
+#### **✅ Konfigurasi WiFi**
 
-**Router Settings:**
+**Pengaturan Router:**
 
 ```
-SSID Primary: "HiQo-Karaoke-BUS001"
-Password: [Strong password]
+SSID Utama: "HiQo-Karaoke-BUS001"
+Password: [Password kuat]
 Security: WPA2-PSK / WPA3
 
-SSID Guest: "HiQo-Penumpang"
-Password: [Simple password untuk penumpang]
+SSID Tamu: "HiQo-Penumpang"
+Password: [Password sederhana untuk penumpang]
 Security: WPA2-PSK
 
 Channel 2.4GHz: Auto (atau 1, 6, 11)
 Channel 5GHz: Auto (atau 36, 40, 44, 48)
 
 DHCP Range: 192.168.1.100 - 192.168.1.200
-IP Display: 192.168.1.10 (static)
+IP Tampilan: 192.168.1.10 (static)
 IP Admin: 192.168.1.11 (static)
-IP Camera: 192.168.1.12 (static)
+IP Kamera: 192.168.1.12 (static)
 ```
 
 ---
 
-#### **✅ IP Address Scheme**
+#### **✅ Skema Alamat IP**
 
-| Device | IP Address | Note |
-|--------|------------|------|
+| Perangkat | Alamat IP | Catatan |
+|-----------|------------|------|
 | Router | 192.168.1.1 | Gateway |
 | Modem | 192.168.1.2 | WAN |
-| Display PC | 192.168.1.10 | Static |
-| Admin Laptop | 192.168.1.11 | Static |
-| Camera Device | 192.168.1.12 | Static |
-| Form Users | 192.168.1.100-200 | DHCP Pool |
+| PC Tampilan | 192.168.1.10 | Static |
+| Laptop Admin | 192.168.1.11 | Static |
+| Perangkat Kamera | 192.168.1.12 | Static |
+| Pengguna Form | 192.168.1.100-200 | DHCP Pool |
 
 ---
 
-#### **✅ QoS (Quality of Service) Settings**
+#### **✅ Pengaturan QoS (Quality of Service)**
 
-**Priority Bandwidth:**
+**Prioritas Bandwidth:**
 
-1. **High Priority (60% bandwidth):**
-   - Display PC (YouTube streaming)
-   - Camera streaming (WebRTC)
+1. **Prioritas Tinggi (60% bandwidth):**
+   - PC Tampilan (YouTube streaming)
+   - Streaming kamera (WebRTC)
 
-2. **Medium Priority (30% bandwidth):**
-   - Admin Panel
-   - Firebase sync
+2. **Prioritas Sedang (30% bandwidth):**
+   - Panel Admin
+   - Sinkronisasi Firebase
 
-3. **Low Priority (10% bandwidth):**
-   - Form requests dari penumpang
-   - General browsing
+3. **Prioritas Rendah (10% bandwidth):**
+   - Request form dari penumpang
+   - Browsing umum
 
-**Router Settings:**
+**Pengaturan Router:**
 ```
-Enable QoS: Yes
-Total Bandwidth: Set to 80% of actual speed
-Priority by IP: 
-  - 192.168.1.10 (Display) = High
-  - 192.168.1.12 (Camera) = High
-  - 192.168.1.11 (Admin) = Medium
+Aktifkan QoS: Ya
+Total Bandwidth: Set ke 80% dari kecepatan aktual
+Prioritas berdasarkan IP: 
+  - 192.168.1.10 (Tampilan) = Tinggi
+  - 192.168.1.12 (Kamera) = Tinggi
+  - 192.168.1.11 (Admin) = Sedang
 ```
 
 ---
 
-#### **✅ Bandwidth Management**
+#### **✅ Manajemen Bandwidth**
 
 **Tips Hemat Kuota:**
 
-1. **Pre-download YouTube videos** (jika mungkin)
-2. **Limit video quality** di admin panel
-3. **Compress video stream** untuk camera
-4. **Cache frequently played songs**
-5. **Use CDN** untuk assets (CSS, JS, images)
+1. **Pre-download video YouTube** (jika memungkinkan)
+2. **Batasi kualitas video** di panel admin
+3. **Compress video stream** untuk kamera
+4. **Cache lagu yang sering diputar**
+5. **Gunakan CDN** untuk assets (CSS, JS, images)
 
-**Monitoring Tools:**
-- GlassWire (Windows) - free
-- NetGuard (Android) - free
-- Router admin panel statistics
+**Alat Monitoring:**
+- GlassWire (Windows) - gratis
+- NetGuard (Android) - gratis
+- Statistik panel admin router
 
 ---
 
-### **C. FIREWALL & SECURITY**
+### **C. FIREWALL & KEAMANAN**
 
-#### **✅ Router Firewall**
+#### **✅ Firewall Router**
 
 ```
-Enable Firewall: Yes
-Block Incoming: Yes
-Allow Outgoing: Yes
+Aktifkan Firewall: Ya
+Blokir Masuk: Ya
+Izinkan Keluar: Ya
 
-Port Forwarding: None (tidak perlu)
-DMZ: Disabled
-UPnP: Disabled (security risk)
+Port Forwarding: Tidak perlu
+DMZ: Nonaktif
+UPnP: Nonaktif (resiko keamanan)
 
-MAC Filtering: Optional (whitelist devices)
+MAC Filtering: Opsional (whitelist perangkat)
 ```
 
-#### **✅ WiFi Security**
+#### **✅ Keamanan WiFi**
 
-**Guest Network:**
-- Isolate dari main network
-- Limit bandwidth (2-5 Mbps per user)
+**Jaringan Tamu:**
+- Isolasi dari jaringan utama
+- Batasi bandwidth (2-5 Mbps per user)
 - Auto-disconnect setelah 4 jam
 
-**Main Network:**
-- Hide SSID (optional)
-- Strong password (min 12 karakter)
-- Change password setiap bulan
+**Jaringan Utama:**
+- Hide SSID (opsional)
+- Password kuat (min 12 karakter)
+- Ganti password setiap bulan
 
 ---
 
-## 4. 🔊 AUDIO VISUAL EQUIPMENT
+## 4. 🔊 PERALATAN AUDIO VISUAL
 
-### **A. AUDIO WIRING DIAGRAM**
+### **A. DIAGRAM PENGKABELAN AUDIO**
 
 ```
 ┌─────────────────┐
-│  Display PC     │
-│  (HDMI Audio)  │
+│  PC Tampilan    │
+│  (Audio HDMI)  │
 └────────┬────────┘
          │ HDMI
          ↓
@@ -862,10 +870,10 @@ MAC Filtering: Optional (whitelist devices)
          ↓                     ↓
 ┌─────────────────────────────────┐
 │        Audio Mixer              │
-│  Ch1: YouTube Audio             │
-│  Ch2: Microphone 1              │
-│  Ch3: Microphone 2              │
-│  Ch4: Backup Input              │
+│  Ch1: Audio YouTube            │
+│  Ch2: Microphone 1             │
+│  Ch3: Microphone 2             │
+│  Ch4: Input Cadangan           │
 └─────────────────┬───────────────┘
                   │ XLR/RCA
                   ↓
@@ -882,120 +890,120 @@ MAC Filtering: Optional (whitelist devices)
 
 ---
 
-### **B. AUDIO CABLES NEEDED**
+### **B. KABEL AUDIO YANG DIBUTUHKAN**
 
-#### **✅ Cable List:**
+#### **✅ Daftar Kabel:**
 
-| Cable Type | Length | Quantity | Purpose | Price |
-|------------|--------|----------|---------|-------|
-| HDMI 2.0 | 3m | 1 | PC to TV | Rp 100k |
-| 3.5mm to RCA | 2m | 1 | TV to Mixer | Rp 50k |
-| XLR Male-Female | 5m | 2 | Mic to Mixer | Rp 150k |
-| RCA to RCA | 2m | 1 | Mixer to Amp | Rp 50k |
-| Speaker Cable | 10m | 1 | Amp to Speakers | Rp 100k |
+| Tipe Kabel | Panjang | Jumlah | Tujuan | Harga |
+|------------|---------|--------|--------|-------|
+| HDMI 2.0 | 3m | 1 | PC ke TV | Rp 100rb |
+| 3.5mm ke RCA | 2m | 1 | TV ke Mixer | Rp 50rb |
+| XLR Male-Female | 5m | 2 | Mic ke Mixer | Rp 150rb |
+| RCA ke RCA | 2m | 1 | Mixer ke Amp | Rp 50rb |
+| Kabel Speaker | 10m | 1 | Amp ke Speakers | Rp 100rb |
 
-**Total Cable Cost:** ~Rp 600.000
+**Total Biaya Kabel:** ~Rp 600.000
 
 ---
 
-### **C. VIDEO WIRING DIAGRAM**
+### **C. DIAGRAM PENGKABELAN VIDEO**
 
 ```
 ┌──────────────┐
-│   Camera     │
-│   Device     │
+│   Kamera     │
+│   Perangkat  │
 └──────┬───────┘
        │ USB / WiFi
        ↓
 ┌──────────────┐      Internet
-│  Camera PC   │◄─────────────►  Firebase
+│  PC Kamera   │◄─────────────►  Firebase
 └──────┬───────┘
        │
        │ WebRTC Streaming
        │
        ↓
 ┌──────────────┐
-│  Display PC  │
+│  PC Tampilan │
 │  (PiP Video) │
 └──────┬───────┘
        │ HDMI
        ↓
 ┌──────────────┐
 │ TV/Monitor   │
-│ (Main Screen)│
+│ (Layar Utama)│
 └──────────────┘
 ```
 
 ---
 
-### **D. AUDIO MIXER SETTINGS**
+### **D. PENGATURAN AUDIO MIXER**
 
-#### **✅ Recommended Settings:**
+#### **✅ Pengaturan yang Disarankan:**
 
-**Channel 1 (YouTube Audio):**
+**Channel 1 (Audio YouTube):**
 ```
 Gain: 0dB (unity)
 EQ:
   - Low: +2dB
   - Mid: 0dB
   - High: +1dB
-Effect: None
+Efek: Tidak ada
 Volume: 70%
 Pan: Center
 ```
 
-**Channel 2 & 3 (Microphones):**
+**Channel 2 & 3 (Microphone):**
 ```
-Gain: Set by sound check (biasanya +10 to +20dB)
+Gain: Set berdasarkan sound check (biasanya +10 to +20dB)
 EQ:
   - Low: -2dB (reduce rumble)
   - Mid: +3dB (vocal clarity)
   - High: +2dB (presence)
-Effect: Echo/Reverb (medium)
+Efek: Echo/Reverb (sedang)
 Volume: 80-90%
-Pan: Mic1=Left, Mic2=Right (untuk stereo)
+Pan: Mic1=Kiri, Mic2=Kanan (untuk stereo)
 ```
 
-**Master Output:**
+**Output Master:**
 ```
 Volume: 75-80%
-EQ: Flat (0dB all)
-Compressor: Light (3:1 ratio, jika ada)
-Limiter: -3dB (prevent clipping)
+EQ: Flat (0dB semua)
+Compressor: Ringan (3:1 ratio, jika ada)
+Limiter: -3dB (mencegah clipping)
 ```
 
 ---
 
-### **E. DISPLAY SETTINGS**
+### **E. PENGATURAN TAMPILAN**
 
-#### **✅ TV/Monitor Configuration:**
+#### **✅ Konfigurasi TV/Monitor:**
 
-**Picture Settings:**
+**Pengaturan Gambar:**
 ```
 Picture Mode: Standard atau Movie
 Brightness: 50
 Contrast: 50
 Color: 45
 Sharpness: 15
-Backlight: 80 (untuk bright conditions)
+Backlight: 80 (untuk kondisi terang)
 
-Advanced:
+Lanjutan:
   - Motion Smoothing: Off
   - Game Mode: Off
   - Energy Saving: Off
 ```
 
-**Audio Settings:**
+**Pengaturan Audio:**
 ```
 Audio Output: External Speakers (via 3.5mm/Optical)
 Internal Speakers: Off
-Volume: Fixed (control di mixer)
+Volume: Fixed (kontrol di mixer)
 Audio Format: PCM/Stereo
 ```
 
-**Display Settings:**
+**Pengaturan Tampilan:**
 ```
-Resolution: 1920x1080 (Full HD)
+Resolusi: 1920x1080 (Full HD)
 Refresh Rate: 60Hz
 HDMI Mode: Full RGB Range
 Overscan: Off
@@ -1004,22 +1012,22 @@ Screen Fit: 100% (no zoom)
 
 ---
 
-## 5. 💻 DEVICE SETUP
+## 5. 💻 SETUP PERANGKAT
 
-### **A. DISPLAY PC SETUP**
+### **A. SETUP PC TAMPILAN**
 
-#### **✅ Operating System**
+#### **✅ Sistem Operasi**
 
-**Windows 10/11 (Recommended):**
+**Windows 10/11 (Disarankan):**
 
-**Initial Setup:**
+**Setup Awal:**
 1. Install Windows 10 Pro/Home
-2. Update semua drivers
-3. Windows Update ke latest
-4. Disable Windows Defender (optional, untuk performance)
-5. Disable Auto-Updates saat operational
+2. Update semua driver
+3. Windows Update ke versi terbaru
+4. Nonaktifkan Windows Defender (opsional, untuk performa)
+5. Nonaktifkan Auto-Updates saat operasional
 
-**Power Settings:**
+**Pengaturan Daya:**
 ```
 Power Plan: High Performance
 Turn off display: Never
@@ -1029,7 +1037,7 @@ Fast Startup: Disabled
 USB Selective Suspend: Disabled
 ```
 
-**Auto-Start Configuration:**
+**Konfigurasi Auto-Start:**
 ```
 1. Buat shortcut ke default browser
 2. Set homepage ke: http://localhost/display.html
@@ -1042,11 +1050,11 @@ USB Selective Suspend: Disabled
 
 ---
 
-#### **✅ Browser Setup**
+#### **✅ Setup Browser**
 
-**Google Chrome (Recommended):**
+**Google Chrome (Dislukan):**
 
-**Extensions Needed:**
+**Ekstensi yang Dibutuhkan:**
 - **Auto Refresh Plus** - refresh jika error
 - **Full Page Screen Capture** - untuk troubleshooting
 - **Video Speed Controller** - jika perlu
@@ -1055,16 +1063,16 @@ USB Selective Suspend: Disabled
 ```
 chrome://flags
 
-Enable:
+Aktifkan:
 - Hardware-accelerated video decode
 - Override software rendering list
 - GPU rasterization
 
-Disable:
+Nonaktifkan:
 - Smooth scrolling (reduce lag)
 ```
 
-**Startup Command:**
+**Command Startup:**
 ```batch
 "C:\Program Files\Google\Chrome\Application\chrome.exe" 
   --start-fullscreen 
@@ -1075,23 +1083,23 @@ Disable:
   "https://your-domain.com/display.html"
 ```
 
-**Create .bat file untuk auto-start:**
+**Buat file .bat untuk auto-start:**
 ```batch
 @echo off
 timeout /t 30
 start chrome --start-fullscreen --kiosk "https://your-domain.com/display.html"
 ```
 
-Simpan sebagai `start-karaoke.bat` dan masukkan ke Startup folder.
+Simpan sebagai `start-karaoke.bat` dan masukkan ke folder Startup.
 
 ---
 
-#### **✅ Network Configuration**
+#### **✅ Konfigurasi Jaringan**
 
-**Static IP Setup (Windows):**
+**Setup IP Static (Windows):**
 ```
 1. Control Panel → Network → Change Adapter Settings
-2. Right-click WiFi/Ethernet → Properties
+2. Klik kanan WiFi/Ethernet → Properties
 3. IPv4 → Properties
 4. Use following IP:
    - IP: 192.168.1.10
@@ -1102,17 +1110,17 @@ Simpan sebagai `start-karaoke.bat` dan masukkan ke Startup folder.
 
 ---
 
-### **B. ADMIN LAPTOP SETUP**
+### **B. SETUP LAPTOP ADMIN**
 
-#### **✅ Software Installation**
+#### **✅ Instalasi Software**
 
-**Required Software:**
+**Software yang Diperlukan:**
 ```
 1. Web Browser (Chrome/Edge/Firefox)
-2. Zoom/TeamViewer (remote support)
+2. Zoom/TeamViewer (dukungan remote)
 3. PDF Reader
 4. Text Editor (Notepad++/VS Code)
-5. File Manager (Total Commander - optional)
+5. File Manager (Total Commander - opsional)
 6. Screenshot Tool (Greenshot/Lightshot)
 ```
 
@@ -1126,28 +1134,28 @@ Simpan sebagai `start-karaoke.bat` dan masukkan ke Startup folder.
 
 ---
 
-#### **✅ Backup & Sync**
+#### **✅ Backup & Sinkronisasi**
 
 **Setup Google Drive / Dropbox:**
 - Folder untuk backup logs
 - Folder untuk playlist/song history
 - Auto-sync setiap hari
 
-**Backup Checklist:**
-- Browser bookmarks
-- WiFi passwords
-- Firebase config backup
-- Emergency contacts
+**Checklist Backup:**
+- Bookmark browser
+- Password WiFi
+- Backup konfigurasi Firebase
+- Kontak darurat
 
 ---
 
-### **C. CAMERA DEVICE SETUP**
+### **C. SETUP PERANGKAT KAMERA**
 
-#### **✅ Webcam Configuration**
+#### **✅ Konfigurasi Webcam**
 
-**Windows Camera App Settings:**
+**Pengaturan Windows Camera App:**
 ```
-Resolution: 1080p
+Resolusi: 1080p
 Frame Rate: 30fps
 Auto-Focus: On
 Low-Light Mode: On
@@ -1155,7 +1163,7 @@ Zoom: 100%
 Pan/Tilt: Center
 ```
 
-**Browser Permissions:**
+**Izin Browser:**
 ```
 Chrome → Settings → Privacy → Site Settings
 - Camera: Allow
@@ -1165,38 +1173,38 @@ Chrome → Settings → Privacy → Site Settings
 
 ---
 
-#### **✅ Smartphone as Camera**
+#### **✅ Smartphone sebagai Kamera**
 
-**Apps Needed:**
-- **DroidCam** (Android) - Rp 0 (free) / Rp 70k (pro)
-- **EpocCam** (iOS) - Rp 0 (free) / Rp 100k (pro)
-- **IP Webcam** (Android) - Rp 0 (free)
+**Aplikasi yang Dibutuhkan:**
+- **DroidCam** (Android) - Rp 0 (gratis) / Rp 70.000 (pro)
+- **EpocCam** (iOS) - Rp 0 (gratis) / Rp 100.000 (pro)
+- **IP Webcam** (Android) - Rp 0 (gratis)
 
-**Setup Steps:**
+**Langkah Setup:**
 1. Install app di HP
 2. Connect ke WiFi yang sama
-3. Note IP address dari app
-4. Access dari browser: `http://192.168.1.XX:8080`
+3. Catat IP address dari app
+4. Akses dari browser: `http://192.168.1.XX:8080`
 5. Set sebagai video source di WebRTC
 
-**Power Management:**
+**Manajemen Daya:**
 ```
-- Keep screen on: Yes
-- Battery optimization: Off for camera app
+- Keep screen on: Ya
+- Battery optimization: Off untuk camera app
 - Auto-lock: Never
 - Brightness: 50%
 ```
 
 ---
 
-## 6. 📱 SOFTWARE INSTALLATION
+## 6. 📱 INSTALASI SOFTWARE
 
 ### **A. WEB HOSTING**
 
-#### **Opsi 1: Firebase Hosting (Recommended)**
+#### **Opsi 1: Firebase Hosting (Disarankan)**
 
-**Pros:**
-- ✅ Free SSL certificate
+**Kelebihan:**
+- ✅ Gratis SSL certificate
 - ✅ CDN global
 - ✅ Fast deployment
 - ✅ Version control
@@ -1217,48 +1225,48 @@ firebase init hosting
 firebase deploy --only hosting
 ```
 
-**Cost:** FREE untuk 10GB storage + 360MB/day transfer
+**Biaya:** FREE untuk 10GB storage + 360MB/hari transfer
 
 ---
 
 #### **Opsi 2: cPanel / Shared Hosting**
 
 **Requirements:**
-- Domain name (Rp 150k/year)
-- Shared hosting (Rp 300k - Rp 600k/year)
+- Nama domain (Rp 150rb/tahun)
+- Shared hosting (Rp 300rb - Rp 600rb/tahun)
 - SSL certificate (Let's Encrypt - FREE)
 
-**Recommended Providers:**
-- Niagahoster (Rp 400k/year)
-- Hostinger (Rp 300k/year)
-- Dewaweb (Rp 600k/year)
+**Provider Rekomendasi:**
+- Niagahoster (Rp 400rb/tahun)
+- Hostinger (Rp 300rb/tahun)
+- Dewaweb (Rp 600rb/tahun)
 
 ---
 
-#### **Opsi 3: Local Network (Offline Mode)**
+#### **Opsi 3: Local Network (Mode Offline)**
 
 **Setup Local Server di Bus:**
 
-**Using XAMPP/WAMP:**
-1. Install XAMPP di Display PC
-2. Copy files ke `htdocs/karaoke/`
-3. Access via: `http://192.168.1.10/karaoke/`
+**Menggunakan XAMPP/WAMP:**
+1. Install XAMPP di PC Tampilan
+2. Copy file ke `htdocs/karaoke/`
+3. Akses via: `http://192.168.1.10/karaoke/`
 
-**Pros:**
-- ✅ No internet needed (kecuali YouTube)
-- ✅ Faster load times
-- ✅ No hosting cost
+**Kelebihan:**
+- ✅ Tidak perlu internet (kecuali YouTube)
+- ✅ Load times lebih cepat
+- ✅ Tidak ada biaya hosting
 
-**Cons:**
-- ❌ Manual updates
-- ❌ No remote management
+**Kekurangan:**
+- ❌ Update manual
+- ❌ Tidak ada remote management
 - ❌ Single point of failure
 
 ---
 
-### **B. FIREBASE SETUP**
+### **B. SETUP FIREBASE**
 
-#### **✅ Database Configuration**
+#### **✅ Konfigurasi Database**
 
 **Realtime Database Rules:**
 
@@ -1317,7 +1325,7 @@ firebase deploy --only hosting
 
 ---
 
-#### **✅ Firebase Configuration in Code**
+#### **✅ Konfigurasi Firebase di Kode**
 
 **js/firebase.js:**
 ```javascript
@@ -1338,9 +1346,9 @@ const db = firebase.database();
 
 ---
 
-### **C. CONFIGURATION FILES**
+### **C. FILE KONFIGURASI**
 
-#### **✅ JS/INDEX.JS - Bus Configuration**
+#### **✅ JS/INDEX.JS - Konfigurasi Bus**
 
 ```javascript
 const buses = [
@@ -1353,7 +1361,7 @@ const buses = [
 
 ---
 
-#### **✅ JS/CONFIG.JS - System Configuration**
+#### **✅ JS/CONFIG.JS - Konfigurasi Sistem**
 
 ```javascript
 // Default passwords (fallback)
@@ -1367,15 +1375,15 @@ window.FIREBASE_PATH = 'karaoke';
 
 ---
 
-## 7. 🔌 WIRING & INSTALLATION
+## 7. 🔌 PENGKABELAN & INSTALASI
 
-### **A. PHYSICAL CONNECTIONS**
+### **A. KONEKSI FISIK**
 
-#### **✅ Display System Wiring**
+#### **✅ Pengkabelan Sistem Tampilan**
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    BUS POWER (12V/24V)                  │
+│                    DAYA BUS (12V/24V)                   │
 └─────────────────────┬───────────────────────────────────┘
                       │
                       ▼
@@ -1387,23 +1395,23 @@ window.FIREBASE_PATH = 'karaoke';
           ┌───────────┼───────────┐
           ▼           ▼           ▼
     ┌──────────┐ ┌──────────┐ ┌──────────┐
-    │  UPS     │ │ Display  │ │  Admin   │
+    │  UPS     │ │ Tampilan │ │  Admin   │
     │  600VA   │ │    PC    │ │  Laptop  │
     └────┬─────┘ └────┬─────┘ └────┬─────┘
          │            │            │
          │            │            │
          │       ┌────┴────┐       │
-         │       │  TV 43" │       │
-         │       └────┬────┘       │
+         │       │  TV 43"  │       │
+         │       └────┴────┘       │
          │            │            │
          │            │            │
          │       ┌────┴────┐       │
          │       │  Mixer  │       │
-         │       └────┬────┘       │
+         │       └────┴────┘       │
          │            │            │
     ┌────┴────┐       │       ┌────┴────┐
-    │ Speaker │       │       │ Camera  │
-    │   L     │       │       │ Device  │
+    │ Speaker │       │       │ Kamera   │
+    │   L     │       │       │ Perangkat│
     └─────────┘       │       └─────────┘
                       │
                  ┌────┴────┐
@@ -1414,37 +1422,37 @@ window.FIREBASE_PATH = 'karaoke';
 
 ---
 
-### **B. CABLE MANAGEMENT**
+### **B. MANAJEMEN KABEL**
 
-#### **✅ Recommended Cable Runs**
+#### **✅ Rekomendasi Jalur Kabel**
 
-| From | To | Cable Type | Length |
+| Dari | Ke | Tipe Kabel | Panjang |
 |------|-----|------------|--------|
-| Display PC | TV | HDMI 2.0 | 3m |
+| PC Tampilan | TV | HDMI 2.0 | 3m |
 | TV | Audio Mixer | 3.5mm/RCA | 2m |
-| Mic Receiver | Audio Mixer | XLR | 5m x 2 |
+| Receiver Mic | Audio Mixer | XLR | 5m x 2 |
 | Audio Mixer | Amplifier | RCA/XLR | 2m |
-| Amplifier | Speakers | Speaker Cable | 10m |
-| Router | Power Socket | Power Cord | 1.5m |
-| Display PC | Router | Ethernet Cat6 | 3m |
+| Amplifier | Speakers | Kabel Speaker | 10m |
+| Router | Stopkontak | Kabel Daya | 1.5m |
+| PC Tampilan | Router | Ethernet Cat6 | 3m |
 
 ---
 
-### **C. MOUNTING POSITIONS**
+### **C. POSISI MOUNTING**
 
-#### **✅ Recommended Device Placement**
+#### **✅ Rekomendasi Penempatan Perangkat**
 
 ```
                     ┌─────────────────────┐
-                    │      TV SCREEN      │
+                    │      LAYAR TV        │
                     │     (43-55 inch)    │
                     │    Wall Mounted     │
                     └──────────┬──────────┘
                                │
                     ┌──────────┴──────────┐
-                    │     MINI PC         │
-                    │   (Hidden behind    │
-                    │      TV)            │
+                    │     MINI PC          │
+                    │   (Tersembunyi       │
+                    │      di TV)          │
                     └──────────┬──────────┘
                                │
         ┌──────────────────────┼──────────────────────┐
@@ -1485,50 +1493,50 @@ window.FIREBASE_PATH = 'karaoke';
 
 ---
 
-## 8. 🧪 TESTING & CALIBRATION
+## 8. 🧪 PENGUJIAN & KALIBRASI
 
-### **A. SYSTEM TESTS**
+### **A. TES SISTEM**
 
-#### **✅ Pre-Operational Checks**
+#### **✅ Pemeriksaan Pra-Operasional**
 
-- [ ] Semua cable terconnect dengan benar
-- [ ] Power supply stabil
-- [ ] Internet connection aktif
-- [ ] Device charging penuh
+- [ ] Semua kabel terconnect dengan benar
+- [ ] Supply daya stabil
+- [ ] Koneksi internet aktif
+- [ ] Pengisian perangkat penuh
 
-#### **✅ Display Tests**
+#### **✅ Tes Tampilan**
 
-- [ ] TV menyala dan display واضحة
-- [ ] HDMI signal terdetect
+- [ ] TV menyala dan tampilan jelas
+- [ ] Signal HDMI terdeteksi
 - [ ] Browser terbuka di fullscreen
 - [ ] Display.html load dengan benar
-- [ ] YouTube video playtest
+- [ ] Tes pemutaran video YouTube
 
-#### **✅ Audio Tests**
+#### **✅ Tes Audio**
 
 - [ ] Speaker menghasilkan suara
-- [ ] Mic berfungsi dan terdetect
-- [ ] Volume control bekerja
-- [ ] Echo/Reverb effect berjalan
+- [ ] Mic berfungsi dan terdeteksi
+- [ ] Kontrol volume bekerja
+- [ ] Efek Echo/Reverb berjalan
 
-#### **✅ Network Tests**
+#### **✅ Tes Jaringan**
 
-- [ ] WiFi connection stabil
-- [ ] Firebase connection OK
-- [ ] Semua device dapat connect ke router
+- [ ] Koneksi WiFi stabil
+- [ ] Koneksi Firebase OK
+- [ ] Semua perangkat dapat connect ke router
 
-#### **✅ Camera Tests**
+#### **✅ Tes Kamera**
 
-- [ ] Camera terdeteksi
+- [ ] Kamera terdeteksi
 - [ ] Video stream berfungsi
-- [ ] WebRTC connection berhasil
+- [ ] Koneksi WebRTC berhasil
 - [ ] Recording berfungsi
 
 ---
 
-### **B. PERFORMANCE CALIBRATION**
+### **B. KALIBRASI PERFORMA**
 
-#### **✅ Display Settings**
+#### **✅ Pengaturan Tampilan**
 ```
 Brightness: 50-60
 Contrast: 45-55
@@ -1536,115 +1544,115 @@ Color: 40-50
 Sharpness: 10-15
 ```
 
-#### **✅ Audio Settings**
+#### **✅ Pengaturan Audio**
 ```
 Mixer Master: 75%
-YouTube Volume: 70%
-Mic Volume: 80%
-Echo: Medium
+Volume YouTube: 70%
+Volume Mic: 80%
+Echo: Sedang
 ```
 
 ---
 
-## 9. 🛠️ MAINTENANCE & BACKUP
+## 9. 🛠️ PERAWATAN & BACKUP
 
-### **A. REGULAR MAINTENANCE**
+### **A. PERAWATAN REGULER**
 
-#### **✅ Daily**
-- Check internet connection
-- Verify Firebase sync
-- Monitor device temperatures
+#### **✅ Harian**
+- Periksa koneksi internet
+- Verifikasi sinkronisasi Firebase
+- Monitor suhu perangkat
 
-#### **✅ Weekly**
-- Clean device ventilation
-- Check cable connections
-- Backup Firebase data
+#### **✅ Mingguan**
+- Bersihkan ventilasi perangkat
+- Periksa koneksi kabel
+- Backup data Firebase
 
-#### **✅ Monthly**
-- Full system test
-- Update software if needed
-- Check hardware condition
+#### **✅ Bulanan**
+- Tes sistem penuh
+- Update software jika diperlukan
+- Periksa kondisi hardware
 
 ---
 
-### **B. BACKUP PROCEDURES**
+### **B. PROSEDUR BACKUP**
 
-#### **✅ Firebase Data Export**
+#### **✅ Export Data Firebase**
 ```javascript
 // Manual backup via Firebase Console
-// Export JSON format
+// Export format JSON
 // Simpan ke local storage
 ```
 
-#### **✅ Configuration Backup**
-- Save PINs
-- Save passwords
-- Save router settings
-- Save network configs
+#### **✅ Backup Konfigurasi**
+- Simpan PIN
+- Simpan password
+- Simpan pengaturan router
+- Simpan konfigurasi jaringan
 
 ---
 
-## 10. 🚨 EMERGENCY PROCEDURES
+## 10. 🚨 PROSEDUR DARURAT
 
-### **A. COMMON ISSUES & SOLUTIONS**
+### **A. MASALAH UMUM & SOLUSI**
 
-#### **❌ Camera tidak bisa diakses**
+#### **❌ Kamera tidak bisa diakses**
 ```
 Solusi:
-1. Check HTTPS connection
-2. Allow camera permission di browser
-3. Restart camera device
-4. Check USB connection
+1. Periksa koneksi HTTPS
+2. Izinkan izin kamera di browser
+3. Restart perangkat kamera
+4. Periksa koneksi USB
 ```
 
-#### **❌ YouTube video tidak bisa diputar**
+#### **❌ Video YouTube tidak bisa diputar**
 ```
 Solusi:
 1. Video tidak mengizinkan embed
 2. Gunakan video lain
-3. Check internet connection
+3. Periksa koneksi internet
 ```
 
-#### **❌ Firebase connection error**
+#### **❌ Error koneksi Firebase**
 ```
 Solusi:
-1. Check internet connection
-2. Verify Firebase config
-3. Clear browser cache
-4. Check database rules
+1. Periksa koneksi internet
+2. Verifikasi konfigurasi Firebase
+3. Clear cache browser
+4. Periksa aturan database
 ```
 
 #### **❌ WebRTC tidak connect**
 ```
 Solusi:
-1. Check STUN server
-2. Verify network allows WebRTC
-3. Test dengan different network
+1. Periksa server STUN
+2. Verifikasi jaringan mengizinkan WebRTC
+3. Tes dengan jaringan berbeda
 ```
 
 ---
 
-### **B. EMERGENCY CONTACTS**
+### **B. KONTAK DARURAT**
 
-| Service | Contact | Notes |
-|---------|---------|-------|
-| Admin Support | +62 xxx-xxxx-xxxx | 24/7 |
-| Firebase Support | console.firebase.google.com | Online |
-| Internet Provider | Customer Service | Technician |
+| Layanan | Kontak | Catatan |
+|---------|--------|-------|
+| Dukungan Admin | +62 xxx-xxxx-xxxx | 24/7 |
+| Dukungan Firebase | console.firebase.google.com | Online |
+| Provider Internet | Customer Service | Teknisi |
 
 ---
 
 ## 11. 💰 ESTIMASI BIAYA
 
-### **A. HARDWARE COST SUMMARY**
+### **A. RINGKASAN BIAYA HARDWARE**
 
-| Item | Qty | Unit Price | Total |
-|------|-----|------------|-------|
+| Item | Jumlah | Harga Unit | Total |
+|------|--------|------------|-------|
 | TV 43" Smart TV | 1 | Rp 5.000.000 | Rp 5.000.000 |
 | Mini PC | 1 | Rp 2.000.000 | Rp 2.000.000 |
-| Admin Laptop | 1 | Rp 5.000.000 | Rp 5.000.000 |
+| Laptop Admin | 1 | Rp 5.000.000 | Rp 5.000.000 |
 | Webcam 1080p | 1 | Rp 1.200.000 | Rp 1.200.000 |
-| Wireless Mic Set | 2 | Rp 1.000.000 | Rp 2.000.000 |
+| Set Mic Wireless | 2 | Rp 1.000.000 | Rp 2.000.000 |
 | Audio Mixer | 1 | Rp 1.500.000 | Rp 1.500.000 |
 | Amplifier | 1 | Rp 1.500.000 | Rp 1.500.000 |
 | Speakers (Pair) | 1 | Rp 1.500.000 | Rp 1.500.000 |
@@ -1652,34 +1660,34 @@ Solusi:
 | Modem 4G | 1 | Rp 800.000 | Rp 800.000 |
 | UPS 600VA | 1 | Rp 1.000.000 | Rp 1.000.000 |
 | Inverter 500W | 1 | Rp 800.000 | Rp 800.000 |
-| Cables & Accessories | - | Rp 500.000 | Rp 500.000 |
-| Mounting & Installation | - | Rp 500.000 | Rp 500.000 |
+| Kabel & Aksesori | - | Rp 500.000 | Rp 500.000 |
+| Mounting & Instalasi | - | Rp 500.000 | Rp 500.000 |
 | **TOTAL** | | | **Rp 23.300.000** |
 
 ---
 
-### **B. SOFTWARE COST SUMMARY**
+### **B. RINGKASAN BIAYA SOFTWARE**
 
-| Item | Cost/Year |
+| Item | Biaya/Tahun |
 |------|------------|
-| Domain Name | Rp 150.000 |
-| Firebase (if paid) | Rp 300.000 |
-| Hosting (if not Firebase) | Rp 600.000 |
+| Nama Domain | Rp 150.000 |
+| Firebase (jika berbayar) | Rp 300.000 |
+| Hosting (jika bukan Firebase) | Rp 600.000 |
 | **TOTAL** | **Rp 1.050.000** |
 
 ---
 
-### **C. OPERATIONAL COST SUMMARY**
+### **C. RINGKASAN BIAYA OPERASIONAL**
 
-| Item | Cost/Month |
+| Item | Biaya/Bulan |
 |------|------------|
-| Internet Data (100GB) | Rp 250.000 |
-| Maintenance | Rp 100.000 |
+| Data Internet (100GB) | Rp 250.000 |
+| Perawatan | Rp 100.000 |
 | **TOTAL** | **Rp 350.000** |
 
 ---
 
-## ✅ CHECKLIST FINAL
+## ✅ CHECKLIST AKHIR
 
 ### **Sebelum Operasional:**
 
@@ -1687,9 +1695,9 @@ Solusi:
 - [ ] Semua software terkonfigurasi
 - [ ] Koneksi internet aktif
 - [ ] Firebase terkoneksi
-- [ ] Test semua fitur berhasil
+- [ ] Tes semua fitur berhasil
 - [ ] Admin familiar dengan sistem
-- [ ] Emergency contacts tersedia
+- [ ] Kontak darurat tersedia
 
 ---
 
@@ -1697,7 +1705,7 @@ Solusi:
 
 **Siap untuk beroperasi! 🎤🚌**
 
-*Ingat Wisata Ingat HiQo - Jalan Jalan NYAMAN, Cuan AMAN*
+*Ingat Wifi Ingat HiQo - Jalan Jalan NYAMAN, Cuan AMAN*
 
 </div>
 
