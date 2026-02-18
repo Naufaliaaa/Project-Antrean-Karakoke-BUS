@@ -13,15 +13,16 @@
 ## 📋 DAFTAR ISI
 
 1. [Hardware Requirements](#1-hardware-requirements)
-2. [Network & Internet](#2-network--internet)
-3. [Audio Visual Equipment](#3-audio-visual-equipment)
-4. [Device Setup](#4-device-setup)
-5. [Software Installation](#5-software-installation)
-6. [Wiring & Installation](#6-wiring--installation)
-7. [Testing & Calibration](#7-testing--calibration)
-8. [Maintenance & Backup](#8-maintenance--backup)
-9. [Emergency Procedures](#9-emergency-procedures)
-10. [Cost Estimation](#10-estimasi-biaya)
+2. [Software Requirements](#2-software-requirements)
+3. [Network & Internet](#3-network--internet)
+4. [Audio Visual Equipment](#4-audio-visual-equipment)
+5. [Device Setup](#5-device-setup)
+6. [Software Installation](#6-software-installation)
+7. [Wiring & Installation](#7-wiring--installation)
+8. [Testing & Calibration](#8-testing--calibration)
+9. [Maintenance & Backup](#9-maintenance--backup)
+10. [Emergency Procedures](#10-emergency-procedures)
+11. [Cost Estimation](#11-estimasi-biaya)
 
 ---
 
@@ -364,7 +365,312 @@
 
 ---
 
-## 2. 🌐 NETWORK & INTERNET
+## 2. 💻 SOFTWARE REQUIREMENTS
+
+### **A. CORE SOFTWARE (WAJIB)**
+
+#### **✅ Web Browser**
+- **Google Chrome** (Recommended - versi terbaru)
+  - Versi: 90+
+  - Ekstensi yang diperlukan:
+    - Auto Refresh Plus
+    - Full Page Screen Capture
+    - Video Speed Controller
+- **Alternatif:** Firefox 88+, Safari 14+, Edge 90+
+
+---
+
+#### **✅ Firebase Realtime Database**
+- **Tipe:** Cloud-based Real-time Database
+- **Provider:** Google Firebase
+- **Fitur:**
+  - Real-time synchronization
+  - Offline support
+  - REST API
+- **Cost:** 
+  - Free tier: 100 simultaneous connections
+  - Paid: Mulai $25/bln untuk lebih banyak koneksi
+
+---
+
+#### **✅ Web Server / Hosting**
+
+**Opsi 1: Firebase Hosting (Recommended)**
+- **Fitur:**
+  - Free SSL certificate
+  - CDN global
+  - Fast deployment
+  - Version control
+  - Rollback capability
+- **Cost:** FREE untuk 10GB storage + 360MB/day transfer
+
+**Opsi 2: Local Server (Offline Mode)**
+- **Software:**
+  - XAMPP (Windows/Linux)
+  - WAMP (Windows)
+  - MAMP (macOS)
+  - Python SimpleHTTPServer
+- **Kelebihan:** Tidak perlu internet untuk operasi dasar
+
+**Opsi 3: cPanel / Shared Hosting**
+- **Requirements:**
+  - Domain name (Rp 150k/tahun)
+  - Shared hosting (Rp 300k - Rp 600k/tahun)
+  - SSL certificate (Let's Encrypt - FREE)
+
+---
+
+#### **✅ YouTube IFrame API**
+- **Versi:** API v3
+- **Fitur:**
+  - Video embedding
+  - Playback control
+  - Event listeners
+  - Volume control
+- **Cost:** FREE (dengan batas quota)
+
+---
+
+### **B. SYSTEM SOFTWARE (PERANGKAT)**
+
+#### **✅ Display PC Software**
+
+**Operating System:**
+- **Windows 10/11 Pro** (Recommended)
+- **Chrome OS**
+- **Linux (Ubuntu/Debian)**
+
+**Required Software:**
+```
+1. Google Chrome / Firefox / Edge (Latest version)
+2. Adobe Flash Player (optional, untuk legacy content)
+3. VLC Media Player (untuk testing video)
+4. Notepad++ / VS Code (untuk editing konfigurasi)
+5. Git (untuk deployment)
+```
+
+**Browser Settings:**
+```
+- Set homepage ke display.html
+- Disable notifications
+- Disable auto-updates saat operational
+- Enable Hardware acceleration
+- Autoplay policy: No user gesture required
+```
+
+---
+
+#### **✅ Admin Laptop Software**
+
+**Operating System:**
+- Windows 10/11, macOS, atau Chrome OS
+
+**Required Software:**
+```
+1. Web Browser (Chrome/Edge/Firefox - Latest)
+2. Zoom / TeamViewer (remote support)
+3. PDF Reader
+4. Text Editor (Notepad++ / VS Code)
+5. File Manager (Total Commander - optional)
+6. Screenshot Tool (Greenshot / Lightshot)
+7. Google Drive / Dropbox (backup)
+```
+
+---
+
+#### **✅ Camera Device Software**
+
+**Untuk Smartphone sebagai Kamera:**
+- **Android:**
+  - DroidCam (Gratis / Rp 70.000 Pro)
+  - IP Webcam (Gratis)
+  - EpocCam (Gratis / Rp 100.000 Pro)
+
+- **iOS:**
+  - EpocCam (Gratis / Rp 100.000 Pro)
+
+**Untuk Webcam PC:**
+- Driver webcam terbaru
+- Windows Camera App (built-in)
+
+---
+
+### **C. APPLICATION SOFTWARE (FITUR SISTEM)**
+
+#### **✅ Karaoke System Files**
+
+**Frontend Files (Web-based):**
+```
+├── index.html                    # Bus selection page
+├── pin-login.html               # PIN authentication
+├── bus-menu.html                # Bus menu navigation
+│
+├── admin-login.html             # Admin authentication
+├── admin.html                   # Admin control panel
+│
+├── display-login.html           # Display authentication
+├── display.html                 # Main karaoke display
+│
+├── camera-login.html            # Camera panel auth
+├── video-panel.html             # Camera control panel
+├── camera-stream.html           # Camera streaming page
+│
+├── form.html                    # Song request form
+├── emote.html                   # Standalone emote sender
+├── roulette.html                # Roulette Arisan (Wheel of Names)
+```
+
+**CSS Files:**
+```
+├── css/index.css               # Bus selection styles
+├── css/pin-login.css           # PIN login styles
+├── css/bus-menu.css            # Menu styles
+├── css/admin-login.css         # Admin login styles
+├── css/admin.css               # Admin panel styles
+├── css/display-login.css       # Display login styles
+├── css/display.css            # Display karaoke styles
+├── css/camera-login.css        # Camera login styles
+├── css/video-panel.css         # Video panel styles
+├── css/form.css                # Request form styles
+├── css/emote.css               # Emote page styles
+├── css/roulette.css            # Roulette Arisan styles
+```
+
+**JavaScript Files:**
+```
+├── js/firebase.js              # Firebase configuration
+├── js/room.js                  # Room management system
+├── js/custom-modal.js          # Custom alert/confirm modals
+│
+├── js/index.js                 # Bus selection logic
+├── js/pin-login.js             # PIN authentication
+├── js/bus-menu.js              # Menu navigation logic
+│
+├── js/admin-login.js           # Admin auth logic
+├── js/admin-page.js            # Admin page init
+├── js/admin.js                 # Admin panel logic
+│
+├── js/display-login.js         # Display auth logic
+├── js/display-page.js          # Display page init
+├── js/display.js               # Display karaoke logic
+│
+├── js/camera-login.js          # Camera auth logic
+├── js/video-panel-page.js      # Video panel init
+├── js/video-panel.js           # Video panel logic
+├── js/camera-stream.js         # Camera streaming logic
+│
+├── js/form.js                  # Request form logic
+├── js/emote.js                 # Emote sender logic
+├── js/roulette.js              # Roulette Arisan logic
+```
+
+---
+
+#### **✅ Database Schema (Firebase)**
+
+**Struktur Data Wajib:**
+```javascript
+{
+  "karaoke": {
+    "room": {
+      "BUS-001": {
+        "queue": { /* Song requests */ },
+        "emotes": { /* Live reactions */ },
+        "Setting": { "pin": "xxxxxx", "busName": "Hiace 1" },
+        "videoSession": { /* WebRTC signaling */ },
+        "audioControl": { "youtubeVolume": 100, "micVolume": 100 },
+        "displayStatus": "active"
+      }
+    },
+    "system": {
+      "passwords": {
+        "admin": "********",
+        "display": "********",
+        "camera": "********"
+      }
+    }
+  }
+}
+```
+
+---
+
+### **D. SECURITY SOFTWARE**
+
+#### **✅ Authentication System**
+
+**Multi-Layer Security:**
+| Layer | Type | Implementation |
+|-------|------|----------------|
+| **Level 1** | PIN Login | 6-digit numeric PIN (Firebase validated) |
+| **Level 2** | Admin Password | Token-based session |
+| **Level 3** | Display Password | Hash-based token |
+| **Level 4** | Camera Password | Token dengan force re-login |
+
+**Password Storage Priority:**
+1. Firebase: `karaoke/system/passwords/`
+2. config.js (development only)
+3. Default values (fallback)
+
+---
+
+### **E. AUXILIARY SOFTWARE**
+
+#### **✅ QR Code Generator**
+- **Library:** QRCode.js / API
+- **Usage:** Generate QR untuk passenger form access
+
+#### **✅ Sound Effects**
+- **Files Required:**
+  - `sounds/roulette.mp3` - Spin wheel sound
+  - `sounds/win.mp3` - Winner celebration sound
+
+#### **✅ Media Players**
+- **VLC Media Player** - Untuk testing dan backup playback
+- **Windows Media Player** - Built-in untuk Windows
+
+#### **✅ Remote Access**
+- **TeamViewer** - Remote support
+- **AnyDesk** - Alternatif remote access
+- **Chrome Remote Desktop** - Free alternative
+
+---
+
+### **F. SOFTWARE VERSIONS & COMPATIBILITY**
+
+#### **✅ Minimum Requirements per Device**
+
+**Display PC:**
+```
+OS: Windows 10/11, Chrome OS, atau Linux
+Processor: Intel Celeron N4020 / AMD Ryzen 3
+RAM: 4GB
+Storage: 64GB
+Browser: Chrome 90+, Firefox 88+, Edge 90+
+Internet: 10Mbps+ (untuk streaming)
+```
+
+**Admin Laptop:**
+```
+OS: Windows 10/11, macOS, Chrome OS
+Processor: Core i3 / Ryzen 3
+RAM: 4GB
+Storage: 128GB
+Browser: Chrome 90+
+Internet: 5Mbps+
+```
+
+**Camera Device:**
+```
+Smartphone: Android 8.0+ / iOS 12+
+atau
+Webcam: USB 2.0+, 720p minimum
+PC: Windows 10/11, RAM 4GB
+```
+
+---
+
+## 3. 🌐 NETWORK & INTERNET
 
 ### **A. INTERNET CONNECTION**
 
@@ -523,8 +829,6 @@ UPnP: Disabled (security risk)
 MAC Filtering: Optional (whitelist devices)
 ```
 
----
-
 #### **✅ WiFi Security**
 
 **Guest Network:**
@@ -539,14 +843,14 @@ MAC Filtering: Optional (whitelist devices)
 
 ---
 
-## 3. 🔊 AUDIO VISUAL EQUIPMENT
+## 4. 🔊 AUDIO VISUAL EQUIPMENT
 
 ### **A. AUDIO WIRING DIAGRAM**
 
 ```
 ┌─────────────────┐
 │  Display PC     │
-│  (HDMI Audio)   │
+│  (HDMI Audio)  │
 └────────┬────────┘
          │ HDMI
          ↓
@@ -700,7 +1004,7 @@ Screen Fit: 100% (no zoom)
 
 ---
 
-## 4. 💻 DEVICE SETUP
+## 5. 💻 DEVICE SETUP
 
 ### **A. DISPLAY PC SETUP**
 
@@ -885,7 +1189,7 @@ Chrome → Settings → Privacy → Site Settings
 
 ---
 
-## 5. 📱 SOFTWARE INSTALLATION
+## 6. 📱 SOFTWARE INSTALLATION
 
 ### **A. WEB HOSTING**
 
@@ -957,3 +1261,443 @@ firebase deploy --only hosting
 #### **✅ Database Configuration**
 
 **Realtime Database Rules:**
+
+```json
+{
+  "rules": {
+    ".read": true,
+    ".write": true,
+    "karaoke": {
+      "room": {
+        "$roomId": {
+          ".read": true,
+          ".write": true,
+          "queue": {
+            ".read": true,
+            ".write": true,
+            "$songId": {
+              ".validate": "newData.hasChildren(['name','videoId','order','deviceId','createdAt'])"
+            }
+          },
+          "emotes": {
+            ".read": true,
+            ".write": true,
+            "$emoteId": {
+              ".validate": "newData.hasChildren(['name','emote','timestamp'])"
+            }
+          },
+          "Setting": {
+            ".read": true,
+            ".write": true
+          },
+          "videoSession": {
+            ".read": true,
+            ".write": true
+          },
+          "audioControl": {
+            ".read": true,
+            ".write": true
+          },
+          "displayStatus": {
+            ".read": true,
+            ".write": true
+          }
+        }
+      },
+      "system": {
+        "passwords": {
+          ".read": true,
+          ".write": true
+        }
+      }
+    }
+  }
+}
+```
+
+---
+
+#### **✅ Firebase Configuration in Code**
+
+**js/firebase.js:**
+```javascript
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT.firebasedatabase.app",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+```
+
+---
+
+### **C. CONFIGURATION FILES**
+
+#### **✅ JS/INDEX.JS - Bus Configuration**
+
+```javascript
+const buses = [
+  { id: 'BUS-001', name: 'Hiace 1', color: '#667eea' },
+  { id: 'BUS-002', name: 'Hiace 2', color: '#f093fb' },
+  { id: 'BUS-003', name: 'Hiace 3', color: '#4facfe' },
+  // Tambahkan bus sesuai kebutuhan
+];
+```
+
+---
+
+#### **✅ JS/CONFIG.JS - System Configuration**
+
+```javascript
+// Default passwords (fallback)
+window.ADMIN_PASSWORD = 'hioo_default_admin';
+window.DISPLAY_PASSWORD = 'hioo_default_display';
+window.CAMERA_PASSWORD = 'hioo_default_camera';
+
+// Firebase paths
+window.FIREBASE_PATH = 'karaoke';
+```
+
+---
+
+## 7. 🔌 WIRING & INSTALLATION
+
+### **A. PHYSICAL CONNECTIONS**
+
+#### **✅ Display System Wiring**
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    BUS POWER (12V/24V)                  │
+└─────────────────────┬───────────────────────────────────┘
+                      │
+                      ▼
+┌─────────────────────────────────────────────────────────┐
+│              INVERTER (12V/24V → 220V)                  │
+│                   300W - 1000W                          │
+└─────────────────────┬───────────────────────────────────┘
+                      │
+          ┌───────────┼───────────┐
+          ▼           ▼           ▼
+    ┌──────────┐ ┌──────────┐ ┌──────────┐
+    │  UPS     │ │ Display  │ │  Admin   │
+    │  600VA   │ │    PC    │ │  Laptop  │
+    └────┬─────┘ └────┬─────┘ └────┬─────┘
+         │            │            │
+         │            │            │
+         │       ┌────┴────┐       │
+         │       │  TV 43" │       │
+         │       └────┬────┘       │
+         │            │            │
+         │            │            │
+         │       ┌────┴────┐       │
+         │       │  Mixer  │       │
+         │       └────┬────┘       │
+         │            │            │
+    ┌────┴────┐       │       ┌────┴────┐
+    │ Speaker │       │       │ Camera  │
+    │   L     │       │       │ Device  │
+    └─────────┘       │       └─────────┘
+                      │
+                 ┌────┴────┐
+                 │ Speaker │
+                 │   R     │
+                 └─────────┘
+```
+
+---
+
+### **B. CABLE MANAGEMENT**
+
+#### **✅ Recommended Cable Runs**
+
+| From | To | Cable Type | Length |
+|------|-----|------------|--------|
+| Display PC | TV | HDMI 2.0 | 3m |
+| TV | Audio Mixer | 3.5mm/RCA | 2m |
+| Mic Receiver | Audio Mixer | XLR | 5m x 2 |
+| Audio Mixer | Amplifier | RCA/XLR | 2m |
+| Amplifier | Speakers | Speaker Cable | 10m |
+| Router | Power Socket | Power Cord | 1.5m |
+| Display PC | Router | Ethernet Cat6 | 3m |
+
+---
+
+### **C. MOUNTING POSITIONS**
+
+#### **✅ Recommended Device Placement**
+
+```
+                    ┌─────────────────────┐
+                    │      TV SCREEN      │
+                    │     (43-55 inch)    │
+                    │    Wall Mounted     │
+                    └──────────┬──────────┘
+                               │
+                    ┌──────────┴──────────┐
+                    │     MINI PC         │
+                    │   (Hidden behind    │
+                    │      TV)            │
+                    └──────────┬──────────┘
+                               │
+        ┌──────────────────────┼──────────────────────┐
+        │                      │                      │
+        │              ┌───────┴───────┐              │
+        │              │   AUDIO       │              │
+        │              │    MIXER       │              │
+        │              └───────┬───────┘              │
+        │                      │                      │
+        │          ┌───────────┴───────────┐          │
+        │          │                       │          │
+        │    ┌─────┴─────┐          ┌─────┴─────┐    │
+        │    │AMPLIFIER  │          │  SPEAKER   │    │
+        │    └───────────┘          │    (L)    │    │
+        │                            └────────────┘    │
+        │    ┌───────────┐                            │
+        │    │  SPEAKER  │                            │
+        │    │    (R)    │                            │
+        │    └───────────┘                            │
+        │                                              │
+        │  ┌──────────┐      ┌──────────────┐         │
+        │  │  ROUTER  │      │   WEBCAM     │         │
+        │  │   WiFi   │      │  (Tripod)    │         │
+        │  └──────────┘      └──────────────┘         │
+        │                                              │
+        │  ┌──────────┐      ┌──────────────┐         │
+        │  │  MODEM   │      │   MIC        │         │
+        │  │   4G/5G  │      │  WIRELESS    │         │
+        │  └──────────┘      └──────────────┘         │
+        │                                              │
+        │  ┌──────────┐      ┌──────────────┐         │
+        │  │   UPS    │      │    ADMIN     │         │
+        │  │  600VA   │      │   LAPTOP     │         │
+        │  └──────────┘      └──────────────┘         │
+        │                                              │
+        └──────────────────────────────────────────────┘
+```
+
+---
+
+## 8. 🧪 TESTING & CALIBRATION
+
+### **A. SYSTEM TESTS**
+
+#### **✅ Pre-Operational Checks**
+
+- [ ] Semua cable terconnect dengan benar
+- [ ] Power supply stabil
+- [ ] Internet connection aktif
+- [ ] Device charging penuh
+
+#### **✅ Display Tests**
+
+- [ ] TV menyala dan display واضحة
+- [ ] HDMI signal terdetect
+- [ ] Browser terbuka di fullscreen
+- [ ] Display.html load dengan benar
+- [ ] YouTube video playtest
+
+#### **✅ Audio Tests**
+
+- [ ] Speaker menghasilkan suara
+- [ ] Mic berfungsi dan terdetect
+- [ ] Volume control bekerja
+- [ ] Echo/Reverb effect berjalan
+
+#### **✅ Network Tests**
+
+- [ ] WiFi connection stabil
+- [ ] Firebase connection OK
+- [ ] Semua device dapat connect ke router
+
+#### **✅ Camera Tests**
+
+- [ ] Camera terdeteksi
+- [ ] Video stream berfungsi
+- [ ] WebRTC connection berhasil
+- [ ] Recording berfungsi
+
+---
+
+### **B. PERFORMANCE CALIBRATION**
+
+#### **✅ Display Settings**
+```
+Brightness: 50-60
+Contrast: 45-55
+Color: 40-50
+Sharpness: 10-15
+```
+
+#### **✅ Audio Settings**
+```
+Mixer Master: 75%
+YouTube Volume: 70%
+Mic Volume: 80%
+Echo: Medium
+```
+
+---
+
+## 9. 🛠️ MAINTENANCE & BACKUP
+
+### **A. REGULAR MAINTENANCE**
+
+#### **✅ Daily**
+- Check internet connection
+- Verify Firebase sync
+- Monitor device temperatures
+
+#### **✅ Weekly**
+- Clean device ventilation
+- Check cable connections
+- Backup Firebase data
+
+#### **✅ Monthly**
+- Full system test
+- Update software if needed
+- Check hardware condition
+
+---
+
+### **B. BACKUP PROCEDURES**
+
+#### **✅ Firebase Data Export**
+```javascript
+// Manual backup via Firebase Console
+// Export JSON format
+// Simpan ke local storage
+```
+
+#### **✅ Configuration Backup**
+- Save PINs
+- Save passwords
+- Save router settings
+- Save network configs
+
+---
+
+## 10. 🚨 EMERGENCY PROCEDURES
+
+### **A. COMMON ISSUES & SOLUTIONS**
+
+#### **❌ Camera tidak bisa diakses**
+```
+Solusi:
+1. Check HTTPS connection
+2. Allow camera permission di browser
+3. Restart camera device
+4. Check USB connection
+```
+
+#### **❌ YouTube video tidak bisa diputar**
+```
+Solusi:
+1. Video tidak mengizinkan embed
+2. Gunakan video lain
+3. Check internet connection
+```
+
+#### **❌ Firebase connection error**
+```
+Solusi:
+1. Check internet connection
+2. Verify Firebase config
+3. Clear browser cache
+4. Check database rules
+```
+
+#### **❌ WebRTC tidak connect**
+```
+Solusi:
+1. Check STUN server
+2. Verify network allows WebRTC
+3. Test dengan different network
+```
+
+---
+
+### **B. EMERGENCY CONTACTS**
+
+| Service | Contact | Notes |
+|---------|---------|-------|
+| Admin Support | +62 xxx-xxxx-xxxx | 24/7 |
+| Firebase Support | console.firebase.google.com | Online |
+| Internet Provider | Customer Service | Technician |
+
+---
+
+## 11. 💰 ESTIMASI BIAYA
+
+### **A. HARDWARE COST SUMMARY**
+
+| Item | Qty | Unit Price | Total |
+|------|-----|------------|-------|
+| TV 43" Smart TV | 1 | Rp 5.000.000 | Rp 5.000.000 |
+| Mini PC | 1 | Rp 2.000.000 | Rp 2.000.000 |
+| Admin Laptop | 1 | Rp 5.000.000 | Rp 5.000.000 |
+| Webcam 1080p | 1 | Rp 1.200.000 | Rp 1.200.000 |
+| Wireless Mic Set | 2 | Rp 1.000.000 | Rp 2.000.000 |
+| Audio Mixer | 1 | Rp 1.500.000 | Rp 1.500.000 |
+| Amplifier | 1 | Rp 1.500.000 | Rp 1.500.000 |
+| Speakers (Pair) | 1 | Rp 1.500.000 | Rp 1.500.000 |
+| Router WiFi | 1 | Rp 500.000 | Rp 500.000 |
+| Modem 4G | 1 | Rp 800.000 | Rp 800.000 |
+| UPS 600VA | 1 | Rp 1.000.000 | Rp 1.000.000 |
+| Inverter 500W | 1 | Rp 800.000 | Rp 800.000 |
+| Cables & Accessories | - | Rp 500.000 | Rp 500.000 |
+| Mounting & Installation | - | Rp 500.000 | Rp 500.000 |
+| **TOTAL** | | | **Rp 23.300.000** |
+
+---
+
+### **B. SOFTWARE COST SUMMARY**
+
+| Item | Cost/Year |
+|------|------------|
+| Domain Name | Rp 150.000 |
+| Firebase (if paid) | Rp 300.000 |
+| Hosting (if not Firebase) | Rp 600.000 |
+| **TOTAL** | **Rp 1.050.000** |
+
+---
+
+### **C. OPERATIONAL COST SUMMARY**
+
+| Item | Cost/Month |
+|------|------------|
+| Internet Data (100GB) | Rp 250.000 |
+| Maintenance | Rp 100.000 |
+| **TOTAL** | **Rp 350.000** |
+
+---
+
+## ✅ CHECKLIST FINAL
+
+### **Sebelum Operasional:**
+
+- [ ] Semua hardware terinstall
+- [ ] Semua software terkonfigurasi
+- [ ] Koneksi internet aktif
+- [ ] Firebase terkoneksi
+- [ ] Test semua fitur berhasil
+- [ ] Admin familiar dengan sistem
+- [ ] Emergency contacts tersedia
+
+---
+
+<div align="center">
+
+**Siap untuk beroperasi! 🎤🚌**
+
+*Ingat Wisata Ingat HiQo - Jalan Jalan NYAMAN, Cuan AMAN*
+
+</div>
+
