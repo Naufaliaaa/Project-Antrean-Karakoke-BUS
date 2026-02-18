@@ -858,7 +858,7 @@ MAC Filtering: Opsional (whitelist perangkat)
 ```
 ┌─────────────────┐
 │  PC Tampilan    │
-│  (Audio HDMI)  │
+│  (Audio HDMI)   │
 └────────┬────────┘
          │ HDMI
          ↓
@@ -870,10 +870,10 @@ MAC Filtering: Opsional (whitelist perangkat)
          ↓                     ↓
 ┌─────────────────────────────────┐
 │        Audio Mixer              │
-│  Ch1: Audio YouTube            │
-│  Ch2: Microphone 1             │
-│  Ch3: Microphone 2             │
-│  Ch4: Input Cadangan           │
+│  Ch1: Audio YouTube             │
+│  Ch2: Microphone 1              │
+│  Ch3: Microphone 2              │
+│  Ch4: Input Cadangan            │
 └─────────────────┬───────────────┘
                   │ XLR/RCA
                   ↓
@@ -1444,22 +1444,22 @@ window.FIREBASE_PATH = 'karaoke';
 
 ```
                     ┌─────────────────────┐
-                    │      LAYAR TV        │
+                    │      LAYAR TV       │
                     │     (43-55 inch)    │
                     │    Wall Mounted     │
                     └──────────┬──────────┘
                                │
-                    ┌──────────┴──────────┐
+                    ┌──────────┴──────────-┐
                     │     MINI PC          │
                     │   (Tersembunyi       │
                     │      di TV)          │
-                    └──────────┬──────────┘
+                    └──────────┬──────────-┘
                                │
         ┌──────────────────────┼──────────────────────-┐
         │                      │                       │
         │              ┌───────┴───────┐               │
         │              │   AUDIO       │               │
-        │              │    MIXER       │              │
+        │              │    MIXER      │               │
         │              └───────┬───────┘               │
         │                      │                       │
         │          ┌───────────┴───────────┐           │
