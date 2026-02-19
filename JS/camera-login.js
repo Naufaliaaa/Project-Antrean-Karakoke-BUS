@@ -1,7 +1,7 @@
 /*************************************************
  * CAMERA-LOGIN.JS - Camera Panel Authentication
  * 
- * Password優先:
+ * Password:
  * 1. Firebase (karaoke/system/passwords/camera)
  * 2. config.js (window.CAMERA_PASSWORD)
  *************************************************/

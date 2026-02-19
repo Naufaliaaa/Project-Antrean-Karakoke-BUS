@@ -1,7 +1,7 @@
 /*************************************************
  * ADMIN-LOGIN.JS - Admin Panel Authentication
  * 
- * Password优先순:
+ * Password:
  * 1. Firebase (karaoke/system/passwords/admin)
  * 2. config.js (window.ADMIN_PASSWORD)
  *************************************************/
