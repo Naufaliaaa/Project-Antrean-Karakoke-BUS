@@ -1,3 +1,7 @@
 {
     "liveServer.settings.port": 5501
 }
+
+//liveServer.settings.port: 5501 → Mengatur agar Live Server
+// (ekstensi VSCode untuk menjalankan web server lokal) berjalan di port 5501 
+//  (bukan port default 5500).
