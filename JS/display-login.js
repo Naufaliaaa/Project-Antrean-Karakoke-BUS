@@ -1,7 +1,7 @@
 /*************************************************
  * DISPLAY-LOGIN.JS - Display Login Authentication
  * 
- * Password优先序:
+ * Password:
  * 1. Firebase (karaoke/system/passwords/display)
  * 2. config.js (window.DISPLAY_PASSWORD)
  *************************************************/
