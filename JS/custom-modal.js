@@ -1,7 +1,7 @@
-/*************************************************
+/*********************************************
  * CUSTOM-MODAL.JS - Beautiful Alert & Confirm
  * Replace semua alert() dan confirm() bawaan browser
- *************************************************/
+ ********************************************/
 
 // ========= INJECT CSS KE HEAD =========
 const modalStyles = `
