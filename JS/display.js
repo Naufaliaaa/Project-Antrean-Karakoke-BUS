@@ -1,8 +1,9 @@
 /*************************************************
- * DISPLAY.JS – WITH WEBRTC + EMOTE RUNNING (FIXED!)
+ * DISPLAY.JS – WITH WEBRTC + EMOTE RUNNING + EMOTE COUNTER (FIXED!)
  * ✅ Emote bergerak BOLAK-BALIK (Kanan→Kiri, Kiri→Kanan)
  * ✅ SIAPAPUN bisa kirim emote kapan saja!
  * ✅ WebRTC PiP Camera working properly
+ * ✅ NEW: Emote counter per-emoji, reset saat ganti lagu
  *************************************************/
 
 // ========= INIT ROOM SYSTEM =========
@@ -69,6 +70,9 @@ let nextDirection = 'rtl';
 // Audio Control State
 let youtubeVolume = 100;
 let audioControlRef = null;
+
+// ========= NEW: EMOTE COUNTER STATE =========
+let emoteCounters = {}; // { '👏': 5, '❤️': 3, ... }
 
 // ========= 1. OVERLAY =========
 document.body.insertAdjacentHTML('afterbegin', `
@@ -283,6 +287,9 @@ function initEmoteListener() {
     showEmoteAnimation(emoteData, emoteKey);
     processedEmotes.add(emoteKey);
     
+    // ✅ NEW: Update emote counter
+    updateEmoteCounter(emoteData.emote);
+    
     setTimeout(() => {
       emotesRef.child(emoteKey).remove()
         .then(() => console.log('🗑️ Emote removed from Firebase:', emoteKey))
@@ -332,7 +339,68 @@ function showEmoteAnimation(emoteData, emoteKey) {
   }, 10000);
 }
 
-// ========= 5. PLAY SONG =========
+// ========= 5. NEW: EMOTE COUNTER FUNCTIONS =========
+function updateEmoteCounter(emoji) {
+  if (!emoji) return;
+  
+  // Increment counter
+  if (!emoteCounters[emoji]) {
+    emoteCounters[emoji] = 0;
+  }
+  emoteCounters[emoji]++;
+  
+  console.log('📊 Emote counter updated:', emoji, emoteCounters[emoji]);
+  
+  // Render counter UI
+  renderEmoteCounterUI();
+}
+
+function resetEmoteCounters() {
+  console.log('🔄 Resetting emote counters...');
+  emoteCounters = {};
+  renderEmoteCounterUI();
+}
+
+function renderEmoteCounterUI() {
+  const listEl = document.getElementById('emote-counter-list');
+  if (!listEl) return;
+  
+  const entries = Object.entries(emoteCounters);
+  
+  if (entries.length === 0) {
+    listEl.innerHTML = '<div class="emote-counter-empty">Belum ada emote</div>';
+    return;
+  }
+  
+  // Sort by count descending
+  entries.sort((a, b) => b[1] - a[1]);
+  
+  // Calculate total
+  const total = entries.reduce((sum, [, count]) => sum + count, 0);
+  
+  let html = '';
+  
+  entries.forEach(([emoji, count]) => {
+    html += `
+      <div class="emote-counter-item">
+        <span class="emote-counter-emoji">${emoji}</span>
+        <span class="emote-counter-count">${count}</span>
+      </div>
+    `;
+  });
+  
+  // Add total
+  html += `
+    <div class="emote-counter-total">
+      <span class="emote-counter-total-label">TOTAL</span>
+      <span class="emote-counter-total-count">${total}</span>
+    </div>
+  `;
+  
+  listEl.innerHTML = html;
+}
+
+// ========= 6. PLAY SONG =========
 function checkAndPlayFirst() {
   if (!isPlayerReady || document.getElementById('start-overlay')) return;
   
@@ -349,6 +417,9 @@ function playSong(key, data) {
   remainingTime = MAX_DURATION;
   document.getElementById("now").innerHTML = '<img src="img/microphone.png" alt="Mic" style="width:24px; vertical-align:middle; margin-right:8px;">' + data.name;
 
+  // ✅ NEW: Reset emote counters saat lagu baru mulai
+  resetEmoteCounters();
+
   if (player) {
     clearAllTimers();
     try { player.destroy(); } catch(e) {}
@@ -361,7 +432,11 @@ function playSong(key, data) {
     videoId: data.videoId,
     playerVars: { autoplay: 1, controls: 1, rel: 0, modestbranding: 1 },
     events: {
-      onReady: (e) => { e.target.playVideo(); startCountdown(); },
+      onReady: (e) => { 
+        e.target.playVideo(); 
+        applyYoutubeVolume();
+        startCountdown(); 
+      },
       onStateChange: (e) => { if (e.data === YT.PlayerState.ENDED) removeCurrentAndPlayNext(); },
       onError: (e) => handleVideoError()
     }
@@ -401,7 +476,7 @@ function showErrorMessage(name) {
   setTimeout(() => overlay.remove(), 3000);
 }
 
-// ========= 6. QUEUE LISTENER =========
+// ========= 7. QUEUE LISTENER =========
 queueRef.orderByChild("order").on("value", snap => {
   renderQueue(snap.val());
   
@@ -440,7 +515,7 @@ function playNextSong() {
   });
 }
 
-// ========= 7. TIMER =========
+// ========= 8. TIMER =========
 function startCountdown() {
   clearInterval(countdownTimer);
   remainingTime = MAX_DURATION;
@@ -482,9 +557,12 @@ function resetPlayer() {
   if (player) { try { player.destroy(); } catch(e) {} player = null; }
   document.getElementById("now").innerText = "Menunggu lagu...";
   document.getElementById("timer").innerHTML = `<img src="img/waktu.png" alt="Waktu" style="width:24px; vertical-align:middle; margin-right:5px;"> 10:00`;
+  
+  // ✅ NEW: Reset emote counters saat tidak ada lagu
+  resetEmoteCounters();
 }
 
-// ========= 8. RENDER QUEUE =========
+// ========= 9. RENDER QUEUE =========
 function renderQueue(data) {
   const list = document.getElementById("queue-list");
   
@@ -511,7 +589,7 @@ function renderQueue(data) {
   }
 }
 
-// ========= 9. CLEANUP =========
+// ========= 10. CLEANUP =========
 window.addEventListener('beforeunload', () => {
   if (peerConnection) peerConnection.close();
   if (videoSessionRef) {
@@ -528,7 +606,7 @@ window.addEventListener('beforeunload', () => {
   });
 });
 
-// ========= 10. AUDIO CONTROL =========
+// ========= 11. AUDIO CONTROL =========
 function setupAudioControl() {
   console.log('🔊 Setting up audio control...');
   
@@ -567,7 +645,7 @@ function setupAudioControl() {
   console.log('✅ Audio control setup complete');
 }
 
-// ========= 11. APPLY YOUTUBE VOLUME =========
+// ========= 12. APPLY YOUTUBE VOLUME =========
 function applyYoutubeVolume() {
   if (player && typeof player.setVolume === 'function') {
     player.setVolume(youtubeVolume);
@@ -575,4 +653,4 @@ function applyYoutubeVolume() {
   }
 }
 
-console.log('✅ Display.js with FIXED WebRTC and emote animation loaded');
+console.log('✅ Display.js with Emote Counter + FIXED WebRTC loaded');
