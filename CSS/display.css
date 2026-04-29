@@ -1,4 +1,4 @@
-/* display.css - Complete with PiP + Emote Running Animation */
+/* display.css - Complete with PiP + Emote Running Animation + Emote Counter */
 
 * {
   margin: 0;
@@ -405,6 +405,23 @@ body {
   padding: 20px 30px;
 }
 
+/* ✅ NEW: Flexbox row - info kiri, emote counter kanan */
+.now-playing-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.now-playing-left {
+  flex: 1;
+  min-width: 0;
+}
+
+.now-playing-right {
+  flex-shrink: 0;
+}
+
 .now-playing-label {
   font-size: 14px;
   opacity: 0.95;
@@ -427,6 +444,9 @@ body {
   font-weight: bold;
   margin-top: 5px;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .now-playing-time {
@@ -444,6 +464,106 @@ body {
   height: 24px;
   object-fit: contain;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* ===== ✅ NEW: EMOTE COUNTER BOX (Ujung kanan area ungu) ===== */
+.emote-counter-box {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  padding: 14px 20px;
+  min-width: 200px;
+  max-width: 320px;
+}
+
+.emote-counter-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.emote-counter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.emote-counter-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 4px 12px 4px 6px;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.emote-counter-item:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.emote-counter-emoji {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.emote-counter-count {
+  font-size: 16px;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.emote-counter-total {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.emote-counter-total-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 1px;
+}
+
+.emote-counter-total-count {
+  font-size: 18px;
+  font-weight: 900;
+  color: #fbbf24;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.emote-counter-empty {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  padding: 4px 0;
+  font-style: italic;
+}
+
+/* Animasi masuk counter item baru */
+@keyframes counterPop {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.emote-counter-item {
+  animation: counterPop 0.3s ease forwards;
 }
 
 /* ===== QUEUE ===== */

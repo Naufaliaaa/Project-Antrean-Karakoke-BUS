@@ -1,9 +1,10 @@
 /*************************************************
- * DISPLAY.JS – WITH WEBRTC + EMOTE RUNNING + EMOTE COUNTER (FIXED!)
+ * DISPLAY.JS – WITH WEBRTC + EMOTE RUNNING + EMOTE COUNTER
  * ✅ Emote bergerak BOLAK-BALIK (Kanan→Kiri, Kiri→Kanan)
  * ✅ SIAPAPUN bisa kirim emote kapan saja!
  * ✅ WebRTC PiP Camera working properly
- * ✅ NEW: Emote counter per-emoji, reset saat ganti lagu
+ * ✅ NEW: Emote counter per-emoji di area ungu (kanan)
+ * ✅ NEW: Auto-reset counter saat giliran berikutnya
  *************************************************/
 
 // ========= INIT ROOM SYSTEM =========
@@ -71,8 +72,8 @@ let nextDirection = 'rtl';
 let youtubeVolume = 100;
 let audioControlRef = null;
 
-// ========= NEW: EMOTE COUNTER STATE =========
-let emoteCounters = {}; // { '👏': 5, '❤️': 3, ... }
+// ✅ NEW: Emote Counter State
+let emoteCounters = {};
 
 // ========= 1. OVERLAY =========
 document.body.insertAdjacentHTML('afterbegin', `
@@ -89,7 +90,6 @@ window.startSystem = function() {
   if (overlay) overlay.remove();
   console.log("🚀 System Started");
   
-  // Set display status to online
   const displayStatusRef = roomRef.child('displayStatus');
   displayStatusRef.set('active').then(() => {
     console.log('✅ Display status set to: active');
@@ -97,9 +97,7 @@ window.startSystem = function() {
     console.error('❌ Failed to set display status:', err);
   });
   
-  // Setup audio control listener
   setupAudioControl();
-  
   checkAndPlayFirst();
   initWebRTCReceiver();
   initEmoteListener();
@@ -119,7 +117,7 @@ window.onYouTubeIframeAPIReady = function() {
   isPlayerReady = true;
 }
 
-// ========= 3. WEBRTC (FIXED VERSION) =========
+// ========= 3. WEBRTC RECEIVER =========
 function initWebRTCReceiver() {
   console.log('📹 Initializing WebRTC receiver...');
   
@@ -148,16 +146,13 @@ async function setupWebRTCConnection() {
   try {
     console.log('🔗 Setting up WebRTC connection...');
     
-    // Close existing connection
     if (peerConnection) {
       peerConnection.close();
       peerConnection = null;
     }
     
-    // Create new peer connection
     peerConnection = new RTCPeerConnection(configuration);
     
-    // Handle incoming track
     peerConnection.ontrack = (event) => {
       console.log('🎥 Received remote track:', event.track.kind);
       remoteStream = event.streams[0];
@@ -173,14 +168,12 @@ async function setupWebRTCConnection() {
       }
     };
     
-    // Handle ICE candidates
     peerConnection.onicecandidate = (event) => {
       if (event.candidate && videoSessionRef) {
         videoSessionRef.child('displayCandidates').push(event.candidate.toJSON());
       }
     };
     
-    // Handle connection state changes
     peerConnection.onconnectionstatechange = () => {
       console.log('Connection state:', peerConnection.connectionState);
       
@@ -191,44 +184,29 @@ async function setupWebRTCConnection() {
       }
     };
     
-    // Listen for offer from camera
     videoSessionRef.child('offer').on('value', async (snapshot) => {
-      if (!snapshot.exists()) {
-        console.log('⏳ Waiting for camera offer...');
-        return;
-      }
-      
-      if (peerConnection.currentRemoteDescription) {
-        console.log('⏭️ Already have remote description');
-        return;
-      }
+      if (!snapshot.exists()) return;
+      if (peerConnection.currentRemoteDescription) return;
       
       const offer = snapshot.val();
       console.log('📩 Received offer from camera');
       
       try {
         await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
-        console.log('✅ Remote description set');
-        
         const answer = await peerConnection.createAnswer();
         await peerConnection.setLocalDescription(answer);
-        
         await videoSessionRef.child('answer').set(peerConnection.localDescription.toJSON());
         console.log('📤 Answer sent to camera');
-        
       } catch (error) {
         console.error('❌ Error handling offer:', error);
       }
     });
     
-    // Listen for ICE candidates from camera
     videoSessionRef.child('cameraCandidates').on('child_added', async (snapshot) => {
       if (!peerConnection || !snapshot.val()) return;
       
       try {
-        const candidate = snapshot.val();
-        await peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
-        console.log('✅ ICE candidate added');
+        await peerConnection.addIceCandidate(new RTCIceCandidate(snapshot.val()));
       } catch (error) {
         console.error('❌ Error adding ICE candidate:', error);
       }
@@ -242,8 +220,6 @@ async function setupWebRTCConnection() {
 }
 
 function closePiPCamera() {
-  console.log('📴 Closing PiP camera...');
-  
   const pipCamera = document.getElementById('pip-camera');
   const pipVideo = document.getElementById('pip-video');
   
@@ -257,8 +233,6 @@ function closePiPCamera() {
   
   remoteStream = null;
   isPiPActive = false;
-  
-  console.log('✅ PiP camera closed');
 }
 
 // ========= 4. 🎭 EMOTE LISTENER =========
@@ -271,16 +245,11 @@ function initEmoteListener() {
     return;
   }
   
-  console.log('✅ Emote container found:', container);
-  
   emotesRef.on('child_added', (snapshot) => {
     const emoteKey = snapshot.key;
     const emoteData = snapshot.val();
     
-    if (processedEmotes.has(emoteKey)) {
-      console.log('⏭️ Emote already processed:', emoteKey);
-      return;
-    }
+    if (processedEmotes.has(emoteKey)) return;
     
     console.log('🎭 NEW EMOTE RECEIVED:', emoteData);
     
@@ -292,7 +261,6 @@ function initEmoteListener() {
     
     setTimeout(() => {
       emotesRef.child(emoteKey).remove()
-        .then(() => console.log('🗑️ Emote removed from Firebase:', emoteKey))
         .catch(err => console.error('❌ Error removing emote:', err));
     }, 12000);
   });
@@ -302,10 +270,7 @@ function initEmoteListener() {
 
 function showEmoteAnimation(emoteData, emoteKey) {
   const container = document.getElementById('emote-container');
-  if (!container) {
-    console.error('❌ Emote container not found!');
-    return;
-  }
+  if (!container) return;
   
   const emoteEl = document.createElement('div');
   emoteEl.className = 'floating-emote';
@@ -313,7 +278,6 @@ function showEmoteAnimation(emoteData, emoteKey) {
   
   const direction = nextDirection;
   emoteEl.classList.add(direction);
-  
   nextDirection = (direction === 'rtl') ? 'ltr' : 'rtl';
   
   const yPosition = emotePositions[nextEmotePosition % emotePositions.length];
@@ -331,27 +295,21 @@ function showEmoteAnimation(emoteData, emoteKey) {
   
   container.appendChild(emoteEl);
   
-  console.log(`✅ Emote displayed (${direction.toUpperCase()}):`, emoteData.name, emoteData.emote);
-  
   setTimeout(() => {
     emoteEl.remove();
-    console.log('🗑️ Emote element removed:', emoteKey);
   }, 10000);
 }
 
-// ========= 5. NEW: EMOTE COUNTER FUNCTIONS =========
+// ========= 5. ✅ EMOTE COUNTER FUNCTIONS =========
 function updateEmoteCounter(emoji) {
   if (!emoji) return;
   
-  // Increment counter
   if (!emoteCounters[emoji]) {
     emoteCounters[emoji] = 0;
   }
   emoteCounters[emoji]++;
   
-  console.log('📊 Emote counter updated:', emoji, emoteCounters[emoji]);
-  
-  // Render counter UI
+  console.log('📊 Emote counter:', emoji, emoteCounters[emoji]);
   renderEmoteCounterUI();
 }
 
@@ -368,18 +326,16 @@ function renderEmoteCounterUI() {
   const entries = Object.entries(emoteCounters);
   
   if (entries.length === 0) {
-    listEl.innerHTML = '<div class="emote-counter-empty">Belum ada emote</div>';
+    listEl.innerHTML = '<div class="emote-counter-empty">Belum ada reaction</div>';
     return;
   }
   
   // Sort by count descending
   entries.sort((a, b) => b[1] - a[1]);
   
-  // Calculate total
   const total = entries.reduce((sum, [, count]) => sum + count, 0);
   
   let html = '';
-  
   entries.forEach(([emoji, count]) => {
     html += `
       <div class="emote-counter-item">
@@ -389,7 +345,6 @@ function renderEmoteCounterUI() {
     `;
   });
   
-  // Add total
   html += `
     <div class="emote-counter-total">
       <span class="emote-counter-total-label">TOTAL</span>
@@ -417,7 +372,7 @@ function playSong(key, data) {
   remainingTime = MAX_DURATION;
   document.getElementById("now").innerHTML = '<img src="img/microphone.png" alt="Mic" style="width:24px; vertical-align:middle; margin-right:8px;">' + data.name;
 
-  // ✅ NEW: Reset emote counters saat lagu baru mulai
+  // ✅ Reset emote counters saat lagu baru mulai
   resetEmoteCounters();
 
   if (player) {
@@ -558,7 +513,7 @@ function resetPlayer() {
   document.getElementById("now").innerText = "Menunggu lagu...";
   document.getElementById("timer").innerHTML = `<img src="img/waktu.png" alt="Waktu" style="width:24px; vertical-align:middle; margin-right:5px;"> 10:00`;
   
-  // ✅ NEW: Reset emote counters saat tidak ada lagu
+  // ✅ Reset emote counters saat tidak ada lagu
   resetEmoteCounters();
 }
 
@@ -597,11 +552,8 @@ window.addEventListener('beforeunload', () => {
     videoSessionRef.child('displayCandidates').remove();
   }
   
-  // Set display status to offline
   const displayStatusRef = roomRef.child('displayStatus');
-  displayStatusRef.set('inactive').then(() => {
-    console.log('✅ Display status set to: inactive');
-  }).catch(err => {
+  displayStatusRef.set('inactive').catch(err => {
     console.error('❌ Failed to set display status:', err);
   });
 });
@@ -612,45 +564,31 @@ function setupAudioControl() {
   
   audioControlRef = roomRef.child('audioControl');
   
-  // Get initial YouTube volume
   audioControlRef.child('youtubeVolume').once('value', (snapshot) => {
     const savedVolume = snapshot.val();
     if (savedVolume !== null && savedVolume !== undefined) {
       youtubeVolume = savedVolume;
-      console.log('📥 Initial YouTube volume loaded:', youtubeVolume);
-      
-      // Apply to current player if exists
       if (player && typeof player.setVolume === 'function') {
         player.setVolume(youtubeVolume);
-        console.log('🔊 YouTube volume applied to player:', youtubeVolume);
       }
     }
   });
   
-  // Listen for real-time volume changes from admin
   audioControlRef.child('youtubeVolume').on('value', (snapshot) => {
     const newVolume = snapshot.val();
     if (newVolume !== null && newVolume !== undefined && newVolume !== youtubeVolume) {
       youtubeVolume = newVolume;
-      console.log('🔄 YouTube volume updated by admin:', youtubeVolume);
-      
-      // Apply to current player
       if (player && typeof player.setVolume === 'function') {
         player.setVolume(youtubeVolume);
-        console.log('🔊 YouTube volume applied:', youtubeVolume);
       }
     }
   });
-  
-  console.log('✅ Audio control setup complete');
 }
 
-// ========= 12. APPLY YOUTUBE VOLUME =========
 function applyYoutubeVolume() {
   if (player && typeof player.setVolume === 'function') {
     player.setVolume(youtubeVolume);
-    console.log('🔊 YouTube volume applied:', youtubeVolume);
   }
 }
 
-console.log('✅ Display.js with Emote Counter + FIXED WebRTC loaded');
+console.log('✅ Display.js with Emote Counter loaded');
