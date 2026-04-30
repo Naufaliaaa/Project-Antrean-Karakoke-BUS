@@ -94,6 +94,15 @@
 - Connection status monitoring
 
 ### 5. 🎰 **Roulette Arisan (Wheel of Names)**
+- **User Registration Form (Baru!)** - QR Code untuk乘客 daftar themselves
+  - **roulette-form.html** - Halaman pendaftaran peserta
+  - **Real-time Entries** - Peserta terdaftar via Firebase
+  - **1 Nama per Device** - Menggunakan deviceId unik
+  - **Device Limiting** - Mencegah duplikasi dari device yang sama
+- **Dual Input Modes** - Pilih antara Online atau Manual
+  - **Tab Online** - Entry dari Firebase (penumpang scan QR)
+  - **Tab Manual** - Input manual langsung di admin panel
+  - **QR Code Generator** - Auto-generate QR untuk link pendaftaran
 - **Sound Effects (Baru!)** - Audio feedback untuk pengalaman lebih seru
   - **Spin Sound** - Suara putar roda berputar selama undian
   - **Win Sound** - Suara kemenangan/celebration saat pemenang dipilih
@@ -110,6 +119,7 @@
 - **Visual Wheel Center** - White circle center design
 - **Colorful Slices** - Each entry gets a unique color
 - **Keyboard Shortcuts** - ESC to go back, Ctrl+Space to spin
+- **Auto Remove Winner** - Checkbox untuk otomatis hapus pemenang dari roda
 
 ### 6. 🔊 **Sound & Audio System**
 - **Sound Effects (SFX)**
@@ -227,6 +237,8 @@ karaoke-bus/
 ├── form.html                    # Song request form
 ├── emote.html                   # Standalone emote sender
 ├── roulette.html                # Roulette Arisan (Wheel of Names)
+├── roulette-form.html          # Roulette user registration (penumpang)
+├── admin-password-setup.html    # Password setup untuk GitHub Pages
 │
 ├── css/
 │   ├── index.css               # Bus selection styles
@@ -240,7 +252,8 @@ karaoke-bus/
 │   ├── video-panel.css         # Video panel styles
 │   ├── form.css                # Request form styles
 │   ├── emote.css               # Emote page styles
-│   └── roulette.css            # Roulette Arisan styles
+│   ├── roulette.css            # Roulette Arisan styles
+│   └── roulette-form.css       # Roulette registration form styles
 │
 ├── js/
 │   ├── firebase.js             # Firebase configuration
@@ -266,7 +279,9 @@ karaoke-bus/
 │   │
 │   ├── form.js                 # Request form logic
 │   ├── emote.js                # Emote sender logic
-│   └── roulette.js             # Roulette Arisan logic
+│   ├── roulette.js             # Roulette Arisan logic
+│   ├── roulette-form.js         # Roulette user registration logic
+│   ├── config.js               # System configuration (passwords)
 │
 ├── img/
 │   ├── hioo.jpeg               # Main logo
@@ -424,12 +439,16 @@ Paste ke Firebase Console → Realtime Database → Rules:
               ".validate": "newData.hasChildren(['name','videoId','order','deviceId','createdAt']) && newData.child('name').isString() && newData.child('videoId').isString() && newData.child('order').isNumber()"
             }
           },
-          "emotes": {
+"emotes": {
             ".read": true,
             ".write": true,
             "$emoteId": {
               ".validate": "newData.hasChildren(['name','emote','timestamp']) && newData.child('name').isString() && newData.child('emote').isString() && newData.child('timestamp').isNumber()"
             }
+          },
+          "rouletteEntries": {
+            ".read": true,
+            ".write": true
           },
           "Setting": {
             ".read": true,
@@ -608,6 +627,7 @@ CAMERA_PASSWORD=your_camera_password
 │  │ karaoke/room/BUS-001/                              │  │
 │  │  ├─ queue/          (Song requests)                │  │
 │  │  ├─ emotes/         (Live reactions)               │  │
+│  │  ├─ rouletteEntries/(Roulette participant entries) │  │
 │  │  ├─ Setting/        (PIN, busName)                 │  │
 │  │  ├─ videoSession/   (WebRTC signaling)             │  │
 │  │  ├─ audioControl/   (Volume settings)              │  │
@@ -680,13 +700,20 @@ CAMERA_PASSWORD=your_camera_password
             "createdAt": 1704067200000
           }
         },
-        "emotes": {
+"emotes": {
           "-NXhY8L1nA4qR3tU6vW": {
             "name": "Jane Smith",
             "emote": "👏",
             "emoteName": "Tepuk Tangan",
             "timestamp": 1704067260000,
             "isAdmin": false
+          }
+        },
+        "rouletteEntries": {
+          "-RouletteUser123": {
+            "name": "Participant Name",
+            "deviceId": "RDEV_1234567890",
+            "createdAt": 1704067300000
           }
         },
         "Setting": {
