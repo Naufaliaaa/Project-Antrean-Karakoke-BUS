@@ -14,7 +14,7 @@
         <img src="img/hioo.jpeg" alt="Hioo Logo" class="navbar-logo">
     </nav>
 
-    <!-- HEADER SECTION (Below Navbar) -->
+    <!-- HEADER SECTION -->
     <header class="page-header">
         <div class="back-button" id="back-button">
             <span class="back-icon">←</span>
@@ -22,76 +22,83 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
-    <main class="main-content">
-        <div class="wheel-container-wrapper">
-            <!-- LEFT SIDE: WHEEL + QR -->
-            <div class="wheel-section">
-                <div class="wheel-wrapper">
-                    <!-- Triangle Pointer -->
-                    <div class="wheel-pointer"></div>
-                    
-                    <!-- SVG Wheel -->
-                    <svg id="wheel-svg" class="wheel-svg" viewBox="0 0 500 500">
-                        <g id="wheel-slices"></g>
-                        <circle cx="250" cy="250" r="50" fill="white" stroke="#ddd" stroke-width="3"/>
-                    </svg>
-                </div>
+    <!-- ========================================
+         SECTION 1: RODA FULLSCREEN CENTER
+    ======================================== -->
+    <section class="wheel-fullscreen">
+        <div class="wheel-area">
+            <div class="wheel-wrapper">
+                <!-- Triangle Pointer -->
+                <div class="wheel-pointer"></div>
                 
-                <!-- Spin Button -->
-                <button class="spin-button" id="spin-button" disabled>
-                    <span class="spin-icon">▶</span>
-                    <span>PUTAR</span>
-                </button>
+                <!-- SVG Wheel -->
+                <svg id="wheel-svg" class="wheel-svg" viewBox="0 0 500 500">
+                    <g id="wheel-slices"></g>
+                    <circle cx="250" cy="250" r="50" fill="white" stroke="#ddd" stroke-width="3"/>
+                </svg>
+            </div>
+            
+            <!-- Spin Button -->
+            <button class="spin-button" id="spin-button" disabled>
+                <span class="spin-icon">▶</span>
+                <span>PUTAR</span>
+            </button>
 
-                <!-- Winner Display -->
-                <div class="winner-announcement" id="winner-announcement" style="display: none;">
-                    <div class="winner-confetti">🎉</div>
-                    <div class="winner-text" id="winner-text">Pemenang</div>
-                    <div class="winner-confetti">🎊</div>
+            <!-- Winner Display -->
+            <div class="winner-announcement" id="winner-announcement" style="display: none;">
+                <div class="winner-confetti">🎉</div>
+                <div class="winner-text" id="winner-text">Pemenang</div>
+                <div class="winner-confetti">🎊</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SECTION 2: PANEL BAWAH (QR + Entries)
+    ======================================== -->
+    <section class="bottom-panel">
+        <div class="bottom-panel-grid">
+
+            <!-- KOLOM KIRI: QR CODE -->
+            <div class="panel-card qr-panel">
+                <div class="panel-card-title">📱 Scan untuk Daftar</div>
+                <div class="qr-code-wrapper">
+                    <img id="roulette-qr-image" alt="QR Code" class="roulette-qr-code">
                 </div>
-
-                <!-- ✅ NEW: QR CODE SECTION (di bawah roda) -->
-                <div class="qr-section" id="qr-section">
-                    <div class="qr-section-title">📱 Scan untuk Daftar Roulette</div>
-                    <div class="qr-code-wrapper">
-                        <img id="roulette-qr-image" alt="QR Code" class="roulette-qr-code">
-                    </div>
-                    <p class="qr-url-text" id="roulette-form-url">Loading...</p>
-                    <div class="online-entries-count" id="online-entries-count">
-                        0 peserta online terdaftar
-                    </div>
+                <p class="qr-url-text" id="roulette-form-url">Loading...</p>
+                <div class="online-entries-count" id="online-entries-count">
+                    0 peserta online terdaftar
                 </div>
             </div>
 
-            <!-- RIGHT SIDE: ENTRIES -->
-            <div class="entries-section">
+            <!-- KOLOM TENGAH: DAFTAR PESERTA -->
+            <div class="panel-card entries-panel">
                 <div class="entries-header">
                     <h2 class="entries-title">Daftar Peserta</h2>
                     <div class="entries-count" id="entries-count">0 peserta</div>
                 </div>
 
-                <!-- ✅ NEW: Tab Switch - Online / Manual -->
+                <!-- Tab Switch - Online / Manual -->
                 <div class="entries-tabs">
                     <button class="tab-btn active" id="tab-online" data-tab="online">📱 Online</button>
                     <button class="tab-btn" id="tab-manual" data-tab="manual">✏️ Manual</button>
                 </div>
 
-                <!-- TAB CONTENT: Online Entries (dari Firebase) -->
+                <!-- TAB: Online Entries -->
                 <div class="tab-content active" id="tab-content-online">
                     <div class="online-entries-list" id="online-entries-list">
                         <div class="empty-online">Belum ada peserta online. Bagikan QR Code!</div>
                     </div>
                 </div>
 
-                <!-- TAB CONTENT: Manual Entries (textarea seperti sebelumnya) -->
+                <!-- TAB: Manual Entries -->
                 <div class="tab-content" id="tab-content-manual">
                     <div class="entries-input-wrapper">
                         <textarea 
                             id="entries-textarea" 
                             class="entries-textarea"
                             placeholder="Masukkan nama peserta (satu per baris)&#10;&#10;Contoh:&#10;Fabio&#10;Eric&#10;Charles"
-                            rows="12"
+                            rows="8"
                         ></textarea>
                     </div>
                 </div>
@@ -106,12 +113,6 @@
                     </button>
                 </div>
 
-                <!-- Winners List -->
-                <div class="winners-section" id="winners-section" style="display: none;">
-                    <h3 class="winners-title">🏆 Urutan Pemenang</h3>
-                    <div class="winners-list" id="winners-list"></div>
-                </div>
-
                 <!-- Options -->
                 <div class="options-section">
                     <label class="option-checkbox">
@@ -120,8 +121,19 @@
                     </label>
                 </div>
             </div>
+
+            <!-- KOLOM KANAN: PEMENANG -->
+            <div class="panel-card winners-panel">
+                <div class="winners-section" id="winners-section">
+                    <h3 class="winners-title">🏆 Urutan Pemenang</h3>
+                    <div class="winners-list" id="winners-list">
+                        <div class="empty-winners">Belum ada pemenang</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </main>
+    </section>
 
     <!-- Custom Modal -->
     <script src="js/custom-modal.js"></script>

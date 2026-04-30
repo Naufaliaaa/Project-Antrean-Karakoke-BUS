@@ -326,7 +326,7 @@ async function clearAll() {
   updateEntriesCount();
   wheelSlices.innerHTML = '';
   winnerAnnouncement.style.display = 'none';
-  winnersSection.style.display = 'none';
+  winnersList.innerHTML = '<div class="empty-winners">Belum ada pemenang</div>';
   currentRotation = 0;
   wheelSvg.style.transform = 'rotate(0deg)';
 
@@ -454,11 +454,10 @@ async function finishSpin(winner) {
 // ========= UPDATE WINNERS LIST =========
 function updateWinnersList() {
   if (winners.length === 0) {
-    winnersSection.style.display = 'none';
+    winnersList.innerHTML = '<div class="empty-winners">Belum ada pemenang</div>';
     return;
   }
 
-  winnersSection.style.display = 'block';
   winnersList.innerHTML = '';
 
   winners.forEach((winner, index) => {

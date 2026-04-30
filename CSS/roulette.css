@@ -1,6 +1,7 @@
 /* ========================================
-   ROULETTE.CSS - Wheel of Names Style
-   ✅ NEW: QR Section, Tab Switch, Online Entries
+   ROULETTE.CSS - FULLSCREEN WHEEL LAYOUT
+   ✅ Roda fullscreen center
+   ✅ QR + Entries + Winners di panel bawah
 ======================================== */
 
 * {
@@ -11,9 +12,10 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
-  background: #f5f5f7;
+  background: #0f0f1a;
   color: #1d1d1f;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* ========================================
@@ -43,7 +45,7 @@ body {
 ======================================== */
 .page-header {
   margin-top: 70px;
-  padding: 20px 30px;
+  padding: 15px 30px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
@@ -72,64 +74,71 @@ body {
 }
 
 /* ========================================
-   MAIN CONTENT
+   SECTION 1: WHEEL FULLSCREEN CENTER
 ======================================== */
-.main-content {
-  padding: 30px;
-  max-width: 1400px;
-  margin: 0 auto;
+.wheel-fullscreen {
+  width: 100%;
+  min-height: calc(100vh - 140px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, #1a1a2e 0%, #0f0f1a 70%);
+  position: relative;
+  padding: 40px 20px;
 }
 
-.wheel-container-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  align-items: start;
+/* Subtle decorative glow behind wheel */
+.wheel-fullscreen::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.12) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
 }
 
-/* ========================================
-   WHEEL SECTION
-======================================== */
-.wheel-section {
-  background: white;
-  border-radius: 16px;
-  padding: 40px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+.wheel-area {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: sticky;
-  top: 90px;
+  gap: 30px;
+  max-width: 650px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .wheel-wrapper {
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   aspect-ratio: 1;
-  margin-bottom: 30px;
 }
 
 /* Triangle Pointer */
 .wheel-pointer {
   position: absolute;
-  top: -15px;
+  top: -18px;
   left: 50%;
   transform: translateX(-50%);
   width: 0;
   height: 0;
-  border-left: 25px solid transparent;
-  border-right: 25px solid transparent;
-  border-top: 35px solid #e74c3c;
+  border-left: 28px solid transparent;
+  border-right: 28px solid transparent;
+  border-top: 40px solid #e74c3c;
   z-index: 100;
-  filter: drop-shadow(0 4px 8px rgba(231, 76, 60, 0.5));
+  filter: drop-shadow(0 4px 12px rgba(231, 76, 60, 0.6));
 }
 
 /* SVG Wheel */
 .wheel-svg {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 8px 40px rgba(0, 0, 0, 0.4));
   transition: transform 0.05s ease-out;
 }
 
@@ -169,73 +178,73 @@ body {
 ======================================== */
 .spin-button {
   width: 100%;
-  max-width: 300px;
-  padding: 18px 40px;
+  max-width: 350px;
+  padding: 20px 50px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
   border-radius: 50px;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
   transition: all 0.3s ease;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
 .spin-button:hover:not(:disabled) {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.6);
 }
 
 .spin-button:active:not(:disabled) {
-  transform: translateY(-1px);
+  transform: translateY(-1px) scale(1);
 }
 
 .spin-button:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 .spin-icon {
-  font-size: 24px;
+  font-size: 26px;
   animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  50% { transform: scale(1.15); }
 }
 
 /* ========================================
    WINNER ANNOUNCEMENT
 ======================================== */
 .winner-announcement {
-  margin-top: 30px;
-  padding: 25px 30px;
+  padding: 25px 40px;
   background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
-  border-radius: 12px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 15px;
-  box-shadow: 0 4px 15px rgba(253, 203, 110, 0.4);
+  box-shadow: 0 8px 30px rgba(253, 203, 110, 0.5);
   animation: slideDown 0.5s ease;
   width: 100%;
+  max-width: 500px;
 }
 
 @keyframes slideDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(-20px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .winner-confetti {
-  font-size: 32px;
+  font-size: 36px;
   animation: rotate 1s ease-in-out;
 }
 
@@ -245,36 +254,58 @@ body {
 }
 
 .winner-text {
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 800;
   color: #2c3e50;
   text-align: center;
 }
 
 /* ========================================
-   ✅ NEW: QR SECTION (Di bawah roda)
+   SECTION 2: BOTTOM PANEL
 ======================================== */
-.qr-section {
-  margin-top: 30px;
-  padding: 25px;
-  background: linear-gradient(135deg, #f8f7ff 0%, #f0eeff 100%);
-  border: 2px solid #e8e7ff;
-  border-radius: 16px;
-  text-align: center;
-  width: 100%;
+.bottom-panel {
+  background: #f5f5f7;
+  padding: 40px 30px 50px;
 }
 
-.qr-section-title {
+.bottom-panel-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr 280px;
+  gap: 25px;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* ========================================
+   PANEL CARD (shared style)
+======================================== */
+.panel-card {
+  background: white;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+}
+
+.panel-card-title {
   font-size: 16px;
   font-weight: 700;
   color: #5b3fd9;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
+  text-align: center;
+}
+
+/* ========================================
+   QR PANEL (Kolom kiri)
+======================================== */
+.qr-panel {
+  text-align: center;
 }
 
 .qr-code-wrapper {
   display: flex;
   justify-content: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .roulette-qr-code {
@@ -282,22 +313,22 @@ body {
   height: 180px;
   border-radius: 12px;
   border: 3px solid #e8e7ff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .qr-url-text {
-  font-size: 11px;
+  font-size: 10px;
   color: #7c5ceb;
   word-break: break-all;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   padding: 8px 12px;
-  background: white;
+  background: #f8f7ff;
   border-radius: 8px;
   border: 1px solid #e8e7ff;
 }
 
 .online-entries-count {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: #5b3fd9;
   padding: 8px 16px;
@@ -307,44 +338,41 @@ body {
 }
 
 /* ========================================
-   ENTRIES SECTION
+   ENTRIES PANEL (Kolom tengah)
 ======================================== */
-.entries-section {
-  background: white;
-  border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+.entries-panel {
+  /* Akan menjadi yang paling lebar */
 }
 
 .entries-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .entries-title {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 700;
   color: #2c3e50;
 }
 
 .entries-count {
-  font-size: 14px;
+  font-size: 13px;
   color: #7f8c8d;
   background: #ecf0f1;
-  padding: 6px 14px;
+  padding: 5px 14px;
   border-radius: 20px;
   font-weight: 600;
 }
 
 /* ========================================
-   ✅ NEW: TAB SWITCH
+   TAB SWITCH
 ======================================== */
 .entries-tabs {
   display: flex;
   gap: 0;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   background: #f1f1f1;
   border-radius: 12px;
   padding: 4px;
@@ -352,7 +380,7 @@ body {
 
 .tab-btn {
   flex: 1;
-  padding: 12px 20px;
+  padding: 11px 20px;
   background: transparent;
   border: none;
   border-radius: 10px;
@@ -377,7 +405,7 @@ body {
 /* Tab Content */
 .tab-content {
   display: none;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .tab-content.active {
@@ -385,14 +413,14 @@ body {
 }
 
 /* ========================================
-   ✅ NEW: ONLINE ENTRIES LIST
+   ONLINE ENTRIES LIST
 ======================================== */
 .online-entries-list {
-  max-height: 350px;
+  max-height: 300px;
   overflow-y: auto;
   border: 2px solid #e8e7ff;
   border-radius: 12px;
-  padding: 12px;
+  padding: 10px;
 }
 
 .online-entries-list::-webkit-scrollbar {
@@ -408,10 +436,10 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 10px 14px;
+  padding: 9px 14px;
   background: linear-gradient(135deg, #f8f7ff 0%, #f0eeff 100%);
   border-radius: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   border: 1px solid #e8e7ff;
   transition: all 0.2s ease;
 }
@@ -426,30 +454,30 @@ body {
 }
 
 .online-entry-number {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   flex-shrink: 0;
 }
 
 .online-entry-name {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   color: #2c3e50;
 }
 
 .empty-online {
   text-align: center;
-  padding: 30px 20px;
+  padding: 25px 15px;
   color: #9ca3af;
-  font-size: 14px;
+  font-size: 13px;
   font-style: italic;
 }
 
@@ -462,14 +490,14 @@ body {
 
 .entries-textarea {
   width: 100%;
-  padding: 15px;
+  padding: 14px;
   border: 2px solid #e2e8f0;
   border-radius: 12px;
-  font-size: 15px;
+  font-size: 14px;
   font-family: inherit;
   resize: vertical;
   transition: border-color 0.3s;
-  min-height: 200px;
+  min-height: 160px;
 }
 
 .entries-textarea:focus {
@@ -488,18 +516,18 @@ body {
 ======================================== */
 .entries-actions {
   display: flex;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 15px;
 }
 
 .action-button {
   flex: 1;
-  padding: 14px 20px;
+  padding: 13px 18px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
   border-radius: 12px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   display: flex;
@@ -530,10 +558,37 @@ body {
 }
 
 /* ========================================
-   WINNERS SECTION
+   OPTIONS
 ======================================== */
+.options-section {
+  padding-top: 12px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.option-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #4a5568;
+}
+
+.option-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #667eea;
+}
+
+/* ========================================
+   WINNERS PANEL (Kolom kanan)
+======================================== */
+.winners-panel {
+  min-height: 200px;
+}
+
 .winners-section {
-  margin-bottom: 20px;
+  /* Selalu terlihat, isi kosong ditampilkan via .empty-winners */
 }
 
 .winners-title {
@@ -547,13 +602,23 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+.empty-winners {
+  text-align: center;
+  padding: 30px 15px;
+  color: #9ca3af;
+  font-size: 13px;
+  font-style: italic;
 }
 
 .winner-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 16px;
+  padding: 11px 14px;
   background: #f8f9fa;
   border-radius: 10px;
   animation: slideIn 0.3s ease forwards;
@@ -566,16 +631,17 @@ body {
 }
 
 .winner-rank {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   color: #64748b;
+  flex-shrink: 0;
 }
 
 .winner-rank.gold {
@@ -594,32 +660,9 @@ body {
 }
 
 .winner-name-item {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: #2c3e50;
-}
-
-/* ========================================
-   OPTIONS
-======================================== */
-.options-section {
-  padding-top: 15px;
-  border-top: 1px solid #e2e8f0;
-}
-
-.option-checkbox {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  font-size: 14px;
-  color: #4a5568;
-}
-
-.option-checkbox input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  accent-color: #667eea;
 }
 
 /* ========================================
@@ -647,15 +690,22 @@ body {
 /* ========================================
    RESPONSIVE
 ======================================== */
-@media (max-width: 1024px) {
-  .wheel-container-wrapper {
-    grid-template-columns: 1fr;
-    gap: 30px;
+@media (max-width: 1200px) {
+  .bottom-panel-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
   }
-
-  .wheel-section {
-    position: relative;
-    top: 0;
+  
+  .qr-panel {
+    grid-column: 1 / 2;
+  }
+  
+  .entries-panel {
+    grid-column: 2 / 3;
+  }
+  
+  .winners-panel {
+    grid-column: 1 / -1;
   }
 }
 
@@ -670,37 +720,49 @@ body {
 
   .page-header {
     margin-top: 60px;
-    padding: 20px;
+    padding: 15px 20px;
   }
 
-  .main-content {
-    padding: 25px 15px;
+  .wheel-fullscreen {
+    min-height: calc(100vh - 120px);
+    padding: 30px 15px;
   }
-
-  .wheel-section,
-  .entries-section {
-    padding: 25px 20px;
-  }
-
+  
   .wheel-wrapper {
-    max-width: 400px;
+    max-width: 420px;
   }
 
   .spin-button {
     font-size: 18px;
-    padding: 16px 32px;
+    padding: 16px 36px;
+    max-width: 280px;
   }
 
   .winner-text {
-    font-size: 22px;
+    font-size: 24px;
+  }
+
+  .bottom-panel {
+    padding: 25px 15px 40px;
+  }
+
+  .bottom-panel-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .qr-panel,
+  .entries-panel,
+  .winners-panel {
+    grid-column: 1 / -1;
+  }
+  
+  .panel-card {
+    padding: 20px;
   }
 
   .entries-title {
-    font-size: 20px;
-  }
-
-  .entries-textarea {
-    font-size: 14px;
+    font-size: 18px;
   }
   
   .roulette-qr-code {
@@ -710,31 +772,32 @@ body {
 }
 
 @media (max-width: 480px) {
-  .page-header {
-    padding: 15px;
+  .wheel-fullscreen {
+    padding: 20px 10px;
   }
-
+  
   .wheel-wrapper {
     max-width: 320px;
   }
 
   .wheel-pointer {
-    border-left: 20px solid transparent;
-    border-right: 20px solid transparent;
-    border-top: 28px solid #e74c3c;
+    border-left: 22px solid transparent;
+    border-right: 22px solid transparent;
+    border-top: 32px solid #e74c3c;
   }
 
   .spin-button {
     font-size: 16px;
     padding: 14px 28px;
+    max-width: 250px;
   }
 
   .winner-confetti {
-    font-size: 24px;
+    font-size: 28px;
   }
 
   .winner-text {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .entries-actions {
@@ -743,10 +806,6 @@ body {
 
   .action-button {
     width: 100%;
-  }
-  
-  .entries-tabs {
-    flex-direction: row;
   }
   
   .tab-btn {
@@ -758,24 +817,24 @@ body {
 /* ========================================
    SCROLLBAR STYLING
 ======================================== */
-.participants-list::-webkit-scrollbar,
-.winners-list::-webkit-scrollbar {
-  width: 8px;
+.winners-list::-webkit-scrollbar,
+.online-entries-list::-webkit-scrollbar {
+  width: 6px;
 }
 
-.participants-list::-webkit-scrollbar-track,
-.winners-list::-webkit-scrollbar-track {
+.winners-list::-webkit-scrollbar-track,
+.online-entries-list::-webkit-scrollbar-track {
   background: #e9ecef;
   border-radius: 10px;
 }
 
-.participants-list::-webkit-scrollbar-thumb,
-.winners-list::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+.winners-list::-webkit-scrollbar-thumb,
+.online-entries-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 10px;
 }
 
-.participants-list::-webkit-scrollbar-thumb:hover,
-.winners-list::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #e082ea 0%, #e4465b 100%);
+.winners-list::-webkit-scrollbar-thumb:hover,
+.online-entries-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #5a6fd6 0%, #6a4190 100%);
 }
