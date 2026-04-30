@@ -1,24 +1,34 @@
 /*************************************************
  * ROULETTE.JS - Wheel of Names Style
- * SVG-based spinning wheel with smooth animations
+ * ✅ SVG-based spinning wheel with smooth animations
+ * ✅ NEW: Online entries dari Firebase (user scan QR)
+ * ✅ NEW: Tab Online / Manual
+ * ✅ NEW: QR Code untuk link roulette-form.html
+ * ✅ Manual input tetap ada sebagai tambahan
+ * ✅ 1 nama per device (online)
  *************************************************/
 
 // ========= GET ROOM ID =========
 const urlParams = new URLSearchParams(window.location.search);
 const roomId = urlParams.get('room');
 
+// ========= FIREBASE REF FOR ONLINE ENTRIES =========
+const rouletteEntriesRef = db.ref(`karaoke/room/${roomId}/rouletteEntries`);
+
 // ========= STATE =========
 let entries = [];
-let appliedEntries = []; // Track applied entries
+let appliedEntries = [];
 let currentRotation = 0;
 let isSpinning = false;
 let winners = [];
-let isApplied = false; // Track if entries have been applied
+let isApplied = false;
+let activeTab = 'online'; // 'online' or 'manual'
+let onlineEntries = []; // Entries dari Firebase
 
 // ========= SOUND EFFECTS =========
 const spinSound = new Audio('sounds/roulette.mp3');
 const winSound = new Audio('sounds/win.mp3');
-spinSound.loop = true; // Loop the spin sound while spinning
+spinSound.loop = true;
 
 // ========= DOM ELEMENTS =========
 const entriesTextarea = document.getElementById('entries-textarea');
@@ -34,6 +44,14 @@ const winnersSection = document.getElementById('winners-section');
 const winnersList = document.getElementById('winners-list');
 const removeWinnerCheckbox = document.getElementById('remove-winner-checkbox');
 const backButton = document.getElementById('back-button');
+const onlineEntriesList = document.getElementById('online-entries-list');
+const onlineEntriesCountEl = document.getElementById('online-entries-count');
+
+// Tab elements
+const tabOnline = document.getElementById('tab-online');
+const tabManual = document.getElementById('tab-manual');
+const tabContentOnline = document.getElementById('tab-content-online');
+const tabContentManual = document.getElementById('tab-content-manual');
 
 // ========= COLORS =========
 const colors = [
@@ -44,21 +62,130 @@ const colors = [
   '#9B59B6', '#3498DB', '#E67E22', '#1ABC9C'
 ];
 
-// ========= PARSE ENTRIES =========
+// ========= GENERATE QR CODE =========
+function generateRouletteQR() {
+  console.log('📱 Generating Roulette QR code...');
+  
+  if (!roomId) return;
+  
+  const base = window.location.origin + window.location.pathname.replace(/[^/]*$/, '');
+  const url = `${base}roulette-form.html?room=${roomId}`;
+  
+  const img = document.getElementById('roulette-qr-image');
+  const txt = document.getElementById('roulette-form-url');
+  
+  if (img) {
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}`;
+    img.src = qrUrl;
+    img.onload = () => console.log('✅ QR image loaded');
+    img.onerror = () => console.error('❌ QR image failed');
+  }
+  
+  if (txt) {
+    txt.textContent = url;
+  }
+}
+
+// ========= LISTEN ONLINE ENTRIES (FIREBASE) =========
+function listenOnlineEntries() {
+  rouletteEntriesRef.on('value', (snapshot) => {
+    onlineEntries = [];
+    
+    if (snapshot.exists()) {
+      snapshot.forEach((child) => {
+        onlineEntries.push({
+          key: child.key,
+          ...child.val()
+        });
+      });
+    }
+    
+    console.log(`📱 Online entries: ${onlineEntries.length}`);
+    
+    // Update online count
+    if (onlineEntriesCountEl) {
+      onlineEntriesCountEl.textContent = `${onlineEntries.length} peserta online terdaftar`;
+    }
+    
+    // Render online entries list
+    renderOnlineEntries();
+    
+    // Jika tab online aktif dan belum di-apply, update wheel preview
+    if (activeTab === 'online' && !isApplied) {
+      entries = onlineEntries.map(e => e.name);
+      updateEntriesCount();
+      createWheelSlices();
+      startContinuousSpin();
+    }
+  });
+}
+
+// ========= RENDER ONLINE ENTRIES LIST =========
+function renderOnlineEntries() {
+  if (!onlineEntriesList) return;
+  
+  if (onlineEntries.length === 0) {
+    onlineEntriesList.innerHTML = '<div class="empty-online">Belum ada peserta online. Bagikan QR Code!</div>';
+    return;
+  }
+  
+  let html = '';
+  onlineEntries.forEach((entry, index) => {
+    html += `
+      <div class="online-entry-item">
+        <span class="online-entry-number">${index + 1}</span>
+        <span class="online-entry-name">${entry.name}</span>
+      </div>
+    `;
+  });
+  
+  onlineEntriesList.innerHTML = html;
+}
+
+// ========= TAB SWITCHING =========
+function switchTab(tab) {
+  activeTab = tab;
+  
+  // Update tab buttons
+  tabOnline.classList.toggle('active', tab === 'online');
+  tabManual.classList.toggle('active', tab === 'manual');
+  
+  // Update tab content
+  tabContentOnline.classList.toggle('active', tab === 'online');
+  tabContentManual.classList.toggle('active', tab === 'manual');
+  
+  // Jika belum di-apply, update wheel sesuai tab
+  if (!isApplied) {
+    if (tab === 'online') {
+      entries = onlineEntries.map(e => e.name);
+    } else {
+      const text = entriesTextarea.value.trim();
+      entries = parseEntries(text);
+    }
+    updateEntriesCount();
+    createWheelSlices();
+    if (entries.length > 0) {
+      startContinuousSpin();
+    }
+  }
+  
+  console.log('📑 Tab switched to:', tab);
+}
+
+// ========= PARSE ENTRIES (Manual) =========
 function parseEntries(text) {
   const lines = text
     .split('\n')
     .map(line => line.trim())
     .filter(line => line.length > 0);
 
-  return [...new Set(lines)]; // Remove duplicates
+  return [...new Set(lines)];
 }
 
 // ========= UPDATE ENTRIES COUNT =========
 function updateEntriesCount() {
   const count = entries.length;
   entriesCount.textContent = `${count} peserta`;
-  // Enable spin button if entries are applied and have at least 1 entry
   spinButton.disabled = !isApplied || count < 1;
 }
 
@@ -74,23 +201,19 @@ function createWheelSlices() {
   const sliceAngle = 360 / entries.length;
 
   entries.forEach((entry, index) => {
-    const startAngle = index * sliceAngle - 90; // Start from top
+    const startAngle = index * sliceAngle - 90;
     const endAngle = startAngle + sliceAngle;
 
-    // Convert angles to radians
     const startRad = (startAngle * Math.PI) / 180;
     const endRad = (endAngle * Math.PI) / 180;
 
-    // Calculate arc points
     const x1 = centerX + radius * Math.cos(startRad);
     const y1 = centerY + radius * Math.sin(startRad);
     const x2 = centerX + radius * Math.cos(endRad);
     const y2 = centerY + radius * Math.sin(endRad);
 
-    // Large arc flag
     const largeArc = sliceAngle > 180 ? 1 : 0;
 
-    // Create path
     const pathData = [
       `M ${centerX} ${centerY}`,
       `L ${x1} ${y1}`,
@@ -98,7 +221,6 @@ function createWheelSlices() {
       'Z'
     ].join(' ');
 
-    // Create path element
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('d', pathData);
     path.setAttribute('fill', colors[index % colors.length]);
@@ -106,7 +228,6 @@ function createWheelSlices() {
     path.setAttribute('stroke-width', '3');
     path.classList.add('wheel-slice');
 
-    // Create text
     const textAngle = startAngle + sliceAngle / 2;
     const textRad = (textAngle * Math.PI) / 180;
     const textRadius = radius * 0.65;
@@ -125,29 +246,33 @@ function createWheelSlices() {
   });
 }
 
-// ========= START CONTINUOUS SPIN (While Editing) =========
+// ========= CONTINUOUS SPIN =========
 function startContinuousSpin() {
   wheelSvg.classList.add('continuous-spin');
 }
 
-// ========= STOP CONTINUOUS SPIN (When Applied) =========
 function stopContinuousSpin() {
   wheelSvg.classList.remove('continuous-spin');
-  // Reset rotation to 0 for clean start
   wheelSvg.style.transform = 'rotate(0deg)';
   currentRotation = 0;
 }
 
 // ========= APPLY ENTRIES =========
 async function applyEntries() {
-  const text = entriesTextarea.value.trim();
-
-  if (!text) {
-    await customWarning('Silakan masukkan nama peserta terlebih dahulu!', 'Input Kosong');
-    return;
+  let newEntries = [];
+  
+  if (activeTab === 'online') {
+    // Ambil dari online entries Firebase
+    newEntries = onlineEntries.map(e => e.name);
+  } else {
+    // Ambil dari textarea manual
+    const text = entriesTextarea.value.trim();
+    if (!text) {
+      await customWarning('Silakan masukkan nama peserta terlebih dahulu!', 'Input Kosong');
+      return;
+    }
+    newEntries = parseEntries(text);
   }
-
-  const newEntries = parseEntries(text);
 
   if (newEntries.length < 1) {
     await customWarning('Minimal perlu ada 1 peserta untuk roulette!', 'Peserta Kurang');
@@ -155,29 +280,27 @@ async function applyEntries() {
   }
 
   entries = newEntries;
-  appliedEntries = [...entries]; // Store applied entries
-  isApplied = true; // Mark as applied
+  appliedEntries = [...entries];
+  isApplied = true;
 
-  // Stop continuous spin when applied
   stopContinuousSpin();
 
-  // Disable textarea after apply
-  entriesTextarea.disabled = true;
+  // Disable inputs setelah apply
+  if (entriesTextarea) entriesTextarea.disabled = true;
   applyButton.disabled = true;
 
   updateEntriesCount();
   createWheelSlices();
 
-  // Hide winner announcement
   winnerAnnouncement.style.display = 'none';
 
-  console.log('✅ Entries applied:', entries.length);
+  console.log('✅ Entries applied:', entries.length, '(source:', activeTab, ')');
 }
 
 // ========= CLEAR ALL =========
 async function clearAll() {
   const result = await customConfirm(
-    'Apakah Anda yakin ingin menghapus semua data?',
+    'Apakah Anda yakin ingin menghapus semua data? Data peserta online juga akan dihapus.',
     {
       title: '⚠️ Konfirmasi',
       icon: '⚠️',
@@ -194,8 +317,10 @@ async function clearAll() {
   winners = [];
   isApplied = false;
 
-  entriesTextarea.value = '';
-  entriesTextarea.disabled = false;
+  if (entriesTextarea) {
+    entriesTextarea.value = '';
+    entriesTextarea.disabled = false;
+  }
   applyButton.disabled = false;
 
   updateEntriesCount();
@@ -205,9 +330,16 @@ async function clearAll() {
   currentRotation = 0;
   wheelSvg.style.transform = 'rotate(0deg)';
 
-  // Stop any playing sounds
   stopSound(spinSound);
   stopSound(winSound);
+
+  // ✅ NEW: Hapus online entries dari Firebase (agar user bisa daftar ulang)
+  try {
+    await rouletteEntriesRef.remove();
+    console.log('✅ Online entries cleared from Firebase');
+  } catch (error) {
+    console.error('❌ Error clearing online entries:', error);
+  }
 
   console.log('✅ All data cleared');
 }
@@ -220,35 +352,29 @@ async function spinWheel() {
   spinButton.disabled = true;
   winnerAnnouncement.style.display = 'none';
 
-  // Pick random winner
   const winnerIndex = Math.floor(Math.random() * entries.length);
   const winner = entries[winnerIndex];
 
   console.log('🎯 Winner selected:', winner);
 
-  // Calculate rotation
   const sliceAngle = 360 / entries.length;
   const targetSliceRotation = winnerIndex * sliceAngle + sliceAngle / 2;
 
-  // Add multiple full rotations (5-8 spins)
   const fullRotations = 5 + Math.random() * 3;
   const totalRotation = currentRotation + (360 * fullRotations) - targetSliceRotation + 90;
 
-  // Animate
-  const duration = 7000; // 7 seconds
+  const duration = 7000;
   const startTime = Date.now();
   const startRotation = currentRotation;
 
   wheelSvg.classList.add('spinning');
 
-  // Play spin sound
   playSound(spinSound);
 
   function animate() {
     const elapsed = Date.now() - startTime;
     const progress = Math.min(elapsed / duration, 1);
 
-    // Easing function (ease-out cubic for realistic deceleration)
     const eased = 1 - Math.pow(1 - progress, 3);
 
     const rotation = startRotation + (totalRotation - startRotation) * eased;
@@ -268,47 +394,51 @@ async function spinWheel() {
 
 // ========= FINISH SPIN =========
 async function finishSpin(winner) {
-  // Show winner
   winnerText.textContent = winner;
   winnerAnnouncement.style.display = 'flex';
 
-  // Stop spin sound and play win sound
   stopSound(spinSound);
   playSound(winSound);
 
-  // Add to winners list
   winners.push(winner);
   updateWinnersList();
 
-  // Confetti
   createConfetti();
 
-  // Success message
   await customSuccess(`🎉 ${winner} terpilih sebagai pemenang!`, {
     title: '🏆 PEMENANG!',
     icon: '🎊'
   });
 
-  // Remove winner if checkbox is checked
   if (removeWinnerCheckbox.checked) {
     entries = entries.filter(e => e !== winner);
     updateEntriesCount();
 
-    // Update textarea with remaining entries
-    entriesTextarea.value = entries.join('\n');
+    if (entriesTextarea) {
+      entriesTextarea.value = entries.join('\n');
+    }
 
-    // Recreate wheel
+    // ✅ NEW: Hapus pemenang dari Firebase online entries juga
+    if (activeTab === 'online') {
+      const winnerEntry = onlineEntries.find(e => e.name === winner);
+      if (winnerEntry && winnerEntry.key) {
+        try {
+          await rouletteEntriesRef.child(winnerEntry.key).remove();
+          console.log('✅ Winner removed from Firebase:', winner);
+        } catch (error) {
+          console.error('❌ Error removing winner from Firebase:', error);
+        }
+      }
+    }
+
     createWheelSlices();
 
     if (entries.length === 1) {
-      // Last winner - show special message and allow spinning
       await customSuccess(`${entries[0]} adalah nominasi terakhir!`, {
         title: '🎯 Nominasi Terakhir',
         icon: '🏁'
       });
-      // Button stays enabled for the last spin
     } else if (entries.length < 1) {
-      // All winners selected
       await customSuccess('Semua pemenang telah terpilih!', {
         title: '✅ Selesai',
         icon: '🏁'
@@ -318,7 +448,6 @@ async function finishSpin(winner) {
   }
 
   isSpinning = false;
-  // Enable spin button if entries are applied and have at least 1 entry
   spinButton.disabled = !isApplied || entries.length < 1;
 }
 
@@ -384,7 +513,7 @@ async function goBack(e) {
 
   if (entries.length > 0 && !isSpinning) {
     const result = await customConfirm(
-      'Apakah Anda yakin ingin kembali ke menu? Semua data akan hilang.',
+      'Apakah Anda yakin ingin kembali ke menu?\nSemua data akan hilang.',
       {
         title: 'Konfirmasi Kembali',
         icon: 'img/exit.png',
@@ -397,7 +526,6 @@ async function goBack(e) {
     if (!result) return;
   }
 
-  // Stop any playing sounds
   stopSound(spinSound);
   stopSound(winSound);
 
@@ -406,26 +534,22 @@ async function goBack(e) {
 
 // ========= TEXTAREA INPUT - REALTIME UPDATE =========
 function handleTextareaInput() {
-  // Only allow input if not yet applied
   if (isApplied) return;
+  if (activeTab !== 'manual') return;
 
   const text = entriesTextarea.value.trim();
   const tempEntries = parseEntries(text);
   entriesCount.textContent = `${tempEntries.length} peserta`;
 
-  // Update wheel in real-time
   entries = tempEntries;
   createWheelSlices();
-
-  // Start continuous spin while editing
   startContinuousSpin();
 }
 
 function handleTextareaKeydown(e) {
-  // Only allow Enter if not yet applied
   if (isApplied) return;
+  if (activeTab !== 'manual') return;
 
-  // When Enter is pressed, add to wheel immediately
   if (e.key === 'Enter') {
     handleTextareaInput();
   }
@@ -453,27 +577,35 @@ document.addEventListener('DOMContentLoaded', function () {
     backButton.addEventListener('click', goBack);
   }
 
-  // Textarea input - realtime update (only before apply)
+  // Textarea input (manual tab)
   if (entriesTextarea) {
     entriesTextarea.addEventListener('input', handleTextareaInput);
     entriesTextarea.addEventListener('keydown', handleTextareaKeydown);
   }
 
+  // Tab switching
+  if (tabOnline) {
+    tabOnline.addEventListener('click', () => switchTab('online'));
+  }
+  if (tabManual) {
+    tabManual.addEventListener('click', () => switchTab('manual'));
+  }
 
-  console.log('✅ Roulette.js loaded (Wheel of Names style)');
+  // Generate QR Code
+  generateRouletteQR();
+
+  // Listen online entries dari Firebase
+  listenOnlineEntries();
+
+  console.log('✅ Roulette.js loaded (with Online Entries)');
   console.log('🎰 Room:', roomId);
 });
 
-// ========= HELPER: PLAY SOUND =========
+// ========= HELPER: PLAY/STOP SOUND =========
 function playSound(audio) {
   if (!audio) return;
-
-  // Reset time to 0 before playing
   audio.currentTime = 0;
-
-  // Play with error handling (browsers might block autoplay)
   const playPromise = audio.play();
-
   if (playPromise !== undefined) {
     playPromise.catch(error => {
       console.warn('Audio play failed:', error);
@@ -481,31 +613,27 @@ function playSound(audio) {
   }
 }
 
-// ========= HELPER: STOP SOUND =========
 function stopSound(audio) {
   if (!audio) return;
-
   audio.pause();
   audio.currentTime = 0;
 }
 
 // ========= KEYBOARD SHORTCUTS =========
 document.addEventListener('keydown', function (e) {
-  // ESC key - back
   if (e.key === 'Escape') {
     if (backButton && !isSpinning) {
       backButton.click();
     }
   }
 
-  // Space or Enter to spin
   if ((e.key === ' ' || e.key === 'Enter') && e.ctrlKey && entries.length >= 1 && !isSpinning && isApplied) {
     e.preventDefault();
     spinWheel();
   }
 });
 
-// ========= EXPORT FOR MODULES =========
+// ========= EXPORT =========
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     applyEntries,
@@ -513,4 +641,3 @@ if (typeof module !== 'undefined' && module.exports) {
     clearAll
   };
 }
-

@@ -1,6 +1,6 @@
 /* ========================================
    ROULETTE.CSS - Wheel of Names Style
-   Modern, clean design
+   ✅ NEW: QR Section, Tab Switch, Online Entries
 ======================================== */
 
 * {
@@ -10,14 +10,14 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Helvetica', 'Arial', sans-serif;
-  background: #f5f7fa;
-  color: #2c3e50;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background: #f5f5f7;
+  color: #1d1d1f;
   min-height: 100vh;
 }
 
 /* ========================================
-   TOP NAVBAR
+   NAVBAR
 ======================================== */
 .top-navbar {
   position: fixed;
@@ -29,7 +29,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   z-index: 1000;
 }
 
@@ -39,63 +39,51 @@ body {
 }
 
 /* ========================================
-   BACK BUTTON (Below Navbar)
+   PAGE HEADER
 ======================================== */
 .page-header {
-  position: fixed;
-  top: 70px;
-  left: 0;
-  width: 100%;
-  padding: 15px 20px;
-  background: #f5f7fa;
-  z-index: 999;
+  margin-top: 70px;
+  padding: 20px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .back-button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  color: #2c3e50;
-  border-radius: 8px;
+  color: white;
+  font-size: 16px;
   font-weight: 600;
-  font-size: 14px;
   cursor: pointer;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .back-button:hover {
-  background: white;
-  border-color: #667eea;
-  transform: translateX(-3px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(-5px);
 }
 
 .back-icon {
-  font-size: 18px;
+  font-size: 20px;
 }
 
 /* ========================================
    MAIN CONTENT
 ======================================== */
 .main-content {
-  padding-top: 140px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 40px;
-  min-height: calc(100vh - 200px);
+  padding: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .wheel-container-wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
   align-items: start;
 }
 
@@ -149,21 +137,15 @@ body {
   transition: none;
 }
 
-/* Continuous spin animation while editing */
 .wheel-svg.continuous-spin {
   animation: continuousSpin 8s linear infinite;
 }
 
 @keyframes continuousSpin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* Wheel Slices */
 .wheel-slice {
   cursor: pointer;
   transition: opacity 0.3s;
@@ -226,12 +208,8 @@ body {
 }
 
 @keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
 /* ========================================
@@ -252,14 +230,8 @@ body {
 }
 
 @keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .winner-confetti {
@@ -268,12 +240,8 @@ body {
 }
 
 @keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .winner-text {
@@ -281,6 +249,61 @@ body {
   font-weight: 800;
   color: #2c3e50;
   text-align: center;
+}
+
+/* ========================================
+   ✅ NEW: QR SECTION (Di bawah roda)
+======================================== */
+.qr-section {
+  margin-top: 30px;
+  padding: 25px;
+  background: linear-gradient(135deg, #f8f7ff 0%, #f0eeff 100%);
+  border: 2px solid #e8e7ff;
+  border-radius: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+.qr-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #5b3fd9;
+  margin-bottom: 15px;
+}
+
+.qr-code-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.roulette-qr-code {
+  width: 180px;
+  height: 180px;
+  border-radius: 12px;
+  border: 3px solid #e8e7ff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.qr-url-text {
+  font-size: 11px;
+  color: #7c5ceb;
+  word-break: break-all;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e8e7ff;
+}
+
+.online-entries-count {
+  font-size: 14px;
+  font-weight: 700;
+  color: #5b3fd9;
+  padding: 8px 16px;
+  background: rgba(124, 92, 235, 0.1);
+  border-radius: 20px;
+  display: inline-block;
 }
 
 /* ========================================
@@ -315,32 +338,149 @@ body {
   font-weight: 600;
 }
 
-.entries-input-wrapper {
+/* ========================================
+   ✅ NEW: TAB SWITCH
+======================================== */
+.entries-tabs {
+  display: flex;
+  gap: 0;
   margin-bottom: 20px;
+  background: #f1f1f1;
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 12px 20px;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b7280;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.tab-btn:hover:not(.active) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+  margin-bottom: 20px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* ========================================
+   ✅ NEW: ONLINE ENTRIES LIST
+======================================== */
+.online-entries-list {
+  max-height: 350px;
+  overflow-y: auto;
+  border: 2px solid #e8e7ff;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.online-entries-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.online-entries-list::-webkit-scrollbar-thumb {
+  background: #7c5ceb;
+  border-radius: 10px;
+}
+
+.online-entry-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #f8f7ff 0%, #f0eeff 100%);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  border: 1px solid #e8e7ff;
+  transition: all 0.2s ease;
+}
+
+.online-entry-item:last-child {
+  margin-bottom: 0;
+}
+
+.online-entry-item:hover {
+  transform: translateX(4px);
+  border-color: #7c5ceb;
+}
+
+.online-entry-number {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.online-entry-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.empty-online {
+  text-align: center;
+  padding: 30px 20px;
+  color: #9ca3af;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* ========================================
+   MANUAL TEXTAREA
+======================================== */
+.entries-input-wrapper {
+  margin-bottom: 0;
 }
 
 .entries-textarea {
   width: 100%;
   padding: 15px;
-  border: 2px solid #e0e0e0;
-  border-radius: 8px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
   font-size: 15px;
   font-family: inherit;
   resize: vertical;
-  transition: all 0.3s ease;
-  background: #fafafa;
-  line-height: 1.6;
+  transition: border-color 0.3s;
+  min-height: 200px;
 }
 
 .entries-textarea:focus {
   outline: none;
   border-color: #667eea;
-  background: white;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
 }
 
-.entries-textarea::placeholder {
-  color: #bdc3c7;
+.entries-textarea:disabled {
+  background: #f8f9fa;
+  color: #6b7280;
 }
 
 /* ========================================
@@ -349,131 +489,122 @@ body {
 .entries-actions {
   display: flex;
   gap: 12px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .action-button {
   flex: 1;
-  padding: 14px 24px;
-  background: #667eea;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  transition: all 0.3s ease;
+  font-family: inherit;
 }
 
-.action-button:hover {
-  background: #5568d3;
+.action-button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 6px 18px rgba(102, 126, 234, 0.4);
+}
+
+.action-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .action-button.secondary {
-  background: #95a5a6;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
 }
 
-.action-button.secondary:hover {
-  background: #7f8c8d;
+.action-button.secondary:hover:not(:disabled) {
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.4);
 }
 
 /* ========================================
    WINNERS SECTION
 ======================================== */
 .winners-section {
-  margin-top: 25px;
-  padding-top: 25px;
-  border-top: 2px solid #ecf0f1;
+  margin-bottom: 20px;
 }
 
 .winners-title {
   font-size: 18px;
   font-weight: 700;
-  color: #2c3e50;
   margin-bottom: 15px;
+  color: #2c3e50;
 }
 
 .winners-list {
-  max-height: 300px;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .winner-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 15px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 8px;
-  margin-bottom: 8px;
-  animation: fadeIn 0.4s ease;
-  transition: transform 0.2s;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  animation: slideIn 0.3s ease forwards;
+  opacity: 0;
 }
 
-.winner-item:hover {
-  transform: translateX(5px);
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
 .winner-rank {
   width: 36px;
   height: 36px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
   border-radius: 50%;
+  background: #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
-  font-size: 16px;
-  flex-shrink: 0;
+  font-weight: 700;
+  font-size: 14px;
+  color: #64748b;
 }
 
 .winner-rank.gold {
-  background: linear-gradient(135deg, #f39c12 0%, #f1c40f 100%);
-  font-size: 18px;
+  background: linear-gradient(135deg, #f1c40f, #f39c12);
+  color: white;
 }
 
 .winner-rank.silver {
-  background: linear-gradient(135deg, #95a5a6 0%, #bdc3c7 100%);
-  font-size: 18px;
+  background: linear-gradient(135deg, #bdc3c7, #95a5a6);
+  color: white;
 }
 
 .winner-rank.bronze {
-  background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);
-  font-size: 18px;
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  color: white;
 }
 
 .winner-name-item {
-  flex: 1;
   font-size: 16px;
   font-weight: 600;
   color: #2c3e50;
 }
 
 /* ========================================
-   OPTIONS SECTION
+   OPTIONS
 ======================================== */
 .options-section {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 2px solid #ecf0f1;
+  padding-top: 15px;
+  border-top: 1px solid #e2e8f0;
 }
 
 .option-checkbox {
@@ -481,33 +612,25 @@ body {
   align-items: center;
   gap: 10px;
   cursor: pointer;
-  user-select: none;
+  font-size: 14px;
+  color: #4a5568;
 }
 
 .option-checkbox input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
+  width: 18px;
+  height: 18px;
   accent-color: #667eea;
 }
 
-.option-checkbox span {
-  font-size: 15px;
-  color: #2c3e50;
-  font-weight: 500;
-}
-
 /* ========================================
-   CONFETTI ANIMATION
+   CONFETTI
 ======================================== */
 .confetti {
   position: fixed;
-  width: 10px;
-  height: 10px;
-  background: #f1c40f;
   top: -20px;
   z-index: 10000;
-  animation: confettiFall 4s linear forwards;
+  animation: confettiFall linear forwards;
+  pointer-events: none;
 }
 
 @keyframes confettiFall {
@@ -522,28 +645,7 @@ body {
 }
 
 /* ========================================
-   SCROLLBAR
-======================================== */
-.winners-list::-webkit-scrollbar {
-  width: 8px;
-}
-
-.winners-list::-webkit-scrollbar-track {
-  background: #ecf0f1;
-  border-radius: 10px;
-}
-
-.winners-list::-webkit-scrollbar-thumb {
-  background: #667eea;
-  border-radius: 10px;
-}
-
-.winners-list::-webkit-scrollbar-thumb:hover {
-  background: #5568d3;
-}
-
-/* ========================================
-   RESPONSIVE DESIGN
+   RESPONSIVE
 ======================================== */
 @media (max-width: 1024px) {
   .wheel-container-wrapper {
@@ -566,17 +668,9 @@ body {
     height: 35px;
   }
 
-  .hero-header {
+  .page-header {
     margin-top: 60px;
-    padding: 30px 20px;
-  }
-
-  .hero-title {
-    font-size: 32px;
-  }
-
-  .hero-subtitle {
-    font-size: 16px;
+    padding: 20px;
   }
 
   .main-content {
@@ -608,11 +702,16 @@ body {
   .entries-textarea {
     font-size: 14px;
   }
+  
+  .roulette-qr-code {
+    width: 150px;
+    height: 150px;
+  }
 }
 
 @media (max-width: 480px) {
-  .hero-title {
-    font-size: 26px;
+  .page-header {
+    padding: 15px;
   }
 
   .wheel-wrapper {
@@ -645,8 +744,16 @@ body {
   .action-button {
     width: 100%;
   }
+  
+  .entries-tabs {
+    flex-direction: row;
+  }
+  
+  .tab-btn {
+    font-size: 13px;
+    padding: 10px 12px;
+  }
 }
-
 
 /* ========================================
    SCROLLBAR STYLING

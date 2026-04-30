@@ -25,7 +25,7 @@
     <!-- MAIN CONTENT -->
     <main class="main-content">
         <div class="wheel-container-wrapper">
-            <!-- LEFT SIDE: WHEEL -->
+            <!-- LEFT SIDE: WHEEL + QR -->
             <div class="wheel-section">
                 <div class="wheel-wrapper">
                     <!-- Triangle Pointer -->
@@ -50,6 +50,18 @@
                     <div class="winner-text" id="winner-text">Pemenang</div>
                     <div class="winner-confetti">🎊</div>
                 </div>
+
+                <!-- ✅ NEW: QR CODE SECTION (di bawah roda) -->
+                <div class="qr-section" id="qr-section">
+                    <div class="qr-section-title">📱 Scan untuk Daftar Roulette</div>
+                    <div class="qr-code-wrapper">
+                        <img id="roulette-qr-image" alt="QR Code" class="roulette-qr-code">
+                    </div>
+                    <p class="qr-url-text" id="roulette-form-url">Loading...</p>
+                    <div class="online-entries-count" id="online-entries-count">
+                        0 peserta online terdaftar
+                    </div>
+                </div>
             </div>
 
             <!-- RIGHT SIDE: ENTRIES -->
@@ -59,15 +71,32 @@
                     <div class="entries-count" id="entries-count">0 peserta</div>
                 </div>
 
-                <div class="entries-input-wrapper">
-                    <textarea 
-                        id="entries-textarea" 
-                        class="entries-textarea"
-                        placeholder="Masukkan nama peserta (satu per baris)&#10;&#10;Contoh:&#10;Fabio&#10;Eric&#10;Charles&#10;Gabriel&#10;Diya&#10;Beatriz&#10;Ali"
-                        rows="15"
-                    ></textarea>
+                <!-- ✅ NEW: Tab Switch - Online / Manual -->
+                <div class="entries-tabs">
+                    <button class="tab-btn active" id="tab-online" data-tab="online">📱 Online</button>
+                    <button class="tab-btn" id="tab-manual" data-tab="manual">✏️ Manual</button>
                 </div>
 
+                <!-- TAB CONTENT: Online Entries (dari Firebase) -->
+                <div class="tab-content active" id="tab-content-online">
+                    <div class="online-entries-list" id="online-entries-list">
+                        <div class="empty-online">Belum ada peserta online. Bagikan QR Code!</div>
+                    </div>
+                </div>
+
+                <!-- TAB CONTENT: Manual Entries (textarea seperti sebelumnya) -->
+                <div class="tab-content" id="tab-content-manual">
+                    <div class="entries-input-wrapper">
+                        <textarea 
+                            id="entries-textarea" 
+                            class="entries-textarea"
+                            placeholder="Masukkan nama peserta (satu per baris)&#10;&#10;Contoh:&#10;Fabio&#10;Eric&#10;Charles"
+                            rows="12"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
                 <div class="entries-actions">
                     <button class="action-button" id="apply-button">
                         <span>✓</span> Terapkan
