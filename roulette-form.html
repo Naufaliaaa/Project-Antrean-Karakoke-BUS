@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/jpeg" href="img/logbro.jpeg?v=2">
+<link rel="apple-touch-icon" href="img/logbro.jpeg?v=2">
+<title>Daftar Roulette - Hioo Karaoke</title>
+<link rel="stylesheet" href="css/roulette-form.css">
+</head>
+<body>
+
+<!-- ========================================
+     CONTAINER
+======================================== -->
+<div class="container">
+  
+  <!-- ========================================
+       LOGO SECTION
+  ======================================== -->
+  <div class="logo-section">
+    <img src="img/hioo.jpeg" alt="Hioo Logo" class="logo-image">
+    <p class="logo-tagline">Jalan Jalan NYAMAN, Cuan AMAN</p>
+  </div>
+
+  <!-- ========================================
+       TITLE SECTION
+  ======================================== -->
+  <div class="title-section">
+    <h1 class="main-title">🎰 Daftar Roulette</h1>
+    <p class="main-subtitle">Masukkan nama kamu untuk ikut roulette arisan!</p>
+  </div>
+
+  <!-- ========================================
+       ALERT (Hidden by default)
+  ======================================== -->
+  <div id="alert" class="alert"></div>
+
+  <!-- ========================================
+       FORM SECTION
+  ======================================== -->
+  <div class="form-section">
+    
+    <!-- Nama Kamu -->
+    <div class="form-group">
+      <label for="name" class="form-label">Nama Kamu</label>
+      <input 
+        type="text" 
+        id="name" 
+        class="form-input"
+        placeholder="Masukan nama kamu......."
+        autocomplete="name"
+        maxlength="30"
+      >
+    </div>
+
+    <!-- Submit Button -->
+    <button class="submit-button" id="submit-btn">
+      <span class="button-icon">🎯</span>
+      <span class="button-text">Daftar Roulette</span>
+    </button>
+
+  </div>
+
+  <!-- ========================================
+       STATUS INFO
+  ======================================== -->
+  <div class="status-info">
+    <div class="status-item" id="status-message">
+      ⏳ Menunggu peserta...
+    </div>
+    <div class="participants-preview" id="participants-preview">
+      <!-- Akan diisi oleh JS -->
+    </div>
+  </div>
+
+</div>
+
+<!-- ========================================
+     SCRIPTS
+======================================== -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="js/firebase.js"></script>
+<script src="js/room.js"></script>
+<script src="js/roulette-form.js"></script>
+
+</body>
+</html>
