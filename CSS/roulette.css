@@ -341,7 +341,8 @@ body {
    ENTRIES PANEL (Kolom tengah)
 ======================================== */
 .entries-panel {
-  /* Akan menjadi yang paling lebar */
+  /* Kolom tengah - paling lebar */
+  grid-column: 2;
 }
 
 .entries-header {
@@ -588,7 +589,8 @@ body {
 }
 
 .winners-section {
-  /* Selalu terlihat, isi kosong ditampilkan via .empty-winners */
+  /* Selalu terlihat - isi kosong ditampilkan via .empty-winners */
+  display: block;
 }
 
 .winners-title {
