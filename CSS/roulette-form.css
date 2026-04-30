@@ -1,0 +1,284 @@
+/* ========================================
+   ROULETTE-FORM.CSS
+   Halaman Daftar Roulette untuk User (scan QR)
+   Desain mirip form.html agar konsisten
+======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* ========================================
+   CONTAINER
+======================================== */
+.container {
+  width: 100%;
+  max-width: 480px;
+  background: white;
+  border-radius: 24px;
+  padding: 40px 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========================================
+   LOGO SECTION
+======================================== */
+.logo-section {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.logo-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  margin-bottom: 10px;
+}
+
+.logo-tagline {
+  font-size: 13px;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+/* ========================================
+   TITLE SECTION
+======================================== */
+.title-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.main-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1d1d1f;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.main-subtitle {
+  font-size: 15px;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+/* ========================================
+   ALERT
+======================================== */
+.alert {
+  display: none;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  animation: shake 0.4s ease;
+}
+
+.alert.success {
+  display: block;
+  background: linear-gradient(135deg, #dcfce7 0%, #f0fdf4 100%);
+  color: #166534;
+  border: 2px solid #86efac;
+}
+
+.alert.error {
+  display: block;
+  background: linear-gradient(135deg, #fef2f2 0%, #fff1f2 100%);
+  color: #991b1b;
+  border: 2px solid #fca5a5;
+}
+
+.alert.warning {
+  display: block;
+  background: linear-gradient(135deg, #fef3c7 0%, #fffbeb 100%);
+  color: #92400e;
+  border: 2px solid #fcd34d;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* ========================================
+   FORM SECTION
+======================================== */
+.form-section {
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 16px 18px;
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  font-size: 16px;
+  font-family: inherit;
+  color: #1d1d1f;
+  background: #f9fafb;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.form-input::placeholder {
+  color: #9ca3af;
+}
+
+/* ========================================
+   SUBMIT BUTTON
+======================================== */
+.submit-button {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 17px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.submit-button:active {
+  transform: translateY(0);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.button-icon {
+  font-size: 20px;
+}
+
+/* ========================================
+   STATUS INFO
+======================================== */
+.status-info {
+  background: linear-gradient(135deg, #f8f7ff 0%, #f0eeff 100%);
+  border: 2px solid #e8e7ff;
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.status-item {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #7c5ceb;
+  margin-bottom: 12px;
+}
+
+.participants-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.participant-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  background: white;
+  border: 1px solid #d8d7ff;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #5b3fd9;
+  animation: tagPop 0.3s ease forwards;
+}
+
+.participant-tag.is-me {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: transparent;
+}
+
+@keyframes tagPop {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.no-participants {
+  font-size: 13px;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+@media (max-width: 480px) {
+  .container {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+  
+  .main-title {
+    font-size: 24px;
+  }
+  
+  .logo-image {
+    width: 65px;
+    height: 65px;
+  }
+}
