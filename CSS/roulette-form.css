@@ -47,10 +47,10 @@ body {
 }
 
 .logo-image {
-  width: 80px;
-  height: 80px;
-  border-radius: 20px;
-  object-fit: cover;
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+  object-fit: contain;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   margin-bottom: 10px;
 }

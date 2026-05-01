@@ -73,9 +73,9 @@ function checkExistingEntry() {
       nameInput.value = myName;
       nameInput.disabled = true;
       submitBtn.disabled = true;
-      submitBtn.innerHTML = '<span class="button-icon">✅</span><span class="button-text">Sudah Terdaftar</span>';
+      submitBtn.innerHTML = '<span class="button-text">Sudah Terdaftar</span>';
       
-      showAlert('success', `✅ Kamu sudah terdaftar sebagai "${myName}". Tunggu admin memutar roda ya!`);
+      showAlert('success', 'Kamu sudah terdaftar sebagai "' + myName + '". Tunggu admin memutar roda ya!');
     }
   });
 }
@@ -86,27 +86,27 @@ async function submitName() {
   
   // Validasi kosong
   if (!name) {
-    showAlert('error', '❌ Nama tidak boleh kosong!');
+    showAlert('error', 'Nama tidak boleh kosong!');
     nameInput.focus();
     return;
   }
   
   // Validasi panjang
   if (name.length < 2) {
-    showAlert('error', '❌ Nama minimal 2 karakter!');
+    showAlert('error', 'Nama minimal 2 karakter!');
     nameInput.focus();
     return;
   }
   
   if (name.length > 30) {
-    showAlert('error', '❌ Nama maksimal 30 karakter!');
+    showAlert('error', 'Nama maksimal 30 karakter!');
     nameInput.focus();
     return;
   }
   
   // Cek ulang apakah sudah submit
   if (hasSubmitted) {
-    showAlert('warning', '⚠️ Kamu sudah terdaftar! Hanya bisa 1 nama per device.');
+    showAlert('warning', 'Kamu sudah terdaftar! Hanya bisa 1 nama per device.');
     return;
   }
   
@@ -114,23 +114,23 @@ async function submitName() {
   const existingSnap = await rouletteRef.orderByChild('deviceId').equalTo(deviceId).once('value');
   if (existingSnap.exists()) {
     hasSubmitted = true;
-    showAlert('warning', '⚠️ Device ini sudah mendaftarkan nama. Tunggu admin reset untuk daftar lagi.');
+    showAlert('warning', 'Device ini sudah mendaftarkan nama. Tunggu admin reset untuk daftar lagi.');
     nameInput.disabled = true;
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<span class="button-icon">✅</span><span class="button-text">Sudah Terdaftar</span>';
+    submitBtn.innerHTML = '<span class="button-text">Sudah Terdaftar</span>';
     return;
   }
   
   // Cek duplikat nama
   const nameSnap = await rouletteRef.orderByChild('name').equalTo(name).once('value');
   if (nameSnap.exists()) {
-    showAlert('error', `❌ Nama "${name}" sudah dipakai orang lain! Gunakan nama berbeda.`);
+    showAlert('error', `Nama "${name}" sudah dipakai orang lain! Gunakan nama berbeda.`);
     return;
   }
   
   // Disable button saat proses
   submitBtn.disabled = true;
-  submitBtn.innerHTML = '<span class="button-icon">⏳</span><span class="button-text">Mendaftar...</span>';
+  submitBtn.innerHTML = '<span class="button-text">Mendaftar...</span>';
   
   try {
     // Push ke Firebase
@@ -148,17 +148,17 @@ async function submitName() {
     
     // Update UI
     nameInput.disabled = true;
-    submitBtn.innerHTML = '<span class="button-icon">✅</span><span class="button-text">Sudah Terdaftar</span>';
+    submitBtn.innerHTML = '<span class="button-text">Sudah Terdaftar</span>';
     
-    showAlert('success', `🎉 Berhasil! "${name}" sudah masuk ke roda roulette. Tunggu admin memutar roda ya!`);
+    showAlert('success', 'Berhasil! "' + name + '" sudah masuk ke roda roulette. Tunggu admin memutar roda ya!');
     
     console.log('✅ Roulette entry submitted:', name);
     
   } catch (error) {
     console.error('❌ Error submitting:', error);
-    showAlert('error', '❌ Gagal mendaftar. Coba lagi.');
+    showAlert('error', 'Gagal mendaftar. Coba lagi.');
     submitBtn.disabled = false;
-    submitBtn.innerHTML = '<span class="button-icon">🎯</span><span class="button-text">Daftar Roulette</span>';
+    submitBtn.innerHTML = '<span class="button-text">Daftar Roulette</span>';
   }
 }
 
@@ -176,7 +176,7 @@ function listenParticipants() {
         nameInput.disabled = false;
         nameInput.value = localStorage.getItem('roulette_user_name') || '';
         submitBtn.disabled = false;
-        submitBtn.innerHTML = '<span class="button-icon">🎯</span><span class="button-text">Daftar Roulette</span>';
+        submitBtn.innerHTML = '<span class="button-text">Daftar Roulette</span>';
         alertDiv.style.display = 'none';
         alertDiv.className = 'alert';
       }
@@ -189,13 +189,13 @@ function listenParticipants() {
     });
     
     const count = entries.length;
-    statusMessage.innerHTML = `🎰 <strong>${count}</strong> peserta terdaftar`;
+    statusMessage.innerHTML = `<strong>${count}</strong> peserta terdaftar`;
     
     // Render tags
     let html = '';
     entries.forEach((entry) => {
       const isMe = entry.deviceId === deviceId;
-      html += `<span class="participant-tag ${isMe ? 'is-me' : ''}">${isMe ? '👤 ' : ''}${entry.name}</span>`;
+      html += `<span class="participant-tag ${isMe ? 'is-me' : ''}">${entry.name}</span>`;
     });
     participantsPreview.innerHTML = html;
     
@@ -207,8 +207,8 @@ function listenParticipants() {
       myName = '';
       nameInput.disabled = false;
       submitBtn.disabled = false;
-      submitBtn.innerHTML = '<span class="button-icon">🎯</span><span class="button-text">Daftar Roulette</span>';
-      showAlert('warning', '🎉 Nama kamu sudah dikeluarkan dari roda! Kamu bisa daftar lagi jika mau.');
+      submitBtn.innerHTML = '<span class="button-text">Daftar Roulette</span>';
+      showAlert('warning', 'Nama kamu sudah dikeluarkan dari roda! Kamu bisa daftar lagi jika mau.');
     }
   });
 }
