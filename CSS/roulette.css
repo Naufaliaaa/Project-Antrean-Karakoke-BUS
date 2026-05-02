@@ -174,51 +174,77 @@ body {
 }
 
 /* ========================================
-   SPIN BUTTON
+   CENTER SPIN BUTTON (Di tengah roda)
 ======================================== */
-.spin-button {
-  width: 100%;
-  max-width: 350px;
-  padding: 20px 50px;
+.center-spin-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 22px;
-  font-weight: 700;
+  border: 4px solid rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  font-weight: 800;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
-  transition: all 0.3s ease;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
+  box-shadow: 
+    0 4px 15px rgba(102, 126, 234, 0.6),
+    0 0 0 6px rgba(102, 126, 234, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  z-index: 10;
+  font-family: inherit;
+  animation: centerPulse 2.5s ease-in-out infinite;
 }
 
-.spin-button:hover:not(:disabled) {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.6);
+@keyframes centerPulse {
+  0%, 100% { 
+    box-shadow: 
+      0 4px 15px rgba(102, 126, 234, 0.6),
+      0 0 0 6px rgba(102, 126, 234, 0.2),
+      inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  }
+  50% { 
+    box-shadow: 
+      0 4px 20px rgba(102, 126, 234, 0.8),
+      0 0 0 10px rgba(102, 126, 234, 0.15),
+      0 0 0 18px rgba(102, 126, 234, 0.08),
+      inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  }
 }
 
-.spin-button:active:not(:disabled) {
-  transform: translateY(-1px) scale(1);
+.center-spin-btn:hover:not(:disabled) {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 
+    0 6px 25px rgba(102, 126, 234, 0.8),
+    0 0 0 8px rgba(102, 126, 234, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  animation: none;
 }
 
-.spin-button:disabled {
-  opacity: 0.4;
+.center-spin-btn:active:not(:disabled) {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+.center-spin-btn:disabled {
+  opacity: 0.35;
   cursor: not-allowed;
+  animation: none;
+  box-shadow: 
+    0 4px 10px rgba(0, 0, 0, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.1);
 }
 
-.spin-icon {
-  font-size: 26px;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+.center-spin-text {
+  pointer-events: none;
 }
 
 /* ========================================
@@ -341,8 +367,7 @@ body {
    ENTRIES PANEL (Kolom tengah)
 ======================================== */
 .entries-panel {
-  /* Kolom tengah - paling lebar */
-  grid-column: 2;
+  /* Akan menjadi yang paling lebar */
 }
 
 .entries-header {
@@ -589,8 +614,7 @@ body {
 }
 
 .winners-section {
-  /* Selalu terlihat - isi kosong ditampilkan via .empty-winners */
-  display: block;
+  /* Selalu terlihat, isi kosong ditampilkan via .empty-winners */
 }
 
 .winners-title {
@@ -734,10 +758,10 @@ body {
     max-width: 420px;
   }
 
-  .spin-button {
-    font-size: 18px;
-    padding: 16px 36px;
-    max-width: 280px;
+  .center-spin-btn {
+    width: 85px;
+    height: 85px;
+    font-size: 12px;
   }
 
   .winner-text {
@@ -788,10 +812,12 @@ body {
     border-top: 32px solid #e74c3c;
   }
 
-  .spin-button {
-    font-size: 16px;
-    padding: 14px 28px;
-    max-width: 250px;
+  .center-spin-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    border-width: 3px;
   }
 
   .winner-confetti {
