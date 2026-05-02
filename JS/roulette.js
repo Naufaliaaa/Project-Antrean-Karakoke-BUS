@@ -352,16 +352,33 @@ async function spinWheel() {
   spinButton.disabled = true;
   winnerAnnouncement.style.display = 'none';
 
+  const sliceAngle = 360 / entries.length;
+  
+  // Pilih pemenang secara acak
   const winnerIndex = Math.floor(Math.random() * entries.length);
   const winner = entries[winnerIndex];
 
-  console.log('🎯 Winner selected:', winner);
+  console.log('🎯 Winner index:', winnerIndex, 'Name:', winner);
 
-  const sliceAngle = 360 / entries.length;
-  const targetSliceRotation = winnerIndex * sliceAngle + sliceAngle / 2;
-
-  const fullRotations = 5 + Math.random() * 3;
-  const totalRotation = currentRotation + (360 * fullRotations) - targetSliceRotation + 90;
+  /*
+   * KALKULASI ROTASI:
+   * - Pointer ada di ATAS (posisi 12 jam / 0°)
+   * - Slice digambar mulai dari -90° (12 jam) searah jarum jam
+   * - Slice ke-i menempati sudut: i * sliceAngle sampai (i+1) * sliceAngle
+   *   (relatif dari posisi 12 jam, searah jarum jam)
+   * - Agar slice ke-winnerIndex berhenti di bawah pointer,
+   *   roda harus berputar sehingga TENGAH slice tersebut ada di posisi 0° (atas)
+   * - Rotasi yang dibutuhkan: 360 - (winnerIndex * sliceAngle + sliceAngle/2)
+   *   Ini membawa tengah slice ke posisi pointer
+   */
+  const targetAngle = 360 - (winnerIndex * sliceAngle + sliceAngle / 2);
+  
+  // Tambahkan random offset dalam slice agar tidak selalu tepat di tengah
+  const randomOffset = (Math.random() - 0.5) * sliceAngle * 0.6;
+  
+  // Total rotasi = beberapa putaran penuh + target angle
+  const fullRotations = 5 + Math.floor(Math.random() * 3);
+  const totalRotation = currentRotation + (360 * fullRotations) + targetAngle + randomOffset - (currentRotation % 360);
 
   const duration = 7000;
   const startTime = Date.now();
@@ -375,6 +392,7 @@ async function spinWheel() {
     const elapsed = Date.now() - startTime;
     const progress = Math.min(elapsed / duration, 1);
 
+    // Easing: cubic ease-out untuk efek perlambatan natural
     const eased = 1 - Math.pow(1 - progress, 3);
 
     const rotation = startRotation + (totalRotation - startRotation) * eased;
@@ -383,7 +401,8 @@ async function spinWheel() {
     if (progress < 1) {
       requestAnimationFrame(animate);
     } else {
-      currentRotation = totalRotation % 360;
+      // Simpan rotasi akhir yang sudah dinormalisasi
+      currentRotation = totalRotation;
       wheelSvg.classList.remove('spinning');
       finishSpin(winner);
     }
