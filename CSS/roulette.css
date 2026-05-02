@@ -367,7 +367,9 @@ body {
    ENTRIES PANEL (Kolom tengah)
 ======================================== */
 .entries-panel {
-  /* Akan menjadi yang paling lebar */
+  /* Menjadi panel paling lebar dengan flex-grow */
+  flex-grow: 1;
+  width: 100%;
 }
 
 .entries-header {
@@ -614,7 +616,9 @@ body {
 }
 
 .winners-section {
-  /* Selalu terlihat, isi kosong ditampilkan via .empty-winners */
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
 }
 
 .winners-title {
