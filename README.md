@@ -1153,10 +1153,10 @@ SOFTWARE.
 
 ### **Support & Documentation**
 
-- 📚 **Documentation:** [Wiki](https://github.com/yourusername/hioo-karaoke-bus/wiki)
-- 🐛 **Bug Reports:** [Issues](https://github.com/yourusername/hioo-karaoke-bus/issues)
-- 💬 **Discussions:** [Discussions](https://github.com/yourusername/hioo-karaoke-bus/discussions)
-- 📹 **Video Tutorials:** [YouTube Channel](https://youtube.com/yourchannel)
+- 📚 **Documentation:** [Wiki](https://www.linkedin.com/company/hioojalanjalanyo/posts/?feedView=all)
+- 🐛 **Bug Reports:** [Issues](https://www.instagram.com/hmptr_09/)
+- 💬 **Discussions:** [Discussions](https://github.com/Naufaliaaa/Project-Antrean-Karakoke-BUS/issues/1)
+- 📹 **Video Tutorials:** [YouTube Channel](https://youtube.com/shorts/USp-MU89SvE?si=n-rhxfTemXe0pVNL)
 
 ---
 
