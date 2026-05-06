@@ -1030,7 +1030,7 @@ Video unavailable / Embedding disabled
 ```
 
 **Solusi:**
-- System sudah ada embed validation
+- Sistem sudah ada embed validation
 - Gunakan video yang allow embedding
 - Cek dengan oEmbed API sebelum add
 
@@ -1051,7 +1051,7 @@ Firebase: Error (auth/network-request-failed)
 
 **Masalah:**
 ```
-ICE connection failed
+ICE connection failed 
 ```
 
 **Solusi:**
