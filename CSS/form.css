@@ -1,6 +1,7 @@
 /*************************************************
  * FORM.CSS - HiOO Karaoke Redesign
  * Modern, Clean, Purple-themed Design
+ * ✅ WITH EDIT REQUEST FEATURE STYLES
  *************************************************/
 
 /* ========================================
@@ -37,14 +38,8 @@ body {
 }
 
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ========================================
@@ -65,12 +60,8 @@ body {
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .logo-tagline {
@@ -122,14 +113,8 @@ body {
 }
 
 @keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .alert.success {
@@ -148,10 +133,40 @@ body {
    FORM SECTION
 ======================================== */
 .form-section {
-  padding: 0 30px 35px;
+  padding: 0 30px 20px;
   background: white;
 }
 
+/* ========================================
+   EDIT MODE BADGE
+======================================== */
+.edit-mode-badge {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+  border: 2px solid #ffc107;
+  border-radius: 14px;
+  margin-bottom: 18px;
+  animation: slideDown 0.3s ease;
+}
+
+.edit-mode-badge .badge-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.edit-mode-badge .badge-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #856404;
+  line-height: 1.4;
+}
+
+/* ========================================
+   FORM GROUP
+======================================== */
 .form-group {
   margin-bottom: 20px;
 }
@@ -193,7 +208,7 @@ body {
 }
 
 /* ========================================
-   SUBMIT BUTTON
+   SUBMIT BUTTON (Tambah Antrean)
 ======================================== */
 .submit-button {
   width: 100%;
@@ -211,7 +226,8 @@ body {
   gap: 12px;
   box-shadow: 0 8px 20px rgba(124, 92, 235, 0.35);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-top: 25px;
+  margin-bottom: 12px;
+  font-family: inherit;
 }
 
 .submit-button:hover {
@@ -224,12 +240,89 @@ body {
   transform: translateY(-1px);
 }
 
+/* Submit button saat mode edit */
+.submit-button.edit-mode-btn {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35);
+}
+
+.submit-button.edit-mode-btn:hover {
+  background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  box-shadow: 0 12px 30px rgba(245, 158, 11, 0.5);
+}
+
 .button-icon {
   font-size: 20px;
 }
 
 .button-text {
   font-size: 17px;
+}
+
+/* ========================================
+   TOMBOL EDIT REQUEST
+======================================== */
+.edit-request-btn {
+  display: none; /* disembunyikan default, muncul dari JS */
+  width: 100%;
+  padding: 14px 20px;
+  background: linear-gradient(135deg, #f0eeff 0%, #e8e7ff 100%);
+  color: #7c5ceb;
+  border: 2px solid #c4b5fd;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
+  font-family: inherit;
+  animation: fadeIn 0.3s ease;
+}
+
+.edit-request-btn:hover {
+  background: linear-gradient(135deg, #e8e7ff 0%, #d8d7ff 100%);
+  border-color: #7c5ceb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(124, 92, 235, 0.2);
+}
+
+.edit-request-btn:active {
+  transform: translateY(0);
+}
+
+/* ========================================
+   TOMBOL BATAL EDIT
+======================================== */
+.cancel-edit-btn {
+  display: none; /* disembunyikan default, muncul dari JS */
+  width: 100%;
+  padding: 13px 20px;
+  background: white;
+  color: #ef4444;
+  border: 2px solid #ef4444;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  margin-bottom: 0;
+  font-family: inherit;
+}
+
+.cancel-edit-btn:hover {
+  background: #fef2f2;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.2);
+}
+
+.cancel-edit-btn:active {
+  transform: translateY(0);
 }
 
 /* ========================================
@@ -287,9 +380,7 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.emote-btn:hover::before {
-  opacity: 1;
-}
+.emote-btn:hover::before { opacity: 1; }
 
 .emote-btn:hover {
   transform: translateY(-5px) scale(1.08);
@@ -348,103 +439,55 @@ body {
    RESPONSIVE DESIGN
 ======================================== */
 @media (max-width: 600px) {
-  body {
-    padding: 15px;
-  }
+  body { padding: 15px; }
 
-  .container {
-    border-radius: 25px;
-  }
+  .container { border-radius: 25px; }
 
-  .logo-section {
-    padding: 30px 20px 25px;
-  }
+  .logo-section { padding: 30px 20px 25px; }
 
-  .logo-image {
-    width: 150px;
-  }
+  .logo-image { width: 150px; }
 
-  .logo-tagline {
-    font-size: 10px;
-  }
+  .logo-tagline { font-size: 10px; }
 
-  .title-section {
-    padding: 25px 20px 30px;
-  }
+  .title-section { padding: 25px 20px 30px; }
 
-  .main-title {
-    font-size: 26px;
-  }
+  .main-title { font-size: 26px; }
 
-  .main-subtitle {
-    font-size: 14px;
-  }
+  .main-subtitle { font-size: 14px; }
 
-  .form-section {
-    padding: 0 20px 30px;
-  }
+  .form-section { padding: 0 20px 20px; }
 
-  .form-input {
-    padding: 16px 18px;
-    font-size: 15px;
-  }
+  .alert { margin: 0 20px 20px; }
 
-  .submit-button {
-    padding: 16px 26px;
-    font-size: 16px;
-  }
+  .form-input { padding: 16px 18px; font-size: 15px; }
 
-  .live-reaction-section {
-    padding: 30px 20px;
-  }
+  .submit-button { padding: 16px 26px; font-size: 16px; }
 
-  .reaction-title {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
+  .edit-request-btn, .cancel-edit-btn { font-size: 14px; padding: 13px 18px; }
 
-  .emote-grid {
-    gap: 10px;
-  }
+  .live-reaction-section { padding: 30px 20px; }
 
-  .emote-btn {
-    font-size: 32px;
-    padding: 16px 8px;
-    border-radius: 16px;
-  }
+  .reaction-title { font-size: 18px; margin-bottom: 20px; }
 
-  .queue-info {
-    padding: 25px 20px;
-  }
+  .emote-grid { gap: 10px; }
 
-  .queue-total,
-  .queue-status {
-    font-size: 14px;
-    padding: 14px 18px;
-  }
+  .emote-btn { font-size: 32px; padding: 16px 8px; border-radius: 16px; }
 
-  .queue-total strong {
-    font-size: 18px;
-  }
+  .queue-info { padding: 25px 20px; }
+
+  .queue-total, .queue-status { font-size: 14px; padding: 14px 18px; }
+
+  .queue-total strong { font-size: 18px; }
 }
 
 @media (max-width: 400px) {
-  .logo-image {
-    width: 130px;
-  }
+  .logo-image { width: 130px; }
 
-  .main-title {
-    font-size: 24px;
-  }
+  .main-title { font-size: 24px; }
 
-  .emote-grid {
-    gap: 8px;
-  }
+  .emote-grid { gap: 8px; }
 
-  .emote-btn {
-    font-size: 28px;
-    padding: 14px 6px;
-  }
+  .emote-btn { font-size: 28px; padding: 14px 6px; }
 }
 
 /* ========================================
@@ -455,15 +498,9 @@ body {
 }
 
 @keyframes shake {
-  0%, 100% {
-    transform: translateX(0);
-  }
-  10%, 30%, 50%, 70%, 90% {
-    transform: translateX(-5px);
-  }
-  20%, 40%, 60%, 80% {
-    transform: translateX(5px);
-  }
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
 }
 
 /* ========================================
@@ -490,9 +527,7 @@ body {
 }
 
 @keyframes spin {
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* ========================================
@@ -500,7 +535,9 @@ body {
 ======================================== */
 .form-input:focus-visible,
 .submit-button:focus-visible,
-.emote-btn:focus-visible {
+.emote-btn:focus-visible,
+.edit-request-btn:focus-visible,
+.cancel-edit-btn:focus-visible {
   outline: 3px solid #7c5ceb;
   outline-offset: 2px;
 }
@@ -509,12 +546,6 @@ body {
    PRINT STYLES
 ======================================== */
 @media print {
-  body {
-    background: white;
-  }
-  
-  .live-reaction-section,
-  .submit-button {
-    display: none;
-  }
+  body { background: white; }
+  .live-reaction-section, .submit-button { display: none; }
 }

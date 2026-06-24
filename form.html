@@ -66,10 +66,26 @@
       >
     </div>
 
+    <!-- Edit Mode Badge (muncul saat mode edit aktif) -->
+    <div class="edit-mode-badge" id="edit-mode-badge">
+      <span class="badge-icon">✏️</span>
+      <div class="badge-text">Mode Edit Aktif — ubah nama atau link lagu kamu, lalu klik Simpan.</div>
+    </div>
+
     <!-- Submit Button -->
     <button class="submit-button" onclick="submitSong()">
       <span class="button-icon">➕</span>
       <span class="button-text">Tambah Antrean</span>
+    </button>
+
+    <!-- Tombol Edit Request (muncul jika posisi >= 3) -->
+    <button class="edit-request-btn" id="edit-request-btn">
+      <span>✏️</span> Edit Request
+    </button>
+
+    <!-- Tombol Batal Edit (muncul saat mode edit) -->
+    <button class="cancel-edit-btn" id="cancel-edit-btn">
+      <span>✕</span> Batal Edit
     </button>
 
   </div>
@@ -107,6 +123,32 @@
       </button>
       <button class="emote-btn" onclick="sendEmote('🥳', 'Party')" title="Party">
         🥳
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================
+       EDIT REQUEST
+  ======================================== -->
+  <div class="edit-request-section" id="edit-request-section" style="display:none;">
+    <div class="edit-request-status" id="edit-request-status">—</div>
+    <h2 class="reaction-title">EDIT REQUEST</h2>
+
+    <div class="edit-request-hint" id="edit-request-hint">
+      Anda sedang antre. Silakan ubah nama & link YouTube.
+    </div>
+
+    <div class="edit-controls">
+      <button class="edit-button" type="button" id="edit-toggle-button" onclick="toggleEditMode()">
+        ✏️ Edit
+      </button>
+
+      <button class="edit-button primary" type="button" id="edit-save-button" onclick="saveEditedRequest()" style="display:none;">
+        ✅ Simpan Perubahan
+      </button>
+
+      <button class="edit-button" type="button" id="edit-cancel-button" onclick="cancelEditMode()" style="display:none;">
+        ↩️ Batal
       </button>
     </div>
   </div>
