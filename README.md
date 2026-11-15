@@ -41,7 +41,7 @@
 
 ## 🎯 Tentang Proyek
 
-**Hioo Karaoke Bus System** adalah solusi hiburan modern untuk armada bus pariwisata yang mengintegrasikan sistem karaoke interaktif dengan teknologi WebRTC untuk live camera streaming, real-time queue management menggunakan Firebase, dan antarmuka yang responsif untuk berbagai perangkat.
+**Hioo Karaoke Bus System** Adalah solusi hiburan modern untuk armada bus pariwisata yang mengintegrasikan sistem karaoke interaktif dengan teknologi WebRTC untuk live camera streaming, real-time queue management menggunakan Firebase, dan antarmuka yang responsif untuk berbagai perangkat.
 
 ### 🌟 Keunggulan
 
@@ -63,7 +63,7 @@
 - YouTube video player dengan full control
 - Real-time queue display dengan smooth animations
 - Live emote reactions dari penumpang
-- Picture-in-Picture (PiP) camera support
+- Picture-in-Picture (PiP) Camera Support
 - Timer countdown untuk setiap lagu
 - Automatic next song playback
 
