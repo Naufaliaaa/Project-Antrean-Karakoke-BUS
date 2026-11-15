@@ -83,7 +83,7 @@
 - Manual song addition
 - Live reaction emotes
 - Session-based request counter
-- QR code generator untuk form access
+- QR Code generator untuk form access
 
 ### 4. 📹 **Video Panel (Camera Control)**
 - WebRTC-based live streaming
