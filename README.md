@@ -627,7 +627,7 @@ CAMERA_PASSWORD=your_camera_password
 │  │ karaoke/room/BUS-001/                              │  │
 │  │  ├─ queue/          (Song requests)                │  │
 │  │  ├─ emotes/         (Live reactions)               │  │
-│  │  ├─ rouletteEntries/(Roulette participant entries) │  │
+│  │  ├─ rouletteEntries/(Roulette Participant Entries) │  │
 │  │  ├─ Setting/        (PIN, busName)                 │  │
 │  │  ├─ videoSession/   (WebRTC signaling)             │  │
 │  │  ├─ audioControl/   (Volume settings)              │  │
@@ -672,7 +672,7 @@ CAMERA_PASSWORD=your_camera_password
 
 3. **WebRTC Flow:**
    ```
-   Video Panel → Firebase (signaling) → Display (PiP)
+   Video Panel → Firebase (Signaling) → Display (PiP)
    ```
 
 4. **Audio Control Flow:**
